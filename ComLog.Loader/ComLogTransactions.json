@@ -1,0 +1,17 @@
+{
+  "DT": "Dt",
+  "Bank": "BankName",
+  "Account": "AccountName",
+  "Type": "AccountTypeName",
+  "Currency": "CurrencyId",
+  "Credits": "Credits",
+  "Debits": "Debits",
+  "Charges": "Charges",
+  "From": "FromTo",
+  "Description": "Description",
+  "Report": "Report",
+  "TrType": "TrType",
+  "$": "Splus",
+  "$-": "Sminus",
+  "S": "Ssum"
+}
