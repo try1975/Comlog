@@ -2,14 +2,14 @@ namespace ComLog.Db.MsSql.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ComLog.Db.MsSql.WorkContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<WorkContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(ComLog.Db.MsSql.WorkContext context)
+        protected override void Seed(WorkContext context)
         {
             //  This method will be called after migrating to the latest version.
 

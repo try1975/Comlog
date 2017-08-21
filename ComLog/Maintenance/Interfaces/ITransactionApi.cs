@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ComLog.Dto;
 
-namespace ComLog.Maintenance
+namespace ComLog.WebApi.Maintenance
 {
     public interface ITransactionApi : ITypedApi<TransactionDto, int>
     {

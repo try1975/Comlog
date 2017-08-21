@@ -1,6 +1,6 @@
 ﻿using ComLog.Dto;
 
-namespace ComLog.Maintenance
+namespace ComLog.WebApi.Maintenance
 {
     public interface IBankApi : ITypedApi<BankDto, int>
     {

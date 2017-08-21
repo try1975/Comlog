@@ -5,11 +5,11 @@ using ComLog.AutoMappers;
 using ComLog.Db.Entities;
 using ComLog.Db.MsSql;
 using ComLog.Db.MsSql.QueryProcessors;
-using ComLog.Maintenance;
+using ComLog.WebApi.Maintenance;
 using Ninject;
 using Ninject.Web.Common;
 
-namespace ComLog.Ninject
+namespace ComLog.WebApi.Ninject
 {
     /// <summary>
     ///     Class used to set up the Ninject DI container.

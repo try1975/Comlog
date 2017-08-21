@@ -4,7 +4,7 @@ using AutoMapper;
 using ComLog.Db.Entities;
 using ComLog.Dto;
 
-namespace ComLog.Maintenance
+namespace ComLog.WebApi.Maintenance
 {
     public class TransactionApi : TypedApi<TransactionDto, TransactionEntity, int>, ITransactionApi
     {

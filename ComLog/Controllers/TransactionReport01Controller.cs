@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using ComLog.Dto;
-using ComLog.Maintenance;
+using ComLog.WebApi.Maintenance;
 
-namespace ComLog.Controllers
+namespace ComLog.WebApi.Controllers
 {
     [RoutePrefix("api/transactions/report01")]
     public class TransactionReport01Controller : ApiController

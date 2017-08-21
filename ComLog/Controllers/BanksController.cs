@@ -1,7 +1,7 @@
 ﻿using ComLog.Dto;
-using ComLog.Maintenance;
+using ComLog.WebApi.Maintenance;
 
-namespace ComLog.Controllers
+namespace ComLog.WebApi.Controllers
 {
     public class BanksController : TypedController<BankDto,int>
     {

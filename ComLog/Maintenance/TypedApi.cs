@@ -3,7 +3,7 @@ using AutoMapper;
 using ComLog.Db.Entities;
 using ComLog.Dto;
 
-namespace ComLog.Maintenance
+namespace ComLog.WebApi.Maintenance
 {
     public abstract class TypedApi<TV, TD, TK> : ITypedApi<TV, TK> where TD : class, IEntity<TK> where TV : class, IDto<TK>
     {

@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 
 namespace ComLog.Db.Entities
 {
-    public interface ITypedQuery<T, K> where T : class, IEntity<K>
+    public interface ITypedQuery<T, in TK> where T : class, IEntity<TK>
     {
         IQueryable<T> GetEntities();
-        T GetEntity(K id);
-        Task<T> GetEntityAsync(K id);
+        T GetEntity(TK id);
+        Task<T> GetEntityAsync(TK id);
         T InsertEntity(T entity);
         T UpdateEntity(T entity);
-        bool DeleteEntity(K id);
+        bool DeleteEntity(TK id);
 
         DbContext GetDbContext();
     }

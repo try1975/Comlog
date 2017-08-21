@@ -1,7 +1,7 @@
 using System;
 using System.Web;
 using System.Web.Http;
-using ComLog.Ninject;
+using ComLog.WebApi.Ninject;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
@@ -9,7 +9,7 @@ using Ninject.Web.Common;
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(WebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(WebCommon), "Stop")]
 
-namespace ComLog.Ninject
+namespace ComLog.WebApi.Ninject
 {
 
 

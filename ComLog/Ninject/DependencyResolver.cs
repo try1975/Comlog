@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http.Dependencies;
 using Ninject;
 
-namespace ComLog.Ninject
+namespace ComLog.WebApi.Ninject
 {
     public sealed class DependencyResolver : IDependencyResolver
     {

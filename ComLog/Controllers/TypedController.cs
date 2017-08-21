@@ -2,9 +2,9 @@
 using System.Net;
 using System.Web.Http;
 using ComLog.Dto;
-using ComLog.Maintenance;
+using ComLog.WebApi.Maintenance;
 
-namespace ComLog.Controllers
+namespace ComLog.WebApi.Controllers
 {
     public class TypedController<T, K> : ApiController where T : class, IDto<K>
     {
