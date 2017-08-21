@@ -37,42 +37,33 @@ namespace ComLog.Db.MsSql.QueryProcessors
 
         public T InsertEntity(T entity)
         {
-            using (var db = new WorkContext())
-            {
-                db.Set<T>().Add(entity);
-                db.SaveChanges();
-                return entity;
-            }
+            _db.Set<T>().Add(entity);
+            _db.SaveChanges();
+            return entity;
         }
 
         public T UpdateEntity(T entity)
         {
-            using (var db = new WorkContext())
-            {
-                db.Set<T>().AddOrUpdate(entity);
-                db.SaveChanges();
-                return entity;
-            }
+            _db.Set<T>().AddOrUpdate(entity);
+            _db.SaveChanges();
+            return entity;
         }
 
         public bool DeleteEntity(TK id)
         {
-            using (var db = new WorkContext())
+            var entity = _db.Set<T>().Find(id);
+            if (entity == null) return false;
+            try
             {
-                var entity = db.Set<T>().Find(id);
-                if (entity == null) return false;
-                try
-                {
-                    db.Set<T>().Attach(entity);
-                    db.Set<T>().Remove(entity);
-                    db.SaveChanges();
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e);
-                    return false;
-                }
+                _db.Set<T>().Attach(entity);
+                _db.Set<T>().Remove(entity);
+                _db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return false;
             }
         }
 

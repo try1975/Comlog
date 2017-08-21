@@ -3,12 +3,12 @@ using ComLog.Dto;
 
 namespace ComLog.Maintenance
 {
-    public interface ITypedApi<T, K> where T : class, IDto<K>
+    public interface ITypedApi<T, in TK> where T : class, IDto<TK>
     {
         IEnumerable<T> GetItems();
-        T GetItem(K id);
+        T GetItem(TK id);
         T AddItem(T dto);
         T ChangeItem(T dto);
-        bool RemoveItem(K id);
+        bool RemoveItem(TK id);
     }
 }

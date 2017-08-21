@@ -1,6 +1,5 @@
 namespace ComLog.Db.MsSql.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class V01 : DbMigration
