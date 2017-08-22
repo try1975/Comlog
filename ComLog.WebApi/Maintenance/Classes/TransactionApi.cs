@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using AutoMapper;
 using ComLog.Db.Entities;
 using ComLog.Dto;
@@ -23,5 +24,10 @@ namespace ComLog.WebApi.Maintenance.Classes
                 ;
             return Mapper.Map<List<TransactionReport01Dto>>(list);
         }
+
+        //public override IEnumerable<TransactionDto> GetItems()
+        //{
+        //    return Mapper.Map<List<TransactionDto>>(Query.GetEntities().Take(300));
+        //}
     }
 }

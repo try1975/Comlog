@@ -1,4 +1,4 @@
-namespace ComLog.WinForms.Presenters
+namespace ComLog.WinForms.Presenters.Common
 {
     public enum PresenterMode
     {

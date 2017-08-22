@@ -1,7 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
-using ComLog.Dto;
-using ComLog.WebApi.Maintenance;
+﻿using ComLog.Dto;
 using ComLog.WebApi.Maintenance.Interfaces;
 
 namespace ComLog.WebApi.Controllers

@@ -7,9 +7,8 @@ using System.Windows.Forms;
 using AutoMapper;
 using ComLog.Dto;
 using ComLog.WinForms.Interfaces.Common;
-using ComLog.WinForms.Interfaces.Data;
 
-namespace ComLog.WinForms.Presenters
+namespace ComLog.WinForms.Presenters.Common
 {
     public abstract class TypedPresenter<T, TK> : IPresenter where T : class, IDto<TK>
     {

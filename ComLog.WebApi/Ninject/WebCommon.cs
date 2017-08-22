@@ -71,7 +71,7 @@ namespace ComLog.WebApi.Ninject
         private static void RegisterServices(IKernel kernel)
         {
             var containerConfigurator = new Configurator();
-            containerConfigurator.Configure(kernel);
+            Configurator.Configure(kernel);
         }
     }
 }

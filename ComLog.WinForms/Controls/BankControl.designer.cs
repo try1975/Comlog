@@ -49,7 +49,7 @@ namespace ComLog.WinForms.Controls
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.pnlGrid = new System.Windows.Forms.Panel();
-            this.dgvItems = new ADGV.AdvancedDataGridView();
+            this.dgvItems = new AdvancedDataGridView();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();

@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Configuration;
 using ComLog.Dto;
+using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
 
-namespace ComLog.WinForms.Data
+namespace ComLog.WinForms.Data.Common
 {
     public abstract class TypedDataMànager<T, TK> : ITypedDataMànager<T, TK> where T : class, IDto<TK>
     {

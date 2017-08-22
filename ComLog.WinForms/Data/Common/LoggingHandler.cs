@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ComLog.WinForms.Data
+namespace ComLog.WinForms.Data.Common
 {
     public class LoggingHandler : DelegatingHandler
     {

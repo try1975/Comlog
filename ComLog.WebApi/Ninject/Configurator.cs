@@ -22,63 +22,55 @@ namespace ComLog.WebApi.Ninject
         ///     container with all of this application's
         ///     dependencies.
         /// </summary>
-        public void Configure(IKernel container)
+        public static void Configure(IKernel container)
         {
             AddBindings(container);
         }
 
-        private void AddBindings(IKernel container)
+        private static void AddBindings(IKernel container)
         {
             ConfigureOrm(container);
             ConfigureAutoMapper(container);
 
             #region Api and Query
 
-            //container.Bind<ICurrencyApi>().To<CurrencyApi>().InRequestScope();
+            container.Bind<IAccountApi>().To<AccountApi>().InRequestScope();
+            container.Bind<IAccountQuery>().To<AccountQuery>().InRequestScope();
+
+            container.Bind<IAccountTypeApi>().To<AccountTypeApi>().InRequestScope();
+            container.Bind<IAccountTypeQuery>().To<AccountTypeQuery>().InRequestScope();
+
+            container.Bind<ICurrencyApi>().To<CurrencyApi>().InRequestScope();
             container.Bind<ICurrencyQuery>().To<CurrencyQuery>().InRequestScope();
 
             container.Bind<IBankApi>().To<BankApi>().InRequestScope();
             container.Bind<IBankQuery>().To<BankQuery>().InRequestScope();
 
-            //container.Bind<IAccountApi>().To<AccountApi>().InRequestScope();
-            container.Bind<IAccountQuery>().To<AccountQuery>().InRequestScope();
-
             container.Bind<ITransactionApi>().To<TransactionApi>().InRequestScope();
             container.Bind<ITransactionQuery>().To<TransactionQuery>().InRequestScope();
+
+            container.Bind<ITransactionTypeApi>().To<TransactionTypeApi>().InRequestScope();
+            container.Bind<ITransactionTypeQuery>().To<TransactionTypeQuery>().InRequestScope();
 
             #endregion
         }
 
-        private void ConfigureAutoMapper(IKernel container)
+        private static void ConfigureAutoMapper(IKernel container)
         {
             var cfg = new MapperConfigurationExpression();
+            AccountAutoMapper.Configure(cfg);
+            AccountTypeAutoMapper.Configure(cfg);
             BankAutoMapper.Configure(cfg);
-            //BankAccountAutoMapper.Configure(cfg);
-            //CurrencyAutoMapper.Configure(cfg);
-            //ClientAutoMapper.Configure(cfg);
-            //CardAutoMapper.Configure(cfg);
-            //AccountAutoMapper.Configure(cfg);
-            //MessageAutoMapper.Configure(cfg);
-            //RequisiteAutoMapper.Configure(cfg);
-            //RequestAutoMapper.Configure(cfg);
-            //StandingOrderAutoMapper.Configure(cfg);
-            //StatementAutoMapper.Configure(cfg);
+            CurrencyAutoMapper.Configure(cfg);
             TransactionAutoMapper.Configure(cfg);
-            //DirectDebitAutoMapper.Configure(cfg);
+            TransactionTypeAutoMapper.Configure(cfg);
             Mapper.Initialize(cfg);
             //Mapper.AssertConfigurationIsValid();
-
-
-            //container.Bind<IAutoMapperTypeConfigurator>()
-            //    .To<ClientToClientEntityAutoMapperTypeConfigurator>()
-            //    .InRequestScope/*InSingletonScope*/();
         }
 
-        private void ConfigureOrm(IKernel container)
+        private static void ConfigureOrm(IKernel container)
         {
-            //container.Bind<WorkContext>().ToSelf().InRequestScope();
             container.Bind<DbContext>().To<WorkContext>().InSingletonScope();
-            //container.Bind<ExchangeServiceMailSender>().ToSelf().InSingletonScope();
         }
     }
 }

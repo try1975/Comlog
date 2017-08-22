@@ -179,8 +179,17 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="AutoMappers\AccountAutoMapper.cs" />
+    <Compile Include="AutoMappers\CurrencyAutoMapper.cs" />
     <Compile Include="AutoMappers\BankAutoMapper.cs" />
     <Compile Include="AutoMappers\TransactionAutoMapper.cs" />
+    <Compile Include="AutoMappers\AccountTypeAutoMapper.cs" />
+    <Compile Include="AutoMappers\TransactionTypeAutoMapper.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AccountTypesController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
+    <Compile Include="Controllers\CurrenciesController.cs" />
+    <Compile Include="Controllers\TransactionTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TransactionReport01Controller.cs" />
     <Compile Include="Controllers\TypedController.cs" />
@@ -188,9 +197,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Maintenance\Classes\AccountTypeApi.cs" />
+    <Compile Include="Maintenance\Classes\AccountApi.cs" />
+    <Compile Include="Maintenance\Classes\CurrencyApi.cs" />
     <Compile Include="Maintenance\Classes\BankApi.cs" />
+    <Compile Include="Maintenance\Classes\TransactionTypeApi.cs" />
     <Compile Include="Maintenance\Classes\TransactionApi.cs" />
+    <Compile Include="Maintenance\Interfaces\IAccountTypeApi.cs" />
+    <Compile Include="Maintenance\Interfaces\IAccountApi.cs" />
+    <Compile Include="Maintenance\Interfaces\ICurrencyApi.cs" />
     <Compile Include="Maintenance\Interfaces\IBankApi.cs" />
+    <Compile Include="Maintenance\Interfaces\ITransactionTypeApi.cs" />
     <Compile Include="Maintenance\Interfaces\ITransactionApi.cs" />
     <Compile Include="Maintenance\ITypedApi.cs" />
     <Compile Include="Maintenance\TypedApi.cs" />

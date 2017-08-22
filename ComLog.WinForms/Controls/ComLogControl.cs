@@ -32,5 +32,35 @@ namespace ComLog.WinForms.Controls
             var bankControl = CompositionRoot.Resolve<IBankView>();
             AddControlToWorkArea((Control)bankControl, ModifierKeys.HasFlag(Keys.Control));
         }
+
+        private void btnAccounts_Click(object sender, System.EventArgs e)
+        {
+            var accountControl = CompositionRoot.Resolve<IAccountView>();
+            AddControlToWorkArea((Control)accountControl, ModifierKeys.HasFlag(Keys.Control));
+        }
+
+        private void btnCurrencies_Click(object sender, System.EventArgs e)
+        {
+            var currencyControl = CompositionRoot.Resolve<ICurrencyView>();
+            AddControlToWorkArea((Control)currencyControl, ModifierKeys.HasFlag(Keys.Control));
+        }
+
+        private void btnAccountTypes_Click(object sender, System.EventArgs e)
+        {
+            var accountTypeControl = CompositionRoot.Resolve<IAccountTypeView>();
+            AddControlToWorkArea((Control)accountTypeControl, ModifierKeys.HasFlag(Keys.Control));
+        }
+
+        private void btnTransactionTypes_Click(object sender, System.EventArgs e)
+        {
+            var transactionTypeControl = CompositionRoot.Resolve<ITransactionTypeView>();
+            AddControlToWorkArea((Control)transactionTypeControl, ModifierKeys.HasFlag(Keys.Control));
+        }
+
+        private void btnTransactions_Click(object sender, System.EventArgs e)
+        {
+            var transactionControl = CompositionRoot.Resolve<ITransactionView>();
+            AddControlToWorkArea((Control)transactionControl, ModifierKeys.HasFlag(Keys.Control));
+        }
     }
 }

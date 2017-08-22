@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 using ComLog.WinForms.Presenters;
+using ComLog.WinForms.Presenters.Common;
 
 namespace ComLog.WinForms.Interfaces.Common
 {

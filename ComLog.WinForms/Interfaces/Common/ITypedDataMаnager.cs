@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ComLog.Dto;
 
-namespace ComLog.WinForms.Interfaces.Data
+namespace ComLog.WinForms.Interfaces.Common
 {
     public interface ITypedDataMànager<T, K> where T : class, IDto<K>
     {

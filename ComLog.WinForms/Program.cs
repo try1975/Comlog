@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using AutoMapper;
 using AutoMapper.Configuration;
-using ComLog.WinForms.Data;
+using ComLog.WinForms.Data.Common;
 using ComLog.WinForms.Ninject;
 
 namespace ComLog.WinForms

@@ -68,6 +68,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AccountControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountControl.designer.cs">
+      <DependentUpon>AccountControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AccountTypeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountTypeControl.Designer.cs">
+      <DependentUpon>AccountTypeControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BankControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -80,12 +92,34 @@
     <Compile Include="Controls\ComLogControl.Designer.cs">
       <DependentUpon>ComLogControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\AutoMapperConfig.cs" />
+    <Compile Include="Controls\CurrencyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CurrencyControl.Designer.cs">
+      <DependentUpon>CurrencyControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TransactionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TransactionControl.Designer.cs">
+      <DependentUpon>TransactionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TransactionTypeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TransactionTypeControl.Designer.cs">
+      <DependentUpon>TransactionTypeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AccountDataManager.cs" />
+    <Compile Include="Data\AccountTypeDataMаnager.cs" />
+    <Compile Include="Data\CurrencyDataMаnager.cs" />
     <Compile Include="Data\BankDataMаnager.cs" />
-    <Compile Include="Data\DataMаnager.cs" />
-    <Compile Include="Data\LoggingHandler.cs" />
+    <Compile Include="Data\Common\AutoMapperConfig.cs" />
+    <Compile Include="Data\Common\DataMаnager.cs" />
+    <Compile Include="Data\Common\LoggingHandler.cs" />
+    <Compile Include="Data\Common\TypedDataMаnager.cs" />
+    <Compile Include="Data\TransactionTypeDataManager.cs" />
     <Compile Include="Data\TransactionDataManager.cs" />
-    <Compile Include="Data\TypedDataMаnager.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,27 +133,56 @@
       <DependentUpon>ChildForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\Common\IComLogControl.cs" />
+    <Compile Include="Interfaces\Common\IDataMаnager.cs" />
     <Compile Include="Interfaces\Common\IEnterMode.cs" />
     <Compile Include="Interfaces\Common\IPresenter.cs" />
     <Compile Include="Interfaces\Common\IRefreshedView.cs" />
+    <Compile Include="Interfaces\Common\ITypedDataMаnager.cs" />
     <Compile Include="Interfaces\Common\ITypedView.cs" />
+    <Compile Include="Interfaces\Data\IAccountDataManager.cs" />
+    <Compile Include="Interfaces\Data\IAccountTypeDataMаnager.cs" />
+    <Compile Include="Interfaces\Data\ICurrencyDataMаnager.cs" />
     <Compile Include="Interfaces\Data\IBankDataMаnager.cs" />
-    <Compile Include="Interfaces\Data\IDataMаnager.cs" />
+    <Compile Include="Interfaces\Data\ITransactionTypeDataManager.cs" />
     <Compile Include="Interfaces\Data\ITransactionDataManager.cs" />
+    <Compile Include="Interfaces\IAccountView.cs" />
+    <Compile Include="Interfaces\IAccountTypeView.cs" />
+    <Compile Include="Interfaces\ITransactionView.cs" />
+    <Compile Include="Interfaces\ITransactionTypeView.cs" />
+    <Compile Include="Interfaces\ICurrencyView.cs" />
     <Compile Include="Interfaces\IBankView.cs" />
-    <Compile Include="Interfaces\Data\ITypedDataMаnager.cs" />
     <Compile Include="Ninject\ApplicationModule.cs" />
     <Compile Include="Ninject\CompositionRoot.cs" />
+    <Compile Include="Presenters\TransactionPresenter.cs" />
+    <Compile Include="Presenters\TransactionTypePresenter.cs" />
+    <Compile Include="Presenters\AccountTypePresenter.cs" />
+    <Compile Include="Presenters\AccountPresenter.cs" />
+    <Compile Include="Presenters\Common\PresenterMode.cs" />
+    <Compile Include="Presenters\Common\TypedPresenter.cs" />
+    <Compile Include="Presenters\CurrencyPresenter.cs" />
     <Compile Include="Presenters\BankPresenter.cs" />
-    <Compile Include="Presenters\PresenterMode.cs" />
-    <Compile Include="Presenters\TypedPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\AccountControl.resx">
+      <DependentUpon>AccountControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccountTypeControl.resx">
+      <DependentUpon>AccountTypeControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BankControl.resx">
       <DependentUpon>BankControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ComLogControl.resx">
       <DependentUpon>ComLogControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CurrencyControl.resx">
+      <DependentUpon>CurrencyControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TransactionControl.resx">
+      <DependentUpon>TransactionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TransactionTypeControl.resx">
+      <DependentUpon>TransactionTypeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

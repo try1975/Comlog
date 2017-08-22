@@ -41,10 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\AccountDto.cs" />
+    <Compile Include="Dto\AccountTypeDto.cs" />
     <Compile Include="Dto\BankDto.cs" />
     <Compile Include="Dto\CurrencyDto.cs" />
     <Compile Include="Dto\TransactionDto.cs" />
     <Compile Include="Dto\TransactionReport01Dto.cs" />
+    <Compile Include="Dto\TransactionTypeDto.cs" />
     <Compile Include="IDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
