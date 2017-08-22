@@ -28,7 +28,14 @@ namespace ComLog.WinForms.Data.Common
                     .ConfigureAwait(false));
             }
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
-
+            //using (var stream = await response.Content.ReadAsStreamAsync())
+            //{
+            //    //stream.Position = 0;
+            //    using (var reader = new StreamReader(stream, Encoding.UTF8))
+            //    {
+            //        Debug.WriteLine(reader.ReadToEnd());
+            //    }
+            //}
 
             return response;
         }

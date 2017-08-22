@@ -65,6 +65,37 @@ namespace ComLog.WinForms.Controls
 
             var column = dgvItems.Columns[nameof(TransactionDto.Id)];
             if (column != null) column.Visible = false;
+
+            column = dgvItems.Columns[nameof(TransactionDto.Charges)];
+            if (column != null)
+            {
+                column.DefaultCellStyle.Format = "N2";
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            column = dgvItems.Columns[nameof(TransactionDto.Credits)];
+            if (column != null)
+            {
+                column.DefaultCellStyle.Format = "N2";
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            column = dgvItems.Columns[nameof(TransactionDto.Debits)];
+            if (column != null)
+            {
+                column.DefaultCellStyle.Format = "N2";
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            column = dgvItems.Columns[nameof(TransactionDto.UsdCredits)];
+            if (column != null)
+            {
+                column.DefaultCellStyle.Format = "N2";
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            column = dgvItems.Columns[nameof(TransactionDto.UsdDebits)];
+            if (column != null)
+            {
+                column.DefaultCellStyle.Format = "N2";
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
         }
 
         public void SetEventHandlers()

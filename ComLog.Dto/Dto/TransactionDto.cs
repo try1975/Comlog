@@ -30,9 +30,9 @@ namespace ComLog.Dto
 
         public string Report { get; set; }
 
-        public decimal? Dcc { get; private set; }
+        public decimal? Dcc { get; set; }
 
-        public decimal? UsdDcc { get; private set; }
+        public decimal? UsdDcc { get; set; }
 
         public DateTime? TransactionDate { get; set; }
 

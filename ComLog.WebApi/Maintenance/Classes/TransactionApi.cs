@@ -25,9 +25,9 @@ namespace ComLog.WebApi.Maintenance.Classes
             return Mapper.Map<List<TransactionReport01Dto>>(list);
         }
 
-        //public override IEnumerable<TransactionDto> GetItems()
-        //{
-        //    return Mapper.Map<List<TransactionDto>>(Query.GetEntities().Take(300));
-        //}
+        public override IEnumerable<TransactionDto> GetItems()
+        {
+            return Mapper.Map<List<TransactionDto>>(Query.GetEntities().Take(10));
+        }
     }
 }
