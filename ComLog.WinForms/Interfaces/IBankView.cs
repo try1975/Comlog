@@ -1,4 +1,5 @@
-﻿using ComLog.Dto;
+﻿using System;
+using ComLog.Dto;
 using ComLog.WinForms.Interfaces.Common;
 
 namespace ComLog.WinForms.Interfaces
@@ -8,6 +9,7 @@ namespace ComLog.WinForms.Interfaces
         #region Details
 
         string BankName { get; set; }
+        DateTime? Closed { get; set; }
 
         #endregion //Details
     }

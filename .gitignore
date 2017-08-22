@@ -241,3 +241,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /ComLog.WinForms/App.AppSettings.config
+/CurEx.Console/App.AppSettings.config

@@ -58,6 +58,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryProcessors\CurrencyPairQuery.cs" />
+    <Compile Include="QueryProcessors\CurrencyPairRateQuery.cs" />
+    <Compile Include="QueryProcessors\TypedQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

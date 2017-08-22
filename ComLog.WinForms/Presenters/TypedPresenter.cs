@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Windows.Forms;
 using AutoMapper;
 using ComLog.Dto;
-using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
 

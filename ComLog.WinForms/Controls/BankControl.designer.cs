@@ -33,12 +33,9 @@ namespace ComLog.WinForms.Controls
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
-            this.pnlBic = new System.Windows.Forms.Panel();
-            this.tbBic = new System.Windows.Forms.TextBox();
-            this.lblBic = new System.Windows.Forms.Label();
-            this.pnlBankAddress = new System.Windows.Forms.Panel();
-            this.tbBankAddress = new System.Windows.Forms.TextBox();
-            this.lblBankAddress = new System.Windows.Forms.Label();
+            this.pnlClosed = new System.Windows.Forms.Panel();
+            this.tbClosed = new System.Windows.Forms.TextBox();
+            this.lblClosed = new System.Windows.Forms.Label();
             this.pnlBankName = new System.Windows.Forms.Panel();
             this.tbName = new System.Windows.Forms.TextBox();
             this.lblBankName = new System.Windows.Forms.Label();
@@ -52,12 +49,11 @@ namespace ComLog.WinForms.Controls
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.pnlGrid = new System.Windows.Forms.Panel();
-            this.dgvItems = new AdvancedDataGridView();
+            this.dgvItems = new ADGV.AdvancedDataGridView();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
-            this.pnlBic.SuspendLayout();
-            this.pnlBankAddress.SuspendLayout();
+            this.pnlClosed.SuspendLayout();
             this.pnlBankName.SuspendLayout();
             this.pnlId.SuspendLayout();
             this.pnlButtons.SuspendLayout();
@@ -77,8 +73,7 @@ namespace ComLog.WinForms.Controls
             // 
             // pnlFields
             // 
-            this.pnlFields.Controls.Add(this.pnlBic);
-            this.pnlFields.Controls.Add(this.pnlBankAddress);
+            this.pnlFields.Controls.Add(this.pnlClosed);
             this.pnlFields.Controls.Add(this.pnlBankName);
             this.pnlFields.Controls.Add(this.pnlId);
             this.pnlFields.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -87,63 +82,34 @@ namespace ComLog.WinForms.Controls
             this.pnlFields.Size = new System.Drawing.Size(396, 509);
             this.pnlFields.TabIndex = 1;
             // 
-            // pnlBic
+            // pnlClosed
             // 
-            this.pnlBic.Controls.Add(this.tbBic);
-            this.pnlBic.Controls.Add(this.lblBic);
-            this.pnlBic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlBic.Location = new System.Drawing.Point(0, 101);
-            this.pnlBic.Name = "pnlBic";
-            this.pnlBic.Size = new System.Drawing.Size(396, 34);
-            this.pnlBic.TabIndex = 6;
+            this.pnlClosed.Controls.Add(this.tbClosed);
+            this.pnlClosed.Controls.Add(this.lblClosed);
+            this.pnlClosed.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlClosed.Location = new System.Drawing.Point(0, 67);
+            this.pnlClosed.Name = "pnlClosed";
+            this.pnlClosed.Size = new System.Drawing.Size(396, 34);
+            this.pnlClosed.TabIndex = 5;
             // 
-            // tbBic
+            // tbClosed
             // 
-            this.tbBic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbClosed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbBic.Enabled = false;
-            this.tbBic.Location = new System.Drawing.Point(97, 5);
-            this.tbBic.Name = "tbBic";
-            this.tbBic.Size = new System.Drawing.Size(283, 20);
-            this.tbBic.TabIndex = 1;
+            this.tbClosed.Enabled = false;
+            this.tbClosed.Location = new System.Drawing.Point(97, 5);
+            this.tbClosed.Name = "tbClosed";
+            this.tbClosed.Size = new System.Drawing.Size(283, 20);
+            this.tbClosed.TabIndex = 1;
             // 
-            // lblBic
+            // lblClosed
             // 
-            this.lblBic.AutoSize = true;
-            this.lblBic.Location = new System.Drawing.Point(6, 8);
-            this.lblBic.Name = "lblBic";
-            this.lblBic.Size = new System.Drawing.Size(22, 13);
-            this.lblBic.TabIndex = 0;
-            this.lblBic.Text = "Bic";
-            // 
-            // pnlBankAddress
-            // 
-            this.pnlBankAddress.Controls.Add(this.tbBankAddress);
-            this.pnlBankAddress.Controls.Add(this.lblBankAddress);
-            this.pnlBankAddress.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlBankAddress.Location = new System.Drawing.Point(0, 67);
-            this.pnlBankAddress.Name = "pnlBankAddress";
-            this.pnlBankAddress.Size = new System.Drawing.Size(396, 34);
-            this.pnlBankAddress.TabIndex = 5;
-            // 
-            // tbBankAddress
-            // 
-            this.tbBankAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbBankAddress.Enabled = false;
-            this.tbBankAddress.Location = new System.Drawing.Point(97, 5);
-            this.tbBankAddress.Name = "tbBankAddress";
-            this.tbBankAddress.Size = new System.Drawing.Size(283, 20);
-            this.tbBankAddress.TabIndex = 1;
-            // 
-            // lblBankAddress
-            // 
-            this.lblBankAddress.AutoSize = true;
-            this.lblBankAddress.Location = new System.Drawing.Point(6, 8);
-            this.lblBankAddress.Name = "lblBankAddress";
-            this.lblBankAddress.Size = new System.Drawing.Size(72, 13);
-            this.lblBankAddress.TabIndex = 0;
-            this.lblBankAddress.Text = "Bank address";
+            this.lblClosed.AutoSize = true;
+            this.lblClosed.Location = new System.Drawing.Point(6, 8);
+            this.lblClosed.Name = "lblClosed";
+            this.lblClosed.Size = new System.Drawing.Size(39, 13);
+            this.lblClosed.TabIndex = 0;
+            this.lblClosed.Text = "Closed";
             // 
             // pnlBankName
             // 
@@ -277,14 +243,16 @@ namespace ComLog.WinForms.Controls
             this.dgvItems.AllowUserToOrderColumns = true;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dgvItems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvItems.AutoGenerateContextFilters = true;
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.DateWithTime = false;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            //this.dgvItems.FilterAndSortEnabled = true;
             this.dgvItems.Location = new System.Drawing.Point(0, 0);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.ReadOnly = true;
             this.dgvItems.Size = new System.Drawing.Size(271, 550);
             this.dgvItems.TabIndex = 1;
+            this.dgvItems.TimeFilter = false;
             // 
             // splitter1
             // 
@@ -306,10 +274,8 @@ namespace ComLog.WinForms.Controls
             this.Size = new System.Drawing.Size(670, 550);
             this.pnlDetails.ResumeLayout(false);
             this.pnlFields.ResumeLayout(false);
-            this.pnlBic.ResumeLayout(false);
-            this.pnlBic.PerformLayout();
-            this.pnlBankAddress.ResumeLayout(false);
-            this.pnlBankAddress.PerformLayout();
+            this.pnlClosed.ResumeLayout(false);
+            this.pnlClosed.PerformLayout();
             this.pnlBankName.ResumeLayout(false);
             this.pnlBankName.PerformLayout();
             this.pnlId.ResumeLayout(false);
@@ -339,11 +305,8 @@ namespace ComLog.WinForms.Controls
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Label lblId;
         private AdvancedDataGridView dgvItems;
-        private System.Windows.Forms.Panel pnlBic;
-        private System.Windows.Forms.TextBox tbBic;
-        private System.Windows.Forms.Label lblBic;
-        private System.Windows.Forms.Panel pnlBankAddress;
-        private System.Windows.Forms.TextBox tbBankAddress;
-        private System.Windows.Forms.Label lblBankAddress;
+        private System.Windows.Forms.Panel pnlClosed;
+        private System.Windows.Forms.TextBox tbClosed;
+        private System.Windows.Forms.Label lblClosed;
     }
 }

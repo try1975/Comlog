@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Configuration;
 using ComLog.Dto;
-using ComLog.WinForms.Interfaces;
+using ComLog.WinForms.Interfaces.Data;
 
 namespace ComLog.WinForms.Data
 {

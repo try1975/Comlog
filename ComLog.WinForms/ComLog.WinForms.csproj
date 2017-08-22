@@ -107,7 +107,7 @@
     <Compile Include="Interfaces\Data\IDataMаnager.cs" />
     <Compile Include="Interfaces\Data\ITransactionDataManager.cs" />
     <Compile Include="Interfaces\IBankView.cs" />
-    <Compile Include="Interfaces\ITypedDataMаnager.cs" />
+    <Compile Include="Interfaces\Data\ITypedDataMаnager.cs" />
     <Compile Include="Ninject\ApplicationModule.cs" />
     <Compile Include="Ninject\CompositionRoot.cs" />
     <Compile Include="Presenters\BankPresenter.cs" />

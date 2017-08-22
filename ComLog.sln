@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComLog.WebApi", "ComLog\ComLog.WebApi.csproj", "{B71DA30E-87F3-465E-AC33-A5FE591676A0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComLog.Db.Entities", "ComLog.Db.Entities\ComLog.Db.Entities.csproj", "{CC4E6D4B-F05C-455E-944B-289621F14223}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComLog.Loader", "ComLog.Loader\ComLog.Loader.csproj", "{72F35641-A005-4DFB-B09B-3C37736CB48B}"
@@ -33,16 +31,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurEx.Dto", "CurEx.Dto\CurE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurEx.Console", "CurEx.Console\CurEx.Console.csproj", "{8485B816-C2EE-43CB-AD54-0B0A6E43AF9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComLog.WebApi", "ComLog.WebApi\ComLog.WebApi.csproj", "{B71DA30E-87F3-465E-AC33-A5FE591676A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B71DA30E-87F3-465E-AC33-A5FE591676A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B71DA30E-87F3-465E-AC33-A5FE591676A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B71DA30E-87F3-465E-AC33-A5FE591676A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B71DA30E-87F3-465E-AC33-A5FE591676A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC4E6D4B-F05C-455E-944B-289621F14223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC4E6D4B-F05C-455E-944B-289621F14223}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC4E6D4B-F05C-455E-944B-289621F14223}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -91,12 +87,15 @@ Global
 		{8485B816-C2EE-43CB-AD54-0B0A6E43AF9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8485B816-C2EE-43CB-AD54-0B0A6E43AF9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8485B816-C2EE-43CB-AD54-0B0A6E43AF9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B71DA30E-87F3-465E-AC33-A5FE591676A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B71DA30E-87F3-465E-AC33-A5FE591676A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B71DA30E-87F3-465E-AC33-A5FE591676A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B71DA30E-87F3-465E-AC33-A5FE591676A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B71DA30E-87F3-465E-AC33-A5FE591676A0} = {D0F12C7F-D098-41F1-8A49-6BBE260EFA12}
 		{CC4E6D4B-F05C-455E-944B-289621F14223} = {D0F12C7F-D098-41F1-8A49-6BBE260EFA12}
 		{72F35641-A005-4DFB-B09B-3C37736CB48B} = {D0F12C7F-D098-41F1-8A49-6BBE260EFA12}
 		{B1C0A686-AB16-481E-B414-B2A88FA81A05} = {D0F12C7F-D098-41F1-8A49-6BBE260EFA12}
@@ -109,5 +108,6 @@ Global
 		{5E4418E2-6F66-40AF-9787-AA229FBD9510} = {2BA6CD83-FFC4-4EE3-AF7A-C5CBD5E5DC25}
 		{41879D37-EA16-4FCD-8902-B4601FF1E1C2} = {2BA6CD83-FFC4-4EE3-AF7A-C5CBD5E5DC25}
 		{8485B816-C2EE-43CB-AD54-0B0A6E43AF9C} = {2BA6CD83-FFC4-4EE3-AF7A-C5CBD5E5DC25}
+		{B71DA30E-87F3-465E-AC33-A5FE591676A0} = {D0F12C7F-D098-41F1-8A49-6BBE260EFA12}
 	EndGlobalSection
 EndGlobal

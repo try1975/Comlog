@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using ComLog.Dto;
 using ComLog.WinForms.Interfaces;
@@ -40,15 +41,16 @@ namespace ComLog.WinForms.Controls
             set { tbName.Text = value; }
         }
 
-        public string BankAddress
-        {
-            get { return tbBankAddress.Text; }
-            set { tbBankAddress.Text = value; }
-        }
-        public string Bic
-        {
-            get { return tbBic.Text; }
-            set { tbBic.Text = value; }
+        public DateTime? Closed {
+            get
+            {
+                return string.IsNullOrEmpty(tbClosed.Text) ? DateTime.UtcNow : DateTime.Parse(tbClosed.Text);
+            }
+            set
+            {
+                if (value != null) tbClosed.Text = value.Value.ToString(CultureInfo.CurrentCulture);
+                else tbClosed.Clear();
+            }
         }
 
         #endregion //Details
@@ -63,8 +65,6 @@ namespace ComLog.WinForms.Controls
             // hide columns
             var column = dgvItems.Columns[nameof(BankDto.Id)];
             if (column != null) column.Visible = false;
-            //column = dgvItems.Columns[nameof(BankDto.BankAccounts)];
-            //if (column != null) column.Visible = false;
         }
 
         public void SetEventHandlers()
@@ -149,24 +149,21 @@ namespace ComLog.WinForms.Controls
         {
             tbId.Clear();
             tbName.Clear();
-            tbBankAddress.Clear();
-            tbBic.Clear();
+            tbClosed.Clear();
         }
 
         public void EnableInput()
         {
             //tbId.Enabled = true;
             tbName.Enabled = true;
-            tbBankAddress.Enabled = true;
-            tbBic.Enabled = true;
+            tbClosed.Enabled = true;
         }
 
         public void DisableInput()
         {
             tbId.Enabled = false;
             tbName.Enabled = false;
-            tbBankAddress.Enabled = false;
-            tbBic.Enabled = false;
+            tbClosed.Enabled = false;
         }
 
         #endregion //IEnterMode
