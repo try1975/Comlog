@@ -46,6 +46,11 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlGrid = new System.Windows.Forms.Panel();
             this.dgvItems = new ADGV.AdvancedDataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dtpDateTo = new System.Windows.Forms.DateTimePicker();
+            this.dtpDateFrom = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.pnlAccountName.SuspendLayout();
@@ -53,6 +58,7 @@
             this.pnlButtons.SuspendLayout();
             this.pnlGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -60,7 +66,7 @@
             this.pnlDetails.Controls.Add(this.pnlFields);
             this.pnlDetails.Controls.Add(this.pnlButtons);
             this.pnlDetails.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlDetails.Location = new System.Drawing.Point(123, 0);
+            this.pnlDetails.Location = new System.Drawing.Point(525, 0);
             this.pnlDetails.Name = "pnlDetails";
             this.pnlDetails.Size = new System.Drawing.Size(396, 514);
             this.pnlDetails.TabIndex = 6;
@@ -195,7 +201,7 @@
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(120, 0);
+            this.splitter1.Location = new System.Drawing.Point(522, 0);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(3, 514);
             this.splitter1.TabIndex = 8;
@@ -204,10 +210,11 @@
             // pnlGrid
             // 
             this.pnlGrid.Controls.Add(this.dgvItems);
+            this.pnlGrid.Controls.Add(this.panel1);
             this.pnlGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlGrid.Location = new System.Drawing.Point(0, 0);
             this.pnlGrid.Name = "pnlGrid";
-            this.pnlGrid.Size = new System.Drawing.Size(120, 514);
+            this.pnlGrid.Size = new System.Drawing.Size(522, 514);
             this.pnlGrid.TabIndex = 9;
             // 
             // dgvItems
@@ -221,12 +228,58 @@
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.DateWithTime = false;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 0);
+            this.dgvItems.Location = new System.Drawing.Point(0, 41);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.ReadOnly = true;
-            this.dgvItems.Size = new System.Drawing.Size(120, 514);
+            this.dgvItems.Size = new System.Drawing.Size(522, 473);
             this.dgvItems.TabIndex = 1;
             this.dgvItems.TimeFilter = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.dtpDateTo);
+            this.panel1.Controls.Add(this.dtpDateFrom);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(522, 41);
+            this.panel1.TabIndex = 2;
+            // 
+            // dtpDateTo
+            // 
+            this.dtpDateTo.Location = new System.Drawing.Point(251, 10);
+            this.dtpDateTo.MinDate = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
+            this.dtpDateTo.Name = "dtpDateTo";
+            this.dtpDateTo.Size = new System.Drawing.Size(120, 20);
+            this.dtpDateTo.TabIndex = 1;
+            // 
+            // dtpDateFrom
+            // 
+            this.dtpDateFrom.Location = new System.Drawing.Point(92, 10);
+            this.dtpDateFrom.MinDate = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
+            this.dtpDateFrom.Name = "dtpDateFrom";
+            this.dtpDateFrom.Size = new System.Drawing.Size(120, 20);
+            this.dtpDateFrom.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(56, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "From";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(225, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(20, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "To";
             // 
             // TransactionControl
             // 
@@ -236,7 +289,7 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlDetails);
             this.Name = "TransactionControl";
-            this.Size = new System.Drawing.Size(519, 514);
+            this.Size = new System.Drawing.Size(921, 514);
             this.pnlDetails.ResumeLayout(false);
             this.pnlFields.ResumeLayout(false);
             this.pnlAccountName.ResumeLayout(false);
@@ -246,6 +299,8 @@
             this.pnlButtons.ResumeLayout(false);
             this.pnlGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -269,5 +324,10 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel pnlGrid;
         private ADGV.AdvancedDataGridView dgvItems;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DateTimePicker dtpDateTo;
+        private System.Windows.Forms.DateTimePicker dtpDateFrom;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

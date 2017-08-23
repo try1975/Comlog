@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Configuration;
 using ComLog.Dto;
+using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces;
 
 namespace ComLog.WinForms.Data.Common
@@ -52,11 +53,11 @@ namespace ComLog.WinForms.Data.Common
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.TransactionTypeName))
                 ;
 
-            cfg.CreateMap<TransactionDto, TransactionDto>()
+            cfg.CreateMap<TransactionExtDto, TransactionExtDto>()
                 ;
-            cfg.CreateMap<TransactionDto, ITransactionView>()
+            cfg.CreateMap<TransactionExtDto, ITransactionView>()
                 ;
-            cfg.CreateMap<ITransactionView, TransactionDto>()
+            cfg.CreateMap<ITransactionView, TransactionExtDto>()
                 ;
         }
     }

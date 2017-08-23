@@ -118,6 +118,7 @@
     <Compile Include="Data\Common\DataMаnager.cs" />
     <Compile Include="Data\Common\LoggingHandler.cs" />
     <Compile Include="Data\Common\TypedDataMаnager.cs" />
+    <Compile Include="Data\Filter\TransactionViewFilter.cs" />
     <Compile Include="Data\TransactionTypeDataManager.cs" />
     <Compile Include="Data\TransactionDataManager.cs" />
     <Compile Include="Form1.cs">
@@ -145,6 +146,7 @@
     <Compile Include="Interfaces\Data\IBankDataMаnager.cs" />
     <Compile Include="Interfaces\Data\ITransactionTypeDataManager.cs" />
     <Compile Include="Interfaces\Data\ITransactionDataManager.cs" />
+    <Compile Include="Interfaces\Filter\ITransactionViewFilter.cs" />
     <Compile Include="Interfaces\IAccountView.cs" />
     <Compile Include="Interfaces\IAccountTypeView.cs" />
     <Compile Include="Interfaces\ITransactionView.cs" />

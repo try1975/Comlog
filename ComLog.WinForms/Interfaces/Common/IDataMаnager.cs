@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ComLog.Dto;
+using ComLog.Dto.Ext;
 
 namespace ComLog.WinForms.Interfaces.Common
 {
@@ -24,7 +25,7 @@ namespace ComLog.WinForms.Interfaces.Common
         #endregion //Currencies
 
         #region Transactions
-        Task<TransactionDto> PostTransaction(TransactionDto item);
+        Task<TransactionExtDto> PostTransaction(TransactionExtDto item);
         #endregion //Transactions
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper.Configuration;
 using ComLog.Db.Entities;
 using ComLog.Dto;
+using ComLog.Dto.Ext;
 
 namespace ComLog.WebApi.AutoMappers
 {
@@ -18,7 +19,15 @@ namespace ComLog.WebApi.AutoMappers
                 .ForMember(dest => dest.AccountName, opt => opt.MapFrom(src => src.Account.Name))
                 .ForMember(dest => dest.TransactionTypeName, opt => opt.MapFrom(src => src.TransactionType.Name))
                 ;
-            
+
+            cfg.CreateMap<TransactionEntity, TransactionExtDto>()
+               .ForMember(dest => dest.BankName, opt => opt.MapFrom(src => src.Bank.Name))
+               .ForMember(dest => dest.AccountName, opt => opt.MapFrom(src => src.Account.Name))
+               .ForMember(dest => dest.TransactionTypeName, opt => opt.MapFrom(src => src.TransactionType.Name))
+               ;
+            cfg.CreateMap<TransactionExtDto, TransactionEntity>()
+               ;
+
         }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ComLog.WinForms.Properties {
+namespace CurEx.Console.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -25,25 +25,13 @@ namespace ComLog.WinForms.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2017-01-16")]
-        public global::System.DateTime TransactionViewFilterDateFrom {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool checkedRoyalStatement {
             get {
-                return ((global::System.DateTime)(this["TransactionViewFilterDateFrom"]));
+                return ((bool)(this["checkedRoyalStatement"]));
             }
             set {
-                this["TransactionViewFilterDateFrom"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2017-01-20")]
-        public global::System.DateTime TransactionViewFilterDateTo {
-            get {
-                return ((global::System.DateTime)(this["TransactionViewFilterDateTo"]));
-            }
-            set {
-                this["TransactionViewFilterDateTo"] = value;
+                this["checkedRoyalStatement"] = value;
             }
         }
     }

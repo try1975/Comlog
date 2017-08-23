@@ -16,6 +16,16 @@ namespace CurEx.Console
 
         private static void Main()
         {
+            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            //System.Console.WriteLine($"Local user config path: {config.FilePath}");
+            //System.Console.WriteLine($"{Properties.Settings.Default.checkedRoyalStatement}");
+            //Properties.Settings.Default.checkedRoyalStatement = !Properties.Settings.Default.checkedRoyalStatement;
+            //Properties.Settings.Default.Save();
+            //System.Console.ReadKey();
+            ////Properties.Settings.Default.Save();
+            //return;
+
+
             Fx = new HttpClient(new LoggingHandler());
             var pairs = GetCurrencyPairs().Result;
             foreach (var pair in pairs)

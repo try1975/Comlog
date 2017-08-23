@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using ComLog.Common;
 using ComLog.Dto;
+using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces.Common;
 
 namespace ComLog.WinForms.Data.Common
@@ -107,12 +108,12 @@ namespace ComLog.WinForms.Data.Common
         #endregion //Currencies
 
         #region Transactions
-        public async Task<TransactionDto> PostTransaction(TransactionDto item)
+        public async Task<TransactionExtDto> PostTransaction(TransactionExtDto item)
         {
             using (var response = await _comLogHttpClient.PostAsJsonAsync($"{_apiTransactions}", item))
             {
                 if (!response.IsSuccessStatusCode) return null;
-                var result = await response.Content.ReadAsAsync<TransactionDto>();
+                var result = await response.Content.ReadAsAsync<TransactionExtDto>();
                 return result;
             }
         }

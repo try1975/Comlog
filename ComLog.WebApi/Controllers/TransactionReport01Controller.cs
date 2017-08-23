@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using ComLog.Dto;
+using ComLog.Dto.Ext;
 using ComLog.WebApi.Maintenance;
 using ComLog.WebApi.Maintenance.Interfaces;
 

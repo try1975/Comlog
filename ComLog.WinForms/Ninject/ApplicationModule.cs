@@ -1,9 +1,11 @@
 ﻿using ComLog.WinForms.Controls;
 using ComLog.WinForms.Data;
 using ComLog.WinForms.Data.Common;
+using ComLog.WinForms.Data.Filter;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
+using ComLog.WinForms.Interfaces.Filter;
 using Ninject.Modules;
 
 namespace ComLog.WinForms.Ninject
@@ -31,6 +33,7 @@ namespace ComLog.WinForms.Ninject
             Bind<ITransactionTypeDataManager>().To<TransactionTypeDataManager>().InSingletonScope();
 
             Bind<ITransactionView>().To<TransactionControl>();
+            Bind<ITransactionViewFilter>().To<TransactionViewFilter>();
             Bind<ITransactionDataManager>().To<TransactionDataManager>().InSingletonScope();
         }
     }

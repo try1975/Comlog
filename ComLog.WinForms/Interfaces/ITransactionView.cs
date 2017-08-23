@@ -1,10 +1,11 @@
 ﻿using System;
 using ComLog.Dto;
+using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces.Common;
 
 namespace ComLog.WinForms.Interfaces
 {
-    public interface ITransactionView : ITypedView<TransactionDto, int>
+    public interface ITransactionView : ITypedView<TransactionExtDto, int>
     {
         #region Details
 

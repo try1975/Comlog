@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ComLog.Dto
+namespace ComLog.Dto.Ext
 {
     public class TransactionReport01Dto
     {

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using ComLog.Dto;
+using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
+using ComLog.WinForms.Interfaces.Filter;
 using ComLog.WinForms.Presenters;
 
 namespace ComLog.WinForms.Controls
@@ -12,10 +13,15 @@ namespace ComLog.WinForms.Controls
     {
         private readonly IPresenter _presenter;
         private bool _isEventHandlerSets;
+        private readonly ITransactionViewFilter _transactionViewFilter;
+
         public TransactionControl(ITransactionDataManager transactionDataManager, IDataMаnager dataMаnager)
         {
             InitializeComponent();
+            _transactionViewFilter = transactionDataManager.TransactionViewFilter;
             _presenter = new TransactionPresenter(this, transactionDataManager, dataMаnager);
+            dtpDateFrom.Value = _transactionViewFilter.DateFrom;
+            dtpDateTo.Value = _transactionViewFilter.DateTo;
         }
 
         #region ITransactionTypeView implementation
@@ -63,34 +69,50 @@ namespace ComLog.WinForms.Controls
         {
             dgvItems.DataSource = _presenter.BindingSource;
 
-            var column = dgvItems.Columns[nameof(TransactionDto.Id)];
+            var column = dgvItems.Columns[nameof(TransactionExtDto.Id)];
+            if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(TransactionExtDto.BankId)];
+            if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(TransactionExtDto.AccountId)];
+            if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(TransactionExtDto.TransactionTypeId)];
+            if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(TransactionExtDto.Dt)];
+            if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(TransactionExtDto.Dcc)];
+            if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(TransactionExtDto.UsdDcc)];
             if (column != null) column.Visible = false;
 
-            column = dgvItems.Columns[nameof(TransactionDto.Charges)];
+            column = dgvItems.Columns[nameof(TransactionExtDto.TransactionDate)];
+            if (column != null) column.DisplayIndex=0;
+
+
+            column = dgvItems.Columns[nameof(TransactionExtDto.Charges)];
             if (column != null)
             {
                 column.DefaultCellStyle.Format = "N2";
                 column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
-            column = dgvItems.Columns[nameof(TransactionDto.Credits)];
+            column = dgvItems.Columns[nameof(TransactionExtDto.Credits)];
             if (column != null)
             {
                 column.DefaultCellStyle.Format = "N2";
                 column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
-            column = dgvItems.Columns[nameof(TransactionDto.Debits)];
+            column = dgvItems.Columns[nameof(TransactionExtDto.Debits)];
             if (column != null)
             {
                 column.DefaultCellStyle.Format = "N2";
                 column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
-            column = dgvItems.Columns[nameof(TransactionDto.UsdCredits)];
+            column = dgvItems.Columns[nameof(TransactionExtDto.UsdCredits)];
             if (column != null)
             {
                 column.DefaultCellStyle.Format = "N2";
                 column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
-            column = dgvItems.Columns[nameof(TransactionDto.UsdDebits)];
+            column = dgvItems.Columns[nameof(TransactionExtDto.UsdDebits)];
             if (column != null)
             {
                 column.DefaultCellStyle.Format = "N2";
@@ -111,7 +133,12 @@ namespace ComLog.WinForms.Controls
             btnSave.Click += btnSave_Click;
             btnCancel.Click += btnCancel_Click;
             btnDelete.Click += btnDelete_Click;
+
+            dtpDateFrom.ValueChanged += dtpDateFrom_ValueChanged;
+            dtpDateTo.ValueChanged += dtpDateTo_ValueChanged;
         }
+
+        
 
         #endregion //IRefreshedView
 
@@ -234,8 +261,17 @@ namespace ComLog.WinForms.Controls
             _presenter.BindingSource.Sort = dgvItems.SortString;
         }
 
-        #endregion //Event handlers
+        private void dtpDateFrom_ValueChanged(object sender, EventArgs e)
+        {
+            _transactionViewFilter.DateFrom = dtpDateFrom.Value;
+            _presenter.Reopen();
+        }
 
-        
+        private void dtpDateTo_ValueChanged(object sender, EventArgs e)
+        {
+            _transactionViewFilter.DateTo = dtpDateTo.Value;
+            _presenter.Reopen();
+        }
+        #endregion //Event handlers
     }
 }

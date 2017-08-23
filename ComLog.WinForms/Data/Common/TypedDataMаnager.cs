@@ -1,10 +1,7 @@
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using ComLog.Dto;
 using ComLog.WinForms.Interfaces.Common;
@@ -13,8 +10,8 @@ namespace ComLog.WinForms.Data.Common
 {
     public abstract class TypedDataMànager<T, TK> : ITypedDataMànager<T, TK> where T : class, IDto<TK>
     {
-        private readonly string _endPoint;
-        private readonly HttpClient _httpClient;
+        protected readonly string _endPoint;
+        protected readonly HttpClient _httpClient;
 
         protected TypedDataMànager(string endPoint)
         {
@@ -26,22 +23,22 @@ namespace ComLog.WinForms.Data.Common
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
         }
 
-        public async Task<IEnumerable<T>> GetItems()
+        public virtual async Task<IEnumerable<T>> GetItems()
         {
             using (var response = await _httpClient.GetAsync($"{_endPoint}"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<IEnumerable<T>>();
-#if DEBUG
-                using (var stream = await response.Content.ReadAsStreamAsync())
-                {
-                    stream.Position = 0;
-                    using (var reader = new StreamReader(stream, Encoding.UTF8))
-                    {
-                        Debug.WriteLine(reader.ReadToEnd());
-                    }
-                }
-#endif
+                //#if DEBUG
+                //using (var stream = await response.Content.ReadAsStreamAsync())
+                //{
+                //    stream.Position = 0;
+                //    using (var reader = new StreamReader(stream, Encoding.UTF8))
+                //    {
+                //        Debug.WriteLine(reader.ReadToEnd());
+                //    }
+                //}
+                //#endif
                 return result;
             }
         }
