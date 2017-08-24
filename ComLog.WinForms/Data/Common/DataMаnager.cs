@@ -41,6 +41,21 @@ namespace ComLog.WinForms.Data.Common
             _comLogHttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
         }
 
+        #region Accounts
+
+        public async Task<IEnumerable<AccountExtDto>> GetAccounts()
+        {
+            using (var response = await _comLogHttpClient.GetAsync($"{_apiAccounts}?ext=true"))
+            {
+                if (!response.IsSuccessStatusCode) return null;
+                var result = await response.Content.ReadAsAsync<List<AccountExtDto>>();
+                return result.ToList();
+            }
+        }
+
+        #endregion //Accounts
+
+
         #region Banks
 
         public async Task<IEnumerable<BankDto>> GetBanks()
@@ -118,5 +133,19 @@ namespace ComLog.WinForms.Data.Common
             }
         }
         #endregion //Transactions
+
+        #region TransactionTypes
+
+        public async Task<IEnumerable<TransactionTypeDto>> GetTransactionTypes()
+        {
+            using (var response = await _comLogHttpClient.GetAsync($"{_apiTransactionTypes}"))
+            {
+                if (!response.IsSuccessStatusCode) return null;
+                var result = await response.Content.ReadAsAsync<List<TransactionTypeDto>>();
+                return result;
+            }
+        }
+
+        #endregion //TransactionTypes
     }
 }

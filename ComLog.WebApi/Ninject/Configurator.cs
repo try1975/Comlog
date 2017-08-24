@@ -70,7 +70,7 @@ namespace ComLog.WebApi.Ninject
 
         private static void ConfigureOrm(IKernel container)
         {
-            container.Bind<DbContext>().To<WorkContext>().InSingletonScope();
+            container.Bind<DbContext>().To<WorkContext>().InRequestScope();
         }
     }
 }

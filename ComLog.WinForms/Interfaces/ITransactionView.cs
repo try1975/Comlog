@@ -1,5 +1,5 @@
 ﻿using System;
-using ComLog.Dto;
+using System.Collections.Generic;
 using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces.Common;
 
@@ -7,9 +7,14 @@ namespace ComLog.WinForms.Interfaces
 {
     public interface ITransactionView : ITypedView<TransactionExtDto, int>
     {
-        #region Details
+        #region DetailsList
 
-        DateTime Dt { get; set; }
+        List<AccountExtDto> AccountList { set; }
+        List<KeyValuePair<int, string>> TransactionTypeList { set; }
+
+        #endregion DetailsList
+
+        #region Details
 
         int BankId { get; set; }
 

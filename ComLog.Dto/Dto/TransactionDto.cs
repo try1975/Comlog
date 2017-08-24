@@ -4,7 +4,7 @@ namespace ComLog.Dto
 {
     public class TransactionDto : IDto<int>
     {
-        public DateTime Dt { get; set; }
+        public DateTime TransactionDate { get; set; }
 
         public int BankId { get; set; }
 
@@ -33,8 +33,6 @@ namespace ComLog.Dto
         public decimal? Dcc { get; set; }
 
         public decimal? UsdDcc { get; set; }
-
-        public DateTime? TransactionDate { get; set; }
 
         public int Id { get; set; }
     }

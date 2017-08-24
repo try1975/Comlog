@@ -10,8 +10,11 @@ namespace ComLog.WebApi.AutoMappers
         public static void Configure(MapperConfigurationExpression cfg)
         {
             cfg.CreateMap<TransactionEntity, TransactionDto>()
+                .ForMember(dest => dest.TransactionDate, opt => opt.MapFrom(src => src.Dt))
                 ;
             cfg.CreateMap<TransactionDto, TransactionEntity>()
+                .ForMember(dest => dest.Dt, opt => opt.MapFrom(src => src.TransactionDate))
+                .ForMember(dest => dest.TransactionDate, opt => opt.MapFrom(src => src.TransactionDate))
                 ;
 
             cfg.CreateMap<TransactionEntity, TransactionReport01Dto>()

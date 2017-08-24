@@ -191,7 +191,7 @@
             // 
             // btnTransactions
             // 
-            this.btnTransactions.Location = new System.Drawing.Point(0, 3);
+            this.btnTransactions.Location = new System.Drawing.Point(5, 3);
             this.btnTransactions.Name = "btnTransactions";
             this.btnTransactions.Size = new System.Drawing.Size(75, 23);
             this.btnTransactions.TabIndex = 6;

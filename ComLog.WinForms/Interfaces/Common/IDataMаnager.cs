@@ -8,6 +8,12 @@ namespace ComLog.WinForms.Interfaces.Common
     public interface IDataMаnager
     {
 
+        #region Accounts
+
+        Task<IEnumerable<AccountExtDto>> GetAccounts();
+
+        #endregion //Accounts
+
         #region Banks
 
         Task<IEnumerable<BankDto>> GetBanks();
@@ -27,5 +33,12 @@ namespace ComLog.WinForms.Interfaces.Common
         #region Transactions
         Task<TransactionExtDto> PostTransaction(TransactionExtDto item);
         #endregion //Transactions
+
+        #region TransactionTypes
+
+        Task<IEnumerable<TransactionTypeDto>> GetTransactionTypes();
+
+        #endregion //TransactionTypes
+
     }
 }

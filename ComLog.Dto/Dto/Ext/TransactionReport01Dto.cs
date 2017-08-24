@@ -4,7 +4,7 @@ namespace ComLog.Dto.Ext
 {
     public class TransactionReport01Dto
     {
-        public DateTime Dt { get; set; }
+        public DateTime TransactionDate { get; set; }
 
         public string BankName { get; set; }
 

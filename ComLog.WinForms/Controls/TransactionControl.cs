@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows.Forms;
 using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces;
@@ -24,7 +27,7 @@ namespace ComLog.WinForms.Controls
             dtpDateTo.Value = _transactionViewFilter.DateTo;
         }
 
-        #region ITransactionTypeView implementation
+        #region ITransactionView implementation
 
         #region Details
 
@@ -38,11 +41,41 @@ namespace ComLog.WinForms.Controls
             }
             set { tbId.Text = value.ToString(); }
         }
-        public DateTime Dt { get; set; }
         public int BankId { get; set; }
-        public int AccountId { get; set; }
-        public int? TransactionTypeId { get; set; }
+        public int AccountId
+        {
+            get
+            {
+                var accountExtDto = cmbAccount.SelectedValue as AccountExtDto;
+                return accountExtDto?.Id ?? 0;
+            }
+            set
+            {
+                var list = cmbAccount.DataSource as List<AccountExtDto>;
+                if (list == null) return;
+                var accountExtDto = list.FirstOrDefault(z => z.Id == value);
+
+                try
+                {
+                    cmbAccount.SelectedItem = accountExtDto;
+                    //if (_presenter.PresenterMode != PresenterMode.AddNew || accountExtDto == null) return;
+                    //BankId = accountExtDto.BankId;
+                    //CurrencyId = accountExtDto.CurrencyId;
+                }
+                catch (Exception exception)
+                {
+                    Debug.WriteLine(exception);
+                }
+            }
+        }
+        public int? TransactionTypeId
+        {
+            get { return (int?)cmbTransactionType.SelectedValue; }
+            set { cmbTransactionType.SelectedValue = value; }
+        }
+
         public string CurrencyId { get; set; }
+
         public decimal? Credits { get; set; }
         public decimal? Debits { get; set; }
         public decimal? Charges { get; set; }
@@ -53,21 +86,58 @@ namespace ComLog.WinForms.Controls
         public string Report { get; set; }
         public decimal? Dcc { get; set; }
         public decimal? UsdDcc { get; set; }
-        public DateTime? TransactionDate { get; set; }
+
+        public DateTime? TransactionDate
+        {
+            get { return dtpTransactionDate.Value; }
+            set
+            {
+                if (value != null) dtpTransactionDate.Value = value.Value;
+            }
+        }
 
         #endregion //Details
 
-        #region DetailsLists
+        #region DetailsList
 
-        #endregion //DetailsLists
+        public List<AccountExtDto> AccountList
+        {
+            set
+            {
+                cmbAccount.DataSource = value;
+                cmbAccount.DisplayMember = "DisplayMember";
+            }
+        }
+        public List<KeyValuePair<int, string>> TransactionTypeList
+        {
+            set
+            {
+                cmbTransactionType.DataSource = value;
+                cmbTransactionType.ValueMember = "Key";
+                cmbTransactionType.DisplayMember = "Value";
+            }
+        }
 
-        #endregion //ITransactionTypeView implementation
+        #endregion DetailsList
+
+        #endregion //ITransactionView implementation
 
         #region IRefreshedView
+
+        private void SetInfoLabels()
+        {
+            label3.Text = $"Record count: {dgvItems.RowCount.ToString("N0")}";
+
+            var total = dgvItems.Rows.Cast<DataGridViewRow>()
+                .Sum(t => Convert.ToDecimal(t.Cells[nameof(TransactionExtDto.Credits)].Value == DBNull.Value ? 0 : t.Cells[nameof(TransactionExtDto.Credits)].Value))
+                ;
+            label4.Text = $"Sum(Credits): {total.ToString("N2")}";
+        }
 
         public void RefreshItems()
         {
             dgvItems.DataSource = _presenter.BindingSource;
+            SetInfoLabels();
 
             var column = dgvItems.Columns[nameof(TransactionExtDto.Id)];
             if (column != null) column.Visible = false;
@@ -77,16 +147,21 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.TransactionTypeId)];
             if (column != null) column.Visible = false;
-            column = dgvItems.Columns[nameof(TransactionExtDto.Dt)];
-            if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.Dcc)];
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.UsdDcc)];
             if (column != null) column.Visible = false;
 
             column = dgvItems.Columns[nameof(TransactionExtDto.TransactionDate)];
-            if (column != null) column.DisplayIndex=0;
-
+            if (column != null) column.DisplayIndex = 0;
+            column = dgvItems.Columns[nameof(TransactionExtDto.BankName)];
+            if (column != null) column.DisplayIndex = 1;
+            column = dgvItems.Columns[nameof(TransactionExtDto.AccountName)];
+            if (column != null) column.DisplayIndex = 2;
+            column = dgvItems.Columns[nameof(TransactionExtDto.CurrencyId)];
+            if (column != null) column.DisplayIndex = 3;
+            column = dgvItems.Columns[nameof(TransactionExtDto.TransactionTypeName)];
+            if (column != null) column.DisplayIndex = 4;
 
             column = dgvItems.Columns[nameof(TransactionExtDto.Charges)];
             if (column != null)
@@ -136,9 +211,8 @@ namespace ComLog.WinForms.Controls
 
             dtpDateFrom.ValueChanged += dtpDateFrom_ValueChanged;
             dtpDateTo.ValueChanged += dtpDateTo_ValueChanged;
+            cmbAccount.SelectedIndexChanged += cmbAccount_SelectedIndexChanged;
         }
-
-        
 
         #endregion //IRefreshedView
 
@@ -207,19 +281,25 @@ namespace ComLog.WinForms.Controls
         public void ClearInputFields()
         {
             tbId.Clear();
-            tbName.Clear();
+            dtpTransactionDate.Value = DateTime.Today;
+            cmbAccount.SelectedIndex = -1;
+            cmbTransactionType.SelectedIndex = -1;
         }
 
         public void EnableInput()
         {
             //tbId.Enabled = true;
-            tbName.Enabled = true;
+            dtpTransactionDate.Enabled = true;
+            cmbAccount.Enabled = true;
+            cmbTransactionType.Enabled = true;
         }
 
         public void DisableInput()
         {
             tbId.Enabled = false;
-            tbName.Enabled = false;
+            dtpTransactionDate.Enabled = false;
+            cmbAccount.Enabled = false;
+            cmbTransactionType.Enabled = false;
         }
 
         #endregion //IEnterMode
@@ -238,6 +318,11 @@ namespace ComLog.WinForms.Controls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            var accountExtDto = cmbAccount.SelectedItem as AccountExtDto;
+            if (accountExtDto == null) return;
+            BankId = accountExtDto.BankId;
+            CurrencyId = accountExtDto.CurrencyId;
+
             _presenter.Save();
         }
 
@@ -254,6 +339,7 @@ namespace ComLog.WinForms.Controls
         private void dgvItems_FilterStringChanged(object sender, EventArgs e)
         {
             _presenter.BindingSource.Filter = dgvItems.FilterString;
+            SetInfoLabels();
         }
 
         private void dgvItems_SortStringChanged(object sender, EventArgs e)
@@ -272,6 +358,17 @@ namespace ComLog.WinForms.Controls
             _transactionViewFilter.DateTo = dtpDateTo.Value;
             _presenter.Reopen();
         }
+
+        private void cmbAccount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //var accountExtDto = cmbAccount.SelectedItem as AccountExtDto;
+            //if (accountExtDto == null) return;
+            //BankId = accountExtDto.BankId;
+            //CurrencyId = accountExtDto.CurrencyId;
+        }
+
         #endregion //Event handlers
+
+
     }
 }
