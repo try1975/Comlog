@@ -31,6 +31,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbReport = new System.Windows.Forms.TextBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbDescription = new System.Windows.Forms.TextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbFromTo = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.tbCharges = new System.Windows.Forms.TextBox();
@@ -61,24 +70,22 @@
             this.pnlGrid = new System.Windows.Forms.Panel();
             this.dgvItems = new ADGV.AdvancedDataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblSumCredits = new System.Windows.Forms.Label();
+            this.lblRecCount = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpDateTo = new System.Windows.Forms.DateTimePicker();
             this.dtpDateFrom = new System.Windows.Forms.DateTimePicker();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tbFromTo = new System.Windows.Forms.TextBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tbDescription = new System.Windows.Forms.TextBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbReport = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblSumDebits = new System.Windows.Forms.Label();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -91,9 +98,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -123,6 +127,93 @@
             this.pnlFields.Name = "pnlFields";
             this.pnlFields.Size = new System.Drawing.Size(396, 473);
             this.pnlFields.TabIndex = 1;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.label11);
+            this.panel8.Controls.Add(this.tbReport);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Location = new System.Drawing.Point(0, 299);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(396, 33);
+            this.panel8.TabIndex = 12;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(7, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(39, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Report";
+            // 
+            // tbReport
+            // 
+            this.tbReport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbReport.Enabled = false;
+            this.tbReport.Location = new System.Drawing.Point(97, 6);
+            this.tbReport.Name = "tbReport";
+            this.tbReport.Size = new System.Drawing.Size(283, 20);
+            this.tbReport.TabIndex = 2;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.label10);
+            this.panel7.Controls.Add(this.tbDescription);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 266);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(396, 33);
+            this.panel7.TabIndex = 11;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(7, 9);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 13);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Description";
+            // 
+            // tbDescription
+            // 
+            this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDescription.Enabled = false;
+            this.tbDescription.Location = new System.Drawing.Point(97, 6);
+            this.tbDescription.Name = "tbDescription";
+            this.tbDescription.Size = new System.Drawing.Size(283, 20);
+            this.tbDescription.TabIndex = 2;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.label9);
+            this.panel6.Controls.Add(this.tbFromTo);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(0, 233);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(396, 33);
+            this.panel6.TabIndex = 10;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 9);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 13);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "FromTo";
+            // 
+            // tbFromTo
+            // 
+            this.tbFromTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbFromTo.Enabled = false;
+            this.tbFromTo.Location = new System.Drawing.Point(97, 6);
+            this.tbFromTo.Name = "tbFromTo";
+            this.tbFromTo.Size = new System.Drawing.Size(283, 20);
+            this.tbFromTo.TabIndex = 2;
             // 
             // panel5
             // 
@@ -411,37 +502,43 @@
             this.dgvItems.Location = new System.Drawing.Point(0, 41);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.ReadOnly = true;
-            this.dgvItems.Size = new System.Drawing.Size(522, 414);
+            this.dgvItems.Size = new System.Drawing.Size(522, 445);
             this.dgvItems.TabIndex = 1;
             this.dgvItems.TimeFilter = false;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.lblSumDebits);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.lblSumCredits);
+            this.panel2.Controls.Add(this.lblRecCount);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 455);
+            this.panel2.Location = new System.Drawing.Point(0, 486);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(522, 59);
+            this.panel2.Size = new System.Drawing.Size(522, 28);
             this.panel2.TabIndex = 3;
             // 
-            // label4
+            // lblSumCredits
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(36, 24);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "label4";
+            this.lblSumCredits.AutoSize = true;
+            this.lblSumCredits.Location = new System.Drawing.Point(245, 7);
+            this.lblSumCredits.Name = "lblSumCredits";
+            this.lblSumCredits.Size = new System.Drawing.Size(70, 13);
+            this.lblSumCredits.TabIndex = 1;
+            this.lblSumCredits.Text = "lblSumCredits";
+            this.lblSumCredits.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label3
+            // lblRecCount
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "label3";
+            this.lblRecCount.AutoSize = true;
+            this.lblRecCount.Location = new System.Drawing.Point(89, 7);
+            this.lblRecCount.Name = "lblRecCount";
+            this.lblRecCount.Size = new System.Drawing.Size(65, 13);
+            this.lblRecCount.TabIndex = 0;
+            this.lblRecCount.Text = "lblRecCount";
+            this.lblRecCount.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // panel1
             // 
@@ -489,92 +586,42 @@
             this.dtpDateFrom.Size = new System.Drawing.Size(120, 20);
             this.dtpDateFrom.TabIndex = 0;
             // 
-            // panel6
+            // label12
             // 
-            this.panel6.Controls.Add(this.label9);
-            this.panel6.Controls.Add(this.tbFromTo);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 233);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(396, 33);
-            this.panel6.TabIndex = 10;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(11, 7);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(75, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "Record count:";
             // 
-            // label9
+            // label13
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 9);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(43, 13);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "FromTo";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(155, 7);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(69, 13);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Sum(Credits):";
             // 
-            // tbFromTo
+            // label14
             // 
-            this.tbFromTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbFromTo.Enabled = false;
-            this.tbFromTo.Location = new System.Drawing.Point(97, 6);
-            this.tbFromTo.Name = "tbFromTo";
-            this.tbFromTo.Size = new System.Drawing.Size(283, 20);
-            this.tbFromTo.TabIndex = 2;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(321, 7);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(67, 13);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Sum(Debits):";
             // 
-            // panel7
+            // lblSumDebits
             // 
-            this.panel7.Controls.Add(this.label10);
-            this.panel7.Controls.Add(this.tbDescription);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 266);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(396, 33);
-            this.panel7.TabIndex = 11;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 9);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 13);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Description";
-            // 
-            // tbDescription
-            // 
-            this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDescription.Enabled = false;
-            this.tbDescription.Location = new System.Drawing.Point(97, 6);
-            this.tbDescription.Name = "tbDescription";
-            this.tbDescription.Size = new System.Drawing.Size(283, 20);
-            this.tbDescription.TabIndex = 2;
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.label11);
-            this.panel8.Controls.Add(this.tbReport);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel8.Location = new System.Drawing.Point(0, 299);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(396, 33);
-            this.panel8.TabIndex = 12;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(7, 9);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(39, 13);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Report";
-            // 
-            // tbReport
-            // 
-            this.tbReport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbReport.Enabled = false;
-            this.tbReport.Location = new System.Drawing.Point(97, 6);
-            this.tbReport.Name = "tbReport";
-            this.tbReport.Size = new System.Drawing.Size(283, 20);
-            this.tbReport.TabIndex = 2;
+            this.lblSumDebits.AutoSize = true;
+            this.lblSumDebits.Location = new System.Drawing.Point(411, 7);
+            this.lblSumDebits.Name = "lblSumDebits";
+            this.lblSumDebits.Size = new System.Drawing.Size(68, 13);
+            this.lblSumDebits.TabIndex = 4;
+            this.lblSumDebits.Text = "lblSumDebits";
+            this.lblSumDebits.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // TransactionControl
             // 
@@ -587,6 +634,12 @@
             this.Size = new System.Drawing.Size(921, 514);
             this.pnlDetails.ResumeLayout(false);
             this.pnlFields.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -607,12 +660,6 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -641,8 +688,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblRecCount;
+        private System.Windows.Forms.Label lblSumCredits;
         private System.Windows.Forms.ComboBox cmbAccount;
         private System.Windows.Forms.Panel pnlTransactionDate;
         private System.Windows.Forms.DateTimePicker dtpTransactionDate;
@@ -667,5 +714,9 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbFromTo;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblSumDebits;
     }
 }

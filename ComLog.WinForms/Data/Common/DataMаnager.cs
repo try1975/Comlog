@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
@@ -21,6 +22,9 @@ namespace ComLog.WinForms.Data.Common
         private readonly string _apiTransactions;
         private readonly HttpClient _comLogHttpClient;
 
+        private readonly string _curExApi;
+        private readonly HttpClient _curExHttpClient;
+
         public DataMаnager()
         {
             #region Endpoints
@@ -39,6 +43,9 @@ namespace ComLog.WinForms.Data.Common
 
             _comLogHttpClient = new HttpClient(new LoggingHandler());
             _comLogHttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
+
+            _curExApi = ConfigurationManager.AppSettings["CurExApi"];
+            _curExHttpClient = new HttpClient(new LoggingHandler());
         }
 
         #region Accounts
@@ -147,5 +154,19 @@ namespace ComLog.WinForms.Data.Common
         }
 
         #endregion //TransactionTypes
+
+        #region CurrencyExchangeRate
+
+        public async Task<decimal> GetCurrencyExchangeRate(string currencyId, DateTime date)
+        {
+            using (var response = await _curExHttpClient.GetAsync($"{_curExApi}?currencyId={currencyId}&date={date.ToString("yyyy-MM-dd")}"))
+            {
+                if (!response.IsSuccessStatusCode) return 1m;
+                var result = await response.Content.ReadAsAsync<decimal>();
+                return result;
+            }
+        }
+
+        #endregion //CurrencyExchangeRate
     }
 }

@@ -13,7 +13,7 @@ namespace ComLog.WinForms.Presenters.Common
     public abstract class TypedPresenter<T, TK> : IPresenter where T : class, IDto<TK>
     {
         private readonly ITypedDataMànager<T, TK> _typedDataMànager;
-        protected readonly IDataMànager DataMànager;
+        public IDataMànager DataMànager { get; set; }
         protected readonly ITypedView<T, TK> View;
         
 

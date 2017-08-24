@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces;
@@ -171,12 +172,16 @@ namespace ComLog.WinForms.Controls
 
         private void SetInfoLabels()
         {
-            label3.Text = $"Record count: {dgvItems.RowCount.ToString("N0")}";
+            lblRecCount.Text = $"{dgvItems.RowCount.ToString("N0")}";
 
-            var total = dgvItems.Rows.Cast<DataGridViewRow>()
+            var sumCredits = dgvItems.Rows.Cast<DataGridViewRow>()
                 .Sum(t => Convert.ToDecimal(t.Cells[nameof(TransactionExtDto.Credits)].Value == DBNull.Value ? 0 : t.Cells[nameof(TransactionExtDto.Credits)].Value))
                 ;
-            label4.Text = $"Sum(Credits): {total.ToString("N2", CultureInfo.InvariantCulture)}";
+            lblSumCredits.Text = $"{sumCredits.ToString("N2", CultureInfo.InvariantCulture)}";
+            var sumDebits = dgvItems.Rows.Cast<DataGridViewRow>()
+                .Sum(t => Convert.ToDecimal(t.Cells[nameof(TransactionExtDto.Debits)].Value == DBNull.Value ? 0 : t.Cells[nameof(TransactionExtDto.Debits)].Value))
+                ;
+            lblSumDebits.Text = $"{sumDebits.ToString("N2", CultureInfo.InvariantCulture)}";
         }
 
         public void RefreshItems()
@@ -383,18 +388,24 @@ namespace ComLog.WinForms.Controls
             _presenter.Edit();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
             var accountExtDto = cmbAccount.SelectedItem as AccountExtDto;
             if (accountExtDto == null) return;
             BankId = accountExtDto.BankId;
             CurrencyId = accountExtDto.CurrencyId;
             var rate = 1m;
-
-            //TODO: get rate from exchange api
-            if (CurrencyId == "EUR") rate = 1.1m;
-            if (CurrencyId == "GBP") rate = 1.5m;
-
+            if (TransactionDate != null)
+            {
+                try
+                {
+                    rate =  await _presenter.DataMаnager.GetCurrencyExchangeRate(CurrencyId, TransactionDate.Value);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                }
+            }
 
             if (!Credits.HasValue) UsdCredits = null;
             else

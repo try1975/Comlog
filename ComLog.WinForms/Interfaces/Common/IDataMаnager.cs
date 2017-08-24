@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ComLog.Dto;
 using ComLog.Dto.Ext;
@@ -39,6 +40,12 @@ namespace ComLog.WinForms.Interfaces.Common
         Task<IEnumerable<TransactionTypeDto>> GetTransactionTypes();
 
         #endregion //TransactionTypes
+
+        #region CurrencyExchangeRate
+
+        Task<decimal> GetCurrencyExchangeRate(string currencyId, DateTime date);
+
+        #endregion //CurrencyExchangeRate
 
     }
 }

@@ -180,6 +180,7 @@
     <Compile Include="AutoMappers\CurrencyPairRateMapper.cs" />
     <Compile Include="Controllers\CurrencyPairsController.cs" />
     <Compile Include="Controllers\CurrencyPairRatesController.cs" />
+    <Compile Include="Controllers\CurrencyRateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TypedController.cs" />
     <Compile Include="Global.asax.cs">
