@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
             this.pnlTransactionType = new System.Windows.Forms.Panel();
@@ -59,6 +59,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtpDateTo = new System.Windows.Forms.DateTimePicker();
             this.dtpDateFrom = new System.Windows.Forms.DateTimePicker();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbCredits = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbDebits = new System.Windows.Forms.TextBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbCharges = new System.Windows.Forms.TextBox();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.pnlTransactionType.SuspendLayout();
@@ -70,6 +79,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -84,6 +96,9 @@
             // 
             // pnlFields
             // 
+            this.pnlFields.Controls.Add(this.panel5);
+            this.pnlFields.Controls.Add(this.panel4);
+            this.pnlFields.Controls.Add(this.panel3);
             this.pnlFields.Controls.Add(this.pnlTransactionType);
             this.pnlFields.Controls.Add(this.pnlAccount);
             this.pnlFields.Controls.Add(this.pnlTransactionDate);
@@ -285,8 +300,8 @@
             this.dgvItems.AllowUserToAddRows = false;
             this.dgvItems.AllowUserToDeleteRows = false;
             this.dgvItems.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvItems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvItems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvItems.AutoGenerateContextFilters = true;
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.DateWithTime = false;
@@ -372,6 +387,93 @@
             this.dtpDateFrom.Size = new System.Drawing.Size(120, 20);
             this.dtpDateFrom.TabIndex = 0;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.tbCredits);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 134);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(396, 33);
+            this.panel3.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(39, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Credits";
+            // 
+            // tbCredits
+            // 
+            this.tbCredits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbCredits.Enabled = false;
+            this.tbCredits.Location = new System.Drawing.Point(97, 6);
+            this.tbCredits.Name = "tbCredits";
+            this.tbCredits.Size = new System.Drawing.Size(283, 20);
+            this.tbCredits.TabIndex = 2;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.label7);
+            this.panel4.Controls.Add(this.tbDebits);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 167);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(396, 33);
+            this.panel4.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Debits";
+            // 
+            // tbDebits
+            // 
+            this.tbDebits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDebits.Enabled = false;
+            this.tbDebits.Location = new System.Drawing.Point(97, 6);
+            this.tbDebits.Name = "tbDebits";
+            this.tbDebits.Size = new System.Drawing.Size(283, 20);
+            this.tbDebits.TabIndex = 2;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Controls.Add(this.tbCharges);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 200);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(396, 33);
+            this.panel5.TabIndex = 9;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 9);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Charges";
+            // 
+            // tbCharges
+            // 
+            this.tbCharges.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbCharges.Enabled = false;
+            this.tbCharges.Location = new System.Drawing.Point(97, 6);
+            this.tbCharges.Name = "tbCharges";
+            this.tbCharges.Size = new System.Drawing.Size(283, 20);
+            this.tbCharges.TabIndex = 2;
+            // 
             // TransactionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -397,6 +499,12 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -433,5 +541,14 @@
         private System.Windows.Forms.Panel pnlTransactionType;
         private System.Windows.Forms.ComboBox cmbTransactionType;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tbCredits;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox tbDebits;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox tbCharges;
     }
 }

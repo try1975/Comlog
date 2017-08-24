@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using ComLog.Dto.Ext;
@@ -54,18 +54,7 @@ namespace ComLog.WinForms.Controls
                 var list = cmbAccount.DataSource as List<AccountExtDto>;
                 if (list == null) return;
                 var accountExtDto = list.FirstOrDefault(z => z.Id == value);
-
-                try
-                {
-                    cmbAccount.SelectedItem = accountExtDto;
-                    //if (_presenter.PresenterMode != PresenterMode.AddNew || accountExtDto == null) return;
-                    //BankId = accountExtDto.BankId;
-                    //CurrencyId = accountExtDto.CurrencyId;
-                }
-                catch (Exception exception)
-                {
-                    Debug.WriteLine(exception);
-                }
+                cmbAccount.SelectedItem = accountExtDto;
             }
         }
         public int? TransactionTypeId
@@ -76,9 +65,51 @@ namespace ComLog.WinForms.Controls
 
         public string CurrencyId { get; set; }
 
-        public decimal? Credits { get; set; }
-        public decimal? Debits { get; set; }
-        public decimal? Charges { get; set; }
+        public decimal? Credits
+        {
+            get
+            {
+                decimal decimalResult;
+                return decimal.TryParse(tbCredits.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
+                    out decimalResult)
+                    ? decimalResult
+                    : (decimal?)null;
+            }
+            set
+            {
+                tbCredits.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? "";
+            }
+        }
+        public decimal? Debits
+        {
+            get
+            {
+                decimal decimalResult;
+                return decimal.TryParse(tbDebits.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
+                    out decimalResult)
+                    ? decimalResult
+                    : (decimal?)null;
+            }
+            set
+            {
+                tbDebits.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? "";
+            }
+        }
+        public decimal? Charges
+        {
+            get
+            {
+                decimal decimalResult;
+                return decimal.TryParse(tbCharges.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
+                    out decimalResult)
+                    ? decimalResult
+                    : (decimal?)null;
+            }
+            set
+            {
+                tbCharges.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? "";
+            }
+        }
         public string FromTo { get; set; }
         public string Description { get; set; }
         public decimal? UsdCredits { get; set; }
@@ -284,6 +315,9 @@ namespace ComLog.WinForms.Controls
             dtpTransactionDate.Value = DateTime.Today;
             cmbAccount.SelectedIndex = -1;
             cmbTransactionType.SelectedIndex = -1;
+            tbCredits.Text = "";
+            tbDebits.Text = "";
+            tbCharges.Text = "";
         }
 
         public void EnableInput()
@@ -292,6 +326,9 @@ namespace ComLog.WinForms.Controls
             dtpTransactionDate.Enabled = true;
             cmbAccount.Enabled = true;
             cmbTransactionType.Enabled = true;
+            tbCredits.Enabled = true;
+            tbDebits.Enabled = true;
+            tbCharges.Enabled = true;
         }
 
         public void DisableInput()
@@ -300,6 +337,9 @@ namespace ComLog.WinForms.Controls
             dtpTransactionDate.Enabled = false;
             cmbAccount.Enabled = false;
             cmbTransactionType.Enabled = false;
+            tbCredits.Enabled = false;
+            tbDebits.Enabled = false;
+            tbCharges.Enabled = false;
         }
 
         #endregion //IEnterMode
@@ -322,7 +362,33 @@ namespace ComLog.WinForms.Controls
             if (accountExtDto == null) return;
             BankId = accountExtDto.BankId;
             CurrencyId = accountExtDto.CurrencyId;
+            var rate = 1m;
 
+            //TODO: get rate from exchange api
+            if (CurrencyId == "EUR") rate = 1.1m;
+            if (CurrencyId == "GBP") rate = 1.5m;
+
+
+            if (!Credits.HasValue) UsdCredits = null;
+            else
+            {
+                UsdCredits = Credits * rate;
+            }
+            if (Debits.HasValue && Debits > 0) Debits = Debits * -1;
+            if (Charges.HasValue && Charges > 0) Charges = Charges * -1;
+            if (!Debits.HasValue && !Charges.HasValue) UsdDebits = null;
+            else
+            {
+                if (Debits.HasValue) UsdDebits = Debits * rate;
+                if (Charges.HasValue)
+                {
+                    if (UsdDebits.HasValue) UsdDebits += Charges * rate;
+                    else
+                    {
+                        UsdDebits = Charges * rate;
+                    }
+                }
+            }
             _presenter.Save();
         }
 

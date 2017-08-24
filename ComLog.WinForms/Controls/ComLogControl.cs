@@ -11,6 +11,7 @@ namespace ComLog.WinForms.Controls
         public ComLogControl()
         {
             InitializeComponent();
+            btnTransactions_Click(null, null);
         }
 
         private void AddControlToWorkArea(Control control, bool ctrlPressed = false)
