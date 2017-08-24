@@ -31,6 +31,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbCharges = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbDebits = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbCredits = new System.Windows.Forms.TextBox();
             this.pnlTransactionType = new System.Windows.Forms.Panel();
             this.cmbTransactionType = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -59,17 +68,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtpDateTo = new System.Windows.Forms.DateTimePicker();
             this.dtpDateFrom = new System.Windows.Forms.DateTimePicker();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbCredits = new System.Windows.Forms.TextBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbDebits = new System.Windows.Forms.TextBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbCharges = new System.Windows.Forms.TextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbFromTo = new System.Windows.Forms.TextBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbDescription = new System.Windows.Forms.TextBox();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbReport = new System.Windows.Forms.TextBox();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.pnlTransactionType.SuspendLayout();
             this.pnlAccount.SuspendLayout();
             this.pnlTransactionDate.SuspendLayout();
@@ -79,9 +91,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -96,6 +108,9 @@
             // 
             // pnlFields
             // 
+            this.pnlFields.Controls.Add(this.panel8);
+            this.pnlFields.Controls.Add(this.panel7);
+            this.pnlFields.Controls.Add(this.panel6);
             this.pnlFields.Controls.Add(this.panel5);
             this.pnlFields.Controls.Add(this.panel4);
             this.pnlFields.Controls.Add(this.panel3);
@@ -108,6 +123,93 @@
             this.pnlFields.Name = "pnlFields";
             this.pnlFields.Size = new System.Drawing.Size(396, 473);
             this.pnlFields.TabIndex = 1;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Controls.Add(this.tbCharges);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 200);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(396, 33);
+            this.panel5.TabIndex = 9;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 9);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Charges";
+            // 
+            // tbCharges
+            // 
+            this.tbCharges.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbCharges.Enabled = false;
+            this.tbCharges.Location = new System.Drawing.Point(97, 6);
+            this.tbCharges.Name = "tbCharges";
+            this.tbCharges.Size = new System.Drawing.Size(283, 20);
+            this.tbCharges.TabIndex = 2;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.label7);
+            this.panel4.Controls.Add(this.tbDebits);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 167);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(396, 33);
+            this.panel4.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Debits";
+            // 
+            // tbDebits
+            // 
+            this.tbDebits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDebits.Enabled = false;
+            this.tbDebits.Location = new System.Drawing.Point(97, 6);
+            this.tbDebits.Name = "tbDebits";
+            this.tbDebits.Size = new System.Drawing.Size(283, 20);
+            this.tbDebits.TabIndex = 2;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.tbCredits);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 134);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(396, 33);
+            this.panel3.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(39, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Credits";
+            // 
+            // tbCredits
+            // 
+            this.tbCredits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbCredits.Enabled = false;
+            this.tbCredits.Location = new System.Drawing.Point(97, 6);
+            this.tbCredits.Name = "tbCredits";
+            this.tbCredits.Size = new System.Drawing.Size(283, 20);
+            this.tbCredits.TabIndex = 2;
             // 
             // pnlTransactionType
             // 
@@ -387,92 +489,92 @@
             this.dtpDateFrom.Size = new System.Drawing.Size(120, 20);
             this.dtpDateFrom.TabIndex = 0;
             // 
-            // panel3
+            // panel6
             // 
-            this.panel3.Controls.Add(this.label6);
-            this.panel3.Controls.Add(this.tbCredits);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 134);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(396, 33);
-            this.panel3.TabIndex = 7;
+            this.panel6.Controls.Add(this.label9);
+            this.panel6.Controls.Add(this.tbFromTo);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(0, 233);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(396, 33);
+            this.panel6.TabIndex = 10;
             // 
-            // label6
+            // label9
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 9);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(39, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Credits";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 9);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 13);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "FromTo";
             // 
-            // tbCredits
+            // tbFromTo
             // 
-            this.tbCredits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbFromTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCredits.Enabled = false;
-            this.tbCredits.Location = new System.Drawing.Point(97, 6);
-            this.tbCredits.Name = "tbCredits";
-            this.tbCredits.Size = new System.Drawing.Size(283, 20);
-            this.tbCredits.TabIndex = 2;
+            this.tbFromTo.Enabled = false;
+            this.tbFromTo.Location = new System.Drawing.Point(97, 6);
+            this.tbFromTo.Name = "tbFromTo";
+            this.tbFromTo.Size = new System.Drawing.Size(283, 20);
+            this.tbFromTo.TabIndex = 2;
             // 
-            // panel4
+            // panel7
             // 
-            this.panel4.Controls.Add(this.label7);
-            this.panel4.Controls.Add(this.tbDebits);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 167);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(396, 33);
-            this.panel4.TabIndex = 8;
+            this.panel7.Controls.Add(this.label10);
+            this.panel7.Controls.Add(this.tbDescription);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 266);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(396, 33);
+            this.panel7.TabIndex = 11;
             // 
-            // label7
+            // label10
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 9);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(37, 13);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Debits";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(7, 9);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 13);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Description";
             // 
-            // tbDebits
+            // tbDescription
             // 
-            this.tbDebits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDebits.Enabled = false;
-            this.tbDebits.Location = new System.Drawing.Point(97, 6);
-            this.tbDebits.Name = "tbDebits";
-            this.tbDebits.Size = new System.Drawing.Size(283, 20);
-            this.tbDebits.TabIndex = 2;
+            this.tbDescription.Enabled = false;
+            this.tbDescription.Location = new System.Drawing.Point(97, 6);
+            this.tbDescription.Name = "tbDescription";
+            this.tbDescription.Size = new System.Drawing.Size(283, 20);
+            this.tbDescription.TabIndex = 2;
             // 
-            // panel5
+            // panel8
             // 
-            this.panel5.Controls.Add(this.label8);
-            this.panel5.Controls.Add(this.tbCharges);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 200);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(396, 33);
-            this.panel5.TabIndex = 9;
+            this.panel8.Controls.Add(this.label11);
+            this.panel8.Controls.Add(this.tbReport);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Location = new System.Drawing.Point(0, 299);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(396, 33);
+            this.panel8.TabIndex = 12;
             // 
-            // label8
+            // label11
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 9);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 13);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Charges";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(7, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(39, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Report";
             // 
-            // tbCharges
+            // tbReport
             // 
-            this.tbCharges.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbReport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCharges.Enabled = false;
-            this.tbCharges.Location = new System.Drawing.Point(97, 6);
-            this.tbCharges.Name = "tbCharges";
-            this.tbCharges.Size = new System.Drawing.Size(283, 20);
-            this.tbCharges.TabIndex = 2;
+            this.tbReport.Enabled = false;
+            this.tbReport.Location = new System.Drawing.Point(97, 6);
+            this.tbReport.Name = "tbReport";
+            this.tbReport.Size = new System.Drawing.Size(283, 20);
+            this.tbReport.TabIndex = 2;
             // 
             // TransactionControl
             // 
@@ -485,6 +587,12 @@
             this.Size = new System.Drawing.Size(921, 514);
             this.pnlDetails.ResumeLayout(false);
             this.pnlFields.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.pnlTransactionType.ResumeLayout(false);
             this.pnlTransactionType.PerformLayout();
             this.pnlAccount.ResumeLayout(false);
@@ -499,12 +607,12 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -550,5 +658,14 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbCharges;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tbReport;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox tbDescription;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox tbFromTo;
     }
 }

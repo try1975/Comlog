@@ -62,12 +62,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 483);
+            this.ClientSize = global::ComLog.WinForms.Properties.Settings.Default.MainFormClientSize;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel2);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::ComLog.WinForms.Properties.Settings.Default, "MainFormClientSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::ComLog.WinForms.Properties.Settings.Default, "MainFormLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Location = global::ComLog.WinForms.Properties.Settings.Default.MainFormLocation;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ComLog";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.ResumeLayout(false);
 
         }

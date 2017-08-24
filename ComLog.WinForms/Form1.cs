@@ -13,5 +13,10 @@ namespace ComLog.WinForms
             control.Dock = DockStyle.Fill;
             panel1.Controls.Add(control);
         }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
     }
 }

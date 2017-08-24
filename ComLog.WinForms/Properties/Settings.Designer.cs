@@ -46,5 +46,29 @@ namespace ComLog.WinForms.Properties {
                 this["TransactionViewFilterDateTo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1036, 483")]
+        public global::System.Drawing.Size MainFormClientSize {
+            get {
+                return ((global::System.Drawing.Size)(this["MainFormClientSize"]));
+            }
+            set {
+                this["MainFormClientSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point MainFormLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["MainFormLocation"]));
+            }
+            set {
+                this["MainFormLocation"] = value;
+            }
+        }
     }
 }

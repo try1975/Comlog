@@ -110,11 +110,25 @@ namespace ComLog.WinForms.Controls
                 tbCharges.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? "";
             }
         }
-        public string FromTo { get; set; }
-        public string Description { get; set; }
+
+        public string FromTo
+        {
+            get { return tbFromTo.Text; }
+            set { tbFromTo.Text = value; }
+        }
+
+        public string Description
+        {
+            get { return tbDescription.Text; }
+            set { tbDescription.Text = value; }
+        }
         public decimal? UsdCredits { get; set; }
         public decimal? UsdDebits { get; set; }
-        public string Report { get; set; }
+        public string Report
+        {
+            get { return tbReport.Text; }
+            set { tbReport.Text = value; }
+        }
         public decimal? Dcc { get; set; }
         public decimal? UsdDcc { get; set; }
 
@@ -162,7 +176,7 @@ namespace ComLog.WinForms.Controls
             var total = dgvItems.Rows.Cast<DataGridViewRow>()
                 .Sum(t => Convert.ToDecimal(t.Cells[nameof(TransactionExtDto.Credits)].Value == DBNull.Value ? 0 : t.Cells[nameof(TransactionExtDto.Credits)].Value))
                 ;
-            label4.Text = $"Sum(Credits): {total.ToString("N2")}";
+            label4.Text = $"Sum(Credits): {total.ToString("N2", CultureInfo.InvariantCulture)}";
         }
 
         public void RefreshItems()
@@ -193,6 +207,9 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.DisplayIndex = 3;
             column = dgvItems.Columns[nameof(TransactionExtDto.TransactionTypeName)];
             if (column != null) column.DisplayIndex = 4;
+
+            column = dgvItems.Columns[nameof(TransactionExtDto.TransactionDate)];
+            if (column != null) column.HeaderText = @"Date";
 
             column = dgvItems.Columns[nameof(TransactionExtDto.Charges)];
             if (column != null)
@@ -242,7 +259,6 @@ namespace ComLog.WinForms.Controls
 
             dtpDateFrom.ValueChanged += dtpDateFrom_ValueChanged;
             dtpDateTo.ValueChanged += dtpDateTo_ValueChanged;
-            cmbAccount.SelectedIndexChanged += cmbAccount_SelectedIndexChanged;
         }
 
         #endregion //IRefreshedView
@@ -283,6 +299,8 @@ namespace ComLog.WinForms.Controls
             btnSave.Enabled = false;
             btnEdit.Enabled = false;
             btnAddNew.Enabled = true;
+
+            SetInfoLabels();
         }
 
         public void EnterAddNewMode()
@@ -318,6 +336,9 @@ namespace ComLog.WinForms.Controls
             tbCredits.Text = "";
             tbDebits.Text = "";
             tbCharges.Text = "";
+            tbFromTo.Text = "";
+            tbDescription.Text = "";
+            tbReport.Text = "";
         }
 
         public void EnableInput()
@@ -329,6 +350,9 @@ namespace ComLog.WinForms.Controls
             tbCredits.Enabled = true;
             tbDebits.Enabled = true;
             tbCharges.Enabled = true;
+            tbFromTo.Enabled = true;
+            tbDescription.Enabled = true;
+            tbReport.Enabled = true;
         }
 
         public void DisableInput()
@@ -340,6 +364,9 @@ namespace ComLog.WinForms.Controls
             tbCredits.Enabled = false;
             tbDebits.Enabled = false;
             tbCharges.Enabled = false;
+            tbFromTo.Enabled = false;
+            tbDescription.Enabled = false;
+            tbReport.Enabled = false;
         }
 
         #endregion //IEnterMode
@@ -425,16 +452,6 @@ namespace ComLog.WinForms.Controls
             _presenter.Reopen();
         }
 
-        private void cmbAccount_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //var accountExtDto = cmbAccount.SelectedItem as AccountExtDto;
-            //if (accountExtDto == null) return;
-            //BankId = accountExtDto.BankId;
-            //CurrencyId = accountExtDto.CurrencyId;
-        }
-
         #endregion //Event handlers
-
-
     }
 }
