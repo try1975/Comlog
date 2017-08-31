@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CurEx.Dto.Dto;
 
@@ -49,10 +50,7 @@ namespace CurEx.Console
                 }
             }
             System.Console.WriteLine("Complete.");
-            #if DEBUG
-            System.Console.ReadKey();
-            #endif
-
+            Thread.Sleep(3000);
         }
 
         private static async Task<string> GetFxRates(string instruments)

@@ -286,9 +286,11 @@ namespace ComLog.WinForms.Controls
             DisableInput();
 
             btnDelete.Enabled = true;
+            if (TransactionDate <= DateTime.Today.AddDays(-5)) btnDelete.Enabled = false;
             btnCancel.Enabled = false;
             btnSave.Enabled = false;
             btnEdit.Enabled = true;
+            if (TransactionDate <= DateTime.Today.AddDays(-5)) btnEdit.Enabled = false;
             btnAddNew.Enabled = true;
         }
 
@@ -388,48 +390,6 @@ namespace ComLog.WinForms.Controls
             _presenter.Edit();
         }
 
-        private async void btnSave_Click(object sender, EventArgs e)
-        {
-            var accountExtDto = cmbAccount.SelectedItem as AccountExtDto;
-            if (accountExtDto == null) return;
-            BankId = accountExtDto.BankId;
-            CurrencyId = accountExtDto.CurrencyId;
-            var rate = 1m;
-            if (TransactionDate != null)
-            {
-                try
-                {
-                    rate =  await _presenter.DataMаnager.GetCurrencyExchangeRate(CurrencyId, TransactionDate.Value);
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine(exception);
-                }
-            }
-
-            if (!Credits.HasValue) UsdCredits = null;
-            else
-            {
-                UsdCredits = Credits * rate;
-            }
-            if (Debits.HasValue && Debits > 0) Debits = Debits * -1;
-            if (Charges.HasValue && Charges > 0) Charges = Charges * -1;
-            if (!Debits.HasValue && !Charges.HasValue) UsdDebits = null;
-            else
-            {
-                if (Debits.HasValue) UsdDebits = Debits * rate;
-                if (Charges.HasValue)
-                {
-                    if (UsdDebits.HasValue) UsdDebits += Charges * rate;
-                    else
-                    {
-                        UsdDebits = Charges * rate;
-                    }
-                }
-            }
-            _presenter.Save();
-        }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             _presenter.Cancel();
@@ -463,6 +423,67 @@ namespace ComLog.WinForms.Controls
             _presenter.Reopen();
         }
 
+        private async void btnSave_Click(object sender, EventArgs e)
+        {
+            if (!ValidateData()) return;
+            if (!await SetData()) return;
+            _presenter.Save();
+        }
+
         #endregion //Event handlers
+
+        private bool ValidateData()
+        {
+            if (TransactionDate <= DateTime.Today.AddDays(-5))
+            {
+                MessageBox.Show(
+                    $"Transaction date must be greater than {DateTime.Today.AddDays(-6).ToString("dd-MM-yyyy")}",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            return true;
+        }
+
+        private async Task<bool> SetData()
+        {
+            var accountExtDto = cmbAccount.SelectedItem as AccountExtDto;
+            if (accountExtDto == null) return false;
+            BankId = accountExtDto.BankId;
+            CurrencyId = accountExtDto.CurrencyId;
+            var rate = 1m;
+            if (TransactionDate != null)
+            {
+                try
+                {
+                    rate = await _presenter.DataMаnager.GetCurrencyExchangeRate(CurrencyId, TransactionDate.Value);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                }
+            }
+
+            if (!Credits.HasValue) UsdCredits = null;
+            else
+            {
+                UsdCredits = Credits*rate;
+            }
+            if (Debits.HasValue && Debits > 0) Debits = Debits*-1;
+            if (Charges.HasValue && Charges > 0) Charges = Charges*-1;
+            if (!Debits.HasValue && !Charges.HasValue) UsdDebits = null;
+            else
+            {
+                if (Debits.HasValue) UsdDebits = Debits*rate;
+                if (Charges.HasValue)
+                {
+                    if (UsdDebits.HasValue) UsdDebits += Charges*rate;
+                    else
+                    {
+                        UsdDebits = Charges*rate;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }
