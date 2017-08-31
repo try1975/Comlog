@@ -40,14 +40,7 @@ namespace CurEx.WebApi.Ninject
             container.Bind<ICurrencyPairRateApi>().To<CurrencyPairRateApi>().InRequestScope();
             container.Bind<ICurrencyPairRateQuery>().To<CurrencyPairRateQuery>().InRequestScope();
 
-            //container.Bind<IBankApi>().To<BankApi>().InRequestScope();
-            //container.Bind<IBankQuery>().To<BankQuery>().InRequestScope();
-
-            ////container.Bind<IAccountApi>().To<AccountApi>().InRequestScope();
-            //container.Bind<IAccountQuery>().To<AccountQuery>().InRequestScope();
-
-            //container.Bind<ITransactionApi>().To<TransactionApi>().InRequestScope();
-            //container.Bind<ITransactionQuery>().To<TransactionQuery>().InRequestScope();
+            container.Bind<ICurrencyRateApi>().To<CurrencyRateApi>().InRequestScope();
 
             #endregion
         }

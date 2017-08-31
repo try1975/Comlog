@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Web.Http;
+using CurEx.WebApi.Maintenance.Interfaces;
 
 namespace CurEx.WebApi.Controllers
 {
     public class CurrencyRateController : ApiController
     {
+        private readonly ICurrencyRateApi _api;
+
+        public CurrencyRateController(ICurrencyRateApi api)
+        {
+            _api = api;
+        }
+
         public decimal Get(string currencyId, DateTime date)
         {
-            if (currencyId == "USD") return 1m;
-            if (currencyId == "EUR") return 1.1m;
-            if (currencyId == "GBP") return 1.5m;
-            return 1;
+            return currencyId.Equals("USD", StringComparison.OrdinalIgnoreCase) ? 1m : _api.GetRate(currencyId, date);
         }
     }
 }

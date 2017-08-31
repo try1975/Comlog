@@ -188,8 +188,10 @@
     </Compile>
     <Compile Include="Maintenance\Classes\CurrencyPairApi.cs" />
     <Compile Include="Maintenance\Classes\CurrencyPairRateApi.cs" />
+    <Compile Include="Maintenance\Classes\CurrencyRateApi.cs" />
     <Compile Include="Maintenance\Interfaces\ICurrencyPairApi.cs" />
     <Compile Include="Maintenance\Interfaces\ICurrencyPairRateApi.cs" />
+    <Compile Include="Maintenance\Interfaces\ICurrencyRateApi.cs" />
     <Compile Include="Maintenance\ITypedApi.cs" />
     <Compile Include="Maintenance\TypedApi.cs" />
     <Compile Include="Ninject\Configurator.cs" />

@@ -21,6 +21,7 @@ namespace CurEx.Console
             foreach (var pair in pairs)
             {
                 var txt = GetFxRates(pair.Id).Result;
+                if (string.IsNullOrEmpty(txt)) continue;
                 var rates = txt.Split('\n');
                 foreach (var rate in rates)
                 {
@@ -31,7 +32,8 @@ namespace CurEx.Console
                         CurrencyPairId = pair.Id,
                         RateDate = DateTime.Parse(rateFields[1]),
                         OpenRate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture),
-                        CloseRate = decimal.Parse(rateFields[3], NumberStyles.Currency, CultureInfo.InvariantCulture),
+                        CloseRate =
+                            decimal.Parse(rateFields[3], NumberStyles.Currency, CultureInfo.InvariantCulture),
                         HighRate = decimal.Parse(rateFields[4], NumberStyles.Currency, CultureInfo.InvariantCulture),
                         LowRate = decimal.Parse(rateFields[5], NumberStyles.Currency, CultureInfo.InvariantCulture),
                         Rate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture)
@@ -42,19 +44,26 @@ namespace CurEx.Console
                     if (dto != null) continue;
                     dto = PostCurrencyPairRate(currencyPairRateDto).Result;
                     if (dto == null) continue;
-                    System.Console.WriteLine($"{dto.CurrencyPairId} {dto.RateDate.ToString("yyyy-MM-dd")} {dto.Rate}");
+                    System.Console.WriteLine(
+                        $"{dto.CurrencyPairId} {dto.RateDate.ToString("yyyy-MM-dd")} {dto.Rate}");
                 }
             }
+            System.Console.WriteLine("Complete.");
+            #if DEBUG
             System.Console.ReadKey();
+            #endif
+
         }
 
         private static async Task<string> GetFxRates(string instruments)
         {
+            var refreshValueCount = ConfigurationManager.AppSettings["RefreshValueCount"];
+            if (string.IsNullOrEmpty(refreshValueCount)) refreshValueCount = "10";
             using (
                 var response =
                     await
                         Fx.GetAsync(
-                            $"http://api.fxhistoricaldata.com/indicators?instruments={instruments}&expression=open,close,high,low&item_count=10&format=csv&timeframe=day")
+                            $"http://api.fxhistoricaldata.com/indicators?instruments={instruments}&expression=open,close,high,low&item_count={refreshValueCount}&format=csv&timeframe=day")
                 )
             {
                 if (!response.IsSuccessStatusCode) return null;
