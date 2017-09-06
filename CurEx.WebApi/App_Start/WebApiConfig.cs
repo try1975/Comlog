@@ -16,6 +16,9 @@ namespace CurEx.WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //config.ParameterBindingRules
+            //      .Add(typeof(DateTime?), des => new DateTimeParameterBinding(des));
         }
     }
 }

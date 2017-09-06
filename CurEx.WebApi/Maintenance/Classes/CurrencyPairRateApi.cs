@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using CurEx.Db.Entities.Entities;
@@ -19,6 +20,13 @@ namespace CurEx.WebApi.Maintenance.Classes
             var entity =
                 Query.GetEntities().FirstOrDefault(z => z.CurrencyPairId == currencyPairId && z.RateDate == rateDate);
             return Mapper.Map<CurrencyPairRateDto>(entity);
+        }
+
+        public IEnumerable<CurrencyPairRateDto> GetLast10(string currencyPairId)
+        {
+            var entities =
+                Query.GetEntities().Where(z => z.CurrencyPairId == currencyPairId).OrderByDescending(z=>z.RateDate).Take(10).ToList();
+            return Mapper.Map<List<CurrencyPairRateDto>>(entities);
         }
     }
 }

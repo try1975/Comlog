@@ -242,3 +242,5 @@ ModelManifest.xml
 .fake/
 /ComLog.WinForms/App.AppSettings.config
 /CurEx.Console/App.AppSettings.config
+/CurEx.WebApi/Web.Connections.config
+/CurEx.WebApi/Web.AppSettings.config

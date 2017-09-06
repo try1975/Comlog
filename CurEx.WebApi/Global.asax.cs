@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using CurEx.WebApi.Formatters;
 
 namespace CurEx.WebApi
 {
@@ -14,6 +15,8 @@ namespace CurEx.WebApi
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            GlobalConfiguration.Configuration.Formatters.Add(new CurrencyPairCsvFormatter());
         }
     }
 }

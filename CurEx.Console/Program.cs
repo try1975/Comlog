@@ -13,15 +13,15 @@ namespace CurEx.Console
 {
     internal static class Program
     {
-        private static HttpClient Fx { get; set; }
+        private static HttpClient HttpClient { get; set; }
 
         private static void Main()
         {
-            Fx = new HttpClient(new LoggingHandler());
+            HttpClient = new HttpClient(new LoggingHandler());
             var pairs = GetCurrencyPairs().Result;
             foreach (var pair in pairs)
             {
-                var txt = GetFxRates(pair.Id).Result;
+                var txt = GetFinamRates(pair.Id).Result;
                 if (string.IsNullOrEmpty(txt)) continue;
                 var rates = txt.Split('\n');
                 foreach (var rate in rates)
@@ -31,12 +31,12 @@ namespace CurEx.Console
                     var currencyPairRateDto = new CurrencyPairRateDto
                     {
                         CurrencyPairId = pair.Id,
-                        RateDate = DateTime.Parse(rateFields[1]),
+                        RateDate = DateTime.ParseExact(rateFields[0],"yyyyMMdd",CultureInfo.InvariantCulture,DateTimeStyles.None),
                         OpenRate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture),
                         CloseRate =
-                            decimal.Parse(rateFields[3], NumberStyles.Currency, CultureInfo.InvariantCulture),
-                        HighRate = decimal.Parse(rateFields[4], NumberStyles.Currency, CultureInfo.InvariantCulture),
-                        LowRate = decimal.Parse(rateFields[5], NumberStyles.Currency, CultureInfo.InvariantCulture),
+                            decimal.Parse(rateFields[5], NumberStyles.Currency, CultureInfo.InvariantCulture),
+                        HighRate = decimal.Parse(rateFields[3], NumberStyles.Currency, CultureInfo.InvariantCulture),
+                        LowRate = decimal.Parse(rateFields[4], NumberStyles.Currency, CultureInfo.InvariantCulture),
                         Rate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture)
                     };
                     var dto =
@@ -53,6 +53,7 @@ namespace CurEx.Console
             Thread.Sleep(3000);
         }
 
+/*
         private static async Task<string> GetFxRates(string instruments)
         {
             var refreshValueCount = ConfigurationManager.AppSettings["RefreshValueCount"];
@@ -60,8 +61,45 @@ namespace CurEx.Console
             using (
                 var response =
                     await
-                        Fx.GetAsync(
+                        HttpClient.GetAsync(
                             $"http://api.fxhistoricaldata.com/indicators?instruments={instruments}&expression=open,close,high,low&item_count={refreshValueCount}&format=csv&timeframe=day")
+                )
+            {
+                if (!response.IsSuccessStatusCode) return null;
+                using (var stream = await response.Content.ReadAsStreamAsync())
+                {
+                    stream.Position = 0;
+                    using (var reader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        return reader.ReadToEnd();
+                    }
+                }
+            }
+        }
+*/
+
+        private static async Task<string> GetFinamRates(string instruments)
+        {
+            var refreshValueCount = ConfigurationManager.AppSettings["RefreshValueCount"];
+            if (string.IsNullOrEmpty(refreshValueCount)) refreshValueCount = "10";
+            var endDate = DateTime.Today.AddDays(-1);
+            var strEndDate01 = endDate.ToString("yyMMdd");
+            var strEndDate02 = endDate.ToString("dd.MM.yyyy");
+            var startDate = endDate.AddDays(-1 * int.Parse(refreshValueCount));
+            var strStartDate01 = startDate.ToString("yyMMdd");
+            var strStartDate02 = startDate.ToString("dd.MM.yyyy");
+            var filename = $"{instruments}_{strStartDate01}_{strEndDate01}";
+            var period = $"df={startDate.Day}&mf={startDate.Month - 1}&yf={startDate.Year}&from={strStartDate02}&dt={endDate.Day}&mt={endDate.Month-1}&yt={endDate.Year}&to={strEndDate02}";
+            var em = "";
+            if (instruments.Equals("EURUSD")) em = "83";
+            if (instruments.Equals("GBPUSD")) em = "86";
+            if (instruments.Equals("USDCHF")) em = "85";
+            if (string.IsNullOrEmpty(em)) return "";
+            using (
+                var response =
+                    await
+                        HttpClient.GetAsync(
+                            $"http://export.finam.ru/{filename}.csv?market=5&em={em}&code={instruments}&apply=0&{period}&p=8&f={filename}&e=.csv&cn={instruments}&dtf=1&tmf=1&MSOR=1&mstimever=1&sep=1&sep2=1&datf=5")
                 )
             {
                 if (!response.IsSuccessStatusCode) return null;
@@ -81,7 +119,7 @@ namespace CurEx.Console
             using (
                 var response =
                     await
-                        Fx.GetAsync(
+                        HttpClient.GetAsync(
                             $"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairRates?currencyPairId={currencyPairId}&rateDate={rateDate}")
                 )
             {
@@ -93,7 +131,7 @@ namespace CurEx.Console
 
         private static async Task<CurrencyPairRateDto> PostCurrencyPairRate(CurrencyPairRateDto dto)
         {
-            using (var response = await Fx.PostAsJsonAsync($"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairRates", dto))
+            using (var response = await HttpClient.PostAsJsonAsync($"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairRates", dto))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<CurrencyPairRateDto>();
@@ -103,7 +141,7 @@ namespace CurEx.Console
 
         private static async Task<IEnumerable<CurrencyPairDto>> GetCurrencyPairs()
         {
-            using (var response = await Fx.GetAsync($"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairs"))
+            using (var response = await HttpClient.GetAsync($"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairs"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<List<CurrencyPairDto>>();

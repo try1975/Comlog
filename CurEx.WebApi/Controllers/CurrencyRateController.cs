@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using CurEx.WebApi.Helpers;
 using CurEx.WebApi.Maintenance.Interfaces;
 
 namespace CurEx.WebApi.Controllers
@@ -13,7 +14,7 @@ namespace CurEx.WebApi.Controllers
             _api = api;
         }
 
-        public decimal Get(string currencyId, DateTime date)
+        public decimal Get(string currencyId, /*[DateTimeParameter(DateFormat = "dd_MM_yyyy")]*/ DateTime date)
         {
             return currencyId.Equals("USD", StringComparison.OrdinalIgnoreCase) ? 1m : _api.GetRate(currencyId, date);
         }

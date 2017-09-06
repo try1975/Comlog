@@ -8,7 +8,5 @@ namespace CurEx.WebApi.Controllers
         public CurrencyPairsController(ICurrencyPairApi api) : base(api)
         {
         }
-
-        
     }
 }
