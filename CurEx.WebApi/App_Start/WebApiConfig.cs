@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using CurEx.WebApi.Logging;
 
 namespace CurEx.WebApi
 {
@@ -19,6 +20,12 @@ namespace CurEx.WebApi
 
             //config.ParameterBindingRules
             //      .Add(typeof(DateTime?), des => new DateTimeParameterBinding(des));
+
+
+            config.Formatters.XmlFormatter.UseXmlSerializer = true;
+
+            // logging
+            config.MessageHandlers.Add(new LogHandler());
         }
     }
 }

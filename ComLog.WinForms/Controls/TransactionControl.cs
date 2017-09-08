@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,6 +13,7 @@ using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
 using ComLog.WinForms.Interfaces.Filter;
 using ComLog.WinForms.Presenters;
+using ComLog.WinForms.Utils;
 
 namespace ComLog.WinForms.Controls
 {
@@ -253,6 +257,8 @@ namespace ComLog.WinForms.Controls
             if (_isEventHandlerSets) return;
             _isEventHandlerSets = true;
 
+            btnRefresh.Click += btnRefresh_Click;
+            btnExcelExport.Click += btnExcelExport_Click;
             dgvItems.FilterStringChanged += dgvItems_FilterStringChanged;
             dgvItems.SortStringChanged += dgvItems_SortStringChanged;
 
@@ -428,6 +434,22 @@ namespace ComLog.WinForms.Controls
             if (!ValidateData()) return;
             if (!await SetData()) return;
             _presenter.Save();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            _presenter.Reopen();
+        }
+
+        private void btnExcelExport_Click(object sender, EventArgs e)
+        {
+            var saveFileDialog = new SaveFileDialog { FileName = $"ComLog_{DateTime.Now.ToString("yyyyMMdd_HHmm")}.xlsx" };
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+            var dataTable = (DataTable) _presenter.BindingSource.DataSource;// bsQuery.DataSource;
+            var dataSet = new DataSet();
+            dataSet.Tables.Add(dataTable);
+            CreateExcelFile.CreateExcelDocument(dataSet, saveFileDialog.FileName);
+            if (File.Exists(saveFileDialog.FileName)) Process.Start(saveFileDialog.FileName);
         }
 
         #endregion //Event handlers

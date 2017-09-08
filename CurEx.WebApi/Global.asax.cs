@@ -4,6 +4,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using CurEx.WebApi.Formatters;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace CurEx.WebApi
 {
     public class CurExWebApiApplication : System.Web.HttpApplication

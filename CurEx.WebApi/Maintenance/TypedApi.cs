@@ -2,13 +2,14 @@
 using AutoMapper;
 using CurEx.Db.Entities;
 using CurEx.Dto;
+using log4net;
 
 namespace CurEx.WebApi.Maintenance
 {
     public abstract class TypedApi<TV, TD, TK> : ITypedApi<TV, TK> where TD : class, IEntity<TK> where TV : class, IDto<TK>
     {
         protected readonly ITypedQuery<TD, TK> Query;
-        //protected static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         protected TypedApi(ITypedQuery<TD, TK> query)
         {
