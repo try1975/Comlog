@@ -28,7 +28,7 @@ namespace CurEx.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Route("last10", Name = nameof(GetLast10) + "Route")]
+        //[Route("{currencyPairId:string}", Name = nameof(GetLast10) + "Route")]
         public HttpResponseMessage GetLast10(string currencyPairId)
         {
             var result = ((ICurrencyPairRateApi)_api).GetLast10(currencyPairId);

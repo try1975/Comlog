@@ -2,13 +2,14 @@
 using AutoMapper;
 using ComLog.Db.Entities;
 using ComLog.Dto;
+using log4net;
 
 namespace ComLog.WebApi.Maintenance
 {
     public abstract class TypedApi<TV, TD, TK> : ITypedApi<TV, TK> where TD : class, IEntity<TK> where TV : class, IDto<TK>
     {
         protected readonly ITypedQuery<TD, TK> Query;
-        //protected static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         protected TypedApi(ITypedQuery<TD, TK> query)
         {

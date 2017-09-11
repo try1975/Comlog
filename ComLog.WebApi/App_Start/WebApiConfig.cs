@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using ComLog.WebApi.Logging;
 
 namespace ComLog.WebApi
 {
@@ -16,6 +17,9 @@ namespace ComLog.WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // logging
+            config.MessageHandlers.Add(new LogHandler());
         }
     }
 }

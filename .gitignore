@@ -244,3 +244,6 @@ ModelManifest.xml
 /CurEx.Console/App.AppSettings.config
 /CurEx.WebApi/Web.Connections.config
 /CurEx.WebApi/Web.AppSettings.config
+/ComLog.WebApi/Web.AppSettings.config
+/ComLog.WebApi/Web.Connections.config
+/CurEx.WebApi/logs
