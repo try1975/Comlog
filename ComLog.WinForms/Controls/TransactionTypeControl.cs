@@ -55,6 +55,9 @@ namespace ComLog.WinForms.Controls
 
             var column = dgvItems.Columns[nameof(TransactionTypeDto.Id)];
             if (column != null) column.Visible = false;
+
+            column = dgvItems.Columns[nameof(TransactionTypeDto.Name)];
+            if (column != null) column.HeaderText = @"TransactionTypeName";
         }
 
         public void SetEventHandlers()

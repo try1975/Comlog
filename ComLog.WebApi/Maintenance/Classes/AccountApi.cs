@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using AutoMapper;
 using ComLog.Db.Entities;
 using ComLog.Dto;
@@ -19,6 +20,8 @@ namespace ComLog.WebApi.Maintenance.Classes
             var list = Query.GetEntities()
                  .Include(nameof(AccountEntity.Bank))
                  .Include(nameof(AccountEntity.AccountType))
+                 .OrderBy(z=>z.Bank.Name)
+                 .ThenBy(z=>z.Name)
                  ;
             return Mapper.Map<List<AccountExtDto>>(list);
         }

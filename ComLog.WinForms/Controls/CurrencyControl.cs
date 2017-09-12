@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using ComLog.Dto;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
@@ -41,8 +42,9 @@ namespace ComLog.WinForms.Controls
         public void RefreshItems()
         {
             dgvItems.DataSource = _presenter.BindingSource;
-            //var column = dgvItems.Columns[nameof(CurrencyDto.Id)];
-            //if (column != null) column.Visible = false;
+
+            var column = dgvItems.Columns[nameof(CurrencyDto.Id)];
+            if (column != null) column.HeaderText = @"CurrencyId";
         }
 
         public void SetEventHandlers()

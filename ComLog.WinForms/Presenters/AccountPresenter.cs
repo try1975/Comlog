@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ComLog.Dto;
+using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
@@ -9,7 +9,7 @@ using ComLog.WinForms.Presenters.Common;
 
 namespace ComLog.WinForms.Presenters
 {
-    public class AccountPresenter : TypedPresenter<AccountDto, int>
+    public class AccountPresenter : TypedPresenter<AccountExtDto, int>
     {
         public AccountPresenter(IAccountView view, IAccountDataManager typedDataMаnager,
             IDataMаnager dataMаnager) : base(view, typedDataMаnager, dataMаnager)

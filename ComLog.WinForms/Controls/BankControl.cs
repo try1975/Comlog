@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows.Forms;
 using ComLog.Dto;
 using ComLog.WinForms.Interfaces;
@@ -13,6 +12,7 @@ namespace ComLog.WinForms.Controls
     {
         private readonly IPresenter _presenter;
         private bool _isEventHandlerSets;
+        private DateTime? _closed;
 
         public BankControl(IBankDataMаnager bankDataMаnager, IDataMаnager dataMаnager)
         {
@@ -41,15 +41,15 @@ namespace ComLog.WinForms.Controls
             set { tbName.Text = value; }
         }
 
-        public DateTime? Closed {
-            get
-            {
-                return string.IsNullOrEmpty(tbClosed.Text) ? (DateTime?) null : DateTime.Parse(tbClosed.Text);
-            }
+        //public DateTime? Closed { get; set; }
+
+        public DateTime? Closed
+        {
+            get { return _closed; }
             set
             {
-                if (value != null) tbClosed.Text = value.Value.ToString(CultureInfo.CurrentCulture);
-                else tbClosed.Clear();
+                _closed = value;
+                if(cbClosed.Checked != _closed.HasValue) cbClosed.Checked = _closed.HasValue;
             }
         }
 
@@ -65,6 +65,9 @@ namespace ComLog.WinForms.Controls
             // hide columns
             var column = dgvItems.Columns[nameof(BankDto.Id)];
             if (column != null) column.Visible = false;
+
+            column = dgvItems.Columns[nameof(BankDto.Name)];
+            if (column != null) column.HeaderText = @"Bank Name";
         }
 
         public void SetEventHandlers()
@@ -81,6 +84,8 @@ namespace ComLog.WinForms.Controls
             btnSave.Click += btnSave_Click;
             btnCancel.Click += btnCancel_Click;
             btnDelete.Click += btnDelete_Click;
+
+            cbClosed.CheckedChanged += cbClosed_CheckedChanged;
         }
 
         #endregion //IRefreshedView
@@ -149,21 +154,21 @@ namespace ComLog.WinForms.Controls
         {
             tbId.Clear();
             tbName.Clear();
-            tbClosed.Clear();
+            cbClosed.Checked = false;
         }
 
         public void EnableInput()
         {
             //tbId.Enabled = true;
             tbName.Enabled = true;
-            tbClosed.Enabled = true;
+            cbClosed.Enabled = true;
         }
 
         public void DisableInput()
         {
             tbId.Enabled = false;
             tbName.Enabled = false;
-            tbClosed.Enabled = false;
+            cbClosed.Enabled = false;
         }
 
         #endregion //IEnterMode
@@ -208,6 +213,12 @@ namespace ComLog.WinForms.Controls
         private void dgvItems_SortStringChanged(object sender, EventArgs e)
         {
             _presenter.BindingSource.Sort = dgvItems.SortString;
+        }
+
+        private void cbClosed_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbClosed.Checked && !Closed.HasValue) Closed = DateTime.Now;
+            if(!cbClosed.Checked && Closed.HasValue) Closed = null;
         }
 
         #endregion

@@ -34,8 +34,7 @@ namespace ComLog.WinForms.Controls
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
             this.pnlClosed = new System.Windows.Forms.Panel();
-            this.tbClosed = new System.Windows.Forms.TextBox();
-            this.lblClosed = new System.Windows.Forms.Label();
+            this.cbClosed = new System.Windows.Forms.CheckBox();
             this.pnlBankName = new System.Windows.Forms.Panel();
             this.tbName = new System.Windows.Forms.TextBox();
             this.lblBankName = new System.Windows.Forms.Label();
@@ -49,7 +48,7 @@ namespace ComLog.WinForms.Controls
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.pnlGrid = new System.Windows.Forms.Panel();
-            this.dgvItems = new AdvancedDataGridView();
+            this.dgvItems = new ADGV.AdvancedDataGridView();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
@@ -84,32 +83,22 @@ namespace ComLog.WinForms.Controls
             // 
             // pnlClosed
             // 
-            this.pnlClosed.Controls.Add(this.tbClosed);
-            this.pnlClosed.Controls.Add(this.lblClosed);
+            this.pnlClosed.Controls.Add(this.cbClosed);
             this.pnlClosed.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlClosed.Location = new System.Drawing.Point(0, 67);
             this.pnlClosed.Name = "pnlClosed";
             this.pnlClosed.Size = new System.Drawing.Size(396, 34);
             this.pnlClosed.TabIndex = 5;
             // 
-            // tbClosed
+            // cbClosed
             // 
-            this.tbClosed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbClosed.Enabled = false;
-            this.tbClosed.Location = new System.Drawing.Point(97, 5);
-            this.tbClosed.Name = "tbClosed";
-            this.tbClosed.Size = new System.Drawing.Size(283, 20);
-            this.tbClosed.TabIndex = 1;
-            // 
-            // lblClosed
-            // 
-            this.lblClosed.AutoSize = true;
-            this.lblClosed.Location = new System.Drawing.Point(6, 8);
-            this.lblClosed.Name = "lblClosed";
-            this.lblClosed.Size = new System.Drawing.Size(39, 13);
-            this.lblClosed.TabIndex = 0;
-            this.lblClosed.Text = "Closed";
+            this.cbClosed.AutoSize = true;
+            this.cbClosed.Location = new System.Drawing.Point(97, 8);
+            this.cbClosed.Name = "cbClosed";
+            this.cbClosed.Size = new System.Drawing.Size(58, 17);
+            this.cbClosed.TabIndex = 1;
+            this.cbClosed.Text = "Closed";
+            this.cbClosed.UseVisualStyleBackColor = true;
             // 
             // pnlBankName
             // 
@@ -149,6 +138,7 @@ namespace ComLog.WinForms.Controls
             this.pnlId.Name = "pnlId";
             this.pnlId.Size = new System.Drawing.Size(396, 33);
             this.pnlId.TabIndex = 3;
+            this.pnlId.Visible = false;
             // 
             // lblId
             // 
@@ -186,32 +176,32 @@ namespace ComLog.WinForms.Controls
             // 
             this.btnDelete.Location = new System.Drawing.Point(294, 12);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(61, 23);
             this.btnDelete.TabIndex = 9;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(213, 12);
+            this.btnCancel.Location = new System.Drawing.Point(223, 12);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(61, 23);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(148, 12);
+            this.btnSave.Location = new System.Drawing.Point(152, 12);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(59, 23);
+            this.btnSave.Size = new System.Drawing.Size(61, 23);
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(78, 12);
+            this.btnEdit.Location = new System.Drawing.Point(81, 12);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(61, 23);
             this.btnEdit.TabIndex = 6;
@@ -306,7 +296,6 @@ namespace ComLog.WinForms.Controls
         private System.Windows.Forms.Label lblId;
         private AdvancedDataGridView dgvItems;
         private System.Windows.Forms.Panel pnlClosed;
-        private System.Windows.Forms.TextBox tbClosed;
-        private System.Windows.Forms.Label lblClosed;
+        private System.Windows.Forms.CheckBox cbClosed;
     }
 }

@@ -85,9 +85,9 @@
             this.lblId.AutoSize = true;
             this.lblId.Location = new System.Drawing.Point(7, 9);
             this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(16, 13);
+            this.lblId.Size = new System.Drawing.Size(58, 13);
             this.lblId.TabIndex = 3;
-            this.lblId.Text = "Id";
+            this.lblId.Text = "CurrencyId";
             // 
             // tbId
             // 
@@ -116,32 +116,32 @@
             // 
             this.btnDelete.Location = new System.Drawing.Point(294, 12);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(61, 23);
             this.btnDelete.TabIndex = 9;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(213, 12);
+            this.btnCancel.Location = new System.Drawing.Point(223, 12);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(61, 23);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(148, 12);
+            this.btnSave.Location = new System.Drawing.Point(152, 12);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(59, 23);
+            this.btnSave.Size = new System.Drawing.Size(61, 23);
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(78, 12);
+            this.btnEdit.Location = new System.Drawing.Point(81, 12);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(61, 23);
             this.btnEdit.TabIndex = 6;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using ComLog.Dto;
+using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
@@ -53,11 +54,8 @@ namespace ComLog.WinForms.Controls
             set { cmbCurrency.SelectedValue = value; }
         }
 
-        public string BeneficiaryAddress
-        {
-            get { return tbBeneficiaryAddress.Text; }
-            set { tbBeneficiaryAddress.Text = value; }
-        }
+        public int AccountTypeId { get; set; }
+        public DateTime? Closed { get; set; }
 
         //public decimal CurrentBalance
         //{
@@ -96,6 +94,8 @@ namespace ComLog.WinForms.Controls
             }
         }
 
+        public List<KeyValuePair<int, string>> AccountTypeList { get; set; }
+
         #endregion //DetailsLists
 
         #endregion //IAccountView implementation
@@ -110,6 +110,22 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(AccountDto.BankId)];
             if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(AccountDto.AccountTypeId)];
+            if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(AccountExtDto.DisplayMember)];
+            if (column != null) column.Visible = false;
+
+            column = dgvItems.Columns[nameof(AccountDto.Name)];
+            if (column != null) column.HeaderText = @"Account Name";
+
+            column = dgvItems.Columns[nameof(AccountExtDto.BankName)];
+            if (column != null) column.DisplayIndex = 0;
+            column = dgvItems.Columns[nameof(AccountExtDto.Name)];
+            if (column != null) column.DisplayIndex = 1;
+            column = dgvItems.Columns[nameof(AccountExtDto.CurrencyId)];
+            if (column != null) column.DisplayIndex = 2;
+            column = dgvItems.Columns[nameof(AccountExtDto.AccountTypeName)];
+            if (column != null) column.DisplayIndex = 3;
         }
 
         public void SetEventHandlers()

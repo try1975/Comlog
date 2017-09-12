@@ -83,8 +83,8 @@ namespace ComLog.WinForms.Controls
             // 
             this.pnlFields.Controls.Add(this.pnplBeneficiaryAddress);
             this.pnlFields.Controls.Add(this.pnlCurrency);
-            this.pnlFields.Controls.Add(this.pnlBank);
             this.pnlFields.Controls.Add(this.pnlAccountName);
+            this.pnlFields.Controls.Add(this.pnlBank);
             this.pnlFields.Controls.Add(this.pnlId);
             this.pnlFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFields.Location = new System.Drawing.Point(0, 41);
@@ -156,7 +156,7 @@ namespace ComLog.WinForms.Controls
             this.pnlBank.Controls.Add(this.cmbBank);
             this.pnlBank.Controls.Add(this.lblBank);
             this.pnlBank.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlBank.Location = new System.Drawing.Point(0, 67);
+            this.pnlBank.Location = new System.Drawing.Point(0, 33);
             this.pnlBank.Name = "pnlBank";
             this.pnlBank.Size = new System.Drawing.Size(396, 34);
             this.pnlBank.TabIndex = 5;
@@ -186,7 +186,7 @@ namespace ComLog.WinForms.Controls
             this.pnlAccountName.Controls.Add(this.tbName);
             this.pnlAccountName.Controls.Add(this.lblAccountName);
             this.pnlAccountName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlAccountName.Location = new System.Drawing.Point(0, 33);
+            this.pnlAccountName.Location = new System.Drawing.Point(0, 67);
             this.pnlAccountName.Name = "pnlAccountName";
             this.pnlAccountName.Size = new System.Drawing.Size(396, 34);
             this.pnlAccountName.TabIndex = 4;
@@ -257,32 +257,32 @@ namespace ComLog.WinForms.Controls
             // 
             this.btnDelete.Location = new System.Drawing.Point(294, 12);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(61, 23);
             this.btnDelete.TabIndex = 9;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(213, 12);
+            this.btnCancel.Location = new System.Drawing.Point(223, 12);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(61, 23);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(148, 12);
+            this.btnSave.Location = new System.Drawing.Point(152, 12);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(59, 23);
+            this.btnSave.Size = new System.Drawing.Size(61, 23);
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(78, 12);
+            this.btnEdit.Location = new System.Drawing.Point(81, 12);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(61, 23);
             this.btnEdit.TabIndex = 6;

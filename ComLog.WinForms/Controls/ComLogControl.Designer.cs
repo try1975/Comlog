@@ -73,7 +73,7 @@
             // 
             this.panelCurrencies.Controls.Add(this.btnCurrencies);
             this.panelCurrencies.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelCurrencies.Location = new System.Drawing.Point(985, 0);
+            this.panelCurrencies.Location = new System.Drawing.Point(1005, 0);
             this.panelCurrencies.Name = "panelCurrencies";
             this.panelCurrencies.Size = new System.Drawing.Size(89, 32);
             this.panelCurrencies.TabIndex = 18;
@@ -92,7 +92,7 @@
             // 
             this.pnlTransactionTypes.Controls.Add(this.btnTransactionTypes);
             this.pnlTransactionTypes.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlTransactionTypes.Location = new System.Drawing.Point(880, 0);
+            this.pnlTransactionTypes.Location = new System.Drawing.Point(900, 0);
             this.pnlTransactionTypes.Name = "pnlTransactionTypes";
             this.pnlTransactionTypes.Size = new System.Drawing.Size(105, 32);
             this.pnlTransactionTypes.TabIndex = 17;
@@ -111,7 +111,7 @@
             // 
             this.pnlAccountTypes.Controls.Add(this.btnAccountTypes);
             this.pnlAccountTypes.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlAccountTypes.Location = new System.Drawing.Point(786, 0);
+            this.pnlAccountTypes.Location = new System.Drawing.Point(806, 0);
             this.pnlAccountTypes.Name = "pnlAccountTypes";
             this.pnlAccountTypes.Size = new System.Drawing.Size(94, 32);
             this.pnlAccountTypes.TabIndex = 15;
@@ -129,7 +129,7 @@
             // panel6
             // 
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel6.Location = new System.Drawing.Point(721, 0);
+            this.panel6.Location = new System.Drawing.Point(741, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(65, 32);
             this.panel6.TabIndex = 16;
@@ -138,7 +138,7 @@
             // 
             this.pnlBanks.Controls.Add(this.btnBanks);
             this.pnlBanks.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlBanks.Location = new System.Drawing.Point(632, 0);
+            this.pnlBanks.Location = new System.Drawing.Point(652, 0);
             this.pnlBanks.Name = "pnlBanks";
             this.pnlBanks.Size = new System.Drawing.Size(89, 32);
             this.pnlBanks.TabIndex = 9;
@@ -157,7 +157,7 @@
             // 
             this.pnlAccounts.Controls.Add(this.btnAccounts);
             this.pnlAccounts.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlAccounts.Location = new System.Drawing.Point(535, 0);
+            this.pnlAccounts.Location = new System.Drawing.Point(555, 0);
             this.pnlAccounts.Name = "pnlAccounts";
             this.pnlAccounts.Size = new System.Drawing.Size(97, 32);
             this.pnlAccounts.TabIndex = 10;
@@ -175,7 +175,7 @@
             // panel8
             // 
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(89, 0);
+            this.panel8.Location = new System.Drawing.Point(109, 0);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(446, 32);
             this.panel8.TabIndex = 13;
@@ -186,14 +186,15 @@
             this.pnlTransactions.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlTransactions.Location = new System.Drawing.Point(0, 0);
             this.pnlTransactions.Name = "pnlTransactions";
-            this.pnlTransactions.Size = new System.Drawing.Size(89, 32);
+            this.pnlTransactions.Size = new System.Drawing.Size(109, 32);
             this.pnlTransactions.TabIndex = 14;
             // 
             // btnTransactions
             // 
+            this.btnTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnTransactions.Location = new System.Drawing.Point(5, 3);
             this.btnTransactions.Name = "btnTransactions";
-            this.btnTransactions.Size = new System.Drawing.Size(75, 23);
+            this.btnTransactions.Size = new System.Drawing.Size(98, 23);
             this.btnTransactions.TabIndex = 6;
             this.btnTransactions.Text = "Transactions";
             this.btnTransactions.UseVisualStyleBackColor = true;

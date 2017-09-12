@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
             this.pnlAccountName = new System.Windows.Forms.Panel();
@@ -90,9 +90,9 @@
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbName.Enabled = false;
-            this.tbName.Location = new System.Drawing.Point(97, 5);
+            this.tbName.Location = new System.Drawing.Point(128, 5);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(283, 20);
+            this.tbName.Size = new System.Drawing.Size(252, 20);
             this.tbName.TabIndex = 1;
             // 
             // lblAccountName
@@ -100,9 +100,9 @@
             this.lblAccountName.AutoSize = true;
             this.lblAccountName.Location = new System.Drawing.Point(7, 8);
             this.lblAccountName.Name = "lblAccountName";
-            this.lblAccountName.Size = new System.Drawing.Size(78, 13);
+            this.lblAccountName.Size = new System.Drawing.Size(115, 13);
             this.lblAccountName.TabIndex = 0;
-            this.lblAccountName.Text = "Account Name";
+            this.lblAccountName.Text = "TransactionTypeName";
             // 
             // pnlId
             // 
@@ -129,9 +129,9 @@
             this.tbId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbId.Enabled = false;
-            this.tbId.Location = new System.Drawing.Point(97, 6);
+            this.tbId.Location = new System.Drawing.Point(128, 6);
             this.tbId.Name = "tbId";
-            this.tbId.Size = new System.Drawing.Size(283, 20);
+            this.tbId.Size = new System.Drawing.Size(252, 20);
             this.tbId.TabIndex = 2;
             // 
             // pnlButtons
@@ -151,32 +151,32 @@
             // 
             this.btnDelete.Location = new System.Drawing.Point(294, 12);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(61, 23);
             this.btnDelete.TabIndex = 9;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(213, 12);
+            this.btnCancel.Location = new System.Drawing.Point(223, 12);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(61, 23);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(148, 12);
+            this.btnSave.Location = new System.Drawing.Point(152, 12);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(59, 23);
+            this.btnSave.Size = new System.Drawing.Size(61, 23);
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(78, 12);
+            this.btnEdit.Location = new System.Drawing.Point(81, 12);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(61, 23);
             this.btnEdit.TabIndex = 6;
@@ -215,8 +215,8 @@
             this.dgvItems.AllowUserToAddRows = false;
             this.dgvItems.AllowUserToDeleteRows = false;
             this.dgvItems.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvItems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvItems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvItems.AutoGenerateContextFilters = true;
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.DateWithTime = false;

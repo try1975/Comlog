@@ -5,6 +5,13 @@
         public string BankName { get; set; }
         public string AccountTypeName { get; set; }
 
-        public string DisplayMember => $"{Name} [{BankName} {CurrencyId}]";
+        public string DisplayMember
+        {
+            get { return $"{Name} [{BankName} {CurrencyId}]"; }
+            set
+            {
+                ;
+            }
+        }
     }
 }

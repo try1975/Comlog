@@ -9,14 +9,22 @@ namespace ComLog.WinForms.Data.Common
     {
         public static void RegisterMappings(MapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<AccountDto, AccountDto>()
-                   ;
-            cfg.CreateMap<AccountDto, IAccountView>()
-                .ForMember(dest => dest.BankAccountName, opt => opt.MapFrom(src => src.Name))
+            //cfg.CreateMap<AccountDto, AccountDto>()
+            //       ;
+            //cfg.CreateMap<AccountDto, IAccountView>()
+            //    .ForMember(dest => dest.BankAccountName, opt => opt.MapFrom(src => src.Name))
+            //    ;
+            //cfg.CreateMap<IAccountView, AccountDto>()
+            //    .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.BankAccountName))
+            //    ;
+
+            cfg.CreateMap<AccountExtDto, AccountExtDto>()
+               ;
+            cfg.CreateMap<AccountExtDto, IAccountView>()
                 ;
-            cfg.CreateMap<IAccountView, AccountDto>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.BankAccountName))
+            cfg.CreateMap<IAccountView, AccountExtDto>()
                 ;
+
 
             cfg.CreateMap<AccountTypeDto, AccountTypeDto>()
                    ;

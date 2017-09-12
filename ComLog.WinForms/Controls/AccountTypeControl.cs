@@ -55,6 +55,9 @@ namespace ComLog.WinForms.Controls
 
             var column = dgvItems.Columns[nameof(AccountTypeDto.Id)];
             if (column != null) column.Visible = false;
+
+            column = dgvItems.Columns[nameof(AccountTypeDto.Name)];
+            if (column != null) column.HeaderText = @"AccountTypeName";
         }
 
         public void SetEventHandlers()
