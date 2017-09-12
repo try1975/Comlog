@@ -1,6 +1,6 @@
 ﻿namespace ComLog.WinForms
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -69,7 +69,7 @@
             this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::ComLog.WinForms.Properties.Settings.Default, "MainFormClientSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::ComLog.WinForms.Properties.Settings.Default, "MainFormLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::ComLog.WinForms.Properties.Settings.Default.MainFormLocation;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "ComLog";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.ResumeLayout(false);

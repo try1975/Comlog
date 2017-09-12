@@ -55,9 +55,14 @@ namespace ComLog.WebApi.Controllers
             return CreatedAtRoute("DefaultApi", new { id = dto.Id }, dto);
         }
 
-        public IHttpActionResult Delete(TK id)
+        //public IHttpActionResult Delete(TK id)
+        //{
+        //    return StatusCode(_api.RemoveItem(id) ? HttpStatusCode.NoContent : HttpStatusCode.Conflict);
+        //}
+
+        public IHttpActionResult Delete(T deletedDto)
         {
-            return StatusCode(_api.RemoveItem(id) ? HttpStatusCode.NoContent : HttpStatusCode.Conflict);
+            return StatusCode(_api.RemoveItem(deletedDto) ? HttpStatusCode.NoContent : HttpStatusCode.Conflict);
         }
     }
 }

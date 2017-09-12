@@ -2,7 +2,7 @@
 
 namespace ComLog.Db.Entities
 {
-    public class TransactionEntity : IEntity<int>
+    public class TransactionEntity : IEntity<int>, ITrackedEntity
     {
         public DateTime Dt { get; set; }
 
@@ -44,5 +44,7 @@ namespace ComLog.Db.Entities
 
         public TransactionTypeEntity TransactionType { get; set; }
         public int Id { get; set; }
+        public string ChangeBy { get; set; }
+        public DateTime? ChangeAt { get; set; }
     }
 }

@@ -247,3 +247,4 @@ ModelManifest.xml
 /ComLog.WebApi/Web.AppSettings.config
 /ComLog.WebApi/Web.Connections.config
 /CurEx.WebApi/logs
+/ComLog.WebApi/logs

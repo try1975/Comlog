@@ -44,7 +44,7 @@ namespace ComLog.WinForms.Controls
         public DateTime? Closed {
             get
             {
-                return string.IsNullOrEmpty(tbClosed.Text) ? DateTime.UtcNow : DateTime.Parse(tbClosed.Text);
+                return string.IsNullOrEmpty(tbClosed.Text) ? (DateTime?) null : DateTime.Parse(tbClosed.Text);
             }
             set
             {

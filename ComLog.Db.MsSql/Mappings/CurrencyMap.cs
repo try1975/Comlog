@@ -13,6 +13,13 @@ namespace ComLog.Db.MsSql.Mappings
                 ;
 
             ToTable($"{tableName}");
+
+            Property(e => e.ChangeBy)
+                .HasMaxLength(50)
+                ;
+            Property(e => e.ChangeAt)
+                .IsOptional()
+                ;
         }
     }
 }

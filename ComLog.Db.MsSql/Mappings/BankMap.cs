@@ -24,6 +24,13 @@ namespace ComLog.Db.MsSql.Mappings
             Property(e => e.Closed)
                 .HasColumnType("date")
                 ;
+
+            Property(e => e.ChangeBy)
+                .HasMaxLength(50)
+                ;
+            Property(e => e.ChangeAt)
+                .IsOptional()
+                ;
         }
     }
 }

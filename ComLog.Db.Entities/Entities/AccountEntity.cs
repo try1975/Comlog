@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ComLog.Db.Entities
 {
-    public class AccountEntity : IEntity<int>
+    public class AccountEntity : IEntity<int>, ITrackedEntity
     {
         public string Name { get; set; }
 
@@ -18,8 +19,12 @@ namespace ComLog.Db.Entities
 
         public CurrencyEntity Currency { get; set; }
 
+        public DateTime? Closed { get; set; }
+
         public ICollection<TransactionEntity> Transactions { get; set; }
         public ICollection<ExcelBookEntity> ExcelBooks { get; set; }
         public int Id { get; set; }
+        public string ChangeBy { get; set; }
+        public DateTime? ChangeAt { get; set; }
     }
 }

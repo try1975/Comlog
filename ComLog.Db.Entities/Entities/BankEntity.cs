@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ComLog.Db.Entities
 {
-    public class BankEntity : IEntity<int>
+    public class BankEntity : IEntity<int>, ITrackedEntity
     {
         public string Name { get; set; }
 
@@ -13,5 +13,7 @@ namespace ComLog.Db.Entities
         public ICollection<AccountEntity> Accounts { get; set; }
         public ICollection<TransactionEntity> Transactions { get; set; }
         public int Id { get; set; }
+        public string ChangeBy { get; set; }
+        public DateTime? ChangeAt { get; set; }
     }
 }

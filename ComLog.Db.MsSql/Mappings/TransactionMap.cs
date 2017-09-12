@@ -62,6 +62,13 @@ namespace ComLog.Db.MsSql.Mappings
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed)
                 ;
 
+            Property(e => e.ChangeBy)
+                .HasMaxLength(50)
+                ;
+            Property(e => e.ChangeAt)
+                .IsOptional()
+                ;
+
             HasRequired(s => s.Bank)
                .WithMany(l => l.Transactions)
                .HasForeignKey(s => s.BankId)

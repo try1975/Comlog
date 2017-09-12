@@ -9,6 +9,6 @@ namespace ComLog.WebApi.Maintenance
         T GetItem(TK id);
         T AddItem(T dto);
         T ChangeItem(T dto);
-        bool RemoveItem(TK id);
+        bool RemoveItem(T dto);
     }
 }

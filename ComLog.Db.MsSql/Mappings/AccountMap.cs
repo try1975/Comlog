@@ -19,6 +19,17 @@ namespace ComLog.Db.MsSql.Mappings
                 .IsRequired()
                 ;
 
+            Property(e => e.Closed)
+                .HasColumnType("date")
+                ;
+
+            Property(e => e.ChangeBy)
+                .HasMaxLength(50)
+                ;
+            Property(e => e.ChangeAt)
+                .IsOptional()
+                ;
+
             HasRequired(s => s.Bank)
                .WithMany(l => l.Accounts)
                .HasForeignKey(s => s.BankId)

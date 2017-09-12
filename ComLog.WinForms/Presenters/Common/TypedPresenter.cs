@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using AutoMapper;
 using ComLog.Dto;
+using ComLog.WinForms.Administration;
 using ComLog.WinForms.Interfaces.Common;
 
 namespace ComLog.WinForms.Presenters.Common
@@ -92,7 +93,10 @@ namespace ComLog.WinForms.Presenters.Common
 
             var item = Mapper.Map<T>(View);
 
-            var success = await _typedDataMànager.DeleteItem(item.Id);
+            var piChangeBy = typeof(T).GetProperty(nameof(ITrackedDto.ChangeBy));
+            piChangeBy?.SetValue(item, CurrentUser.Login);
+
+            var success = await _typedDataMànager.DeleteItem(item);
             if (success)
             {
                 BindingSource.RemoveCurrent();
@@ -121,6 +125,10 @@ namespace ComLog.WinForms.Presenters.Common
         private async void Create()
         {
             var item = Mapper.Map<T>(View);
+
+            var piChangeBy = typeof(T).GetProperty(nameof(ITrackedDto.ChangeBy));
+            piChangeBy?.SetValue(item, CurrentUser.Login);
+
             item = await _typedDataMànager.PostItem(item);
             Mapper.Map(item, View);
 
@@ -135,6 +143,10 @@ namespace ComLog.WinForms.Presenters.Common
         private async void Update()
         {
             var item = Mapper.Map<T>(View);
+
+            var piChangeBy = typeof(T).GetProperty(nameof(ITrackedDto.ChangeBy));
+            piChangeBy?.SetValue(item, CurrentUser.Login);
+
             item = await _typedDataMànager.PutItem(item);
             Mapper.Map(item, View);
 

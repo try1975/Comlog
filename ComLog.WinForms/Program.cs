@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using AutoMapper;
 using AutoMapper.Configuration;
+using ComLog.WinForms.Administration;
 using ComLog.WinForms.Data.Common;
 using ComLog.WinForms.Ninject;
 
@@ -22,8 +23,9 @@ namespace ComLog.WinForms
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var form = CompositionRoot.Resolve<Form1>();
-            Application.Run(form);
+            //var form = CompositionRoot.Resolve<MainForm>();
+            //Application.Run(form);
+            Application.Run(new AuthenticationForm());
         }
     }
 }

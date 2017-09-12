@@ -1,0 +1,51 @@
+﻿using System;
+using System.Windows.Forms;
+using ComLog.WinForms.Ninject;
+
+namespace ComLog.WinForms.Administration
+{
+    public partial class AuthenticationForm : Form
+    {
+        public AuthenticationForm()
+        {
+            InitializeComponent();
+        }
+
+        private void btnEnter_Click(object sender, EventArgs e)
+        {
+#if DEBUG
+            CurrentUser.Login = "vorobyev";
+            var mainForm = CompositionRoot.Resolve<MainForm>();
+            Hide();
+            mainForm.Show();
+#else
+            if (string.IsNullOrEmpty(tbLogin.Text) || string.IsNullOrEmpty(tbPassword.Text))
+            {
+                MessageBox.Show(@"Please enter login and password.");
+                return;
+            }
+            using (var administrationDataManager = new AdministrationDataManager())
+            {
+                CurrentUser.Login = tbLogin.Text;
+                CurrentUser.Password = tbPassword.Text;
+                CurrentUser.Roles = administrationDataManager.Authenticate(tbLogin.Text, tbPassword.Text);
+                if (CurrentUser.Roles == null)
+                {
+                    MessageBox.Show(@"Wrong login or password.");
+                }
+                else
+                {
+                    var mainForm = CompositionRoot.Resolve<MainForm>();
+                    Hide();
+                    mainForm.Show();
+                }
+            }
+#endif
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
+}

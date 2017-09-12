@@ -3,9 +3,9 @@ using ComLog.WinForms.Interfaces.Common;
 
 namespace ComLog.WinForms
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1(IComLogControl comLogControl)
+        public MainForm(IComLogControl comLogControl)
         {
             InitializeComponent();
 
@@ -17,6 +17,7 @@ namespace ComLog.WinForms
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Properties.Settings.Default.Save();
+            Application.Exit();
         }
     }
 }

@@ -39,9 +39,10 @@ namespace ComLog.WebApi.Maintenance
             return Mapper.Map<TV>(Query.UpdateEntity(entity));
         }
 
-        public virtual bool RemoveItem(TK id)
+        public virtual bool RemoveItem(TV dto)
         {
-            return Query.DeleteEntity(id);
+            var entity = Mapper.Map<TD>(dto);
+            return Query.DeleteEntity(entity);
         }
     }
 }

@@ -2,13 +2,21 @@
 using ComLog.Db.Entities;
 using ComLog.Db.MsSql.Mappings;
 using ComLog.Db.MsSql.Migrations;
+using Z.EntityFramework.Plus;
 
 namespace ComLog.Db.MsSql
 {
     [DbConfigurationType(typeof(ConfigContext))]
     public class WorkContext : DbContext
     {
-        public WorkContext(): base("name=ComLog")
+        static WorkContext()
+        {
+            AuditManager.DefaultConfiguration.AutoSavePreAction = (context, audit) =>
+               // ADD "Where(x => x.AuditEntryID == 0)" to allow multiple SaveChanges with same Audit
+               ((WorkContext) context).AuditEntries.AddRange(audit.Entries);
+        }
+
+        public WorkContext() : base("name=ComLog")
         {
         }
 
@@ -19,6 +27,10 @@ namespace ComLog.Db.MsSql
         public virtual DbSet<TransactionTypeEntity> TransactionTypes { get; set; }
         public virtual DbSet<AccountEntity> Accounts { get; set; }
         public virtual DbSet<TransactionEntity> Transactions { get; set; }
+
+        public DbSet<AuditEntry> AuditEntries { get; set; }
+        public DbSet<AuditEntryProperty> AuditEntryProperties { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

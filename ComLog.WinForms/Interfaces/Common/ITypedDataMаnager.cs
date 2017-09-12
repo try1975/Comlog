@@ -10,6 +10,6 @@ namespace ComLog.WinForms.Interfaces.Common
         Task<T> GetItem(K id);
         Task<T> PostItem(T item);
         Task<T> PutItem(T item);
-        Task<bool> DeleteItem(K id);
+        Task<bool> DeleteItem(T item);
     }
 }

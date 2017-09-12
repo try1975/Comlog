@@ -10,22 +10,22 @@ namespace ComLog.WinForms.Data.Common
 {
     public abstract class TypedDataMànager<T, TK> : ITypedDataMànager<T, TK> where T : class, IDto<TK>
     {
-        protected readonly string _endPoint;
-        protected readonly HttpClient _httpClient;
+        protected readonly string EndPoint;
+        protected readonly HttpClient HttpClient;
 
         protected TypedDataMànager(string endPoint)
         {
             var baseApi = ConfigurationManager.AppSettings["BaseApi"];
             var token = ConfigurationManager.AppSettings["ExternalToken"];
-            _endPoint = $"{baseApi}{endPoint}/";
+            EndPoint = $"{baseApi}{endPoint}/";
 
-            _httpClient = new HttpClient(new LoggingHandler());
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
+            HttpClient = new HttpClient(new LoggingHandler());
+            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
         }
 
         public virtual async Task<IEnumerable<T>> GetItems()
         {
-            using (var response = await _httpClient.GetAsync($"{_endPoint}"))
+            using (var response = await HttpClient.GetAsync($"{EndPoint}"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<IEnumerable<T>>();
@@ -45,7 +45,7 @@ namespace ComLog.WinForms.Data.Common
 
         public async Task<T> GetItem(TK id)
         {
-            using (var response = await _httpClient.GetAsync($"{_endPoint}{id}"))
+            using (var response = await HttpClient.GetAsync($"{EndPoint}{id}"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<T>();
@@ -55,7 +55,7 @@ namespace ComLog.WinForms.Data.Common
 
         public async Task<T> PostItem(T item)
         {
-            using (var response = await _httpClient.PostAsJsonAsync($"{_endPoint}", item))
+            using (var response = await HttpClient.PostAsJsonAsync($"{EndPoint}", item))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<T>();
@@ -65,7 +65,7 @@ namespace ComLog.WinForms.Data.Common
 
         public async Task<T> PutItem(T item)
         {
-            using (var response = await _httpClient.PutAsJsonAsync($"{_endPoint}", item))
+            using (var response = await HttpClient.PutAsJsonAsync($"{EndPoint}", item))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<T>();
@@ -73,12 +73,25 @@ namespace ComLog.WinForms.Data.Common
             }
         }
 
-        public async Task<bool> DeleteItem(TK id)
+        public async Task<bool> DeleteItem(T item)
         {
-            using (var response = await _httpClient.DeleteAsync($"{_endPoint}{id}"))
+            //HttpRequestMessage request = new HttpRequestMessage
+            //{
+            //    Content = new StringContent("[YOUR JSON GOES HERE]", Encoding.UTF8, "application/json"),
+            //    Method = HttpMethod.Delete,
+            //    RequestUri = new Uri("[YOUR URL GOES HERE]")
+            //};
+            //httpClient.SendAsync(request);
+
+            using (var response = await HttpClient.DeleteAsJsonAsync($"{EndPoint}", item))
             {
                 return response.IsSuccessStatusCode;
             }
+
+            //using (var response = await _httpClient.DeleteAsync($"{_endPoint}{item.Id}"))
+            //{
+            //    return response.IsSuccessStatusCode;
+            //}
         }
     }
 }

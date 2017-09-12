@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ComLog.Db.Entities;
+using Z.EntityFramework.Plus;
 
 namespace ComLog.Db.MsSql.QueryProcessors
 {
@@ -37,27 +38,31 @@ namespace ComLog.Db.MsSql.QueryProcessors
 
         public T InsertEntity(T entity)
         {
+            SetChangeAt(entity);
+
             _db.Set<T>().Add(entity);
-            _db.SaveChanges();
+            SaveChanges(entity);
             return entity;
         }
 
         public T UpdateEntity(T entity)
         {
+            SetChangeAt(entity);
+
             _db.Set<T>().AddOrUpdate(entity);
-            _db.SaveChanges();
+            SaveChanges(entity);
             return entity;
         }
 
-        public bool DeleteEntity(TK id)
+        public bool DeleteEntity(T entity)
         {
-            var entity = _db.Set<T>().Find(id);
-            if (entity == null) return false;
+            //var entity = _db.Set<T>().Find(id);
+            //if (entity == null) return false;
             try
             {
                 _db.Set<T>().Attach(entity);
                 _db.Set<T>().Remove(entity);
-                _db.SaveChanges();
+                SaveChanges(entity);
                 return true;
             }
             catch (Exception e)
@@ -70,6 +75,33 @@ namespace ComLog.Db.MsSql.QueryProcessors
         public DbContext GetDbContext()
         {
             return _db;
+        }
+
+        private Audit GetAudit(T entity)
+        {
+
+            var piChangeBy = typeof(T).GetProperty(nameof(ITrackedEntity.ChangeBy));
+            var changeBy = piChangeBy?.GetValue(entity);
+
+            return new Audit { CreatedBy = $"{changeBy}" };
+        }
+
+        private void SetChangeAt(T entity)
+        {
+            var piChangeAt = typeof(T).GetProperty(nameof(ITrackedEntity.ChangeAt));
+            piChangeAt?.SetValue(entity, DateTime.Now);
+        }
+
+        private void SaveChanges(T entity)
+        {
+            if (entity is ITrackedEntity)
+            {
+                _db.SaveChanges(GetAudit(entity));
+            }
+            else
+            {
+                _db.SaveChanges();
+            }
         }
     }
 }

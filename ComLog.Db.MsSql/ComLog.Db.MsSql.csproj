@@ -47,6 +47,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Z.EntityFramework.Plus.EF6, Version=1.6.20.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.EntityFramework.Plus.EF6.1.6.20\lib\net45\Z.EntityFramework.Plus.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mappings\AccountMap.cs" />
@@ -67,6 +71,18 @@
     <Compile Include="Migrations\201707091842582_V03.cs" />
     <Compile Include="Migrations\201707091842582_V03.Designer.cs">
       <DependentUpon>201707091842582_V03.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709111324176_V04.cs" />
+    <Compile Include="Migrations\201709111324176_V04.Designer.cs">
+      <DependentUpon>201709111324176_V04.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709111743145_V05.cs" />
+    <Compile Include="Migrations\201709111743145_V05.Designer.cs">
+      <DependentUpon>201709111743145_V05.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709121054299_V06.cs" />
+    <Compile Include="Migrations\201709121054299_V06.Designer.cs">
+      <DependentUpon>201709121054299_V06.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +115,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707091842582_V03.resx">
       <DependentUpon>201707091842582_V03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709111324176_V04.resx">
+      <DependentUpon>201709111324176_V04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709111743145_V05.resx">
+      <DependentUpon>201709111743145_V05.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121054299_V06.resx">
+      <DependentUpon>201709121054299_V06.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

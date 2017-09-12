@@ -22,6 +22,13 @@ namespace ComLog.Db.MsSql.Mappings
                     new IndexAnnotation(new IndexAttribute("IX_AccountTypeName", 1) {IsUnique = true}))
                 ;
 
+            Property(e => e.ChangeBy)
+                .HasMaxLength(50)
+                ;
+            Property(e => e.ChangeAt)
+                .IsOptional()
+                ;
+
         }
 
     }

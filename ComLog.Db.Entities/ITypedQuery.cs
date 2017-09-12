@@ -11,7 +11,7 @@ namespace ComLog.Db.Entities
         Task<T> GetEntityAsync(TK id);
         T InsertEntity(T entity);
         T UpdateEntity(T entity);
-        bool DeleteEntity(TK id);
+        bool DeleteEntity(T entity);
 
         DbContext GetDbContext();
     }

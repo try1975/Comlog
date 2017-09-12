@@ -50,6 +50,7 @@
     <Compile Include="Dto\TransactionDto.cs" />
     <Compile Include="Dto\TransactionTypeDto.cs" />
     <Compile Include="IDto.cs" />
+    <Compile Include="ITrackedDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

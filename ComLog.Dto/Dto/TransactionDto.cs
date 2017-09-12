@@ -2,7 +2,7 @@
 
 namespace ComLog.Dto
 {
-    public class TransactionDto : IDto<int>
+    public class TransactionDto : IDto<int>, ITrackedDto
     {
         public DateTime TransactionDate { get; set; }
 
@@ -35,5 +35,7 @@ namespace ComLog.Dto
         public decimal? UsdDcc { get; set; }
 
         public int Id { get; set; }
+        public string ChangeBy { get; set; }
+        public DateTime? ChangeAt { get; set; }
     }
 }
