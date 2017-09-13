@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Principal;
 using System.Windows.Forms;
 using ComLog.WinForms.Ninject;
 
@@ -9,12 +10,13 @@ namespace ComLog.WinForms.Administration
         public AuthenticationForm()
         {
             InitializeComponent();
+            tbLogin.Text = WindowsIdentity.GetCurrent().Name;
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
         {
 #if DEBUG
-            CurrentUser.Login = "vorobyev";
+            CurrentUser.Login = WindowsIdentity.GetCurrent().Name;
             var mainForm = CompositionRoot.Resolve<MainForm>();
             Hide();
             mainForm.Show();

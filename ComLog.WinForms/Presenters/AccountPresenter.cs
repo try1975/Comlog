@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ComLog.Dto;
 using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
@@ -44,6 +43,20 @@ namespace ComLog.WinForms.Presenters
             else
             {
                 ((IAccountView) View).BankList = new List<KeyValuePair<int, string>>();
+            }
+
+            var accountTypeDtos = await DataMаnager.GetAccountTypes();
+            if (accountTypeDtos != null)
+            {
+                var accountTypes = accountTypeDtos.ToList();
+                ((IAccountView)View).AccountTypeList =
+                    accountTypes.Select(c => new KeyValuePair<int, string>(c.Id, c.Name))
+                        .OrderBy(kv => kv.Value)
+                        .ToList();
+            }
+            else
+            {
+                ((IAccountView)View).AccountTypeList = new List<KeyValuePair<int, string>>();
             }
         }
     }

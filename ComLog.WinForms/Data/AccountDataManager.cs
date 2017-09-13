@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using ComLog.Common;
-using ComLog.Dto;
 using ComLog.Dto.Ext;
 using ComLog.WinForms.Data.Common;
 using ComLog.WinForms.Interfaces.Data;

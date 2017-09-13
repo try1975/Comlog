@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using ComLog.Dto;
 using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces.Common;
 
@@ -10,7 +9,7 @@ namespace ComLog.WinForms.Interfaces
     {
         #region Details
 
-        string Name { get; set; }
+        string AccountName { get; set; }
         int BankId { get; set; }
         string CurrencyId { get; set; }
         int AccountTypeId { get; set; }

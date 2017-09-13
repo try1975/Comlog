@@ -56,6 +56,7 @@
             this.cmbAccount = new System.Windows.Forms.ComboBox();
             this.lblAccount = new System.Windows.Forms.Label();
             this.pnlTransactionDate = new System.Windows.Forms.Panel();
+            this.lblDate = new System.Windows.Forms.Label();
             this.dtpTransactionDate = new System.Windows.Forms.DateTimePicker();
             this.pnlId = new System.Windows.Forms.Panel();
             this.lblId = new System.Windows.Forms.Label();
@@ -86,7 +87,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.lblDate = new System.Windows.Forms.Label();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -387,6 +387,15 @@
             this.pnlTransactionDate.Size = new System.Drawing.Size(398, 34);
             this.pnlTransactionDate.TabIndex = 5;
             // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(7, 9);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(30, 13);
+            this.lblDate.TabIndex = 1;
+            this.lblDate.Text = "Date";
+            // 
             // dtpTransactionDate
             // 
             this.dtpTransactionDate.Location = new System.Drawing.Point(97, 7);
@@ -683,15 +692,6 @@
             this.btnRefresh.TabIndex = 0;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
-            // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(7, 9);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(30, 13);
-            this.lblDate.TabIndex = 1;
-            this.lblDate.Text = "Date";
             // 
             // TransactionControl
             // 

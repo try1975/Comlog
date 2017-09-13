@@ -62,7 +62,6 @@ namespace ComLog.WinForms.Data.Common
 
         #endregion //Accounts
 
-
         #region Banks
 
         public async Task<IEnumerable<BankDto>> GetBanks()
@@ -72,44 +71,6 @@ namespace ComLog.WinForms.Data.Common
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<List<BankDto>>();
                 return result.OrderBy(d => d.Name).ToList();
-            }
-        }
-
-        public async Task<BankDto> GetBank(int id)
-        {
-            using (var response = await _comLogHttpClient.GetAsync($"{_apiBanks}{id}"))
-            {
-                if (!response.IsSuccessStatusCode) return null;
-                var result = await response.Content.ReadAsAsync<BankDto>();
-                return result;
-            }
-        }
-
-        public async Task<BankDto> PostBank(BankDto item)
-        {
-            using (var response = await _comLogHttpClient.PostAsJsonAsync($"{_apiBanks}", item))
-            {
-                if (!response.IsSuccessStatusCode) return null;
-                var result = await response.Content.ReadAsAsync<BankDto>();
-                return result;
-            }
-        }
-
-        public async Task<BankDto> PutBank(BankDto item)
-        {
-            using (var response = await _comLogHttpClient.PutAsJsonAsync($"{_apiBanks}", item))
-            {
-                if (!response.IsSuccessStatusCode) return null;
-                var result = await response.Content.ReadAsAsync<BankDto>();
-                return result;
-            }
-        }
-
-        public async Task<bool> DeleteBank(int id)
-        {
-            using (var response = await _comLogHttpClient.DeleteAsync($"{_apiBanks}{id}"))
-            {
-                return response.IsSuccessStatusCode;
             }
         }
 
@@ -128,18 +89,6 @@ namespace ComLog.WinForms.Data.Common
         }
 
         #endregion //Currencies
-
-        #region Transactions
-        public async Task<TransactionExtDto> PostTransaction(TransactionExtDto item)
-        {
-            using (var response = await _comLogHttpClient.PostAsJsonAsync($"{_apiTransactions}", item))
-            {
-                if (!response.IsSuccessStatusCode) return null;
-                var result = await response.Content.ReadAsAsync<TransactionExtDto>();
-                return result;
-            }
-        }
-        #endregion //Transactions
 
         #region TransactionTypes
 
@@ -166,7 +115,20 @@ namespace ComLog.WinForms.Data.Common
                 return result;
             }
         }
-
         #endregion //CurrencyExchangeRate
+
+        #region AccountTypes
+
+        public async Task<IEnumerable<AccountTypeDto>> GetAccountTypes()
+        {
+            using (var response = await _comLogHttpClient.GetAsync($"{_apiAccountTypes}"))
+            {
+                if (!response.IsSuccessStatusCode) return null;
+                var result = await response.Content.ReadAsAsync<List<AccountTypeDto>>();
+                return result;
+            }
+        }
+
+        #endregion //AccountTypes
     }
 }

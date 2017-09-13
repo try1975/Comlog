@@ -7,6 +7,7 @@ using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
 using ComLog.WinForms.Presenters;
+using ComLog.WinForms.Presenters.Common;
 
 namespace ComLog.WinForms.Controls
 {
@@ -14,6 +15,7 @@ namespace ComLog.WinForms.Controls
     {
         private readonly IPresenter _presenter;
         private bool _isEventHandlerSets;
+        private DateTime? _closed;
 
         public AccountControl(IAccountDataManager accountDataManager, IDataMаnager dataMаnager)
         {
@@ -36,7 +38,7 @@ namespace ComLog.WinForms.Controls
             set { tbId.Text = value.ToString(); }
         }
 
-        public string BankAccountName
+        public string AccountName
         {
             get { return tbName.Text; }
             set { tbName.Text = value; }
@@ -54,21 +56,21 @@ namespace ComLog.WinForms.Controls
             set { cmbCurrency.SelectedValue = value; }
         }
 
-        public int AccountTypeId { get; set; }
-        public DateTime? Closed { get; set; }
+        public int AccountTypeId
+        {
+            get { return (int)cmbAccountType.SelectedValue; }
+            set { cmbAccountType.SelectedValue = value; }
+        }
 
-        //public decimal CurrentBalance
-        //{
-        //    get
-        //    {
-        //        if (string.IsNullOrEmpty(tbBalance.Text)) return 0;
-        //        decimal balance;
-        //        return decimal.TryParse(tbBalance.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out balance)
-        //            ? balance
-        //            : 0;
-        //    }
-        //    set { tbBalance.Text = value.ToString(CultureInfo.InvariantCulture); }
-        //}
+        public DateTime? Closed
+        {
+            get { return _closed; }
+            set
+            {
+                _closed = value;
+                if (cbClosed.Checked != _closed.HasValue) cbClosed.Checked = _closed.HasValue;
+            }
+        }
 
         #endregion //Details
 
@@ -94,7 +96,14 @@ namespace ComLog.WinForms.Controls
             }
         }
 
-        public List<KeyValuePair<int, string>> AccountTypeList { get; set; }
+        public List<KeyValuePair<int, string>> AccountTypeList {
+            set
+            {
+                cmbAccountType.DataSource = value;
+                cmbAccountType.ValueMember = "Key";
+                cmbAccountType.DisplayMember = "Value";
+            }
+        }
 
         #endregion //DetailsLists
 
@@ -126,6 +135,9 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.DisplayIndex = 2;
             column = dgvItems.Columns[nameof(AccountExtDto.AccountTypeName)];
             if (column != null) column.DisplayIndex = 3;
+
+            column = dgvItems.Columns[nameof(AccountDto.Name)];
+            if (column != null) column.Width = 200;
         }
 
         public void SetEventHandlers()
@@ -141,6 +153,8 @@ namespace ComLog.WinForms.Controls
             btnSave.Click += btnSave_Click;
             btnCancel.Click += btnCancel_Click;
             btnDelete.Click += btnDelete_Click;
+
+            cbClosed.CheckedChanged += cbClosed_CheckedChanged;
         }
 
         #endregion //IRefreshedView
@@ -213,16 +227,18 @@ namespace ComLog.WinForms.Controls
             tbName.Clear();
             cmbBank.SelectedIndex = -1;
             cmbCurrency.SelectedIndex = -1;
-            tbBeneficiaryAddress.Clear();
+            cmbAccountType.SelectedIndex = -1;
+            cbClosed.Checked = false;
         }
 
         public void EnableInput()
         {
-            //tbId.Enabled = true;
             tbName.Enabled = true;
+            cbClosed.Enabled = true;
+            if (_presenter.PresenterMode != PresenterMode.AddNew) return;
             cmbBank.Enabled = true;
             cmbCurrency.Enabled = true;
-            tbBeneficiaryAddress.Enabled = true;
+            cmbAccountType.Enabled = true;
         }
 
         public void DisableInput()
@@ -231,7 +247,8 @@ namespace ComLog.WinForms.Controls
             tbName.Enabled = false;
             cmbBank.Enabled = false;
             cmbCurrency.Enabled = false;
-            tbBeneficiaryAddress.Enabled = false;
+            cmbAccountType.Enabled = false;
+            cbClosed.Enabled = false;
         }
 
         #endregion //IEnterMode
@@ -271,6 +288,12 @@ namespace ComLog.WinForms.Controls
         private void dgvItems_SortStringChanged(object sender, EventArgs e)
         {
             _presenter.BindingSource.Sort = dgvItems.SortString;
+        }
+
+        private void cbClosed_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbClosed.Checked && !Closed.HasValue) Closed = DateTime.Now;
+            if (!cbClosed.Checked && Closed.HasValue) Closed = null;
         }
 
         #endregion //Event handlers
