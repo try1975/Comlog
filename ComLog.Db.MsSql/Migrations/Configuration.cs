@@ -1,3 +1,5 @@
+using ComLog.Db.Entities;
+
 namespace ComLog.Db.MsSql.Migrations
 {
     using System.Data.Entity.Migrations;
@@ -16,13 +18,16 @@ namespace ComLog.Db.MsSql.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Currencies.AddOrUpdate(
+              p => p.Id,
+              new CurrencyEntity() { Id = "USD" },
+              new CurrencyEntity() { Id = "EUR" },
+              new CurrencyEntity { Id = "GBP" },
+              new CurrencyEntity { Id = "CHF" },
+              new CurrencyEntity { Id = "HKD" },
+              new CurrencyEntity { Id = "RUB" },
+              new CurrencyEntity { Id = "UAH" }
+            );
         }
     }
 }
