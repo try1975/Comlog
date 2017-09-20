@@ -198,6 +198,7 @@
     <Compile Include="Controllers\TransactionReport01Controller.cs" />
     <Compile Include="Controllers\TypedController.cs" />
     <Compile Include="Controllers\BanksController.cs" />
+    <Compile Include="Formaters\TransactionReport01CsvFormatter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
