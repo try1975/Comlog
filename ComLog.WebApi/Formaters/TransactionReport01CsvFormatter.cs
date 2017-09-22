@@ -65,7 +65,7 @@ namespace ComLog.WebApi.Formaters
         // Helper methods for serializing Products to CSV format. 
         private static void WriteItem(TransactionReport01Dto dto, TextWriter writer)
         {
-            writer.WriteLine($"{Escape(dto.TransactionDate.ToString("dd.MM.yyyy"))},{Escape(dto.BankName)},{Escape(dto.AccountName)},{Escape(dto.TransactionTypeName)},{Escape(dto.CurrencyId)},{Escape(dto.Credits)},{Escape(dto.Debits)},{Escape(dto.Charges)},{Escape(dto.FromTo)},{Escape(dto.Description)},{Escape(dto.UsdCredits)},{Escape(dto.UsdDebits)},{Escape(dto.Report)},{Escape(dto.Dcc)},{Escape(dto.UsdDcc)}");
+           writer.WriteLine($"{Escape(dto.TransactionDate.ToString("dd/MM/yyyy"))},{Escape(dto.BankName)},{Escape(dto.AccountName)},{Escape(dto.TransactionTypeName)},{Escape(dto.CurrencyId)},{Escape(dto.Credits)},{Escape(dto.Debits)},{Escape(dto.Charges)},{Escape(dto.FromTo)},{Escape(dto.Description)},{Escape(dto.UsdCredits)},{Escape(dto.UsdDebits)},{Escape(dto.Report)},{Escape(dto.Dcc)},{Escape(dto.UsdDcc)}");
         }
 
         private static void WriteHeader(TextWriter writer)
