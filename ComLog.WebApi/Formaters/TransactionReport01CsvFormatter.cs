@@ -4,6 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 using ComLog.Dto.Ext;
 
 namespace ComLog.WebApi.Formaters
@@ -79,6 +80,7 @@ namespace ComLog.WebApi.Formaters
         {
             if (o == null) return "";
             var field = o.ToString();
+            field = Regex.Replace(field, @"\r\n?|\n|\r", "");
             return field.IndexOfAny(SpecialChars) != -1 ? $"\"{field.Replace("\"", "\"\"")}\"" : field;
         }
     }
