@@ -22,10 +22,10 @@ namespace CurEx.WebApi.Maintenance.Classes
             return Mapper.Map<CurrencyPairRateDto>(entity);
         }
 
-        public IEnumerable<CurrencyPairRateDto> GetLast10(string currencyPairId)
+        public IEnumerable<CurrencyPairRateDto> GetLastN(string currencyPairId, int lastN)
         {
             var entities =
-                Query.GetEntities().Where(z => z.CurrencyPairId == currencyPairId).OrderByDescending(z=>z.RateDate).Take(10).ToList();
+                Query.GetEntities().Where(z => z.CurrencyPairId == currencyPairId).OrderByDescending(z=>z.RateDate).Take(lastN).ToList();
             return Mapper.Map<List<CurrencyPairRateDto>>(entities);
         }
     }

@@ -7,6 +7,6 @@ namespace CurEx.WebApi.Maintenance.Interfaces
     public interface ICurrencyPairRateApi : ITypedApi<CurrencyPairRateDto, int>
     {
         CurrencyPairRateDto GetByDate(string currencyPairId, DateTime rateDate);
-        IEnumerable<CurrencyPairRateDto> GetLast10(string currencyPairId);
+        IEnumerable<CurrencyPairRateDto> GetLastN(string currencyPairId, int lastN);
     }
 }

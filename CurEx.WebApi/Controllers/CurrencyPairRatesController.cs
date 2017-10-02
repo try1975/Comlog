@@ -29,9 +29,9 @@ namespace CurEx.WebApi.Controllers
 
         [HttpGet]
         //[Route("{currencyPairId:string}", Name = nameof(GetLast10) + "Route")]
-        public HttpResponseMessage GetLast10(string currencyPairId)
+        public HttpResponseMessage GetLastN(string currencyPairId, int lastN = 10)
         {
-            var result = ((ICurrencyPairRateApi)_api).GetLast10(currencyPairId);
+            var result = ((ICurrencyPairRateApi)_api).GetLastN(currencyPairId, lastN);
             return new HttpResponseMessage()
             {
                 Content = new ObjectContent<IEnumerable<CurrencyPairRateDto>>(result, new CurrencyPairCsvFormatter())

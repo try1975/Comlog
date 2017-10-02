@@ -1,4 +1,6 @@
-﻿--update ExcelBooks set 
+﻿declare @dt date = '20171001'
+
+--update ExcelBooks set 
 --	AccountName = replace(replace(replace(AccountName,' ','<>'),'><',''),'<>',' ')
 --where dt>='20170601'
 
@@ -21,13 +23,13 @@ SELECT DISTINCT
   e.[BankName]
 FROM 
 	[ExcelBooks] e
-WHERE not exists(select b.Id from [dbo].[Banks] b where b.Name=e.BankName) and dt>='20170601';
+WHERE not exists(select b.Id from [dbo].[Banks] b where b.Name=e.BankName) and dt >= @dt;
 
 insert into AccountTypes (Name)
 select distinct
  e.AccountTypeName
 from ExcelBooks e
-where not exists(select a.Id from AccountTypes a where a.Name=e.AccountTypeName) and dt>='20170601';
+where not exists(select a.Id from AccountTypes a where a.Name=e.AccountTypeName) and dt >= @dt;
 
 
 UPDATE ExcelBooks set
@@ -42,7 +44,7 @@ select distinct
 , e.CurrencyId
 , e.AccountTypeId
 from ExcelBooks e
-where not exists(select a.Id from Accounts a where a.BankId=e.BankId and a.Name=e.AccountName and a.CurrencyId=e.CurrencyId and a.AccountTypeId=e.AccountTypeId) and dt>='20170601';
+where not exists(select a.Id from Accounts a where a.BankId=e.BankId and a.Name=e.AccountName and a.CurrencyId=e.CurrencyId and a.AccountTypeId=e.AccountTypeId) and dt >= @dt;
 
 UPDATE ExcelBooks set
   AccountId=(select top 1 a.Id from Accounts a 
@@ -54,7 +56,7 @@ UPDATE ExcelBooks set
 
 delete
   FROM [Transactions]
-  where dt>='20170601';
+  where dt >= @dt;
 
 INSERT INTO [dbo].[Transactions]
            ([Dt]
@@ -80,14 +82,14 @@ SELECT
 	,[Credits]
 	,[Debits]
 	,[Charges]
-	,[FromTo]
-	,[Description]
+	,REPLACE(REPLACE([FromTo], CHAR(13), ''), CHAR(10), '')
+	,REPLACE(REPLACE([Description], CHAR(13), ''), CHAR(10), '')
       ,[Splus]
       ,[Sminus]
       ,[Report]
 	  ,[Dt]
   FROM [dbo].[ExcelBooks]
-  WHERE Dt>='20170601';
+  WHERE Dt >= @dt;
 
 update ExcelBooks set AccountId = 118 where AccountId=186
 update Transactions set AccountId = 118 where AccountId=186
