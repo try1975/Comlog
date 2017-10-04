@@ -74,7 +74,7 @@ INSERT INTO [dbo].[Transactions]
            ,[Report]
            ,[TransactionDate])
 SELECT 
-  [Dt]
+	[Dt]
 	,[BankId]
 	,[AccountId]
 	,[TransactionTypeId]
@@ -84,10 +84,10 @@ SELECT
 	,[Charges]
 	,REPLACE(REPLACE([FromTo], CHAR(13), ''), CHAR(10), '')
 	,REPLACE(REPLACE([Description], CHAR(13), ''), CHAR(10), '')
-      ,[Splus]
-      ,[Sminus]
-      ,[Report]
-	  ,[Dt]
+    ,[Splus]
+    ,[Sminus]
+    ,[Report]
+	,[Dt]
   FROM [dbo].[ExcelBooks]
   WHERE Dt >= @dt;
 

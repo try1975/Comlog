@@ -44,6 +44,12 @@ namespace ComLog.WinForms.Controls
             set { tbName.Text = value; }
         }
 
+        public string AccountNumber
+        {
+            get { return tbAccountNumber.Text; }
+            set { tbAccountNumber.Text = value; }
+        }
+
         public int BankId
         {
             get { return (int)cmbBank.SelectedValue; }
@@ -131,10 +137,12 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.DisplayIndex = 0;
             column = dgvItems.Columns[nameof(AccountExtDto.Name)];
             if (column != null) column.DisplayIndex = 1;
-            column = dgvItems.Columns[nameof(AccountExtDto.CurrencyId)];
+            column = dgvItems.Columns[nameof(AccountExtDto.AccountNumber)];
             if (column != null) column.DisplayIndex = 2;
-            column = dgvItems.Columns[nameof(AccountExtDto.AccountTypeName)];
+            column = dgvItems.Columns[nameof(AccountExtDto.CurrencyId)];
             if (column != null) column.DisplayIndex = 3;
+            column = dgvItems.Columns[nameof(AccountExtDto.AccountTypeName)];
+            if (column != null) column.DisplayIndex = 4;
 
             column = dgvItems.Columns[nameof(AccountDto.Name)];
             if (column != null) column.Width = 200;
@@ -225,6 +233,7 @@ namespace ComLog.WinForms.Controls
         {
             tbId.Clear();
             tbName.Clear();
+            tbAccountNumber.Clear();
             cmbBank.SelectedIndex = -1;
             cmbCurrency.SelectedIndex = -1;
             cmbAccountType.SelectedIndex = -1;
@@ -234,6 +243,7 @@ namespace ComLog.WinForms.Controls
         public void EnableInput()
         {
             tbName.Enabled = true;
+            tbAccountNumber.Enabled = true;
             cbClosed.Enabled = true;
             if (_presenter.PresenterMode != PresenterMode.AddNew) return;
             cmbBank.Enabled = true;
@@ -245,6 +255,7 @@ namespace ComLog.WinForms.Controls
         {
             tbId.Enabled = false;
             tbName.Enabled = false;
+            tbAccountNumber.Enabled = false;
             cmbBank.Enabled = false;
             cmbCurrency.Enabled = false;
             cmbAccountType.Enabled = false;

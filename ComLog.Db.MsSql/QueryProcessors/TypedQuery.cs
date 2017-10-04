@@ -56,8 +56,6 @@ namespace ComLog.Db.MsSql.QueryProcessors
 
         public bool DeleteEntity(T entity)
         {
-            //var entity = _db.Set<T>().Find(id);
-            //if (entity == null) return false;
             try
             {
                 _db.Set<T>().Attach(entity);

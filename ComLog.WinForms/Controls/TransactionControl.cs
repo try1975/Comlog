@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComLog.Dto.Ext;
+using ComLog.WinForms.Forms;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
@@ -259,6 +260,7 @@ namespace ComLog.WinForms.Controls
 
             btnRefresh.Click += btnRefresh_Click;
             btnExcelExport.Click += btnExcelExport_Click;
+            btnLoadCashUpdateXls.Click += btnLoadCashUpdateXls_Click;
             dgvItems.FilterStringChanged += dgvItems_FilterStringChanged;
             dgvItems.SortStringChanged += dgvItems_SortStringChanged;
 
@@ -445,11 +447,19 @@ namespace ComLog.WinForms.Controls
         {
             var saveFileDialog = new SaveFileDialog { FileName = $"ComLog_{DateTime.Now.ToString("yyyyMMdd_HHmm")}.xlsx" };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            var dataTable = (DataTable) _presenter.BindingSource.DataSource;// bsQuery.DataSource;
+            var dataTable = (DataTable)_presenter.BindingSource.DataSource;// bsQuery.DataSource;
             var dataSet = new DataSet();
             dataSet.Tables.Add(dataTable);
             CreateExcelFile.CreateExcelDocument(dataSet, saveFileDialog.FileName);
             if (File.Exists(saveFileDialog.FileName)) Process.Start(saveFileDialog.FileName);
+        }
+
+        private void btnLoadCashUpdateXls_Click(object sender, EventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            var runMacroForm = new RunMacroForm(openFileDialog.FileName);
+            if (runMacroForm.ShowDialog() == DialogResult.OK) btnRefresh_Click(this, null);
         }
 
         #endregion //Event handlers
@@ -488,20 +498,20 @@ namespace ComLog.WinForms.Controls
             if (!Credits.HasValue) UsdCredits = null;
             else
             {
-                UsdCredits = Credits*rate;
+                UsdCredits = Credits * rate;
             }
-            if (Debits.HasValue && Debits > 0) Debits = Debits*-1;
-            if (Charges.HasValue && Charges > 0) Charges = Charges*-1;
+            if (Debits.HasValue && Debits > 0) Debits = Debits * -1;
+            if (Charges.HasValue && Charges > 0) Charges = Charges * -1;
             if (!Debits.HasValue && !Charges.HasValue) UsdDebits = null;
             else
             {
-                if (Debits.HasValue) UsdDebits = Debits*rate;
+                if (Debits.HasValue) UsdDebits = Debits * rate;
                 if (Charges.HasValue)
                 {
-                    if (UsdDebits.HasValue) UsdDebits += Charges*rate;
+                    if (UsdDebits.HasValue) UsdDebits += Charges * rate;
                     else
                     {
-                        UsdDebits = Charges*rate;
+                        UsdDebits = Charges * rate;
                     }
                 }
             }

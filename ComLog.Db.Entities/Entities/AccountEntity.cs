@@ -7,6 +7,8 @@ namespace ComLog.Db.Entities
     {
         public string Name { get; set; }
 
+        public string AccountNumber { get; set; }
+
         public int BankId { get; set; }
 
         public string CurrencyId { get; set; }

@@ -33,7 +33,10 @@ namespace ComLog.WinForms.Controls
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
+            this.pnlClosed = new System.Windows.Forms.Panel();
+            this.cbClosed = new System.Windows.Forms.CheckBox();
             this.pnplBeneficiaryAddress = new System.Windows.Forms.Panel();
+            this.cmbAccountType = new System.Windows.Forms.ComboBox();
             this.lblAccountType = new System.Windows.Forms.Label();
             this.pnlCurrency = new System.Windows.Forms.Panel();
             this.cmbCurrency = new System.Windows.Forms.ComboBox();
@@ -56,11 +59,12 @@ namespace ComLog.WinForms.Controls
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlGrid = new System.Windows.Forms.Panel();
             this.dgvItems = new ADGV.AdvancedDataGridView();
-            this.pnlClosed = new System.Windows.Forms.Panel();
-            this.cbClosed = new System.Windows.Forms.CheckBox();
-            this.cmbAccountType = new System.Windows.Forms.ComboBox();
+            this.pnlAccountNumber = new System.Windows.Forms.Panel();
+            this.tbAccountNumber = new System.Windows.Forms.TextBox();
+            this.lblAccountNumber = new System.Windows.Forms.Label();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
+            this.pnlClosed.SuspendLayout();
             this.pnplBeneficiaryAddress.SuspendLayout();
             this.pnlCurrency.SuspendLayout();
             this.pnlAccountName.SuspendLayout();
@@ -69,7 +73,7 @@ namespace ComLog.WinForms.Controls
             this.pnlButtons.SuspendLayout();
             this.pnlGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
-            this.pnlClosed.SuspendLayout();
+            this.pnlAccountNumber.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -87,6 +91,7 @@ namespace ComLog.WinForms.Controls
             this.pnlFields.Controls.Add(this.pnlClosed);
             this.pnlFields.Controls.Add(this.pnplBeneficiaryAddress);
             this.pnlFields.Controls.Add(this.pnlCurrency);
+            this.pnlFields.Controls.Add(this.pnlAccountNumber);
             this.pnlFields.Controls.Add(this.pnlAccountName);
             this.pnlFields.Controls.Add(this.pnlBank);
             this.pnlFields.Controls.Add(this.pnlId);
@@ -96,15 +101,45 @@ namespace ComLog.WinForms.Controls
             this.pnlFields.Size = new System.Drawing.Size(396, 509);
             this.pnlFields.TabIndex = 1;
             // 
+            // pnlClosed
+            // 
+            this.pnlClosed.Controls.Add(this.cbClosed);
+            this.pnlClosed.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlClosed.Location = new System.Drawing.Point(0, 203);
+            this.pnlClosed.Name = "pnlClosed";
+            this.pnlClosed.Size = new System.Drawing.Size(396, 34);
+            this.pnlClosed.TabIndex = 8;
+            // 
+            // cbClosed
+            // 
+            this.cbClosed.AutoSize = true;
+            this.cbClosed.Location = new System.Drawing.Point(97, 8);
+            this.cbClosed.Name = "cbClosed";
+            this.cbClosed.Size = new System.Drawing.Size(58, 17);
+            this.cbClosed.TabIndex = 1;
+            this.cbClosed.Text = "Closed";
+            this.cbClosed.UseVisualStyleBackColor = true;
+            // 
             // pnplBeneficiaryAddress
             // 
             this.pnplBeneficiaryAddress.Controls.Add(this.cmbAccountType);
             this.pnplBeneficiaryAddress.Controls.Add(this.lblAccountType);
             this.pnplBeneficiaryAddress.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnplBeneficiaryAddress.Location = new System.Drawing.Point(0, 135);
+            this.pnplBeneficiaryAddress.Location = new System.Drawing.Point(0, 169);
             this.pnplBeneficiaryAddress.Name = "pnplBeneficiaryAddress";
             this.pnplBeneficiaryAddress.Size = new System.Drawing.Size(396, 34);
             this.pnplBeneficiaryAddress.TabIndex = 7;
+            // 
+            // cmbAccountType
+            // 
+            this.cmbAccountType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbAccountType.Enabled = false;
+            this.cmbAccountType.FormattingEnabled = true;
+            this.cmbAccountType.Location = new System.Drawing.Point(97, 5);
+            this.cmbAccountType.Name = "cmbAccountType";
+            this.cmbAccountType.Size = new System.Drawing.Size(283, 21);
+            this.cmbAccountType.TabIndex = 2;
             // 
             // lblAccountType
             // 
@@ -120,7 +155,7 @@ namespace ComLog.WinForms.Controls
             this.pnlCurrency.Controls.Add(this.cmbCurrency);
             this.pnlCurrency.Controls.Add(this.lblCurrency);
             this.pnlCurrency.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlCurrency.Location = new System.Drawing.Point(0, 101);
+            this.pnlCurrency.Location = new System.Drawing.Point(0, 135);
             this.pnlCurrency.Name = "pnlCurrency";
             this.pnlCurrency.Size = new System.Drawing.Size(396, 34);
             this.pnlCurrency.TabIndex = 6;
@@ -328,35 +363,34 @@ namespace ComLog.WinForms.Controls
             this.dgvItems.TabIndex = 1;
             this.dgvItems.TimeFilter = false;
             // 
-            // pnlClosed
+            // pnlAccountNumber
             // 
-            this.pnlClosed.Controls.Add(this.cbClosed);
-            this.pnlClosed.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlClosed.Location = new System.Drawing.Point(0, 169);
-            this.pnlClosed.Name = "pnlClosed";
-            this.pnlClosed.Size = new System.Drawing.Size(396, 34);
-            this.pnlClosed.TabIndex = 8;
+            this.pnlAccountNumber.Controls.Add(this.tbAccountNumber);
+            this.pnlAccountNumber.Controls.Add(this.lblAccountNumber);
+            this.pnlAccountNumber.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlAccountNumber.Location = new System.Drawing.Point(0, 101);
+            this.pnlAccountNumber.Name = "pnlAccountNumber";
+            this.pnlAccountNumber.Size = new System.Drawing.Size(396, 34);
+            this.pnlAccountNumber.TabIndex = 9;
             // 
-            // cbClosed
+            // tbAccountNumber
             // 
-            this.cbClosed.AutoSize = true;
-            this.cbClosed.Location = new System.Drawing.Point(97, 8);
-            this.cbClosed.Name = "cbClosed";
-            this.cbClosed.Size = new System.Drawing.Size(58, 17);
-            this.cbClosed.TabIndex = 1;
-            this.cbClosed.Text = "Closed";
-            this.cbClosed.UseVisualStyleBackColor = true;
-            // 
-            // cmbAccountType
-            // 
-            this.cmbAccountType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbAccountNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbAccountType.Enabled = false;
-            this.cmbAccountType.FormattingEnabled = true;
-            this.cmbAccountType.Location = new System.Drawing.Point(97, 5);
-            this.cmbAccountType.Name = "cmbAccountType";
-            this.cmbAccountType.Size = new System.Drawing.Size(283, 21);
-            this.cmbAccountType.TabIndex = 2;
+            this.tbAccountNumber.Enabled = false;
+            this.tbAccountNumber.Location = new System.Drawing.Point(97, 5);
+            this.tbAccountNumber.Name = "tbAccountNumber";
+            this.tbAccountNumber.Size = new System.Drawing.Size(283, 20);
+            this.tbAccountNumber.TabIndex = 1;
+            // 
+            // lblAccountNumber
+            // 
+            this.lblAccountNumber.AutoSize = true;
+            this.lblAccountNumber.Location = new System.Drawing.Point(7, 8);
+            this.lblAccountNumber.Name = "lblAccountNumber";
+            this.lblAccountNumber.Size = new System.Drawing.Size(87, 13);
+            this.lblAccountNumber.TabIndex = 0;
+            this.lblAccountNumber.Text = "Account Number";
             // 
             // AccountControl
             // 
@@ -369,6 +403,8 @@ namespace ComLog.WinForms.Controls
             this.Size = new System.Drawing.Size(670, 550);
             this.pnlDetails.ResumeLayout(false);
             this.pnlFields.ResumeLayout(false);
+            this.pnlClosed.ResumeLayout(false);
+            this.pnlClosed.PerformLayout();
             this.pnplBeneficiaryAddress.ResumeLayout(false);
             this.pnplBeneficiaryAddress.PerformLayout();
             this.pnlCurrency.ResumeLayout(false);
@@ -382,8 +418,8 @@ namespace ComLog.WinForms.Controls
             this.pnlButtons.ResumeLayout(false);
             this.pnlGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
-            this.pnlClosed.ResumeLayout(false);
-            this.pnlClosed.PerformLayout();
+            this.pnlAccountNumber.ResumeLayout(false);
+            this.pnlAccountNumber.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -418,5 +454,8 @@ namespace ComLog.WinForms.Controls
         private System.Windows.Forms.Panel pnlClosed;
         private System.Windows.Forms.CheckBox cbClosed;
         private System.Windows.Forms.ComboBox cmbAccountType;
+        private System.Windows.Forms.Panel pnlAccountNumber;
+        private System.Windows.Forms.TextBox tbAccountNumber;
+        private System.Windows.Forms.Label lblAccountNumber;
     }
 }

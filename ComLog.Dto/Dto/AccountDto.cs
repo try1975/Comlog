@@ -7,6 +7,8 @@ namespace ComLog.Dto
         public int Id { get; set; }
         public string Name { get; set; }
 
+        public string AccountNumber { get; set; }
+
         public int BankId { get; set; }
 
         public string CurrencyId { get; set; }

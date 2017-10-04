@@ -2,11 +2,13 @@
 using System.Security.Principal;
 using System.Windows.Forms;
 using ComLog.WinForms.Ninject;
+using log4net;
 
 namespace ComLog.WinForms.Administration
 {
     public partial class AuthenticationForm : Form
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public AuthenticationForm()
         {
             InitializeComponent();
@@ -19,6 +21,7 @@ namespace ComLog.WinForms.Administration
             CurrentUser.Login = WindowsIdentity.GetCurrent().Name;
             var mainForm = CompositionRoot.Resolve<MainForm>();
             Hide();
+            Log.Debug("Start mainform");
             mainForm.Show();
 #else
             if (string.IsNullOrEmpty(tbLogin.Text) || string.IsNullOrEmpty(tbPassword.Text))

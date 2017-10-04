@@ -6,6 +6,7 @@ using ComLog.WinForms.Administration;
 using ComLog.WinForms.Data.Common;
 using ComLog.WinForms.Ninject;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace ComLog.WinForms
 {
     internal static class Program

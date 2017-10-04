@@ -46,6 +46,14 @@
       <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.12.0.4518.1014\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -149,6 +157,12 @@
     <Compile Include="Data\Filter\TransactionViewFilter.cs" />
     <Compile Include="Data\TransactionTypeDataManager.cs" />
     <Compile Include="Data\TransactionDataManager.cs" />
+    <Compile Include="Forms\RunMacroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RunMacroForm.Designer.cs">
+      <DependentUpon>RunMacroForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +237,9 @@
     <EmbeddedResource Include="Controls\TransactionTypeControl.resx">
       <DependentUpon>TransactionTypeControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RunMacroForm.resx">
+      <DependentUpon>RunMacroForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -240,6 +257,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.AppSettings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Macro\RunMacro.xlsm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -270,7 +290,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComLog.Common\ComLog.Common.csproj">

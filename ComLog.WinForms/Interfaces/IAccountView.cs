@@ -10,6 +10,7 @@ namespace ComLog.WinForms.Interfaces
         #region Details
 
         string AccountName { get; set; }
+        string AccountNumber { get; set; }
         int BankId { get; set; }
         string CurrencyId { get; set; }
         int AccountTypeId { get; set; }

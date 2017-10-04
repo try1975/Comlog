@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 using ComLog.Db.Entities;
 
@@ -27,6 +28,11 @@ namespace ComLog.Db.MsSql.Mappings
                 .HasMaxLength(50)
                 ;
             Property(e => e.ChangeAt)
+                .IsOptional()
+                ;
+
+            Property(e => e.AccountNumber)
+                .HasMaxLength(250)
                 .IsOptional()
                 ;
 
