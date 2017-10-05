@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
@@ -458,7 +459,12 @@ namespace ComLog.WinForms.Controls
         {
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-            var runMacroForm = new RunMacroForm(openFileDialog.FileName);
+            var macroSetting = new MacroSettings()
+            {
+                MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
+                CashUpdateMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)]
+            };
+            var runMacroForm = new RunMacroForm(openFileDialog.FileName, macroSetting);
             if (runMacroForm.ShowDialog() == DialogResult.OK) btnRefresh_Click(this, null);
         }
 

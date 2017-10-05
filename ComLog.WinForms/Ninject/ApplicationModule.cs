@@ -1,4 +1,8 @@
-﻿using ComLog.WinForms.Controls;
+﻿using System.Data.Entity;
+using ComLog.Db.Entities;
+using ComLog.Db.MsSql;
+using ComLog.Db.MsSql.QueryProcessors;
+using ComLog.WinForms.Controls;
 using ComLog.WinForms.Data;
 using ComLog.WinForms.Data.Common;
 using ComLog.WinForms.Data.Filter;
@@ -35,6 +39,10 @@ namespace ComLog.WinForms.Ninject
             Bind<ITransactionView>().To<TransactionControl>();
             Bind<ITransactionViewFilter>().To<TransactionViewFilter>();
             Bind<ITransactionDataManager>().To<TransactionDataManager>().InSingletonScope();
+
+            // Loader
+            Bind<DbContext>().To<WorkContext>().InSingletonScope();
+            Bind<IExcelBookQuery>().To<ExcelBookQuery>().InSingletonScope();
         }
     }
 }

@@ -254,3 +254,6 @@ ModelManifest.xml
 /ComLog 2017 - MS.xlsm
 /ComlogPivot.xlsx
 /ComLog_ALL_2017.xlsm
+/ComLog.Loader/App.Connections.config
+/ComLog.Loader/App.AppSettings.config
+/ComLog.WinForms/Macro/RunMacro - копия.xlsm

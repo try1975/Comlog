@@ -13,8 +13,6 @@ CurrencyId='GLAM';
 
 update ExcelBooks set 
 CurrencyId='GBP'
-, Splus=Credits*1.55
-, Sminus=Debits*1.55
 where 
 CurrencyId='DPA';
 
@@ -109,9 +107,9 @@ WHERE (
   
 
 
-delete
+/*delete
   FROM [Transactions]
-  where dt >= @dt;
+  where dt >= @dt;*/
 
 INSERT INTO [dbo].[Transactions]
            ([Dt]
@@ -144,7 +142,7 @@ SELECT
     ,[Report]
 	,[Dt]
   FROM [dbo].[ExcelBooks]
-  WHERE Dt >= @dt;
+  /*WHERE Dt >= @dt;*/
 
 update ExcelBooks set AccountId = 118 where AccountId=186
 update Transactions set AccountId = 118 where AccountId=186
