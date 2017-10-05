@@ -459,13 +459,20 @@ namespace ComLog.WinForms.Controls
         {
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-            var macroSetting = new MacroSettings()
+            var macroRunSettings = new MacroRunSettings()
             {
                 MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
-                CashUpdateMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)]
+                MacroName = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)]
             };
-            var runMacroForm = new RunMacroForm(openFileDialog.FileName, macroSetting);
-            if (runMacroForm.ShowDialog() == DialogResult.OK) btnRefresh_Click(this, null);
+            var runMacroForm = new RunMacroForm(openFileDialog.FileName, macroRunSettings);
+            if (runMacroForm.NotShow)
+            {
+                runMacroForm.Close();
+            }
+            else
+            {
+                if (runMacroForm.ShowDialog() == DialogResult.OK) btnRefresh_Click(this, null);
+            }
         }
 
         #endregion //Event handlers

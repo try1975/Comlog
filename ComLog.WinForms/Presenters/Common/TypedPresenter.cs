@@ -8,15 +8,18 @@ using AutoMapper;
 using ComLog.Dto;
 using ComLog.WinForms.Administration;
 using ComLog.WinForms.Interfaces.Common;
+using log4net;
 
 namespace ComLog.WinForms.Presenters.Common
 {
     public abstract class TypedPresenter<T, TK> : IPresenter where T : class, IDto<TK>
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly ITypedDataMànager<T, TK> _typedDataMànager;
         public IDataMànager DataMànager { get; set; }
         protected readonly ITypedView<T, TK> View;
-        
+
 
         protected TypedPresenter(ITypedView<T, TK> view, ITypedDataMànager<T, TK> typedDataMànager,
             IDataMànager dataMànager, PresenterMode presenterMode = PresenterMode.Read)
@@ -36,14 +39,22 @@ namespace ComLog.WinForms.Presenters.Common
 
         public void SetDetailData()
         {
-            T item = null;
-            if (BindingSource.Current != null)
+            try
             {
-                var current = (DataRowView) BindingSource.Current;
-                item = ToDto(current);
+                T item = null;
+                if (BindingSource.Current != null)
+                {
+                    var current = (DataRowView)BindingSource.Current;
+                    item = ToDto(current);
+                }
+                Mapper.Map(item, View);
+                View.EnterDetailsMode();
             }
-            Mapper.Map(item, View);
-            View.EnterDetailsMode();
+            catch (Exception exception)
+            {
+                Log.Error(exception);
+                throw;
+            }
         }
 
         public void Reopen()
@@ -117,9 +128,28 @@ namespace ComLog.WinForms.Presenters.Common
 
         private async void SetItems()
         {
-            BindingSource.DataSource = ToDataTable((await _typedDataMànager.GetItems()).ToList());
-            View.RefreshItems();
-            View.SetEventHandlers();
+            try
+            {
+                Log.Debug($"SetItems BindingSource.DataSource");
+                Log.Debug($"_typedDataMànager is null {_typedDataMànager==null}");
+                if (_typedDataMànager != null)
+                {
+                    var getItems = await _typedDataMànager.GetItems();
+                    Log.Debug($"getItems is null {getItems == null}");
+                    if (getItems != null)
+                    {
+                        BindingSource.DataSource = ToDataTable(getItems.ToList());
+                    }
+                }
+                Log.Debug($"SetItems RefreshItems");
+                View.RefreshItems();
+                View.SetEventHandlers();
+            }
+            catch (Exception exception)
+            {
+                Log.Error(exception);
+                throw;
+            }
         }
 
         private async void Create()
@@ -158,6 +188,7 @@ namespace ComLog.WinForms.Presenters.Common
 
         private static DataTable ToDataTable(IEnumerable<T> items)
         {
+            Log.Info($"ToDataTable start {typeof(T).Name}");
             var dataTable = new DataTable(typeof(T).Name);
 
             var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -168,6 +199,7 @@ namespace ComLog.WinForms.Presenters.Common
                     ? Nullable.GetUnderlyingType(prop.PropertyType)
                     : prop.PropertyType;
                 if (type != null) dataTable.Columns.Add(prop.Name, type);
+                Log.Info($"prop.Name {prop.Name}");
             }
             foreach (var item in items)
             {
@@ -175,6 +207,7 @@ namespace ComLog.WinForms.Presenters.Common
                 for (var i = 0; i < props.Length; i++)
                 {
                     values[i] = props[i].GetValue(item, null);
+                    Log.Info($"values[i] {props[i].GetValue(item, null)}");
                 }
                 dataTable.Rows.Add(values);
             }
@@ -192,7 +225,7 @@ namespace ComLog.WinForms.Presenters.Common
 
         private static T ToDto(DataRowView data)
         {
-            var result = (T) Activator.CreateInstance(typeof(T), null);
+            var result = (T)Activator.CreateInstance(typeof(T), null);
             var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             for (var i = 0; i < props.Length; i++)
             {

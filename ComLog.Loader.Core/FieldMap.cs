@@ -28,17 +28,18 @@ namespace ComLog.Loader.Core
             Map["$-"] = nameof(ExcelBookEntity.Sminus);
             Map["S"] = nameof(ExcelBookEntity.Ssum);
 
-            var pathPrefix = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)}\\ComLogTransactions.json";
-            var path = new Uri($"{pathPrefix}").LocalPath;
-            try
-            {
-                var json = JsonConvert.SerializeObject(Map);
-                File.WriteAllText(path, json);
-            }
-            catch
-            {
-                // ignored
-            }
+            //var pathPrefix = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)}\\ComLogTransactions.json";
+            //var path = new Uri($"{pathPrefix}").LocalPath;
+            var path = Path.GetFullPath("ComLogTransactions.json");
+            //try
+            //{
+            //    var json = JsonConvert.SerializeObject(Map);
+            //    File.WriteAllText(path, json);
+            //}
+            //catch
+            //{
+            //    // ignored
+            //}
         }
     }
 }

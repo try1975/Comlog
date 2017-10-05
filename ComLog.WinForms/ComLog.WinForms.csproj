@@ -222,6 +222,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Utils\CreateExcelFile.cs" />
+    <Compile Include="Utils\MacroRunSettings.cs" />
     <Compile Include="Utils\MacroSettings.cs" />
     <EmbeddedResource Include="Administration\AuthenticationForm.resx">
       <DependentUpon>AuthenticationForm.cs</DependentUpon>
