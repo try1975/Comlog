@@ -273,7 +273,10 @@ namespace ComLog.WinForms.Controls
 
             dtpDateFrom.ValueChanged += dtpDateFrom_ValueChanged;
             dtpDateTo.ValueChanged += dtpDateTo_ValueChanged;
+            btnToday.Click += btnToday_Click;
         }
+
+        
 
         #endregion //IRefreshedView
 
@@ -420,18 +423,6 @@ namespace ComLog.WinForms.Controls
             _presenter.BindingSource.Sort = dgvItems.SortString;
         }
 
-        private void dtpDateFrom_ValueChanged(object sender, EventArgs e)
-        {
-            _transactionViewFilter.DateFrom = dtpDateFrom.Value;
-            _presenter.Reopen();
-        }
-
-        private void dtpDateTo_ValueChanged(object sender, EventArgs e)
-        {
-            _transactionViewFilter.DateTo = dtpDateTo.Value;
-            _presenter.Reopen();
-        }
-
         private async void btnSave_Click(object sender, EventArgs e)
         {
             if (!ValidateData()) return;
@@ -473,6 +464,28 @@ namespace ComLog.WinForms.Controls
             {
                 if (runMacroForm.ShowDialog() == DialogResult.OK) btnRefresh_Click(this, null);
             }
+        }
+
+        private void dtpDateFrom_ValueChanged(object sender, EventArgs e)
+        {
+            _transactionViewFilter.DateFrom = dtpDateFrom.Value;
+            _presenter.Reopen();
+        }
+
+        private void dtpDateTo_ValueChanged(object sender, EventArgs e)
+        {
+            _transactionViewFilter.DateTo = dtpDateTo.Value;
+            _presenter.Reopen();
+        }
+
+        private void btnToday_Click(object sender, EventArgs e)
+        {
+            dtpDateFrom.Value = DateTime.Today;
+            dtpDateTo.Value = DateTime.Today;
+            //_transactionViewFilter.DateFrom = dtpDateFrom.Value;
+            //_presenter.Reopen();
+            //_transactionViewFilter.DateTo = dtpDateTo.Value;
+            //_presenter.Reopen();
         }
 
         #endregion //Event handlers

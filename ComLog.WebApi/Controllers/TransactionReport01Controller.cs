@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http;
-using ComLog.Dto;
 using ComLog.Dto.Ext;
 using ComLog.WebApi.Formaters;
-using ComLog.WebApi.Maintenance;
 using ComLog.WebApi.Maintenance.Interfaces;
 
 namespace ComLog.WebApi.Controllers

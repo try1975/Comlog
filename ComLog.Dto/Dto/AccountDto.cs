@@ -16,6 +16,7 @@ namespace ComLog.Dto
         public int AccountTypeId { get; set; }
 
         public DateTime? Closed { get; set; }
+        
         public string ChangeBy { get; set; }
         public DateTime? ChangeAt { get; set; }
     }

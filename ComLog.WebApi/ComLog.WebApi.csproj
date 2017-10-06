@@ -191,6 +191,7 @@
     <Compile Include="AutoMappers\TransactionTypeAutoMapper.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\AccountTypesController.cs" />
+    <Compile Include="Controllers\CheckBalanceController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\CurrenciesController.cs" />
     <Compile Include="Controllers\TransactionTypesController.cs" />

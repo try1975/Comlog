@@ -23,5 +23,6 @@ namespace ComLog.WinForms.Data
                 return result;
             }
         }
+
     }
 }
