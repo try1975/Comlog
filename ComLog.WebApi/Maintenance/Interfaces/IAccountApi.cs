@@ -6,7 +6,6 @@ namespace ComLog.WebApi.Maintenance.Interfaces
 {
     public interface IAccountApi : ITypedApi<AccountDto, int>
     {
-        IEnumerable<AccountExtDto> GetExtItems();
-        IEnumerable<CheckBalanceDto> GetCheckBalanceItems();
+        IEnumerable<AccountExtDto> GetExtItems(bool withBalance);
     }
 }

@@ -16,7 +16,7 @@ namespace ComLog.WinForms.Data
 
         public override async Task<IEnumerable<AccountExtDto>> GetItems()
         {
-            using (var response = await HttpClient.GetAsync($"{EndPoint}?ext=true"))
+            using (var response = await HttpClient.GetAsync($"{EndPoint}?withBalance=true"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<IEnumerable<AccountExtDto>>();

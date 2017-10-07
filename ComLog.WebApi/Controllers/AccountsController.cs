@@ -11,9 +11,9 @@ namespace ComLog.WebApi.Controllers
         {
         }
 
-        public IEnumerable<AccountExtDto> Get(bool ext)
+        public IEnumerable<AccountExtDto> Get(bool withBalance)
         {
-            return ((IAccountApi)_api).GetExtItems();
+            return ((IAccountApi)_api).GetExtItems(withBalance);
         }
     }
 }

@@ -52,7 +52,7 @@ namespace ComLog.WinForms.Data.Common
 
         public async Task<IEnumerable<AccountExtDto>> GetAccounts()
         {
-            using (var response = await _comLogHttpClient.GetAsync($"{_apiAccounts}?ext=true"))
+            using (var response = await _comLogHttpClient.GetAsync($"{_apiAccounts}?withBalance=false"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<List<AccountExtDto>>();

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 using AutoMapper;
 using ComLog.Db.Entities;
 using ComLog.Dto;
@@ -13,67 +13,56 @@ namespace ComLog.WebApi.Maintenance.Classes
     public class AccountApi : TypedApi<AccountDto, AccountEntity, int>, IAccountApi
     {
         private readonly ITransactionQuery _transactionQuery;
-        private IAccountTypeQuery _accountTypeQuery;
 
-        public AccountApi(IAccountQuery query, ITransactionQuery transactionQuery, IAccountTypeQuery accountTypeQuery) : base(query)
+        public AccountApi(IAccountQuery query, ITransactionQuery transactionQuery) : base(query)
         {
             _transactionQuery = transactionQuery;
-            _accountTypeQuery = accountTypeQuery;
         }
 
-        public IEnumerable<AccountExtDto> GetExtItems()
+        public IEnumerable<AccountExtDto> GetExtItems(bool withBalance)
         {
-            //var list = Query.GetEntities()
-            //     .Include(nameof(AccountEntity.Bank))
-            //     .Include(nameof(AccountEntity.AccountType))
-            //     .OrderBy(z => z.Bank.Name)
-            //     .ThenBy(z => z.Name)
-            //     ;
-            //return Mapper.Map<List<AccountExtDto>>(list);
-            var list = _transactionQuery.GetEntities()
-                .Include(nameof(TransactionEntity.Bank))
-                .Include(nameof(TransactionEntity.Account))
-                //.Include(nameof(AccountEntity.AccountType))
-                .GroupBy(x => new { x.BankId, x.AccountId, x.CurrencyId })
-                .Select(y => new AccountExtDto
-                {
-                    Id = y.FirstOrDefault().AccountId,
-                    Name = y.FirstOrDefault().Account.Name,
-                    AccountNumber = y.FirstOrDefault().Account.AccountNumber,
-                    BankId = y.FirstOrDefault().Account.BankId,
-                    CurrencyId = y.Key.CurrencyId,
-                    AccountTypeId = y.FirstOrDefault().Account.AccountTypeId,
-                    Closed = y.FirstOrDefault().Account.Closed,
-                    ChangeBy = y.FirstOrDefault().Account.ChangeBy,
-                    ChangeAt = y.FirstOrDefault().Account.ChangeAt,
-                    BankName = y.FirstOrDefault().Bank.Name,
-                    //AccountTypeName= y.FirstOrDefault().Account.AccountType.Name,
-                    DbBalance = y.Sum(c => c.Dcc)
-                }
-                ).ToList();
-            var accountTypes = _accountTypeQuery.GetEntities().ToList();
-            foreach (var accountExtDto in list)
+            var accounts = Query.GetEntities()
+                 .Include(nameof(AccountEntity.Bank))
+                 .Include(nameof(AccountEntity.AccountType))
+                 .OrderBy(z => z.Bank.Name)
+                 .ThenBy(z => z.Name)
+                 .ThenBy(z => z.CurrencyId)
+                 .ToList()
+                 ;
+            if (!withBalance)
             {
-                accountExtDto.AccountTypeName = accountTypes.Find(z => z.Id == accountExtDto.AccountTypeId).Name;
+                return Mapper.Map<List<AccountExtDto>>(accounts);
             }
-            return list;
-        }
-
-        public IEnumerable<CheckBalanceDto> GetCheckBalanceItems()
-        {
-            var list = _transactionQuery.GetEntities()
-                .Include(nameof(TransactionEntity.Bank))
-                .Include(nameof(TransactionEntity.Account))
-                .GroupBy(x => new { x.BankId, x.AccountId, x.CurrencyId })
-                .Select(y => new CheckBalanceDto
+            var maxDate = DateTime.Today.AddDays(1);
+            var dbBalances = _transactionQuery.GetEntities()
+                    .Where(z => z.TransactionDate < maxDate)
+                    .GroupBy(x => new { x.AccountId })
+                    .Select(y => new
+                    {
+                        Id = y.Key.AccountId,
+                        DbBalance = y.Sum(c => c.Dcc)
+                    })
+                    .ToList()
+                    ;
+            var list = accounts
+                .GroupJoin(dbBalances, x => x.Id, y => y.Id, (o, i) => new { acc = o, bal = i })
+                .SelectMany(xy => xy.bal.DefaultIfEmpty(), (x, y) => new { account = x.acc, balance = y })
+                .Select(o => new AccountExtDto
                 {
-                    Id = y.FirstOrDefault().AccountId,
-                    BankName = y.FirstOrDefault().Bank.Name,
-                    AccountName = y.FirstOrDefault().Account.Name,
-                    CurrencyId = y.Key.CurrencyId,
-                    DbBalance = y.Sum(c => c.Dcc)
-                }
-                ).ToList();
+                    Id = o.account.Id,
+                    Name = o.account.Name,
+                    AccountNumber = o.account.AccountNumber,
+                    BankId = o.account.BankId,
+                    CurrencyId = o.account.CurrencyId,
+                    AccountTypeId = o.account.AccountTypeId,
+                    Closed = o.account.Closed,
+                    ChangeBy = o.account.ChangeBy,
+                    ChangeAt = o.account.ChangeAt,
+                    BankName = o.account.Bank.Name,
+                    AccountTypeName = o.account.AccountType.Name,
+                    DbBalance = o.balance == null ? 0 : o.balance.DbBalance
+                })
+                .ToList();
             return list;
         }
     }

@@ -437,7 +437,7 @@ namespace ComLog.WinForms.Controls
 
         private void btnExcelExport_Click(object sender, EventArgs e)
         {
-            var saveFileDialog = new SaveFileDialog { FileName = $"ComLog_{DateTime.Now.ToString("yyyyMMdd_HHmm")}.xlsx" };
+            var saveFileDialog = new SaveFileDialog { FileName = $"ComLog_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
             var dataTable = (DataTable)_presenter.BindingSource.DataSource;// bsQuery.DataSource;
             var dataSet = new DataSet();
