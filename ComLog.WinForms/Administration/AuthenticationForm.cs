@@ -12,13 +12,21 @@ namespace ComLog.WinForms.Administration
         public AuthenticationForm()
         {
             InitializeComponent();
-            tbLogin.Text = WindowsIdentity.GetCurrent().Name;
+            tbLogin.Text = GetCurrentUserNameAsLogin();
+        }
+
+        private static string GetCurrentUserNameAsLogin()
+        {
+            var result = WindowsIdentity.GetCurrent().Name;
+            var backSlashIndex = result.IndexOf("\\", StringComparison.Ordinal);
+            if (backSlashIndex >= 0) result = result.Substring(backSlashIndex + 1);
+            return result;
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
         {
 #if DEBUG
-            CurrentUser.Login = WindowsIdentity.GetCurrent().Name;
+            CurrentUser.Login = GetCurrentUserNameAsLogin();
             var mainForm = CompositionRoot.Resolve<MainForm>();
             Hide();
             Log.Debug("Start mainform");

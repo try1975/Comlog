@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ValidityLogo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdvancedDataGridView, Version=0.1.0.10, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ADGV.0.1.0.10\lib\net40\AdvancedDataGridView.dll</HintPath>
@@ -163,6 +166,7 @@
     <Compile Include="Data\Common\DataMаnager.cs" />
     <Compile Include="Data\Common\LoggingHandler.cs" />
     <Compile Include="Data\Common\TypedDataMаnager.cs" />
+    <Compile Include="Data\Filter\AccountViewFilter.cs" />
     <Compile Include="Data\Filter\TransactionViewFilter.cs" />
     <Compile Include="Data\TransactionTypeDataManager.cs" />
     <Compile Include="Data\TransactionDataManager.cs" />
@@ -172,6 +176,7 @@
     <Compile Include="Forms\RunMacroForm.Designer.cs">
       <DependentUpon>RunMacroForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\Filter\IAccountViewFilter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +227,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Utils\CreateExcelFile.cs" />
+    <Compile Include="Utils\DataTableExtensions.cs" />
     <Compile Include="Utils\MacroRunSettings.cs" />
     <Compile Include="Utils\MacroSettings.cs" />
     <EmbeddedResource Include="Administration\AuthenticationForm.resx">
@@ -358,6 +364,9 @@
     <Content Include="ComLogTransactionsBeforeLoad.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Icon1.ico" />
+    <None Include="Resources\ValidityLogo.ico" />
+    <Content Include="ValidityLogo.ico" />
     <None Include="Resources\Today.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

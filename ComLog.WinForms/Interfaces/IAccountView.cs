@@ -10,7 +10,7 @@ namespace ComLog.WinForms.Interfaces
         #region Details
 
         string AccountName { get; set; }
-        string AccountNumber { get; set; }
+        decimal? Balance { get; set; }
         int BankId { get; set; }
         string CurrencyId { get; set; }
         int AccountTypeId { get; set; }
@@ -26,5 +26,11 @@ namespace ComLog.WinForms.Interfaces
         List<KeyValuePair<int, string>> AccountTypeList { set; }
 
         #endregion
+
+        #region Methods
+
+        void Reopen();
+
+        #endregion //Methods
     }
 }

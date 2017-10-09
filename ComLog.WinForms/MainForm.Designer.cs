@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -37,15 +38,17 @@
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(10, 483);
+            this.panel2.Size = new System.Drawing.Size(15, 743);
             this.panel2.TabIndex = 5;
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(10, 0);
+            this.splitter1.Location = new System.Drawing.Point(15, 0);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 483);
+            this.splitter1.Size = new System.Drawing.Size(4, 743);
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
             // 
@@ -53,14 +56,15 @@
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(13, 0);
+            this.panel1.Location = new System.Drawing.Point(19, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1023, 483);
+            this.panel1.Size = new System.Drawing.Size(1535, 743);
             this.panel1.TabIndex = 7;
             // 
-            // Form1
+            // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = global::ComLog.WinForms.Properties.Settings.Default.MainFormClientSize;
             this.Controls.Add(this.panel1);
@@ -68,7 +72,9 @@
             this.Controls.Add(this.panel2);
             this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::ComLog.WinForms.Properties.Settings.Default, "MainFormClientSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::ComLog.WinForms.Properties.Settings.Default, "MainFormLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = global::ComLog.WinForms.Properties.Settings.Default.MainFormLocation;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
             this.Text = "ComLog";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);

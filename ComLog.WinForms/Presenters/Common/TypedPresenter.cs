@@ -74,7 +74,7 @@ namespace ComLog.WinForms.Presenters.Common
             View.EnterEditMode();
         }
 
-        public void Save()
+        public virtual void Save()
         {
             switch (PresenterMode)
             {
@@ -96,7 +96,7 @@ namespace ComLog.WinForms.Presenters.Common
             View.EnterReadMode();
         }
 
-        public async void Delete()
+        public virtual async void Delete()
         {
             const string question = @"You really want to delete this record?";
             const string caption = @"Delete warning";

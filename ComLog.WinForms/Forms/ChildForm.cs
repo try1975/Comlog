@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using ComLog.WinForms.Interfaces;
 
 namespace ComLog.WinForms.Forms
 {
@@ -14,6 +15,16 @@ namespace ComLog.WinForms.Forms
             control.Dock = DockStyle.Fill;
             Controls.Clear();
             Controls.Add(control);
+        }
+
+        public void ReopenData()
+        {
+            foreach (Control control in Controls)
+            {
+                if (!(control is IAccountView)) continue;
+                (control as IAccountView).Reopen();
+                break;
+            }
         }
     }
 }

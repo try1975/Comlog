@@ -53,8 +53,11 @@
             this.pnlTransactionType = new System.Windows.Forms.Panel();
             this.cmbTransactionType = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.pnlAccount = new System.Windows.Forms.Panel();
-            this.cmbAccount = new System.Windows.Forms.ComboBox();
+            this.pnlNotClosedAccounts = new System.Windows.Forms.Panel();
+            this.cmbNotClosedAccounts = new System.Windows.Forms.ComboBox();
+            this.labelNotClosedAccount = new System.Windows.Forms.Label();
+            this.pnlAllAccount = new System.Windows.Forms.Panel();
+            this.cmbAllAccount = new System.Windows.Forms.ComboBox();
             this.lblAccount = new System.Windows.Forms.Label();
             this.pnlTransactionDate = new System.Windows.Forms.Panel();
             this.lblDate = new System.Windows.Forms.Label();
@@ -91,6 +94,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnDateFromAdd = new System.Windows.Forms.Button();
+            this.btnDateFromSubtract = new System.Windows.Forms.Button();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -100,7 +105,8 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.pnlTransactionType.SuspendLayout();
-            this.pnlAccount.SuspendLayout();
+            this.pnlNotClosedAccounts.SuspendLayout();
+            this.pnlAllAccount.SuspendLayout();
             this.pnlTransactionDate.SuspendLayout();
             this.pnlId.SuspendLayout();
             this.pnlButtons.SuspendLayout();
@@ -134,7 +140,8 @@
             this.pnlFields.Controls.Add(this.panel4);
             this.pnlFields.Controls.Add(this.panel3);
             this.pnlFields.Controls.Add(this.pnlTransactionType);
-            this.pnlFields.Controls.Add(this.pnlAccount);
+            this.pnlFields.Controls.Add(this.pnlNotClosedAccounts);
+            this.pnlFields.Controls.Add(this.pnlAllAccount);
             this.pnlFields.Controls.Add(this.pnlTransactionDate);
             this.pnlFields.Controls.Add(this.pnlId);
             this.pnlFields.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -149,7 +156,7 @@
             this.panel8.Controls.Add(this.label11);
             this.panel8.Controls.Add(this.tbReport);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel8.Location = new System.Drawing.Point(0, 461);
+            this.panel8.Location = new System.Drawing.Point(0, 513);
             this.panel8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(597, 51);
@@ -181,7 +188,7 @@
             this.panel7.Controls.Add(this.label10);
             this.panel7.Controls.Add(this.tbDescription);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 410);
+            this.panel7.Location = new System.Drawing.Point(0, 462);
             this.panel7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(597, 51);
@@ -213,7 +220,7 @@
             this.panel6.Controls.Add(this.label9);
             this.panel6.Controls.Add(this.tbFromTo);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 359);
+            this.panel6.Location = new System.Drawing.Point(0, 411);
             this.panel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(597, 51);
@@ -245,7 +252,7 @@
             this.panel5.Controls.Add(this.label8);
             this.panel5.Controls.Add(this.tbCharges);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 308);
+            this.panel5.Location = new System.Drawing.Point(0, 360);
             this.panel5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(597, 51);
@@ -277,7 +284,7 @@
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.tbDebits);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 257);
+            this.panel4.Location = new System.Drawing.Point(0, 309);
             this.panel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(597, 51);
@@ -309,7 +316,7 @@
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.tbCredits);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 206);
+            this.panel3.Location = new System.Drawing.Point(0, 258);
             this.panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(597, 51);
@@ -341,7 +348,7 @@
             this.pnlTransactionType.Controls.Add(this.cmbTransactionType);
             this.pnlTransactionType.Controls.Add(this.label5);
             this.pnlTransactionType.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTransactionType.Location = new System.Drawing.Point(0, 155);
+            this.pnlTransactionType.Location = new System.Drawing.Point(0, 207);
             this.pnlTransactionType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlTransactionType.Name = "pnlTransactionType";
             this.pnlTransactionType.Size = new System.Drawing.Size(597, 51);
@@ -372,31 +379,68 @@
             this.label5.TabIndex = 3;
             this.label5.Text = "Type";
             // 
-            // pnlAccount
+            // pnlNotClosedAccounts
             // 
-            this.pnlAccount.Controls.Add(this.cmbAccount);
-            this.pnlAccount.Controls.Add(this.lblAccount);
-            this.pnlAccount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlAccount.Location = new System.Drawing.Point(0, 103);
-            this.pnlAccount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pnlAccount.Name = "pnlAccount";
-            this.pnlAccount.Size = new System.Drawing.Size(597, 52);
-            this.pnlAccount.TabIndex = 4;
+            this.pnlNotClosedAccounts.Controls.Add(this.cmbNotClosedAccounts);
+            this.pnlNotClosedAccounts.Controls.Add(this.labelNotClosedAccount);
+            this.pnlNotClosedAccounts.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNotClosedAccounts.Location = new System.Drawing.Point(0, 155);
+            this.pnlNotClosedAccounts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pnlNotClosedAccounts.Name = "pnlNotClosedAccounts";
+            this.pnlNotClosedAccounts.Size = new System.Drawing.Size(597, 52);
+            this.pnlNotClosedAccounts.TabIndex = 13;
+            this.pnlNotClosedAccounts.Visible = false;
             // 
-            // cmbAccount
+            // cmbNotClosedAccounts
             // 
-            this.cmbAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cmbNotClosedAccounts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbAccount.Enabled = false;
-            this.cmbAccount.FormattingEnabled = true;
-            this.cmbAccount.Location = new System.Drawing.Point(146, 11);
-            this.cmbAccount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cmbAccount.Name = "cmbAccount";
-            this.cmbAccount.Size = new System.Drawing.Size(426, 28);
-            this.cmbAccount.Sorted = true;
-            this.cmbAccount.TabIndex = 1;
+            this.cmbNotClosedAccounts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbNotClosedAccounts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbNotClosedAccounts.Enabled = false;
+            this.cmbNotClosedAccounts.FormattingEnabled = true;
+            this.cmbNotClosedAccounts.Location = new System.Drawing.Point(146, 11);
+            this.cmbNotClosedAccounts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmbNotClosedAccounts.Name = "cmbNotClosedAccounts";
+            this.cmbNotClosedAccounts.Size = new System.Drawing.Size(426, 28);
+            this.cmbNotClosedAccounts.Sorted = true;
+            this.cmbNotClosedAccounts.TabIndex = 1;
+            // 
+            // labelNotClosedAccount
+            // 
+            this.labelNotClosedAccount.AutoSize = true;
+            this.labelNotClosedAccount.Location = new System.Drawing.Point(10, 12);
+            this.labelNotClosedAccount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelNotClosedAccount.Name = "labelNotClosedAccount";
+            this.labelNotClosedAccount.Size = new System.Drawing.Size(74, 20);
+            this.labelNotClosedAccount.TabIndex = 0;
+            this.labelNotClosedAccount.Text = "Account*";
+            // 
+            // pnlAllAccount
+            // 
+            this.pnlAllAccount.Controls.Add(this.cmbAllAccount);
+            this.pnlAllAccount.Controls.Add(this.lblAccount);
+            this.pnlAllAccount.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlAllAccount.Location = new System.Drawing.Point(0, 103);
+            this.pnlAllAccount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pnlAllAccount.Name = "pnlAllAccount";
+            this.pnlAllAccount.Size = new System.Drawing.Size(597, 52);
+            this.pnlAllAccount.TabIndex = 4;
+            // 
+            // cmbAllAccount
+            // 
+            this.cmbAllAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbAllAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbAllAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbAllAccount.Enabled = false;
+            this.cmbAllAccount.FormattingEnabled = true;
+            this.cmbAllAccount.Location = new System.Drawing.Point(146, 11);
+            this.cmbAllAccount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmbAllAccount.Name = "cmbAllAccount";
+            this.cmbAllAccount.Size = new System.Drawing.Size(426, 28);
+            this.cmbAllAccount.Sorted = true;
+            this.cmbAllAccount.TabIndex = 1;
             // 
             // lblAccount
             // 
@@ -716,6 +760,8 @@
             // 
             // panel9
             // 
+            this.panel9.Controls.Add(this.btnDateFromSubtract);
+            this.panel9.Controls.Add(this.btnDateFromAdd);
             this.panel9.Controls.Add(this.btnToday);
             this.panel9.Controls.Add(this.dtpDateFrom);
             this.panel9.Controls.Add(this.label1);
@@ -740,7 +786,7 @@
             // 
             // dtpDateFrom
             // 
-            this.dtpDateFrom.Location = new System.Drawing.Point(108, 17);
+            this.dtpDateFrom.Location = new System.Drawing.Point(91, 17);
             this.dtpDateFrom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpDateFrom.MinDate = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
             this.dtpDateFrom.Name = "dtpDateFrom";
@@ -750,7 +796,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 23);
+            this.label1.Location = new System.Drawing.Point(37, 23);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 20);
@@ -769,7 +815,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(298, 23);
+            this.label2.Location = new System.Drawing.Point(301, 23);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 20);
@@ -795,6 +841,24 @@
             this.btnRefresh.TabIndex = 0;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            // 
+            // btnDateFromAdd
+            // 
+            this.btnDateFromAdd.Location = new System.Drawing.Point(276, 4);
+            this.btnDateFromAdd.Name = "btnDateFromAdd";
+            this.btnDateFromAdd.Size = new System.Drawing.Size(28, 27);
+            this.btnDateFromAdd.TabIndex = 5;
+            this.btnDateFromAdd.Text = "+";
+            this.btnDateFromAdd.UseVisualStyleBackColor = true;
+            // 
+            // btnDateFromSubtract
+            // 
+            this.btnDateFromSubtract.Location = new System.Drawing.Point(276, 33);
+            this.btnDateFromSubtract.Name = "btnDateFromSubtract";
+            this.btnDateFromSubtract.Size = new System.Drawing.Size(28, 27);
+            this.btnDateFromSubtract.TabIndex = 6;
+            this.btnDateFromSubtract.Text = "-";
+            this.btnDateFromSubtract.UseVisualStyleBackColor = true;
             // 
             // TransactionControl
             // 
@@ -822,8 +886,10 @@
             this.panel3.PerformLayout();
             this.pnlTransactionType.ResumeLayout(false);
             this.pnlTransactionType.PerformLayout();
-            this.pnlAccount.ResumeLayout(false);
-            this.pnlAccount.PerformLayout();
+            this.pnlNotClosedAccounts.ResumeLayout(false);
+            this.pnlNotClosedAccounts.PerformLayout();
+            this.pnlAllAccount.ResumeLayout(false);
+            this.pnlAllAccount.PerformLayout();
             this.pnlTransactionDate.ResumeLayout(false);
             this.pnlTransactionDate.PerformLayout();
             this.pnlId.ResumeLayout(false);
@@ -847,7 +913,7 @@
 
         private System.Windows.Forms.Panel pnlDetails;
         private System.Windows.Forms.Panel pnlFields;
-        private System.Windows.Forms.Panel pnlAccount;
+        private System.Windows.Forms.Panel pnlAllAccount;
         private System.Windows.Forms.Label lblAccount;
         private System.Windows.Forms.Panel pnlId;
         private System.Windows.Forms.Label lblId;
@@ -869,7 +935,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblRecCount;
         private System.Windows.Forms.Label lblSumCredits;
-        private System.Windows.Forms.ComboBox cmbAccount;
+        private System.Windows.Forms.ComboBox cmbAllAccount;
         private System.Windows.Forms.Panel pnlTransactionDate;
         private System.Windows.Forms.DateTimePicker dtpTransactionDate;
         private System.Windows.Forms.Panel pnlTransactionType;
@@ -906,5 +972,10 @@
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Button btnLoadCashUpdateXls;
         private System.Windows.Forms.Button btnToday;
+        private System.Windows.Forms.Panel pnlNotClosedAccounts;
+        private System.Windows.Forms.ComboBox cmbNotClosedAccounts;
+        private System.Windows.Forms.Label labelNotClosedAccount;
+        private System.Windows.Forms.Button btnDateFromSubtract;
+        private System.Windows.Forms.Button btnDateFromAdd;
     }
 }

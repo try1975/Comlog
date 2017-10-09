@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using ComLog.Dto;
@@ -9,6 +10,7 @@ using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
+using ComLog.WinForms.Interfaces.Filter;
 using ComLog.WinForms.Presenters;
 using ComLog.WinForms.Presenters.Common;
 using ComLog.WinForms.Utils;
@@ -20,11 +22,14 @@ namespace ComLog.WinForms.Controls
         private readonly IPresenter _presenter;
         private bool _isEventHandlerSets;
         private DateTime? _closed;
+        private readonly IAccountViewFilter _accountViewFilter;
 
         public AccountControl(IAccountDataManager accountDataManager, IDataMаnager dataMаnager)
         {
             InitializeComponent();
+            _accountViewFilter = accountDataManager.AccountViewFilter;
             _presenter = new AccountPresenter(this, accountDataManager, dataMаnager);
+            cbShowClosed.Checked = _accountViewFilter.ShowClosed;
         }
 
         #region IAccountView implementation
@@ -48,10 +53,20 @@ namespace ComLog.WinForms.Controls
             set { tbName.Text = value; }
         }
 
-        public string AccountNumber
+        public decimal? Balance
         {
-            get { return tbAccountNumber.Text; }
-            set { tbAccountNumber.Text = value; }
+            get
+            {
+                decimal decimalResult;
+                return decimal.TryParse(tbBalance.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
+                    out decimalResult)
+                    ? decimalResult
+                    : (decimal?)null;
+            }
+            set
+            {
+                tbBalance.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? "";
+            }
         }
 
         public int BankId
@@ -106,7 +121,8 @@ namespace ComLog.WinForms.Controls
             }
         }
 
-        public List<KeyValuePair<int, string>> AccountTypeList {
+        public List<KeyValuePair<int, string>> AccountTypeList
+        {
             set
             {
                 cmbAccountType.DataSource = value;
@@ -114,8 +130,16 @@ namespace ComLog.WinForms.Controls
                 cmbAccountType.DisplayMember = "Value";
             }
         }
-
         #endregion //DetailsLists
+
+        #region Methods
+        public void Reopen()
+        {
+            _presenter.Reopen();
+        }
+        #endregion //Methods
+
+
 
         #endregion //IAccountView implementation
 
@@ -141,15 +165,40 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.DisplayIndex = 0;
             column = dgvItems.Columns[nameof(AccountExtDto.Name)];
             if (column != null) column.DisplayIndex = 1;
-            column = dgvItems.Columns[nameof(AccountExtDto.AccountNumber)];
+            column = dgvItems.Columns[nameof(AccountExtDto.AccountTypeName)];
             if (column != null) column.DisplayIndex = 2;
             column = dgvItems.Columns[nameof(AccountExtDto.CurrencyId)];
             if (column != null) column.DisplayIndex = 3;
-            column = dgvItems.Columns[nameof(AccountExtDto.AccountTypeName)];
+            column = dgvItems.Columns[nameof(AccountExtDto.Balance)];
             if (column != null) column.DisplayIndex = 4;
+            column = dgvItems.Columns[nameof(AccountExtDto.DbBalance)];
+            if (column != null) column.DisplayIndex = 5;
+            column = dgvItems.Columns[nameof(AccountExtDto.DeltaBalance)];
+            if (column != null) column.DisplayIndex = 6;
+
+
 
             column = dgvItems.Columns[nameof(AccountDto.Name)];
             if (column != null) column.Width = 200;
+
+            column = dgvItems.Columns[nameof(AccountExtDto.Balance)];
+            if (column != null)
+            {
+                column.DefaultCellStyle.Format = "N2";
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            column = dgvItems.Columns[nameof(AccountExtDto.DbBalance)];
+            if (column != null)
+            {
+                column.DefaultCellStyle.Format = "N2";
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            column = dgvItems.Columns[nameof(AccountExtDto.DeltaBalance)];
+            if (column != null)
+            {
+                column.DefaultCellStyle.Format = "N2";
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
         }
 
         public void SetEventHandlers()
@@ -169,6 +218,7 @@ namespace ComLog.WinForms.Controls
             btnDelete.Click += btnDelete_Click;
 
             cbClosed.CheckedChanged += cbClosed_CheckedChanged;
+            cbShowClosed.CheckedChanged += cbShowClosed_CheckedChanged;
         }
 
         #endregion //IRefreshedView
@@ -239,7 +289,7 @@ namespace ComLog.WinForms.Controls
         {
             tbId.Clear();
             tbName.Clear();
-            tbAccountNumber.Clear();
+            tbBalance.Clear();
             cmbBank.SelectedIndex = -1;
             cmbCurrency.SelectedIndex = -1;
             cmbAccountType.SelectedIndex = -1;
@@ -249,7 +299,7 @@ namespace ComLog.WinForms.Controls
         public void EnableInput()
         {
             tbName.Enabled = true;
-            tbAccountNumber.Enabled = true;
+            tbBalance.Enabled = true;
             cbClosed.Enabled = true;
             if (_presenter.PresenterMode != PresenterMode.AddNew) return;
             cmbBank.Enabled = true;
@@ -261,7 +311,7 @@ namespace ComLog.WinForms.Controls
         {
             tbId.Enabled = false;
             tbName.Enabled = false;
-            tbAccountNumber.Enabled = false;
+            tbBalance.Enabled = false;
             cmbBank.Enabled = false;
             cmbCurrency.Enabled = false;
             cmbAccountType.Enabled = false;
@@ -322,13 +372,29 @@ namespace ComLog.WinForms.Controls
         {
             var saveFileDialog = new SaveFileDialog { FileName = $"ComLogAccounts_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            var dataTable = (DataTable)_presenter.BindingSource.DataSource;// bsQuery.DataSource;
+            var dataTable = ((DataTable)_presenter.BindingSource.DataSource).Copy();
+            dataTable.SetColumnsOrder(nameof(AccountExtDto.BankName)
+                , nameof(AccountExtDto.Name)
+                , nameof(AccountExtDto.AccountTypeName)
+                , nameof(AccountExtDto.CurrencyId)
+                , nameof(AccountExtDto.Balance)
+                , nameof(AccountExtDto.DbBalance)
+                , nameof(AccountExtDto.DeltaBalance)
+                , nameof(AccountExtDto.Closed)
+                , nameof(AccountExtDto.ChangeBy)
+                , nameof(AccountExtDto.ChangeAt)
+            );
             var dataSet = new DataSet();
             dataSet.Tables.Add(dataTable);
             CreateExcelFile.CreateExcelDocument(dataSet, saveFileDialog.FileName);
             if (File.Exists(saveFileDialog.FileName)) Process.Start(saveFileDialog.FileName);
         }
 
+        private void cbShowClosed_CheckedChanged(object sender, EventArgs e)
+        {
+            _accountViewFilter.ShowClosed = cbShowClosed.Checked;
+            _presenter.Reopen();
+        }
         #endregion //Event handlers
     }
 }

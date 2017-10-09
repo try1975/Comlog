@@ -22,6 +22,7 @@ namespace ComLog.WinForms.Ninject
             Bind<IComLogControl>().To<ComLogControl>().InSingletonScope();
 
             Bind<IAccountView>().To<AccountControl>();
+            Bind<IAccountViewFilter>().To<AccountViewFilter>();
             Bind<IAccountDataManager>().To<AccountDataManager>().InSingletonScope();
 
             Bind<IAccountTypeView>().To<AccountTypeControl>();

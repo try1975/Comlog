@@ -51,7 +51,7 @@ namespace ComLog.WebApi.Maintenance.Classes
                 {
                     Id = o.account.Id,
                     Name = o.account.Name,
-                    AccountNumber = o.account.AccountNumber,
+                    Balance = o.account.Balance ?? 0,
                     BankId = o.account.BankId,
                     CurrencyId = o.account.CurrencyId,
                     AccountTypeId = o.account.AccountTypeId,
@@ -60,7 +60,8 @@ namespace ComLog.WebApi.Maintenance.Classes
                     ChangeAt = o.account.ChangeAt,
                     BankName = o.account.Bank.Name,
                     AccountTypeName = o.account.AccountType.Name,
-                    DbBalance = o.balance == null ? 0 : o.balance.DbBalance
+                    DbBalance = o.balance == null ? 0 : o.balance.DbBalance,
+                    DeltaBalance = (o.account.Balance ?? 0) - (o.balance == null ? 0 : o.balance.DbBalance)
                 })
                 .ToList();
             return list;

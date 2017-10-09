@@ -53,15 +53,15 @@ namespace ComLog.WinForms.Controls
         {
             get
             {
-                var accountExtDto = cmbAccount.SelectedValue as AccountExtDto;
+                var accountExtDto = cmbAllAccount.SelectedValue as AccountExtDto;
                 return accountExtDto?.Id ?? 0;
             }
             set
             {
-                var list = cmbAccount.DataSource as List<AccountExtDto>;
+                var list = cmbAllAccount.DataSource as List<AccountExtDto>;
                 if (list == null) return;
                 var accountExtDto = list.FirstOrDefault(z => z.Id == value);
-                cmbAccount.SelectedItem = accountExtDto;
+                cmbAllAccount.SelectedItem = accountExtDto;
             }
         }
         public int? TransactionTypeId
@@ -152,14 +152,24 @@ namespace ComLog.WinForms.Controls
 
         #region DetailsList
 
-        public List<AccountExtDto> AccountList
+        public List<AccountExtDto> AllAccountList
         {
             set
             {
-                cmbAccount.DataSource = value;
-                cmbAccount.DisplayMember = "DisplayMember";
+                cmbAllAccount.DataSource = value;
+                cmbAllAccount.DisplayMember = "DisplayMember";
             }
         }
+
+        public List<AccountExtDto> NotClosedAccountList
+        {
+            set
+            {
+                cmbNotClosedAccounts.DataSource = value;
+                cmbNotClosedAccounts.DisplayMember = "DisplayMember";
+            }
+        }
+
         public List<KeyValuePair<int, string>> TransactionTypeList
         {
             set
@@ -178,16 +188,16 @@ namespace ComLog.WinForms.Controls
 
         private void SetInfoLabels()
         {
-            lblRecCount.Text = $"{dgvItems.RowCount.ToString("N0")}";
+            lblRecCount.Text = $@"{dgvItems.RowCount:N0}";
 
             var sumCredits = dgvItems.Rows.Cast<DataGridViewRow>()
                 .Sum(t => Convert.ToDecimal(t.Cells[nameof(TransactionExtDto.Credits)].Value == DBNull.Value ? 0 : t.Cells[nameof(TransactionExtDto.Credits)].Value))
                 ;
-            lblSumCredits.Text = $"{sumCredits.ToString("N2", CultureInfo.InvariantCulture)}";
+            lblSumCredits.Text = $@"{sumCredits.ToString("N2", CultureInfo.InvariantCulture)}";
             var sumDebits = dgvItems.Rows.Cast<DataGridViewRow>()
                 .Sum(t => Convert.ToDecimal(t.Cells[nameof(TransactionExtDto.Debits)].Value == DBNull.Value ? 0 : t.Cells[nameof(TransactionExtDto.Debits)].Value))
                 ;
-            lblSumDebits.Text = $"{sumDebits.ToString("N2", CultureInfo.InvariantCulture)}";
+            lblSumDebits.Text = $@"{sumDebits.ToString("N2", CultureInfo.InvariantCulture)}";
         }
 
         public void RefreshItems()
@@ -274,9 +284,11 @@ namespace ComLog.WinForms.Controls
             dtpDateFrom.ValueChanged += dtpDateFrom_ValueChanged;
             dtpDateTo.ValueChanged += dtpDateTo_ValueChanged;
             btnToday.Click += btnToday_Click;
+            btnDateFromAdd.Click += btnDateFromAdd_Click;
+            btnDateFromSubtract.Click += btnDateFromSubtract_Click;
         }
 
-        
+
 
         #endregion //IRefreshedView
 
@@ -291,6 +303,9 @@ namespace ComLog.WinForms.Controls
             btnSave.Enabled = true;
             btnEdit.Enabled = false;
             btnAddNew.Enabled = false;
+
+            //pnlAllAccount.Visible = false;
+            //pnlNotClosedAccounts.Visible = true;
         }
 
         public void EnterDetailsMode()
@@ -319,6 +334,9 @@ namespace ComLog.WinForms.Controls
             btnEdit.Enabled = false;
             btnAddNew.Enabled = true;
 
+            //pnlAllAccount.Visible = true;
+            //pnlNotClosedAccounts.Visible = false;
+
             SetInfoLabels();
         }
 
@@ -332,6 +350,9 @@ namespace ComLog.WinForms.Controls
             btnSave.Enabled = true;
             btnEdit.Enabled = false;
             btnAddNew.Enabled = false;
+
+            //pnlAllAccount.Visible = false;
+            //pnlNotClosedAccounts.Visible = true;
         }
 
         public void EnterMultiSelectMode()
@@ -350,7 +371,8 @@ namespace ComLog.WinForms.Controls
         {
             tbId.Clear();
             dtpTransactionDate.Value = DateTime.Today;
-            cmbAccount.SelectedIndex = -1;
+            cmbAllAccount.SelectedIndex = -1;
+            //cmbNotClosedAccounts.SelectedIndex = -1;
             cmbTransactionType.SelectedIndex = -1;
             tbCredits.Text = "";
             tbDebits.Text = "";
@@ -364,7 +386,7 @@ namespace ComLog.WinForms.Controls
         {
             //tbId.Enabled = true;
             dtpTransactionDate.Enabled = true;
-            cmbAccount.Enabled = true;
+            cmbAllAccount.Enabled = true;
             cmbTransactionType.Enabled = true;
             tbCredits.Enabled = true;
             tbDebits.Enabled = true;
@@ -378,7 +400,7 @@ namespace ComLog.WinForms.Controls
         {
             tbId.Enabled = false;
             dtpTransactionDate.Enabled = false;
-            cmbAccount.Enabled = false;
+            cmbAllAccount.Enabled = false;
             cmbTransactionType.Enabled = false;
             tbCredits.Enabled = false;
             tbDebits.Enabled = false;
@@ -439,7 +461,25 @@ namespace ComLog.WinForms.Controls
         {
             var saveFileDialog = new SaveFileDialog { FileName = $"ComLog_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            var dataTable = (DataTable)_presenter.BindingSource.DataSource;// bsQuery.DataSource;
+            var dataTable = ((DataTable)_presenter.BindingSource.DataSource).Copy();
+            dataTable.SetColumnsOrder(
+                nameof(TransactionExtDto.TransactionDate)
+                , nameof(TransactionExtDto.BankName)
+                , nameof(TransactionExtDto.AccountName)
+                , nameof(TransactionExtDto.CurrencyId)
+                , nameof(TransactionExtDto.Credits)
+                , nameof(TransactionExtDto.Debits)
+                , nameof(TransactionExtDto.Charges)
+                , nameof(TransactionExtDto.FromTo)
+                , nameof(TransactionExtDto.Description)
+                , nameof(TransactionExtDto.Report)
+                , nameof(TransactionExtDto.TransactionTypeName)
+                , nameof(TransactionExtDto.UsdDebits)
+                , nameof(TransactionExtDto.UsdCredits)
+                , nameof(TransactionExtDto.Dcc)
+                , nameof(TransactionExtDto.ChangeBy)
+                , nameof(TransactionExtDto.ChangeAt)
+            );
             var dataSet = new DataSet();
             dataSet.Tables.Add(dataTable);
             CreateExcelFile.CreateExcelDocument(dataSet, saveFileDialog.FileName);
@@ -488,6 +528,16 @@ namespace ComLog.WinForms.Controls
             //_presenter.Reopen();
         }
 
+        private void btnDateFromSubtract_Click(object sender, EventArgs e)
+        {
+            dtpDateFrom.Value = dtpDateFrom.Value.AddDays(-1);
+        }
+
+        private void btnDateFromAdd_Click(object sender, EventArgs e)
+        {
+            dtpDateFrom.Value = dtpDateFrom.Value.AddDays(1);
+        }
+
         #endregion //Event handlers
 
         private bool ValidateData()
@@ -495,7 +545,56 @@ namespace ComLog.WinForms.Controls
             if (TransactionDate <= DateTime.Today.AddDays(-5))
             {
                 MessageBox.Show(
-                    $"Transaction date must be greater than {DateTime.Today.AddDays(-6).ToString("dd-MM-yyyy")}",
+                    $@"Transaction date must be greater than {DateTime.Today.AddDays(-6):dd-MM-yyyy}",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            if (TransactionDate >= DateTime.Today.AddDays(1))
+            {
+                MessageBox.Show(
+                    $@"Transaction date must be less or equal than {DateTime.Today:dd-MM-yyyy}",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            if (string.IsNullOrEmpty(cmbAllAccount.Text))
+            {
+                MessageBox.Show(
+                    @"Account must be set",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            if (string.IsNullOrEmpty(cmbTransactionType.Text))
+            {
+                MessageBox.Show(
+                    @"Transaction type must be set",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            if (!string.IsNullOrEmpty(tbCredits.Text) && !Credits.HasValue)
+            {
+                MessageBox.Show(
+                    $@"Check Credits number format [{tbCredits.Text}]",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            if (!string.IsNullOrEmpty(tbDebits.Text) && !Debits.HasValue)
+            {
+                MessageBox.Show(
+                    $@"Check Debits number format [{tbDebits.Text}]",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            if (!string.IsNullOrEmpty(tbCharges.Text) && !Charges.HasValue)
+            {
+                MessageBox.Show(
+                    $@"Check Charges number format [{tbCharges.Text}]",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            if (!Credits.HasValue && !Debits.HasValue && !Charges.HasValue)
+            {
+                MessageBox.Show(
+                    @"Credits or Debits or Charges  must have value",
                     @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 return false;
             }
@@ -504,7 +603,7 @@ namespace ComLog.WinForms.Controls
 
         private async Task<bool> SetData()
         {
-            var accountExtDto = cmbAccount.SelectedItem as AccountExtDto;
+            var accountExtDto = cmbAllAccount.SelectedItem as AccountExtDto;
             if (accountExtDto == null) return false;
             BankId = accountExtDto.BankId;
             CurrencyId = accountExtDto.CurrencyId;
@@ -540,6 +639,10 @@ namespace ComLog.WinForms.Controls
                         UsdDebits = Charges * rate;
                     }
                 }
+            }
+            if (TransactionDate != null && TransactionDate.Value.Date == DateTime.Today)
+            {
+                dtpDateTo.Value = DateTime.Today;
             }
             return true;
         }

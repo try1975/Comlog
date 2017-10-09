@@ -9,7 +9,8 @@ namespace ComLog.WinForms.Interfaces
     {
         #region DetailsList
 
-        List<AccountExtDto> AccountList { set; }
+        List<AccountExtDto> AllAccountList { set; }
+        List<AccountExtDto> NotClosedAccountList { set; }
         List<KeyValuePair<int, string>> TransactionTypeList { set; }
 
         #endregion DetailsList

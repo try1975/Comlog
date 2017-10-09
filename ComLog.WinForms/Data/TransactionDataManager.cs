@@ -23,7 +23,7 @@ namespace ComLog.WinForms.Data
         public override async Task<IEnumerable<TransactionExtDto>> GetItems()
         {
             Log.Debug($"TransactionDataManager GetItems");
-            using (var response = await HttpClient.GetAsync($"{EndPoint}?dateFrom={TransactionViewFilter.DateFrom.ToString("yyyy-MM-dd")}&dateTo={TransactionViewFilter.DateTo.ToString("yyyy-MM-dd")}"))
+            using (var response = await HttpClient.GetAsync($"{EndPoint}?dateFrom={TransactionViewFilter.DateFrom:yyyy-MM-dd}&dateTo={TransactionViewFilter.DateTo:yyyy-MM-dd}"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<IEnumerable<TransactionExtDto>>();

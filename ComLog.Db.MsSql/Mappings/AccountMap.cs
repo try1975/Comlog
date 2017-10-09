@@ -31,8 +31,8 @@ namespace ComLog.Db.MsSql.Mappings
                 .IsOptional()
                 ;
 
-            Property(e => e.AccountNumber)
-                .HasMaxLength(250)
+            Property(e => e.Balance)
+                .HasColumnType("money")
                 .IsOptional()
                 ;
 

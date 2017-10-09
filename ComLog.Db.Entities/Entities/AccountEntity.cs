@@ -7,7 +7,7 @@ namespace ComLog.Db.Entities
     {
         public string Name { get; set; }
 
-        public string AccountNumber { get; set; }
+        public decimal? Balance { get; set; }
 
         public int BankId { get; set; }
 

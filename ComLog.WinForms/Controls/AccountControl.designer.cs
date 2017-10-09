@@ -30,7 +30,8 @@ namespace ComLog.WinForms.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
             this.pnlClosed = new System.Windows.Forms.Panel();
@@ -41,9 +42,9 @@ namespace ComLog.WinForms.Controls
             this.pnlCurrency = new System.Windows.Forms.Panel();
             this.cmbCurrency = new System.Windows.Forms.ComboBox();
             this.lblCurrency = new System.Windows.Forms.Label();
-            this.pnlAccountNumber = new System.Windows.Forms.Panel();
-            this.tbAccountNumber = new System.Windows.Forms.TextBox();
-            this.lblAccountNumber = new System.Windows.Forms.Label();
+            this.pnlBalance = new System.Windows.Forms.Panel();
+            this.tbBalance = new System.Windows.Forms.TextBox();
+            this.lblBalance = new System.Windows.Forms.Label();
             this.pnlAccountName = new System.Windows.Forms.Panel();
             this.tbName = new System.Windows.Forms.TextBox();
             this.lblAccountName = new System.Windows.Forms.Label();
@@ -61,27 +62,30 @@ namespace ComLog.WinForms.Controls
             this.btnAddNew = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlGrid = new System.Windows.Forms.Panel();
+            this.dgvItems = new ADGV.AdvancedDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cbShowClosed = new System.Windows.Forms.CheckBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.btnExcelExport = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.dgvItems = new ADGV.AdvancedDataGridView();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.pnlClosed.SuspendLayout();
             this.pnplBeneficiaryAddress.SuspendLayout();
             this.pnlCurrency.SuspendLayout();
-            this.pnlAccountNumber.SuspendLayout();
+            this.pnlBalance.SuspendLayout();
             this.pnlAccountName.SuspendLayout();
             this.pnlBank.SuspendLayout();
             this.pnlId.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             this.pnlGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -100,7 +104,7 @@ namespace ComLog.WinForms.Controls
             this.pnlFields.Controls.Add(this.pnlClosed);
             this.pnlFields.Controls.Add(this.pnplBeneficiaryAddress);
             this.pnlFields.Controls.Add(this.pnlCurrency);
-            this.pnlFields.Controls.Add(this.pnlAccountNumber);
+            this.pnlFields.Controls.Add(this.pnlBalance);
             this.pnlFields.Controls.Add(this.pnlAccountName);
             this.pnlFields.Controls.Add(this.pnlBank);
             this.pnlFields.Controls.Add(this.pnlId);
@@ -198,37 +202,37 @@ namespace ComLog.WinForms.Controls
             this.lblCurrency.TabIndex = 0;
             this.lblCurrency.Text = "Currency";
             // 
-            // pnlAccountNumber
+            // pnlBalance
             // 
-            this.pnlAccountNumber.Controls.Add(this.tbAccountNumber);
-            this.pnlAccountNumber.Controls.Add(this.lblAccountNumber);
-            this.pnlAccountNumber.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlAccountNumber.Location = new System.Drawing.Point(0, 155);
-            this.pnlAccountNumber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pnlAccountNumber.Name = "pnlAccountNumber";
-            this.pnlAccountNumber.Size = new System.Drawing.Size(594, 52);
-            this.pnlAccountNumber.TabIndex = 9;
+            this.pnlBalance.Controls.Add(this.tbBalance);
+            this.pnlBalance.Controls.Add(this.lblBalance);
+            this.pnlBalance.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlBalance.Location = new System.Drawing.Point(0, 155);
+            this.pnlBalance.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pnlBalance.Name = "pnlBalance";
+            this.pnlBalance.Size = new System.Drawing.Size(594, 52);
+            this.pnlBalance.TabIndex = 9;
             // 
-            // tbAccountNumber
+            // tbBalance
             // 
-            this.tbAccountNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbBalance.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAccountNumber.Enabled = false;
-            this.tbAccountNumber.Location = new System.Drawing.Point(146, 8);
-            this.tbAccountNumber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAccountNumber.Name = "tbAccountNumber";
-            this.tbAccountNumber.Size = new System.Drawing.Size(422, 26);
-            this.tbAccountNumber.TabIndex = 1;
+            this.tbBalance.Enabled = false;
+            this.tbBalance.Location = new System.Drawing.Point(146, 8);
+            this.tbBalance.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbBalance.Name = "tbBalance";
+            this.tbBalance.Size = new System.Drawing.Size(422, 26);
+            this.tbBalance.TabIndex = 1;
             // 
-            // lblAccountNumber
+            // lblBalance
             // 
-            this.lblAccountNumber.AutoSize = true;
-            this.lblAccountNumber.Location = new System.Drawing.Point(10, 12);
-            this.lblAccountNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblAccountNumber.Name = "lblAccountNumber";
-            this.lblAccountNumber.Size = new System.Drawing.Size(128, 20);
-            this.lblAccountNumber.TabIndex = 0;
-            this.lblAccountNumber.Text = "Account Number";
+            this.lblBalance.AutoSize = true;
+            this.lblBalance.Location = new System.Drawing.Point(10, 12);
+            this.lblBalance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBalance.Name = "lblBalance";
+            this.lblBalance.Size = new System.Drawing.Size(67, 20);
+            this.lblBalance.TabIndex = 0;
+            this.lblBalance.Text = "Balance";
             // 
             // pnlAccountName
             // 
@@ -413,8 +417,36 @@ namespace ComLog.WinForms.Controls
             this.pnlGrid.Size = new System.Drawing.Size(982, 846);
             this.pnlGrid.TabIndex = 7;
             // 
+            // dgvItems
+            // 
+            this.dgvItems.AllowUserToAddRows = false;
+            this.dgvItems.AllowUserToDeleteRows = false;
+            this.dgvItems.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(169)))), ((int)(((byte)(219)))));
+            this.dgvItems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvItems.AutoGenerateContextFilters = true;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvItems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.DateWithTime = false;
+            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItems.Location = new System.Drawing.Point(0, 63);
+            this.dgvItems.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvItems.Name = "dgvItems";
+            this.dgvItems.ReadOnly = true;
+            this.dgvItems.Size = new System.Drawing.Size(982, 783);
+            this.dgvItems.TabIndex = 1;
+            this.dgvItems.TimeFilter = true;
+            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.panel11);
             this.panel1.Controls.Add(this.panel10);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -423,6 +455,26 @@ namespace ComLog.WinForms.Controls
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(982, 63);
             this.panel1.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.cbShowClosed);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(312, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(156, 63);
+            this.panel2.TabIndex = 7;
+            // 
+            // cbShowClosed
+            // 
+            this.cbShowClosed.AutoSize = true;
+            this.cbShowClosed.Location = new System.Drawing.Point(20, 25);
+            this.cbShowClosed.Name = "cbShowClosed";
+            this.cbShowClosed.Size = new System.Drawing.Size(125, 24);
+            this.cbShowClosed.TabIndex = 0;
+            this.cbShowClosed.Text = "Show closed";
+            this.cbShowClosed.UseVisualStyleBackColor = true;
             // 
             // panel11
             // 
@@ -464,25 +516,6 @@ namespace ComLog.WinForms.Controls
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
-            // dgvItems
-            // 
-            this.dgvItems.AllowUserToAddRows = false;
-            this.dgvItems.AllowUserToDeleteRows = false;
-            this.dgvItems.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvItems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvItems.AutoGenerateContextFilters = true;
-            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItems.DateWithTime = false;
-            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 63);
-            this.dgvItems.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dgvItems.Name = "dgvItems";
-            this.dgvItems.ReadOnly = true;
-            this.dgvItems.Size = new System.Drawing.Size(982, 783);
-            this.dgvItems.TabIndex = 1;
-            this.dgvItems.TimeFilter = false;
-            // 
             // AccountControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -501,8 +534,8 @@ namespace ComLog.WinForms.Controls
             this.pnplBeneficiaryAddress.PerformLayout();
             this.pnlCurrency.ResumeLayout(false);
             this.pnlCurrency.PerformLayout();
-            this.pnlAccountNumber.ResumeLayout(false);
-            this.pnlAccountNumber.PerformLayout();
+            this.pnlBalance.ResumeLayout(false);
+            this.pnlBalance.PerformLayout();
             this.pnlAccountName.ResumeLayout(false);
             this.pnlAccountName.PerformLayout();
             this.pnlBank.ResumeLayout(false);
@@ -511,10 +544,12 @@ namespace ComLog.WinForms.Controls
             this.pnlId.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
             this.pnlGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel11.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -549,13 +584,15 @@ namespace ComLog.WinForms.Controls
         private System.Windows.Forms.Panel pnlClosed;
         private System.Windows.Forms.CheckBox cbClosed;
         private System.Windows.Forms.ComboBox cmbAccountType;
-        private System.Windows.Forms.Panel pnlAccountNumber;
-        private System.Windows.Forms.TextBox tbAccountNumber;
-        private System.Windows.Forms.Label lblAccountNumber;
+        private System.Windows.Forms.Panel pnlBalance;
+        private System.Windows.Forms.TextBox tbBalance;
+        private System.Windows.Forms.Label lblBalance;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Button btnExcelExport;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.CheckBox cbShowClosed;
     }
 }
