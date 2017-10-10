@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
@@ -148,6 +149,7 @@ namespace ComLog.WinForms.Controls
         public void RefreshItems()
         {
             dgvItems.DataSource = _presenter.BindingSource;
+            GridColors.SetRowColors(dgvItems);
 
             var column = dgvItems.Columns[nameof(AccountDto.Id)];
             if (column != null) column.Visible = false;
@@ -259,6 +261,8 @@ namespace ComLog.WinForms.Controls
             btnSave.Enabled = false;
             btnEdit.Enabled = false;
             btnAddNew.Enabled = true;
+
+            GridColors.SetRowColors(dgvItems);
         }
 
         public void EnterAddNewMode()
@@ -350,6 +354,7 @@ namespace ComLog.WinForms.Controls
         private void dgvItems_FilterStringChanged(object sender, EventArgs e)
         {
             _presenter.BindingSource.Filter = dgvItems.FilterString;
+            GridColors.SetRowColors(dgvItems);
         }
 
         private void dgvItems_SortStringChanged(object sender, EventArgs e)

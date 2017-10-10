@@ -228,6 +228,7 @@
     </Compile>
     <Compile Include="Utils\CreateExcelFile.cs" />
     <Compile Include="Utils\DataTableExtensions.cs" />
+    <Compile Include="Utils\GridColors.cs" />
     <Compile Include="Utils\MacroRunSettings.cs" />
     <Compile Include="Utils\MacroSettings.cs" />
     <EmbeddedResource Include="Administration\AuthenticationForm.resx">

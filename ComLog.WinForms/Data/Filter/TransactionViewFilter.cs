@@ -10,8 +10,8 @@ namespace ComLog.WinForms.Data.Filter
 
         public TransactionViewFilter()
         {
-            _dateFrom = Properties.Settings.Default.TransactionViewFilterDateFrom;
-            _dateTo = Properties.Settings.Default.TransactionViewFilterDateTo;
+            //_dateFrom = Properties.Settings.Default.TransactionViewFilterDateFrom;
+            //_dateTo = Properties.Settings.Default.TransactionViewFilterDateTo;
         }
 
         public DateTime DateFrom
@@ -20,8 +20,8 @@ namespace ComLog.WinForms.Data.Filter
             set
             {
                 _dateFrom = value;
-                Properties.Settings.Default.TransactionViewFilterDateFrom = _dateFrom;
-                Properties.Settings.Default.Save();
+                //Properties.Settings.Default.TransactionViewFilterDateFrom = _dateFrom;
+                //Properties.Settings.Default.Save();
             }
         }
 
@@ -31,8 +31,8 @@ namespace ComLog.WinForms.Data.Filter
             set
             {
                 _dateTo = value;
-                Properties.Settings.Default.TransactionViewFilterDateTo = _dateTo;
-                Properties.Settings.Default.Save();
+                //Properties.Settings.Default.TransactionViewFilterDateTo = _dateTo;
+                //Properties.Settings.Default.Save();
             }
         }
     }

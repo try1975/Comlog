@@ -9,7 +9,7 @@
 
         public string DisplayMember
         {
-            get { return $"{Name} [{BankName} {CurrencyId}]"; }
+            get { return $"{BankName} [{Name}] [{CurrencyId}]"; }
             set
             {
                 ;

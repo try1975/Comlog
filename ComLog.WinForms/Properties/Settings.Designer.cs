@@ -22,53 +22,5 @@ namespace ComLog.WinForms.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2017-01-16")]
-        public global::System.DateTime TransactionViewFilterDateFrom {
-            get {
-                return ((global::System.DateTime)(this["TransactionViewFilterDateFrom"]));
-            }
-            set {
-                this["TransactionViewFilterDateFrom"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2017-01-20")]
-        public global::System.DateTime TransactionViewFilterDateTo {
-            get {
-                return ((global::System.DateTime)(this["TransactionViewFilterDateTo"]));
-            }
-            set {
-                this["TransactionViewFilterDateTo"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1036, 483")]
-        public global::System.Drawing.Size MainFormClientSize {
-            get {
-                return ((global::System.Drawing.Size)(this["MainFormClientSize"]));
-            }
-            set {
-                this["MainFormClientSize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Point MainFormLocation {
-            get {
-                return ((global::System.Drawing.Point)(this["MainFormLocation"]));
-            }
-            set {
-                this["MainFormLocation"] = value;
-            }
-        }
     }
 }

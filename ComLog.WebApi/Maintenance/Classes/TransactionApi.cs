@@ -35,7 +35,8 @@ namespace ComLog.WebApi.Maintenance.Classes
                 .Include(nameof(TransactionEntity.Bank))
                 .Include(nameof(TransactionEntity.Account))
                 .Include(nameof(TransactionEntity.TransactionType))
-                .OrderByDescending(z=>z.ChangeAt)
+                .OrderByDescending(z => z.TransactionDate)
+                .ThenByDescending(z=>z.ChangeAt)
                 ;
             return Mapper.Map<List<TransactionExtDto>>(list);
         }

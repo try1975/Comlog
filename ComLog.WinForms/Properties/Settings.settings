@@ -1,18 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ComLog.WinForms.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
   <Profiles />
-  <Settings>
-    <Setting Name="TransactionViewFilterDateFrom" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)">2017-01-16</Value>
-    </Setting>
-    <Setting Name="TransactionViewFilterDateTo" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)">2017-01-20</Value>
-    </Setting>
-    <Setting Name="MainFormClientSize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">1036, 483</Value>
-    </Setting>
-    <Setting Name="MainFormLocation" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
-    </Setting>
-  </Settings>
+  <Settings />
 </SettingsFile>

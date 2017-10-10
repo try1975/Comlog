@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using ComLog.Db.Entities;
-using Newtonsoft.Json;
 
 namespace ComLog.Loader.Core
 {
