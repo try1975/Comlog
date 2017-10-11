@@ -11,8 +11,8 @@ namespace ComLog.WinForms.Controls
     public partial class BankControl : UserControl, IBankView
     {
         private readonly IPresenter _presenter;
-        private bool _isEventHandlerSets;
         private DateTime? _closed;
+        private bool _isEventHandlerSets;
 
         public BankControl(IBankDataMаnager bankDataMаnager, IDataMаnager dataMаnager)
         {
@@ -49,7 +49,7 @@ namespace ComLog.WinForms.Controls
             set
             {
                 _closed = value;
-                if(cbClosed.Checked != _closed.HasValue) cbClosed.Checked = _closed.HasValue;
+                if (cbClosed.Checked != _closed.HasValue) cbClosed.Checked = _closed.HasValue;
             }
         }
 
@@ -217,8 +217,8 @@ namespace ComLog.WinForms.Controls
 
         private void cbClosed_CheckedChanged(object sender, EventArgs e)
         {
-            if(cbClosed.Checked && !Closed.HasValue) Closed = DateTime.Now;
-            if(!cbClosed.Checked && Closed.HasValue) Closed = null;
+            if (cbClosed.Checked && !Closed.HasValue) Closed = DateTime.Now;
+            if (!cbClosed.Checked && Closed.HasValue) Closed = null;
         }
 
         #endregion

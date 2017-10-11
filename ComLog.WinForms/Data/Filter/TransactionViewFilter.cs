@@ -8,12 +8,6 @@ namespace ComLog.WinForms.Data.Filter
         private DateTime _dateFrom;
         private DateTime _dateTo;
 
-        public TransactionViewFilter()
-        {
-            //_dateFrom = Properties.Settings.Default.TransactionViewFilterDateFrom;
-            //_dateTo = Properties.Settings.Default.TransactionViewFilterDateTo;
-        }
-
         public DateTime DateFrom
         {
             get { return _dateFrom == new DateTime() ? DateTime.Today : _dateFrom; }

@@ -2,24 +2,22 @@
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using ComLog.Db.Entities;
 using ComLog.Db.MsSql;
 using ComLog.Loader.Core;
 using ComLog.WinForms.Ninject;
 using ComLog.WinForms.Utils;
-using Excel = Microsoft.Office.Interop.Excel;
+using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace ComLog.WinForms.Forms
 {
     public partial class RunMacroForm : Form
     {
-        private readonly string _sourceFilename;
         private readonly string _destinationFilename;
         private readonly MacroRunSettings _macroRunSettings;
-        public bool NotShow { get; }
-        private IExcelBookQuery ExcelBookQuery { get; }
+        private readonly string _sourceFilename;
 
         public RunMacroForm(string sourceFilename, MacroRunSettings macroRunSettings)
         {
@@ -29,13 +27,17 @@ namespace ComLog.WinForms.Forms
             _destinationFilename = _sourceFilename.Replace(".xls", "_Converted.xls");
             _macroRunSettings = macroRunSettings;
             if (!File.Exists(_destinationFilename)) return;
-            if (MessageBox.Show($"Converted file {_destinationFilename} already downloaded. Export anyway?", @"Warning", MessageBoxButtons.YesNo) == DialogResult.No) NotShow = true;
+            if (MessageBox.Show($"Converted file {_destinationFilename} already downloaded. Export anyway?", @"Warning",
+                    MessageBoxButtons.YesNo) == DialogResult.No) NotShow = true;
         }
+
+        public bool NotShow { get; }
+        private IExcelBookQuery ExcelBookQuery { get; }
 
         private void RunMacro()
         {
             //~~> Define your Excel Objects
-            var xlApp = new Excel.Application();
+            var xlApp = new Application();
 
             //~~> Start Excel and open the workbook.
             //var pathPrefix = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)}\\{_macroRunSettings.MacroWorkBook}";
@@ -47,13 +49,9 @@ namespace ComLog.WinForms.Forms
             if (
                 _macroRunSettings.MacroName.Equals(
                     ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)]))
-            {
                 xlApp.Run(_macroRunSettings.MacroName, _sourceFilename, _destinationFilename, DateTime.Today);
-            }
             else
-            {
                 xlApp.Run(_macroRunSettings.MacroName, _sourceFilename, _destinationFilename);
-            }
 
             //~~> Clean-up: Close the workbook
             xlWorkBook.Close(false);
@@ -71,7 +69,7 @@ namespace ComLog.WinForms.Forms
         {
             try
             {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                Marshal.ReleaseComObject(obj);
                 obj = null;
             }
             catch (Exception exception)
@@ -86,7 +84,6 @@ namespace ComLog.WinForms.Forms
 
         private void RunMacroForm_Shown(object sender, EventArgs e)
         {
-
             RunMacro();
             // load result to db
             LoadInDb();
@@ -100,8 +97,10 @@ namespace ComLog.WinForms.Forms
             {
                 LoadedFilePath = _destinationFilename,
                 SqlConnectionString = ConfigurationManager.ConnectionStrings["ComLog"].ConnectionString,
-                BeforeLoadScriptFilename = ConfigurationManager.AppSettings[nameof(LoaderSettings.BeforeLoadScriptFilename)],
-                AfterLoadScriptFilename = ConfigurationManager.AppSettings[nameof(LoaderSettings.AfterLoadScriptFilename)],
+                BeforeLoadScriptFilename =
+                    ConfigurationManager.AppSettings[nameof(LoaderSettings.BeforeLoadScriptFilename)],
+                AfterLoadScriptFilename =
+                    ConfigurationManager.AppSettings[nameof(LoaderSettings.AfterLoadScriptFilename)],
                 BulkTableName = nameof(WorkContext.ExcelBooks),
                 BulkSelectStatement = "Select * FROM [{0}]"
             };
@@ -109,6 +108,7 @@ namespace ComLog.WinForms.Forms
             new LoaderAce(loaderSettings).Load();
             MessageWriter($"Количество записей в таблице импорта: {ExcelBookQuery.GetEntities().Count()}");
         }
+
         private void MessageWriter(string message)
         {
             tbMessages.AppendText(message);

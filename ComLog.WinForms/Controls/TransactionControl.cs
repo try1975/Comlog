@@ -16,7 +16,6 @@ using ComLog.WinForms.Interfaces.Data;
 using ComLog.WinForms.Interfaces.Filter;
 using ComLog.WinForms.Presenters;
 using ComLog.WinForms.Utils;
-using DocumentFormat.OpenXml;
 
 namespace ComLog.WinForms.Controls
 {
@@ -181,7 +180,7 @@ namespace ComLog.WinForms.Controls
 
         public int? TransactionTypeId
         {
-            get { return (int?)cmbTransactionType.SelectedValue; }
+            get { return (int?) cmbTransactionType.SelectedValue; }
             set { cmbTransactionType.SelectedValue = value; }
         }
 
@@ -195,7 +194,7 @@ namespace ComLog.WinForms.Controls
                 return decimal.TryParse(tbCredits.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
                     out decimalResult)
                     ? decimalResult
-                    : (decimal?)null;
+                    : (decimal?) null;
             }
             set { tbCredits.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? ""; }
         }
@@ -208,7 +207,7 @@ namespace ComLog.WinForms.Controls
                 return decimal.TryParse(tbDebits.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
                     out decimalResult)
                     ? decimalResult
-                    : (decimal?)null;
+                    : (decimal?) null;
             }
             set { tbDebits.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? ""; }
         }
@@ -221,7 +220,7 @@ namespace ComLog.WinForms.Controls
                 return decimal.TryParse(tbCharges.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
                     out decimalResult)
                     ? decimalResult
-                    : (decimal?)null;
+                    : (decimal?) null;
             }
             set { tbCharges.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? ""; }
         }
@@ -434,7 +433,6 @@ namespace ComLog.WinForms.Controls
 
             //pnlAllAccount.Visible = false;
             //pnlNotClosedAccounts.Visible = true;
-            
         }
 
         public void EnterDetailsMode()
@@ -581,7 +579,6 @@ namespace ComLog.WinForms.Controls
             if (!ValidateData()) return;
             if (!await SetData()) return;
             _presenter.Save();
-
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -591,9 +588,9 @@ namespace ComLog.WinForms.Controls
 
         private void btnExcelExport_Click(object sender, EventArgs e)
         {
-            var saveFileDialog = new SaveFileDialog { FileName = $"ComLog_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
+            var saveFileDialog = new SaveFileDialog {FileName = $"ComLog_{DateTime.Now:yyyyMMdd_HHmm}.xlsx"};
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            var dataTable = ((DataTable)_presenter.BindingSource.DataSource).Copy();
+            var dataTable = ((DataTable) _presenter.BindingSource.DataSource).Copy();
             dataTable.SetColumnsOrder(
                 nameof(TransactionExtDto.TransactionDate)
                 , nameof(TransactionExtDto.BankName)
@@ -669,7 +666,7 @@ namespace ComLog.WinForms.Controls
         {
             dtpDateFrom.Value = dtpDateFrom.Value.AddDays(1);
         }
-        #endregion //Event handlers
 
+        #endregion //Event handlers
     }
 }

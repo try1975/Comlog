@@ -19,7 +19,7 @@ namespace ComLog.WinForms.Data.Common
             //    ;
 
             cfg.CreateMap<AccountExtDto, AccountExtDto>()
-               ;
+                ;
             cfg.CreateMap<AccountExtDto, IAccountView>()
                 .ForMember(dest => dest.AccountName, opt => opt.MapFrom(src => src.Name))
                 ;
@@ -29,7 +29,7 @@ namespace ComLog.WinForms.Data.Common
 
 
             cfg.CreateMap<AccountTypeDto, AccountTypeDto>()
-                   ;
+                ;
             cfg.CreateMap<AccountTypeDto, IAccountTypeView>()
                 .ForMember(dest => dest.AccountTypeName, opt => opt.MapFrom(src => src.Name))
                 ;

@@ -51,19 +51,15 @@ namespace ComLog.WinForms.Utils
             var dt = new DataTable();
 
             foreach (var info in typeof(T).GetProperties())
-            {
                 dt.Columns.Add(new DataColumn(info.Name, GetNullableType(info.PropertyType)));
-            }
             foreach (var t in list)
             {
                 var row = dt.NewRow();
                 foreach (var info in typeof(T).GetProperties())
-                {
                     if (!IsNullableType(info.PropertyType))
                         row[info.Name] = info.GetValue(t, null);
                     else
                         row[info.Name] = info.GetValue(t, null) ?? DBNull.Value;
-                }
                 dt.Rows.Add(row);
             }
             return dt;
@@ -73,9 +69,7 @@ namespace ComLog.WinForms.Utils
         {
             var returnType = t;
             if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
                 returnType = Nullable.GetUnderlyingType(t);
-            }
             return returnType;
         }
 
@@ -83,8 +77,8 @@ namespace ComLog.WinForms.Utils
         {
             return type == typeof(string) ||
                    type.IsArray ||
-                   (type.IsGenericType &&
-                    type.GetGenericTypeDefinition() == typeof(Nullable<>));
+                   type.IsGenericType &&
+                   type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
         // ReSharper disable once UnusedMember.Global
@@ -99,14 +93,13 @@ namespace ComLog.WinForms.Utils
 
         #endregion
 
-#if INCLUDE_WEB_FUNCTIONS
-    /// <summary>
-    /// Create an Excel file, and write it out to a MemoryStream (rather than directly to a file)
-    /// </summary>
-    /// <param name="dt">DataTable containing the data to be written to the Excel.</param>
-    /// <param name="filename">The filename (without a path) to call the new Excel file.</param>
-    /// <param name="Response">HttpResponse of the current page.</param>
-    /// <returns>True if it was created succesfully, otherwise false.</returns>
+#if INCLUDE_WEB_FUNCTIONS /// <summary>
+/// Create an Excel file, and write it out to a MemoryStream (rather than directly to a file)
+/// </summary>
+/// <param name="dt">DataTable containing the data to be written to the Excel.</param>
+/// <param name="filename">The filename (without a path) to call the new Excel file.</param>
+/// <param name="Response">HttpResponse of the current page.</param>
+/// <returns>True if it was created succesfully, otherwise false.</returns>
         public static bool CreateExcelDocument(DataTable dt, string filename, System.Web.HttpResponse Response)
         {
             try
@@ -152,7 +145,8 @@ namespace ComLog.WinForms.Utils
             try
             {
                 System.IO.MemoryStream stream = new System.IO.MemoryStream();
-                using (SpreadsheetDocument document = SpreadsheetDocument.Create(stream, SpreadsheetDocumentType.Workbook, true))
+                using (SpreadsheetDocument document =
+SpreadsheetDocument.Create(stream, SpreadsheetDocumentType.Workbook, true))
                 {
                     WriteExcelFile(ds, document);
                 }
@@ -288,8 +282,8 @@ namespace ComLog.WinForms.Utils
             {
                 var col = dt.Columns[colInx];
                 AppendTextCell(excelColumnNames[colInx] + "1", col.ColumnName, headerRow);
-                isNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") ||
-                                          (col.DataType.FullName == "System.Int32");
+                isNumericColumn[colInx] = col.DataType.FullName == "System.Decimal" ||
+                                          col.DataType.FullName == "System.Int32";
             }
 
             //
@@ -362,8 +356,8 @@ namespace ComLog.WinForms.Utils
             if (columnIndex < 26)
                 return ((char) ('A' + columnIndex)).ToString();
 
-            var firstChar = (char) ('A' + columnIndex/26 - 1);
-            var secondChar = (char) ('A' + columnIndex%26);
+            var firstChar = (char) ('A' + columnIndex / 26 - 1);
+            var secondChar = (char) ('A' + columnIndex % 26);
 
             return $"{firstChar}{secondChar}";
         }

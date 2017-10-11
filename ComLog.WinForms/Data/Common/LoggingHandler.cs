@@ -22,11 +22,9 @@ namespace ComLog.WinForms.Data.Common
         {
             Debug.WriteLine(request.ToString());
             if (request.Content != null)
-            {
                 Debug.WriteLine(await request.Content
                     .ReadAsStringAsync()
                     .ConfigureAwait(false));
-            }
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
             //using (var stream = await response.Content.ReadAsStreamAsync())
             //{

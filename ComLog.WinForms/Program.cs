@@ -5,14 +5,16 @@ using AutoMapper.Configuration;
 using ComLog.WinForms.Administration;
 using ComLog.WinForms.Data.Common;
 using ComLog.WinForms.Ninject;
+using log4net.Config;
 
-[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+[assembly: XmlConfigurator(Watch = true)]
+
 namespace ComLog.WinForms
 {
     internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
         private static void Main()

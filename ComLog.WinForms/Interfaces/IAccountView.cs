@@ -26,11 +26,5 @@ namespace ComLog.WinForms.Interfaces
         List<KeyValuePair<int, string>> AccountTypeList { set; }
 
         #endregion
-
-        #region Methods
-
-        void Reopen();
-
-        #endregion //Methods
     }
 }

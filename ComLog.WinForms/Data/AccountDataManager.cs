@@ -12,12 +12,12 @@ namespace ComLog.WinForms.Data
 {
     public class AccountDataManager : TypedDataMаnager<AccountExtDto, int>, IAccountDataManager
     {
-        public IAccountViewFilter AccountViewFilter { get; set; }
-
         public AccountDataManager(IAccountViewFilter accountViewFilter) : base(ComLogConstants.ClientAppApi.Accounts)
         {
             AccountViewFilter = accountViewFilter;
         }
+
+        public IAccountViewFilter AccountViewFilter { get; set; }
 
         public override async Task<IEnumerable<AccountExtDto>> GetItems()
         {
@@ -29,7 +29,5 @@ namespace ComLog.WinForms.Data
                 return result;
             }
         }
-
-       
     }
 }

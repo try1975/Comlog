@@ -14,10 +14,9 @@ namespace ComLog.WinForms.Presenters.Common
 {
     public abstract class TypedPresenter<T, TK> : IPresenter where T : class, IDto<TK>
     {
-        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly ITypedDataMànager<T, TK> _typedDataMànager;
-        public IDataMànager DataMànager { get; set; }
         protected readonly ITypedView<T, TK> View;
 
 
@@ -33,6 +32,8 @@ namespace ComLog.WinForms.Presenters.Common
             if (presenterMode == PresenterMode.Read) SetItems();
         }
 
+        public IDataMànager DataMànager { get; set; }
+
         public PresenterMode PresenterMode { get; private set; }
 
         public BindingSource BindingSource { get; }
@@ -44,7 +45,7 @@ namespace ComLog.WinForms.Presenters.Common
                 T item = null;
                 if (BindingSource.Current != null)
                 {
-                    var current = (DataRowView)BindingSource.Current;
+                    var current = (DataRowView) BindingSource.Current;
                     item = ToDto(current);
                 }
                 Mapper.Map(item, View);
@@ -109,13 +110,9 @@ namespace ComLog.WinForms.Presenters.Common
 
             var success = await _typedDataMànager.DeleteItem(item);
             if (success)
-            {
                 BindingSource.RemoveCurrent();
-            }
             else
-            {
                 MessageBox.Show(@"Error: You can't delete this item.", @"Error");
-            }
 
             View.EnterReadMode();
             PresenterMode = PresenterMode.Read;
@@ -131,15 +128,13 @@ namespace ComLog.WinForms.Presenters.Common
             try
             {
                 Log.Debug($"SetItems BindingSource.DataSource");
-                Log.Debug($"_typedDataMànager is null {_typedDataMànager==null}");
+                Log.Debug($"_typedDataMànager is null {_typedDataMànager == null}");
                 if (_typedDataMànager != null)
                 {
                     var getItems = await _typedDataMànager.GetItems();
                     Log.Debug($"getItems is null {getItems == null}");
                     if (getItems != null)
-                    {
                         BindingSource.DataSource = ToDataTable(getItems.ToList());
-                    }
                 }
                 Log.Debug($"SetItems RefreshItems");
                 View.RefreshItems();
@@ -163,9 +158,7 @@ namespace ComLog.WinForms.Presenters.Common
             Mapper.Map(item, View);
 
             if (item != null)
-            {
                 BindingSource.DataSource = ToDataTable((await _typedDataMànager.GetItems()).ToList());
-            }
             PresenterMode = PresenterMode.Read;
             View.EnterReadMode();
         }
@@ -225,15 +218,13 @@ namespace ComLog.WinForms.Presenters.Common
 
         private static T ToDto(DataRowView data)
         {
-            var result = (T)Activator.CreateInstance(typeof(T), null);
+            var result = (T) Activator.CreateInstance(typeof(T), null);
             var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             for (var i = 0; i < props.Length; i++)
             {
                 var value = data.Row.ItemArray[i];
                 if (value != DBNull.Value)
-                {
                     props[i].SetValue(result, data.Row.ItemArray[i]);
-                }
             }
             return result;
         }

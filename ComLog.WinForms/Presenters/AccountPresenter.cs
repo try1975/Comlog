@@ -49,14 +49,14 @@ namespace ComLog.WinForms.Presenters
             if (accountTypeDtos != null)
             {
                 var accountTypes = accountTypeDtos.ToList();
-                ((IAccountView)View).AccountTypeList =
+                ((IAccountView) View).AccountTypeList =
                     accountTypes.Select(c => new KeyValuePair<int, string>(c.Id, c.Name))
                         .OrderBy(kv => kv.Value)
                         .ToList();
             }
             else
             {
-                ((IAccountView)View).AccountTypeList = new List<KeyValuePair<int, string>>();
+                ((IAccountView) View).AccountTypeList = new List<KeyValuePair<int, string>>();
             }
         }
     }

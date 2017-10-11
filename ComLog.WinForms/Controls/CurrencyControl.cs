@@ -25,7 +25,7 @@ namespace ComLog.WinForms.Controls
 
         public string Id
         {
-            get { return tbId.Text;}
+            get { return tbId.Text; }
             set { tbId.Text = value; }
         }
 

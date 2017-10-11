@@ -2,9 +2,12 @@
 
 namespace ComLog.WinForms.Administration
 {
-    static class ListsCache
+    internal static class ListsCache
     {
         private static CachedList<User> _users;
+
+        private static CachedList<string> _roles;
+
         public static CachedList<User> Users
         {
             get
@@ -19,7 +22,6 @@ namespace ComLog.WinForms.Administration
             }
         }
 
-        private static CachedList<string> _roles;
         public static CachedList<string> Roles
         {
             get

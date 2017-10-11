@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using ComLog.WinForms.Forms;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
@@ -18,7 +19,7 @@ namespace ComLog.WinForms.Controls
         {
             if (ctrlPressed)
             {
-                var childForm = new ChildForm { Text = control.Name };
+                var childForm = new ChildForm {Text = control.Name};
                 childForm.AddControlToWorkArea(control);
                 childForm.Show();
                 return;
@@ -28,40 +29,40 @@ namespace ComLog.WinForms.Controls
             pnlWorkArea.Controls.Add(control);
         }
 
-        private void btnBanks_Click(object sender, System.EventArgs e)
+        private void btnBanks_Click(object sender, EventArgs e)
         {
             var bankControl = CompositionRoot.Resolve<IBankView>();
-            AddControlToWorkArea((Control)bankControl, ModifierKeys.HasFlag(Keys.Control));
+            AddControlToWorkArea((Control) bankControl, ModifierKeys.HasFlag(Keys.Control));
         }
 
-        private void btnAccounts_Click(object sender, System.EventArgs e)
+        private void btnAccounts_Click(object sender, EventArgs e)
         {
             var accountControl = CompositionRoot.Resolve<IAccountView>();
-            AddControlToWorkArea((Control)accountControl, ModifierKeys.HasFlag(Keys.Control));
+            AddControlToWorkArea((Control) accountControl, ModifierKeys.HasFlag(Keys.Control));
         }
 
-        private void btnCurrencies_Click(object sender, System.EventArgs e)
+        private void btnCurrencies_Click(object sender, EventArgs e)
         {
             var currencyControl = CompositionRoot.Resolve<ICurrencyView>();
-            AddControlToWorkArea((Control)currencyControl, ModifierKeys.HasFlag(Keys.Control));
+            AddControlToWorkArea((Control) currencyControl, ModifierKeys.HasFlag(Keys.Control));
         }
 
-        private void btnAccountTypes_Click(object sender, System.EventArgs e)
+        private void btnAccountTypes_Click(object sender, EventArgs e)
         {
             var accountTypeControl = CompositionRoot.Resolve<IAccountTypeView>();
-            AddControlToWorkArea((Control)accountTypeControl, ModifierKeys.HasFlag(Keys.Control));
+            AddControlToWorkArea((Control) accountTypeControl, ModifierKeys.HasFlag(Keys.Control));
         }
 
-        private void btnTransactionTypes_Click(object sender, System.EventArgs e)
+        private void btnTransactionTypes_Click(object sender, EventArgs e)
         {
             var transactionTypeControl = CompositionRoot.Resolve<ITransactionTypeView>();
-            AddControlToWorkArea((Control)transactionTypeControl, ModifierKeys.HasFlag(Keys.Control));
+            AddControlToWorkArea((Control) transactionTypeControl, ModifierKeys.HasFlag(Keys.Control));
         }
 
-        private void btnTransactions_Click(object sender, System.EventArgs e)
+        private void btnTransactions_Click(object sender, EventArgs e)
         {
             var transactionControl = CompositionRoot.Resolve<ITransactionView>();
-            AddControlToWorkArea((Control)transactionControl, ModifierKeys.HasFlag(Keys.Control));
+            AddControlToWorkArea((Control) transactionControl, ModifierKeys.HasFlag(Keys.Control));
         }
     }
 }

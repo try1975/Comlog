@@ -17,7 +17,8 @@ namespace ComLog.WinForms.Utils
             var idxCharges = column?.Index ?? -1;
             column = dgv.Columns[nameof(AccountExtDto.DeltaBalance)];
             var idxDeltaBalance = column?.Index ?? -1;
-            var boldStyle = new DataGridViewCellStyle {Font = new Font(dgv.Font, FontStyle.Bold), ForeColor = Color.OrangeRed};
+            var boldStyle =
+                new DataGridViewCellStyle {Font = new Font(dgv.Font, FontStyle.Bold), ForeColor = Color.OrangeRed};
 
             if (idxCurrencyId < 0) return;
             var usdColor = Color.FromArgb(204, 255, 204);
@@ -51,13 +52,11 @@ namespace ComLog.WinForms.Utils
                     if (!string.IsNullOrEmpty(debits)) row.Cells[idxDebits].Style.ForeColor = Color.Red;
                     if (!string.IsNullOrEmpty(charges)) row.Cells[idxCharges].Style.ForeColor = Color.Red;
                 }
-                if (idxDeltaBalance > -1){
+                if (idxDeltaBalance > -1)
+                {
                     var deltaBalance = (decimal) row.Cells[idxDeltaBalance].Value;
                     if (deltaBalance != 0)
-                    {
-                        //row.Cells[idxDeltaBalance].Style.ForeColor = Color.OrangeRed;
                         row.Cells[idxDeltaBalance].Style = boldStyle;
-                    }
                 }
             }
         }

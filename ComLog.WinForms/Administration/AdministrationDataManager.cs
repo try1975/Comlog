@@ -6,7 +6,7 @@ using ComLog.WinForms.AdministrationServiceReference;
 
 namespace ComLog.WinForms.Administration
 {
-    public class AdministrationDataManager:IDisposable
+    public class AdministrationDataManager : IDisposable
     {
         private AdministrationServiceClient _serviceClientInner;
 
@@ -17,10 +17,25 @@ namespace ComLog.WinForms.Administration
                 if (_serviceClientInner != null) return _serviceClientInner;
                 _serviceClientInner = new AdministrationServiceClient();
                 if (_serviceClientInner.ClientCredentials == null) return _serviceClientInner;
-                _serviceClientInner.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.None;
+                _serviceClientInner.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode =
+                    X509CertificateValidationMode.None;
                 _serviceClientInner.ClientCredentials.UserName.UserName = CurrentUser.Login;
                 _serviceClientInner.ClientCredentials.UserName.Password = CurrentUser.Password;
                 return _serviceClientInner;
+            }
+        }
+
+
+        public void Dispose()
+        {
+            if (ServiceClient == null) return;
+            try
+            {
+                ServiceClient.Close();
+            }
+            catch
+            {
+                ServiceClient.Abort();
             }
         }
 
@@ -67,7 +82,7 @@ namespace ComLog.WinForms.Administration
 
         public string CreateUser(User user)
         {
-            var id = ServiceClient.CreateUser(user); 
+            var id = ServiceClient.CreateUser(user);
             ListsCache.Users.InvalidateList();
             return id;
         }
@@ -85,7 +100,7 @@ namespace ComLog.WinForms.Administration
             ListsCache.Users.InvalidateList();
             return success;
         }
-        
+
 
         public List<string> LoadRoles()
         {
@@ -95,20 +110,6 @@ namespace ComLog.WinForms.Administration
         public List<string> GetRoles()
         {
             return ListsCache.Roles.Items;
-        }
-
-
-        public void Dispose()
-        {
-            if (ServiceClient == null) return;
-            try
-            {
-                ServiceClient.Close();
-            }
-            catch
-            {
-                ServiceClient.Abort();
-            }
         }
     }
 }

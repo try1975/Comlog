@@ -12,6 +12,7 @@ namespace ComLog.WinForms.Controls
     {
         private readonly IPresenter _presenter;
         private bool _isEventHandlerSets;
+
         public TransactionTypeControl(ITransactionTypeDataManager transactionTypeDataManager, IDataMаnager dataMаnager)
         {
             InitializeComponent();

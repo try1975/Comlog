@@ -18,8 +18,8 @@ namespace ComLog.WinForms.Data.Common
         private readonly string _apiAccountTypes;
         private readonly string _apiBanks;
         private readonly string _apiCurrencies;
-        private readonly string _apiTransactionTypes;
         private readonly string _apiTransactions;
+        private readonly string _apiTransactionTypes;
         private readonly HttpClient _comLogHttpClient;
 
         private readonly string _curExApi;
@@ -108,13 +108,16 @@ namespace ComLog.WinForms.Data.Common
 
         public async Task<decimal> GetCurrencyExchangeRate(string currencyId, DateTime date)
         {
-            using (var response = await _curExHttpClient.GetAsync($"{_curExApi}?currencyId={currencyId}&date={date.ToString("yyyy-MM-dd")}"))
+            using (var response =
+                await _curExHttpClient.GetAsync(
+                    $"{_curExApi}?currencyId={currencyId}&date={date.ToString("yyyy-MM-dd")}"))
             {
                 if (!response.IsSuccessStatusCode) return 1m;
                 var result = await response.Content.ReadAsAsync<decimal>();
                 return result;
             }
         }
+
         #endregion //CurrencyExchangeRate
 
         #region AccountTypes

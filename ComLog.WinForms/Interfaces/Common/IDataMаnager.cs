@@ -8,7 +8,6 @@ namespace ComLog.WinForms.Interfaces.Common
 {
     public interface IDataMаnager
     {
-
         #region Accounts
 
         Task<IEnumerable<AccountExtDto>> GetAccounts();
@@ -44,6 +43,5 @@ namespace ComLog.WinForms.Interfaces.Common
         Task<IEnumerable<AccountTypeDto>> GetAccountTypes();
 
         #endregion //AccountTypes
-
     }
 }
