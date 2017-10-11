@@ -16,6 +16,7 @@ using ComLog.WinForms.Interfaces.Data;
 using ComLog.WinForms.Interfaces.Filter;
 using ComLog.WinForms.Presenters;
 using ComLog.WinForms.Utils;
+using DocumentFormat.OpenXml;
 
 namespace ComLog.WinForms.Controls
 {
@@ -314,17 +315,15 @@ namespace ComLog.WinForms.Controls
             lblSumDebits.Text = $@"{sumDebits.ToString("N2", CultureInfo.InvariantCulture)}";
         }
 
-        private void SetInfoLabelsAndRowColors()
+        private void AfterGridDataChange()
         {
             GridColors.SetRowColors(dgvItems);
+            ColumnSettings();
             SetInfoLabels();
         }
 
-        public void RefreshItems()
+        private void ColumnSettings()
         {
-            dgvItems.DataSource = _presenter.BindingSource;
-            SetInfoLabelsAndRowColors();
-
             var column = dgvItems.Columns[nameof(TransactionExtDto.Id)];
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.BankId)];
@@ -389,6 +388,12 @@ namespace ComLog.WinForms.Controls
             }
         }
 
+        public void RefreshItems()
+        {
+            dgvItems.DataSource = _presenter.BindingSource;
+            AfterGridDataChange();
+        }
+
         public void SetEventHandlers()
         {
             if (_isEventHandlerSets) return;
@@ -429,6 +434,7 @@ namespace ComLog.WinForms.Controls
 
             //pnlAllAccount.Visible = false;
             //pnlNotClosedAccounts.Visible = true;
+            
         }
 
         public void EnterDetailsMode()
@@ -460,7 +466,7 @@ namespace ComLog.WinForms.Controls
             //pnlAllAccount.Visible = true;
             //pnlNotClosedAccounts.Visible = false;
 
-            SetInfoLabelsAndRowColors();
+            AfterGridDataChange();
         }
 
         public void EnterAddNewMode()
@@ -517,6 +523,8 @@ namespace ComLog.WinForms.Controls
             tbFromTo.Enabled = true;
             tbDescription.Enabled = true;
             tbReport.Enabled = true;
+
+            cmbAllAccount.Focus();
         }
 
         public void DisableInput()
@@ -560,7 +568,7 @@ namespace ComLog.WinForms.Controls
         private void dgvItems_FilterStringChanged(object sender, EventArgs e)
         {
             _presenter.BindingSource.Filter = dgvItems.FilterString;
-            SetInfoLabelsAndRowColors();
+            AfterGridDataChange();
         }
 
         private void dgvItems_SortStringChanged(object sender, EventArgs e)
@@ -661,7 +669,7 @@ namespace ComLog.WinForms.Controls
         {
             dtpDateFrom.Value = dtpDateFrom.Value.AddDays(1);
         }
-
         #endregion //Event handlers
+
     }
 }

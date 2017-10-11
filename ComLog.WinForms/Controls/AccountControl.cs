@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using ComLog.Dto;
 using ComLog.Dto.Ext;
@@ -146,11 +147,14 @@ namespace ComLog.WinForms.Controls
 
         #region IRefreshedView
 
-        public void RefreshItems()
+        private void AfterGridDataChange()
         {
-            dgvItems.DataSource = _presenter.BindingSource;
             GridColors.SetRowColors(dgvItems);
+            ColumnSettings();
+        }
 
+        private void ColumnSettings()
+        {
             var column = dgvItems.Columns[nameof(AccountDto.Id)];
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(AccountDto.BankId)];
@@ -201,6 +205,12 @@ namespace ComLog.WinForms.Controls
                 column.DefaultCellStyle.Format = "N2";
                 column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
+        }
+
+        public void RefreshItems()
+        {
+            dgvItems.DataSource = _presenter.BindingSource;
+            AfterGridDataChange();
         }
 
         public void SetEventHandlers()
@@ -262,7 +272,7 @@ namespace ComLog.WinForms.Controls
             btnEdit.Enabled = false;
             btnAddNew.Enabled = true;
 
-            GridColors.SetRowColors(dgvItems);
+            AfterGridDataChange();
         }
 
         public void EnterAddNewMode()
@@ -354,7 +364,7 @@ namespace ComLog.WinForms.Controls
         private void dgvItems_FilterStringChanged(object sender, EventArgs e)
         {
             _presenter.BindingSource.Filter = dgvItems.FilterString;
-            GridColors.SetRowColors(dgvItems);
+            AfterGridDataChange();
         }
 
         private void dgvItems_SortStringChanged(object sender, EventArgs e)
