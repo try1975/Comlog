@@ -5,5 +5,6 @@ namespace ComLog.WinForms.Data.Filter
     public class AccountViewFilter : IAccountViewFilter
     {
         public bool ShowClosed { get; set; }
+        public bool OnlyTodayActivity { get; set; }
     }
 }

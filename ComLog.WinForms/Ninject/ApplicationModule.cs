@@ -21,8 +21,12 @@ namespace ComLog.WinForms.Ninject
             Bind<IDataMаnager>().To<DataMаnager>().InSingletonScope();
             Bind<IComLogControl>().To<ComLogControl>().InSingletonScope();
 
+            Bind<ITransactionView>().To<TransactionControl>();
+            Bind<ITransactionViewFilter>().To<TransactionViewFilter>().InSingletonScope();
+            Bind<ITransactionDataManager>().To<TransactionDataManager>().InSingletonScope();
+
             Bind<IAccountView>().To<AccountControl>();
-            Bind<IAccountViewFilter>().To<AccountViewFilter>();
+            Bind<IAccountViewFilter>().To<AccountViewFilter>().InSingletonScope();
             Bind<IAccountDataManager>().To<AccountDataManager>().InSingletonScope();
 
             Bind<IAccountTypeView>().To<AccountTypeControl>();
@@ -36,10 +40,6 @@ namespace ComLog.WinForms.Ninject
 
             Bind<ITransactionTypeView>().To<TransactionTypeControl>();
             Bind<ITransactionTypeDataManager>().To<TransactionTypeDataManager>().InSingletonScope();
-
-            Bind<ITransactionView>().To<TransactionControl>();
-            Bind<ITransactionViewFilter>().To<TransactionViewFilter>();
-            Bind<ITransactionDataManager>().To<TransactionDataManager>().InSingletonScope();
 
             // Loader
             Bind<DbContext>().To<WorkContext>().InSingletonScope();

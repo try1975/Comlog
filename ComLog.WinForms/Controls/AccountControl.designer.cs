@@ -60,6 +60,7 @@ namespace ComLog.WinForms.Controls
             this.btnAddNew = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlGrid = new System.Windows.Forms.Panel();
+            this.dgvItems = new ADGV.AdvancedDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cbShowClosed = new System.Windows.Forms.CheckBox();
@@ -67,7 +68,8 @@ namespace ComLog.WinForms.Controls
             this.btnExcelExport = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.dgvItems = new ADGV.AdvancedDataGridView();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cbOnlyTodayActivity = new System.Windows.Forms.CheckBox();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.pnlClosed.SuspendLayout();
@@ -79,11 +81,12 @@ namespace ComLog.WinForms.Controls
             this.pnlId.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             this.pnlGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -385,8 +388,26 @@ namespace ComLog.WinForms.Controls
             this.pnlGrid.Size = new System.Drawing.Size(654, 550);
             this.pnlGrid.TabIndex = 7;
             // 
+            // dgvItems
+            // 
+            this.dgvItems.AllowUserToAddRows = false;
+            this.dgvItems.AllowUserToDeleteRows = false;
+            this.dgvItems.AllowUserToOrderColumns = true;
+            this.dgvItems.AutoGenerateContextFilters = true;
+            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dgvItems.DateWithTime = false;
+            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItems.Location = new System.Drawing.Point(0, 41);
+            this.dgvItems.Name = "dgvItems";
+            this.dgvItems.ReadOnly = true;
+            this.dgvItems.Size = new System.Drawing.Size(654, 509);
+            this.dgvItems.TabIndex = 1;
+            this.dgvItems.TimeFilter = true;
+            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.panel11);
             this.panel1.Controls.Add(this.panel10);
@@ -409,7 +430,7 @@ namespace ComLog.WinForms.Controls
             // 
             this.cbShowClosed.AutoSize = true;
             this.cbShowClosed.Location = new System.Drawing.Point(13, 16);
-            this.cbShowClosed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbShowClosed.Margin = new System.Windows.Forms.Padding(2);
             this.cbShowClosed.Name = "cbShowClosed";
             this.cbShowClosed.Size = new System.Drawing.Size(87, 17);
             this.cbShowClosed.TabIndex = 0;
@@ -452,22 +473,25 @@ namespace ComLog.WinForms.Controls
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
-            // dgvItems
+            // panel3
             // 
-            this.dgvItems.AllowUserToAddRows = false;
-            this.dgvItems.AllowUserToDeleteRows = false;
-            this.dgvItems.AllowUserToOrderColumns = true;
-            this.dgvItems.AutoGenerateContextFilters = true;
-            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItems.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dgvItems.DateWithTime = false;
-            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 41);
-            this.dgvItems.Name = "dgvItems";
-            this.dgvItems.ReadOnly = true;
-            this.dgvItems.Size = new System.Drawing.Size(654, 509);
-            this.dgvItems.TabIndex = 1;
-            this.dgvItems.TimeFilter = true;
+            this.panel3.Controls.Add(this.cbOnlyTodayActivity);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(312, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(153, 41);
+            this.panel3.TabIndex = 8;
+            // 
+            // cbOnlyTodayActivity
+            // 
+            this.cbOnlyTodayActivity.AutoSize = true;
+            this.cbOnlyTodayActivity.Location = new System.Drawing.Point(13, 16);
+            this.cbOnlyTodayActivity.Margin = new System.Windows.Forms.Padding(2);
+            this.cbOnlyTodayActivity.Name = "cbOnlyTodayActivity";
+            this.cbOnlyTodayActivity.Size = new System.Drawing.Size(134, 17);
+            this.cbOnlyTodayActivity.TabIndex = 0;
+            this.cbOnlyTodayActivity.Text = "Only with today activity";
+            this.cbOnlyTodayActivity.UseVisualStyleBackColor = true;
             // 
             // AccountControl
             // 
@@ -496,12 +520,14 @@ namespace ComLog.WinForms.Controls
             this.pnlId.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
             this.pnlGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel11.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -546,5 +572,7 @@ namespace ComLog.WinForms.Controls
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox cbShowClosed;
         private AdvancedDataGridView dgvItems;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.CheckBox cbOnlyTodayActivity;
     }
 }

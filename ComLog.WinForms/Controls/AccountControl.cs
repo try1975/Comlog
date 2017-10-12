@@ -30,6 +30,7 @@ namespace ComLog.WinForms.Controls
             _accountViewFilter = accountDataManager.AccountViewFilter;
             _presenter = new AccountPresenter(this, accountDataManager, dataMаnager);
             cbShowClosed.Checked = _accountViewFilter.ShowClosed;
+            cbOnlyTodayActivity.Checked = _accountViewFilter.OnlyTodayActivity;
         }
 
         #region IAccountView implementation
@@ -217,6 +218,7 @@ namespace ComLog.WinForms.Controls
 
             cbClosed.CheckedChanged += cbClosed_CheckedChanged;
             cbShowClosed.CheckedChanged += cbShowClosed_CheckedChanged;
+            cbOnlyTodayActivity.CheckedChanged += cbOnlyTodayActivity_CheckedChanged;
         }
 
         #endregion //IRefreshedView
@@ -394,6 +396,12 @@ namespace ComLog.WinForms.Controls
         private void cbShowClosed_CheckedChanged(object sender, EventArgs e)
         {
             _accountViewFilter.ShowClosed = cbShowClosed.Checked;
+            _presenter.Reopen();
+        }
+
+        private void cbOnlyTodayActivity_CheckedChanged(object sender, EventArgs e)
+        {
+            _accountViewFilter.OnlyTodayActivity = cbOnlyTodayActivity.Checked;
             _presenter.Reopen();
         }
 

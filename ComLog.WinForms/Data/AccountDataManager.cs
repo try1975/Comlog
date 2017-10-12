@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -12,9 +13,11 @@ namespace ComLog.WinForms.Data
 {
     public class AccountDataManager : TypedDataMаnager<AccountExtDto, int>, IAccountDataManager
     {
-        public AccountDataManager(IAccountViewFilter accountViewFilter) : base(ComLogConstants.ClientAppApi.Accounts)
+        private readonly ITransactionDataManager _transactionDataManager;
+        public AccountDataManager(IAccountViewFilter accountViewFilter, ITransactionDataManager transactionDataManager) : base(ComLogConstants.ClientAppApi.Accounts)
         {
             AccountViewFilter = accountViewFilter;
+            _transactionDataManager= transactionDataManager;
         }
 
         public IAccountViewFilter AccountViewFilter { get; set; }
@@ -26,6 +29,14 @@ namespace ComLog.WinForms.Data
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<IEnumerable<AccountExtDto>>();
                 if (!AccountViewFilter.ShowClosed) result = result.Where(z => z.Closed == null);
+                if (AccountViewFilter.OnlyTodayActivity)
+                {
+                    _transactionDataManager.TransactionViewFilter.DateFrom=DateTime.Today;
+                    _transactionDataManager.TransactionViewFilter.DateTo = DateTime.Today;
+                    var transactions = await _transactionDataManager.GetItems();
+                    var todayActivityAccounts = transactions.Select(z => z.AccountId).Distinct().ToList();
+                    result = result.Where(z => todayActivityAccounts.Contains(z.Id));
+                }
                 return result;
             }
         }
