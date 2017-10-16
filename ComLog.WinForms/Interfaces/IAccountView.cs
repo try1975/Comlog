@@ -16,6 +16,7 @@ namespace ComLog.WinForms.Interfaces
         int AccountTypeId { get; set; }
 
         DateTime? Closed { get; set; }
+        bool? MsDaily01 { get; set; }
 
         #endregion
 

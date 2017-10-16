@@ -6,6 +6,11 @@ namespace ComLog.WinForms.Utils
 {
     public static class GridColors
     {
+        private static readonly Color UsdColor = Color.FromArgb(204, 255, 204);
+        private static readonly Color EurColor = Color.FromArgb(204, 255, 255);
+        private static readonly Color GbpColor = Color.FromArgb(255, 204, 153);
+        private static readonly Color ChfColor = Color.FromArgb(255, 255, 153);
+
         public static void SetRowColors(DataGridView dgv)
         {
             if (dgv == null) return;
@@ -21,10 +26,6 @@ namespace ComLog.WinForms.Utils
                 new DataGridViewCellStyle {Font = new Font(dgv.Font, FontStyle.Bold), ForeColor = Color.OrangeRed};
 
             if (idxCurrencyId < 0) return;
-            var usdColor = Color.FromArgb(204, 255, 204);
-            var eurColor = Color.FromArgb(204, 255, 255);
-            var gbpColor = Color.FromArgb(255, 204, 153);
-            var chfColor = Color.FromArgb(255, 255, 153);
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 var currencyId = row.Cells[idxCurrencyId].Value.ToString();
@@ -32,17 +33,16 @@ namespace ComLog.WinForms.Utils
                 switch (currencyId)
                 {
                     case "USD":
-                        row.DefaultCellStyle.BackColor = usdColor;
-                        //row.DefaultCellStyle.ForeColor = Color.White;
+                        row.DefaultCellStyle.BackColor = UsdColor;
                         break;
                     case "EUR":
-                        row.DefaultCellStyle.BackColor = eurColor;
+                        row.DefaultCellStyle.BackColor = EurColor;
                         break;
                     case "GBP":
-                        row.DefaultCellStyle.BackColor = gbpColor;
+                        row.DefaultCellStyle.BackColor = GbpColor;
                         break;
                     case "CHF":
-                        row.DefaultCellStyle.BackColor = chfColor;
+                        row.DefaultCellStyle.BackColor = ChfColor;
                         break;
                 }
                 if (idxDebits > -1 && idxCharges > -1)

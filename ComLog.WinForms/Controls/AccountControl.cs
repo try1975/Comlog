@@ -62,26 +62,26 @@ namespace ComLog.WinForms.Controls
                 return decimal.TryParse(tbBalance.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
                     out decimalResult)
                     ? decimalResult
-                    : (decimal?) null;
+                    : (decimal?)null;
             }
             set { tbBalance.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? ""; }
         }
 
         public int BankId
         {
-            get { return (int) cmbBank.SelectedValue; }
+            get { return (int)cmbBank.SelectedValue; }
             set { cmbBank.SelectedValue = value; }
         }
 
         public string CurrencyId
         {
-            get { return (string) cmbCurrency.SelectedValue; }
+            get { return (string)cmbCurrency.SelectedValue; }
             set { cmbCurrency.SelectedValue = value; }
         }
 
         public int AccountTypeId
         {
-            get { return (int) cmbAccountType.SelectedValue; }
+            get { return (int)cmbAccountType.SelectedValue; }
             set { cmbAccountType.SelectedValue = value; }
         }
 
@@ -93,6 +93,12 @@ namespace ComLog.WinForms.Controls
                 _closed = value;
                 if (cbClosed.Checked != _closed.HasValue) cbClosed.Checked = _closed.HasValue;
             }
+        }
+
+        public bool? MsDaily01
+        {
+            get { return cbMsDaily01.Checked; }
+            set { cbMsDaily01.Checked = value ?? false; }
         }
 
         #endregion //Details
@@ -219,6 +225,7 @@ namespace ComLog.WinForms.Controls
             cbClosed.CheckedChanged += cbClosed_CheckedChanged;
             cbShowClosed.CheckedChanged += cbShowClosed_CheckedChanged;
             cbOnlyTodayActivity.CheckedChanged += cbOnlyTodayActivity_CheckedChanged;
+            
         }
 
         #endregion //IRefreshedView
@@ -296,6 +303,7 @@ namespace ComLog.WinForms.Controls
             cmbCurrency.SelectedIndex = -1;
             cmbAccountType.SelectedIndex = -1;
             cbClosed.Checked = false;
+            cbMsDaily01.Checked = false;
         }
 
         public void EnableInput()
@@ -303,6 +311,7 @@ namespace ComLog.WinForms.Controls
             tbName.Enabled = true;
             tbBalance.Enabled = true;
             cbClosed.Enabled = true;
+            cbMsDaily01.Enabled = true;
             if (_presenter.PresenterMode != PresenterMode.AddNew) return;
             cmbBank.Enabled = true;
             cmbCurrency.Enabled = true;
@@ -318,6 +327,7 @@ namespace ComLog.WinForms.Controls
             cmbCurrency.Enabled = false;
             cmbAccountType.Enabled = false;
             cbClosed.Enabled = false;
+            cbMsDaily01.Enabled = false;
         }
 
         #endregion //IEnterMode
@@ -373,9 +383,9 @@ namespace ComLog.WinForms.Controls
 
         private void btnExcelExport_Click(object sender, EventArgs e)
         {
-            var saveFileDialog = new SaveFileDialog {FileName = $"ComLogAccounts_{DateTime.Now:yyyyMMdd_HHmm}.xlsx"};
+            var saveFileDialog = new SaveFileDialog { FileName = $"ComLogAccounts_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            var dataTable = ((DataTable) _presenter.BindingSource.DataSource).Copy();
+            var dataTable = ((DataTable)_presenter.BindingSource.DataSource).Copy();
             dataTable.SetColumnsOrder(nameof(AccountExtDto.BankName)
                 , nameof(AccountExtDto.Name)
                 , nameof(AccountExtDto.AccountTypeName)

@@ -23,6 +23,8 @@ namespace ComLog.Db.Entities
 
         public DateTime? Closed { get; set; }
 
+        public bool? MsDaily01 { get; set; } 
+
         public ICollection<TransactionEntity> Transactions { get; set; }
         public ICollection<ExcelBookEntity> ExcelBooks { get; set; }
         public int Id { get; set; }

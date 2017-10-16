@@ -20,13 +20,13 @@ namespace ComLog.Db.MsSql.Migrations
             //
             context.Currencies.AddOrUpdate(
               p => p.Id,
-              new CurrencyEntity() { Id = "USD" },
-              new CurrencyEntity() { Id = "EUR" },
-              new CurrencyEntity { Id = "GBP" },
-              new CurrencyEntity { Id = "CHF" },
-              new CurrencyEntity { Id = "HKD" },
-              new CurrencyEntity { Id = "RUB" },
-              new CurrencyEntity { Id = "UAH" }
+              new CurrencyEntity { Id = "USD", Ord = 1},
+              new CurrencyEntity { Id = "EUR", Ord = 2 },
+              new CurrencyEntity { Id = "GBP", Ord = 3 },
+              new CurrencyEntity { Id = "CHF", Ord = 4 },
+              new CurrencyEntity { Id = "HKD", Ord = 5 },
+              new CurrencyEntity { Id = "RUB", Ord = 6 },
+              new CurrencyEntity { Id = "UAH", Ord = 7 }
             );
         }
     }

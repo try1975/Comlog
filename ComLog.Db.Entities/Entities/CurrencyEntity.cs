@@ -10,5 +10,6 @@ namespace ComLog.Db.Entities
         public string Id { get; set; }
         public string ChangeBy { get; set; }
         public DateTime? ChangeAt { get; set; }
+        public int Ord { get; set; }
     }
 }

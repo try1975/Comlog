@@ -62,14 +62,16 @@ namespace ComLog.WinForms.Controls
             this.pnlGrid = new System.Windows.Forms.Panel();
             this.dgvItems = new ADGV.AdvancedDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cbOnlyTodayActivity = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cbShowClosed = new System.Windows.Forms.CheckBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.btnExcelExport = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.cbOnlyTodayActivity = new System.Windows.Forms.CheckBox();
+            this.pnlMsDaily01 = new System.Windows.Forms.Panel();
+            this.cbMsDaily01 = new System.Windows.Forms.CheckBox();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.pnlClosed.SuspendLayout();
@@ -83,10 +85,11 @@ namespace ComLog.WinForms.Controls
             this.pnlGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.pnlMsDaily01.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -101,6 +104,7 @@ namespace ComLog.WinForms.Controls
             // 
             // pnlFields
             // 
+            this.pnlFields.Controls.Add(this.pnlMsDaily01);
             this.pnlFields.Controls.Add(this.pnlClosed);
             this.pnlFields.Controls.Add(this.pnplBeneficiaryAddress);
             this.pnlFields.Controls.Add(this.pnlCurrency);
@@ -417,6 +421,26 @@ namespace ComLog.WinForms.Controls
             this.panel1.Size = new System.Drawing.Size(654, 41);
             this.panel1.TabIndex = 3;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.cbOnlyTodayActivity);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(312, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(153, 41);
+            this.panel3.TabIndex = 8;
+            // 
+            // cbOnlyTodayActivity
+            // 
+            this.cbOnlyTodayActivity.AutoSize = true;
+            this.cbOnlyTodayActivity.Location = new System.Drawing.Point(13, 16);
+            this.cbOnlyTodayActivity.Margin = new System.Windows.Forms.Padding(2);
+            this.cbOnlyTodayActivity.Name = "cbOnlyTodayActivity";
+            this.cbOnlyTodayActivity.Size = new System.Drawing.Size(134, 17);
+            this.cbOnlyTodayActivity.TabIndex = 0;
+            this.cbOnlyTodayActivity.Text = "Only with today activity";
+            this.cbOnlyTodayActivity.UseVisualStyleBackColor = true;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.cbShowClosed);
@@ -473,25 +497,24 @@ namespace ComLog.WinForms.Controls
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
-            // panel3
+            // pnlMsDaily01
             // 
-            this.panel3.Controls.Add(this.cbOnlyTodayActivity);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(312, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(153, 41);
-            this.panel3.TabIndex = 8;
+            this.pnlMsDaily01.Controls.Add(this.cbMsDaily01);
+            this.pnlMsDaily01.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMsDaily01.Location = new System.Drawing.Point(0, 237);
+            this.pnlMsDaily01.Name = "pnlMsDaily01";
+            this.pnlMsDaily01.Size = new System.Drawing.Size(396, 34);
+            this.pnlMsDaily01.TabIndex = 10;
             // 
-            // cbOnlyTodayActivity
+            // cbMsDaily01
             // 
-            this.cbOnlyTodayActivity.AutoSize = true;
-            this.cbOnlyTodayActivity.Location = new System.Drawing.Point(13, 16);
-            this.cbOnlyTodayActivity.Margin = new System.Windows.Forms.Padding(2);
-            this.cbOnlyTodayActivity.Name = "cbOnlyTodayActivity";
-            this.cbOnlyTodayActivity.Size = new System.Drawing.Size(134, 17);
-            this.cbOnlyTodayActivity.TabIndex = 0;
-            this.cbOnlyTodayActivity.Text = "Only with today activity";
-            this.cbOnlyTodayActivity.UseVisualStyleBackColor = true;
+            this.cbMsDaily01.AutoSize = true;
+            this.cbMsDaily01.Location = new System.Drawing.Point(97, 8);
+            this.cbMsDaily01.Name = "cbMsDaily01";
+            this.cbMsDaily01.Size = new System.Drawing.Size(75, 17);
+            this.cbMsDaily01.TabIndex = 1;
+            this.cbMsDaily01.Text = "MsDaily01";
+            this.cbMsDaily01.UseVisualStyleBackColor = true;
             // 
             // AccountControl
             // 
@@ -522,12 +545,14 @@ namespace ComLog.WinForms.Controls
             this.pnlGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel11.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.pnlMsDaily01.ResumeLayout(false);
+            this.pnlMsDaily01.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -574,5 +599,7 @@ namespace ComLog.WinForms.Controls
         private AdvancedDataGridView dgvItems;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.CheckBox cbOnlyTodayActivity;
+        private System.Windows.Forms.Panel pnlMsDaily01;
+        private System.Windows.Forms.CheckBox cbMsDaily01;
     }
 }
