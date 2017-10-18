@@ -94,6 +94,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.btnMsDaily = new System.Windows.Forms.Button();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -116,6 +118,7 @@
             this.panel11.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -123,7 +126,7 @@
             this.pnlDetails.Controls.Add(this.pnlFields);
             this.pnlDetails.Controls.Add(this.pnlButtons);
             this.pnlDetails.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlDetails.Location = new System.Drawing.Point(751, 0);
+            this.pnlDetails.Location = new System.Drawing.Point(855, 0);
             this.pnlDetails.Name = "pnlDetails";
             this.pnlDetails.Size = new System.Drawing.Size(398, 514);
             this.pnlDetails.TabIndex = 6;
@@ -538,7 +541,7 @@
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(748, 0);
+            this.splitter1.Location = new System.Drawing.Point(852, 0);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(3, 514);
             this.splitter1.TabIndex = 8;
@@ -552,7 +555,7 @@
             this.pnlGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlGrid.Location = new System.Drawing.Point(0, 0);
             this.pnlGrid.Name = "pnlGrid";
-            this.pnlGrid.Size = new System.Drawing.Size(748, 514);
+            this.pnlGrid.Size = new System.Drawing.Size(852, 514);
             this.pnlGrid.TabIndex = 9;
             // 
             // dgvItems
@@ -567,7 +570,7 @@
             this.dgvItems.Location = new System.Drawing.Point(0, 41);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.ReadOnly = true;
-            this.dgvItems.Size = new System.Drawing.Size(748, 445);
+            this.dgvItems.Size = new System.Drawing.Size(852, 445);
             this.dgvItems.TabIndex = 1;
             this.dgvItems.TimeFilter = false;
             // 
@@ -582,7 +585,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 486);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(748, 28);
+            this.panel2.Size = new System.Drawing.Size(852, 28);
             this.panel2.TabIndex = 3;
             // 
             // label14
@@ -644,6 +647,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel13);
             this.panel1.Controls.Add(this.panel12);
             this.panel1.Controls.Add(this.panel11);
             this.panel1.Controls.Add(this.panel9);
@@ -651,7 +655,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(748, 41);
+            this.panel1.Size = new System.Drawing.Size(852, 41);
             this.panel1.TabIndex = 2;
             // 
             // panel12
@@ -788,6 +792,24 @@
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
+            // panel13
+            // 
+            this.panel13.Controls.Add(this.btnMsDaily);
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel13.Location = new System.Drawing.Point(705, 0);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(104, 41);
+            this.panel13.TabIndex = 8;
+            // 
+            // btnMsDaily
+            // 
+            this.btnMsDaily.Location = new System.Drawing.Point(14, 10);
+            this.btnMsDaily.Name = "btnMsDaily";
+            this.btnMsDaily.Size = new System.Drawing.Size(75, 23);
+            this.btnMsDaily.TabIndex = 0;
+            this.btnMsDaily.Text = "MS daily";
+            this.btnMsDaily.UseVisualStyleBackColor = true;
+            // 
             // TransactionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -796,7 +818,7 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlDetails);
             this.Name = "TransactionControl";
-            this.Size = new System.Drawing.Size(1149, 514);
+            this.Size = new System.Drawing.Size(1253, 514);
             this.pnlDetails.ResumeLayout(false);
             this.pnlFields.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
@@ -832,6 +854,7 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel10.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -904,5 +927,7 @@
         private System.Windows.Forms.Label labelNotClosedAccount;
         private System.Windows.Forms.Button btnDateFromSubtract;
         private System.Windows.Forms.Button btnDateFromAdd;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Button btnMsDaily;
     }
 }

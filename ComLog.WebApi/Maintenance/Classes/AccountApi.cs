@@ -24,9 +24,10 @@ namespace ComLog.WebApi.Maintenance.Classes
             var accounts = Query.GetEntities()
                  .Include(nameof(AccountEntity.Bank))
                  .Include(nameof(AccountEntity.AccountType))
+                 .Include(nameof(AccountEntity.Currency))
                  .OrderBy(z => z.Bank.Name)
+                 .ThenBy(z => z.Currency.Ord)
                  .ThenBy(z => z.Name)
-                 .ThenBy(z => z.CurrencyId)
                  .ToList()
                  ;
             if (!withBalance)
@@ -67,5 +68,115 @@ namespace ComLog.WebApi.Maintenance.Classes
                 .ToList();
             return list;
         }
+
+        public IEnumerable<AccountMsDailyDto> GetMsDaily(DateTime? dateFrom = null, DateTime? dateTo = null)
+        {
+            var accounts = Query.GetEntities()
+                    .Include(nameof(AccountEntity.Bank))
+                    .Include(nameof(AccountEntity.Currency))
+                    .Where(z => z.MsDaily01 == true)
+                    .Select(z => new AccountBalanceDto
+                    {
+                        Id = z.Id,
+                        BankName = z.Bank.Name,
+                        CurrencyId = z.CurrencyId,
+                        CurrencyOrd = z.Currency.Ord
+                    })
+                    .OrderBy(z => z.BankName)
+                    .ThenBy(z => z.CurrencyOrd)
+                    .ToList()
+                ;
+            var accountIds = accounts.Select(z => z.Id).ToList();
+            var aDateFrom = dateFrom?.Date ?? DateTime.Today.Date;
+            var aDateTo = dateTo?.Date.AddDays(1) ?? DateTime.Today.Date.AddDays(1);
+            var prevBalances = _transactionQuery.GetEntities()
+                    .Where(z => z.TransactionDate < aDateFrom && accountIds.Contains(z.AccountId))
+                    .GroupBy(x => new { x.AccountId })
+                    .Select(y => new
+                    {
+                        Id = y.Key.AccountId,
+                        DbBalance = y.Sum(c => c.Dcc)
+                    })
+                    .ToList()
+                ;
+            var activities = _transactionQuery.GetEntities()
+                    .Where(z => z.TransactionDate >= aDateFrom && z.TransactionDate < aDateTo && accountIds.Contains(z.AccountId))
+                    .GroupBy(x => new { x.AccountId })
+                    .Select(y => new
+                    {
+                        Id = y.Key.AccountId,
+                        DbBalance = y.Sum(c => c.Dcc)
+                    })
+                    .ToList()
+                ;
+            foreach (var accountBalanceDto in accounts)
+            {
+                accountBalanceDto.PrevBalance = prevBalances.Where(z => z.Id == accountBalanceDto.Id).Sum(z => z.DbBalance) ?? 0;
+                accountBalanceDto.Activity = activities.Where(z => z.Id == accountBalanceDto.Id).Sum(z => z.DbBalance) ?? 0;
+                accountBalanceDto.NewBalance = accountBalanceDto.PrevBalance + accountBalanceDto.Activity;
+            }
+
+            var daily = accounts
+                    .GroupBy(z => new { z.BankName, z.CurrencyId })
+                    .Select(z => new AccountMsDailyDto
+                    {
+                        BankName = z.Key.BankName,
+                        CurrencyId = z.Key.CurrencyId,
+                        PrevBalance = z.Sum(y => y.PrevBalance),
+                        Activity = z.Sum(y => y.Activity),
+                        NewBalance = z.Sum(y => y.NewBalance)
+                    })
+                    .ToList()
+                ;
+            var transactions = _transactionQuery.GetEntities()
+                .Include(nameof(TransactionEntity.Account))
+                .Include($"{nameof(TransactionEntity.Account)}.{nameof(AccountEntity.Bank)}")
+                    .Where(z => z.TransactionDate >= aDateFrom && z.TransactionDate < aDateTo && accountIds.Contains(z.AccountId))
+                    .ToList()
+                ;
+            var dailyNew = new List<AccountMsDailyDto>();
+            foreach (var dto in daily)
+            {
+                var bankAndCurrencyTransactions = transactions.Where(z =>
+                    z.Account.Bank.Name == dto.BankName && z.CurrencyId == dto.CurrencyId).ToList();
+                if (bankAndCurrencyTransactions.Count > 0)
+                {
+                    var firstTime = true;
+                    for (var i = 0; i < bankAndCurrencyTransactions.Count; i++)
+                    {
+                        if (firstTime)
+                        {
+                            dto.FromTo = bankAndCurrencyTransactions[i].FromTo;
+                            dto.Description = bankAndCurrencyTransactions[i].Description;
+                            dto.Dcc = bankAndCurrencyTransactions[i].Dcc ?? 0;
+
+                            dailyNew.Add(dto);
+                        }
+                        else
+                        {
+                            dailyNew.Add(new AccountMsDailyDto
+                            {
+                                BankName = dto.BankName,
+                                CurrencyId = dto.CurrencyId,
+                                FromTo = bankAndCurrencyTransactions[i].FromTo,
+                                Description = bankAndCurrencyTransactions[i].Description,
+                                Dcc = bankAndCurrencyTransactions[i].Dcc ?? 0
+                            });
+                        }
+                        if (i == 0)
+                        {
+                            firstTime = false;
+                        }
+
+                    }
+                }
+                else
+                {
+                    dailyNew.Add(dto);
+                }
+            }
+            return dailyNew;
+        }
+
     }
 }

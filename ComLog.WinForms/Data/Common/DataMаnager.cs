@@ -60,6 +60,16 @@ namespace ComLog.WinForms.Data.Common
             }
         }
 
+        public async Task<IEnumerable<AccountMsDailyDto>> GetAccountsReport01(DateTime dateFrom, DateTime dateTo)
+        {
+            using (var response = await _comLogHttpClient.GetAsync($"{_apiAccounts}report01?{nameof(dateFrom)}={dateFrom:yyyy-MM-dd}&{nameof(dateTo)}={dateTo:yyyy-MM-dd}"))
+            {
+                if (!response.IsSuccessStatusCode) return null;
+                var result = await response.Content.ReadAsAsync<List<AccountMsDailyDto>>();
+                return result.ToList();
+            }
+        }
+
         #endregion //Accounts
 
         #region Banks

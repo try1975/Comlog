@@ -18,13 +18,25 @@ namespace ComLog.WebApi.Maintenance.Classes
 
         public IEnumerable<TransactionReport01Dto> GetReportItems()
         {
+            //var maxDate = DateTime.Today.AddDays(-365);
+            //var dbBalances = Query.GetEntities()
+            //        .Where(z => z.TransactionDate < maxDate)
+            //        .GroupBy(x => new { x.AccountId })
+            //        .Select(y => new
+            //        {
+            //            Id = y.Key.AccountId,
+            //            DbBalance = y.Sum(c => c.Dcc)
+            //        })
+            //        .ToList()
+            //    ;
             var list = Query.GetEntities()
                 //.Where(z=>z.Dt>=new DateTime(2017,1,1))
                 .Include(nameof(TransactionEntity.Bank))
                 .Include(nameof(TransactionEntity.Account))
                 .Include(nameof(TransactionEntity.TransactionType))
                 ;
-            return Mapper.Map<List<TransactionReport01Dto>>(list);
+            
+            return Mapper.Map<List<TransactionReport01Dto>>(list/*.Concat(dbBalances)*/);
         }
 
         public IEnumerable<TransactionExtDto> GetItemsByPeriod(DateTime dateFrom, DateTime dateTo)
@@ -35,6 +47,7 @@ namespace ComLog.WebApi.Maintenance.Classes
                 .Include(nameof(TransactionEntity.Bank))
                 .Include(nameof(TransactionEntity.Account))
                 .Include(nameof(TransactionEntity.TransactionType))
+                .Include(nameof(TransactionEntity.Currency))
                 .OrderByDescending(z => z.TransactionDate)
                 .ThenByDescending(z=>z.ChangeAt)
                 ;

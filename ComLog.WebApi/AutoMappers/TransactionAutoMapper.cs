@@ -27,6 +27,8 @@ namespace ComLog.WebApi.AutoMappers
                .ForMember(dest => dest.BankName, opt => opt.MapFrom(src => src.Bank.Name))
                .ForMember(dest => dest.AccountName, opt => opt.MapFrom(src => src.Account.Name))
                .ForMember(dest => dest.TransactionTypeName, opt => opt.MapFrom(src => src.TransactionType.Name))
+               .ForMember(dest => dest.MsDaily01, opt => opt.MapFrom(src => src.Account.MsDaily01))
+                .ForMember(dest => dest.CurrencyOrd, opt => opt.MapFrom(src => src.Currency.Ord))
                ;
             cfg.CreateMap<TransactionExtDto, TransactionEntity>()
                ;

@@ -60,7 +60,23 @@ namespace ComLog.WinForms.Controls
                     MessageBoxDefaultButton.Button1);
                 return false;
             }
+            if (cmbAllAccount.SelectedItem == null)
+            {
+                MessageBox.Show(
+                    @"Account must be set",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+                return false;
+            }
             if (string.IsNullOrEmpty(cmbTransactionType.Text))
+            {
+                MessageBox.Show(
+                    @"Transaction type must be set",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            if (cmbTransactionType.SelectedItem == null)
             {
                 MessageBox.Show(
                     @"Transaction type must be set",
@@ -180,7 +196,7 @@ namespace ComLog.WinForms.Controls
 
         public int? TransactionTypeId
         {
-            get { return (int?) cmbTransactionType.SelectedValue; }
+            get { return (int?)cmbTransactionType.SelectedValue; }
             set { cmbTransactionType.SelectedValue = value; }
         }
 
@@ -194,7 +210,7 @@ namespace ComLog.WinForms.Controls
                 return decimal.TryParse(tbCredits.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
                     out decimalResult)
                     ? decimalResult
-                    : (decimal?) null;
+                    : (decimal?)null;
             }
             set { tbCredits.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? ""; }
         }
@@ -207,7 +223,7 @@ namespace ComLog.WinForms.Controls
                 return decimal.TryParse(tbDebits.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
                     out decimalResult)
                     ? decimalResult
-                    : (decimal?) null;
+                    : (decimal?)null;
             }
             set { tbDebits.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? ""; }
         }
@@ -220,7 +236,7 @@ namespace ComLog.WinForms.Controls
                 return decimal.TryParse(tbCharges.Text, NumberStyles.Number, CultureInfo.InvariantCulture,
                     out decimalResult)
                     ? decimalResult
-                    : (decimal?) null;
+                    : (decimal?)null;
             }
             set { tbCharges.Text = value?.ToString("N2", CultureInfo.InvariantCulture) ?? ""; }
         }
@@ -339,6 +355,8 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.UsdDebits)];
             if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(TransactionExtDto.MsDaily01)];
+            if (column != null) column.Visible = false;
 
 
             column = dgvItems.Columns[nameof(TransactionExtDto.TransactionDate)];
@@ -401,6 +419,7 @@ namespace ComLog.WinForms.Controls
             btnRefresh.Click += btnRefresh_Click;
             btnExcelExport.Click += btnExcelExport_Click;
             btnLoadCashUpdateXls.Click += btnLoadCashUpdateXls_Click;
+            btnMsDaily.Click += btnMsDaily_Click;
             dgvItems.FilterStringChanged += dgvItems_FilterStringChanged;
             dgvItems.SortStringChanged += dgvItems_SortStringChanged;
 
@@ -588,9 +607,9 @@ namespace ComLog.WinForms.Controls
 
         private void btnExcelExport_Click(object sender, EventArgs e)
         {
-            var saveFileDialog = new SaveFileDialog {FileName = $"ComLog_{DateTime.Now:yyyyMMdd_HHmm}.xlsx"};
+            var saveFileDialog = new SaveFileDialog { FileName = $"ComLog_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            var dataTable = ((DataTable) _presenter.BindingSource.DataSource).Copy();
+            var dataTable = ((DataTable)_presenter.BindingSource.DataSource).Copy();
             dataTable.SetColumnsOrder(
                 nameof(TransactionExtDto.TransactionDate)
                 , nameof(TransactionExtDto.BankName)
@@ -612,6 +631,39 @@ namespace ComLog.WinForms.Controls
             var dataSet = new DataSet();
             dataSet.Tables.Add(dataTable);
             CreateExcelFile.CreateExcelDocument(dataSet, saveFileDialog.FileName);
+            if (File.Exists(saveFileDialog.FileName)) Process.Start(saveFileDialog.FileName);
+        }
+
+        private async void btnMsDaily_Click(object sender, EventArgs e)
+        {
+            var saveFileDialog = new SaveFileDialog { FileName = $"MS_ComLog_{dtpDateFrom.Value:yyMMdd}-{dtpDateTo.Value:yyMMdd}_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+            //var dataTable = ((DataTable)_presenter.BindingSource.DataSource).Copy();
+
+            //var dataView = dataTable.DefaultView;
+            //var filter = $"{nameof(TransactionExtDto.MsDaily01)} = {bool.TrueString}";
+            //dataView.RowFilter = filter;
+            //var sort = $"{nameof(TransactionExtDto.TransactionDate)} ASC, {nameof(TransactionExtDto.BankName)} ASC, {nameof(TransactionExtDto.CurrencyOrd)} ASC";
+            //dataView.Sort = sort;
+            //dataTable = dataView.ToTable();
+            //var columnNames = new[]
+            //{
+            //    nameof(TransactionExtDto.BankName), nameof(TransactionExtDto.CurrencyId),
+            //    nameof(TransactionExtDto.FromTo), nameof(TransactionExtDto.Description),
+            //    nameof(TransactionExtDto.Credits), nameof(TransactionExtDto.Debits),
+            //    nameof(TransactionExtDto.TransactionDate)
+            //};
+
+            //dataTable.SetColumnsOrder(columnNames);
+            //var columnIndex = columnNames.Length - 1;
+            //for (var i = dataTable.Columns.Count - 1; i > columnIndex; i--)
+            //{
+            //    dataTable.Columns.RemoveAt(i);
+            //}
+
+            //CreateExcelFile.CreateExcelDocument(dataTable, saveFileDialog.FileName);
+            var report01 = await _presenter.DataMаnager.GetAccountsReport01(dtpDateFrom.Value, dtpDateTo.Value);
+            CreateExcelFile.CreateExcelDocument(report01, saveFileDialog.FileName);
             if (File.Exists(saveFileDialog.FileName)) Process.Start(saveFileDialog.FileName);
         }
 

@@ -11,7 +11,7 @@ namespace ComLog.WinForms.Interfaces.Common
         #region Accounts
 
         Task<IEnumerable<AccountExtDto>> GetAccounts();
-
+        Task<IEnumerable<AccountMsDailyDto>> GetAccountsReport01(DateTime dateFrom, DateTime dateTo);
         #endregion //Accounts
 
         #region Banks

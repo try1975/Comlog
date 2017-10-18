@@ -189,6 +189,7 @@
     <Compile Include="AutoMappers\TransactionAutoMapper.cs" />
     <Compile Include="AutoMappers\AccountTypeAutoMapper.cs" />
     <Compile Include="AutoMappers\TransactionTypeAutoMapper.cs" />
+    <Compile Include="Controllers\AccountMsDailyController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\AccountTypesController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />

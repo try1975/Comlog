@@ -22,17 +22,20 @@ namespace ComLog.WinForms.Forms
         public RunMacroForm(string sourceFilename, MacroRunSettings macroRunSettings)
         {
             InitializeComponent();
-            ExcelBookQuery = CompositionRoot.Resolve<IExcelBookQuery>();
             _sourceFilename = sourceFilename;
             _destinationFilename = _sourceFilename.Replace(".xls", "_Converted.xls");
             _macroRunSettings = macroRunSettings;
             if (!File.Exists(_destinationFilename)) return;
-            if (MessageBox.Show($"Converted file {_destinationFilename} already downloaded. Export anyway?", @"Warning",
+            if (MessageBox.Show($@"Converted file {_destinationFilename} already downloaded. Export anyway?", @"Warning",
                     MessageBoxButtons.YesNo) == DialogResult.No) NotShow = true;
         }
 
+        public RunMacroForm(MacroRunSettings macroRunSettings)
+        {
+            _macroRunSettings = macroRunSettings;
+        }
+
         public bool NotShow { get; }
-        private IExcelBookQuery ExcelBookQuery { get; }
 
         private void RunMacro()
         {
@@ -91,7 +94,8 @@ namespace ComLog.WinForms.Forms
 
         private void LoadInDb()
         {
-            MessageWriter($"Количество записей в таблице импорта: {ExcelBookQuery.GetEntities().Count()}");
+            var excelBookQuery = CompositionRoot.Resolve<IExcelBookQuery>();
+            MessageWriter($"Количество записей в таблице импорта: {excelBookQuery.GetEntities().Count()}");
             MessageWriter($"Импорт из файла: {_destinationFilename}");
             var loaderSettings = new LoaderSettings
             {
@@ -106,7 +110,7 @@ namespace ComLog.WinForms.Forms
             };
             loaderSettings.OnMessage += MessageWriter;
             new LoaderAce(loaderSettings).Load();
-            MessageWriter($"Количество записей в таблице импорта: {ExcelBookQuery.GetEntities().Count()}");
+            MessageWriter($"Количество записей в таблице импорта: {excelBookQuery.GetEntities().Count()}");
         }
 
         private void MessageWriter(string message)
