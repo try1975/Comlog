@@ -638,6 +638,9 @@ namespace ComLog.WinForms.Controls
         {
             var saveFileDialog = new SaveFileDialog { FileName = $"MS_ComLog_{dtpDateFrom.Value:yyMMdd}-{dtpDateTo.Value:yyMMdd}_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            #region comment
+
             //var dataTable = ((DataTable)_presenter.BindingSource.DataSource).Copy();
 
             //var dataView = dataTable.DefaultView;
@@ -662,9 +665,37 @@ namespace ComLog.WinForms.Controls
             //}
 
             //CreateExcelFile.CreateExcelDocument(dataTable, saveFileDialog.FileName);
+
+            #endregion
+
             var report01 = await _presenter.DataMаnager.GetAccountsReport01(dtpDateFrom.Value, dtpDateTo.Value);
             CreateExcelFile.CreateExcelDocument(report01, saveFileDialog.FileName);
-            if (File.Exists(saveFileDialog.FileName)) Process.Start(saveFileDialog.FileName);
+            var macroRunSettings = new MacroRunSettings
+            {
+                MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
+                MacroName = ConfigurationManager.AppSettings[nameof(MacroSettings.MsDailyMacro)],
+                SourceFilename = saveFileDialog.FileName,
+                DestinationFilename = saveFileDialog.FileName.Replace(".xls", "_Formated.xls")
+            };
+            if (dtpDateFrom.Value != dtpDateTo.Value)
+            {
+                macroRunSettings.Params["Period"] = $"{dtpDateFrom.Value:dd-MMM-yy} to {dtpDateTo.Value:dd-MMM-yy}";
+            }
+            else
+            {
+                macroRunSettings.Params["Period"] = $"{dtpDateFrom.Value:dd-MMM-yy}";
+            }
+
+            var runMacroForm = new RunMacroForm(macroRunSettings);
+            if (runMacroForm.NotShow)
+            {
+                runMacroForm.Close();
+            }
+            else
+            {
+                runMacroForm.ShowDialog();
+            }
+            if (File.Exists(macroRunSettings.DestinationFilename)) Process.Start(macroRunSettings.DestinationFilename);
         }
 
         private void btnLoadCashUpdateXls_Click(object sender, EventArgs e)
@@ -674,9 +705,11 @@ namespace ComLog.WinForms.Controls
             var macroRunSettings = new MacroRunSettings
             {
                 MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
-                MacroName = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)]
+                MacroName = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)],
+                SourceFilename = openFileDialog.FileName,
+                DestinationFilename = openFileDialog.FileName.Replace(".xls", "_Converted.xls")
             };
-            var runMacroForm = new RunMacroForm(openFileDialog.FileName, macroRunSettings);
+            var runMacroForm = new RunMacroForm(macroRunSettings);
             if (runMacroForm.NotShow)
             {
                 runMacroForm.Close();

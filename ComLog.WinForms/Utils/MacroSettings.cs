@@ -4,5 +4,6 @@
     {
         public string MacroWorkBook { get; set; }
         public string CashUpdateMacro { get; set; }
+        public string MsDailyMacro { get; set; }
     }
 }

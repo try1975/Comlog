@@ -15,30 +15,22 @@ namespace ComLog.WinForms.Forms
 {
     public partial class RunMacroForm : Form
     {
-        private readonly string _destinationFilename;
         private readonly MacroRunSettings _macroRunSettings;
-        private readonly string _sourceFilename;
-
-        public RunMacroForm(string sourceFilename, MacroRunSettings macroRunSettings)
-        {
-            InitializeComponent();
-            _sourceFilename = sourceFilename;
-            _destinationFilename = _sourceFilename.Replace(".xls", "_Converted.xls");
-            _macroRunSettings = macroRunSettings;
-            if (!File.Exists(_destinationFilename)) return;
-            if (MessageBox.Show($@"Converted file {_destinationFilename} already downloaded. Export anyway?", @"Warning",
-                    MessageBoxButtons.YesNo) == DialogResult.No) NotShow = true;
-        }
+        public bool NotShow { get; }
 
         public RunMacroForm(MacroRunSettings macroRunSettings)
         {
+            InitializeComponent();
             _macroRunSettings = macroRunSettings;
+            if (!File.Exists(_macroRunSettings.DestinationFilename)) return;
+            if (MessageBox.Show($@"Converted file {_macroRunSettings.DestinationFilename} already exists. Continue anyway?", @"Warning",
+                    MessageBoxButtons.YesNo) == DialogResult.No) NotShow = true;
         }
-
-        public bool NotShow { get; }
 
         private void RunMacro()
         {
+            #region create and open
+
             //~~> Define your Excel Objects
             var xlApp = new Application();
 
@@ -48,13 +40,32 @@ namespace ComLog.WinForms.Forms
             var path = Path.GetFullPath(_macroRunSettings.MacroWorkBook);
             var xlWorkBook = xlApp.Workbooks.Open(path);
 
+            #endregion
+
             //~~> Run the macros by supplying the necessary arguments
-            if (
-                _macroRunSettings.MacroName.Equals(
-                    ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)]))
-                xlApp.Run(_macroRunSettings.MacroName, _sourceFilename, _destinationFilename, DateTime.Today);
-            else
-                xlApp.Run(_macroRunSettings.MacroName, _sourceFilename, _destinationFilename);
+            var cashUpdateMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)];
+            var msDailyMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.MsDailyMacro)];
+            try
+            {
+                if (_macroRunSettings.MacroName.Equals(cashUpdateMacro))
+                {
+                    xlApp.Run(_macroRunSettings.MacroName, _macroRunSettings.SourceFilename, _macroRunSettings.DestinationFilename, DateTime.Today);
+                }
+                else if (_macroRunSettings.MacroName.Equals(msDailyMacro))
+                {
+                    xlApp.Run(_macroRunSettings.MacroName, _macroRunSettings.SourceFilename, _macroRunSettings.DestinationFilename, _macroRunSettings.Params["Period"]);
+                }
+                else
+                {
+                    xlApp.Run(_macroRunSettings.MacroName, _macroRunSettings.SourceFilename, _macroRunSettings.DestinationFilename);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageWriter(e.Message);
+            }
+
+            #region close and release
 
             //~~> Clean-up: Close the workbook
             xlWorkBook.Close(false);
@@ -65,6 +76,8 @@ namespace ComLog.WinForms.Forms
             //~~> Clean Up
             ReleaseObject(xlApp);
             ReleaseObject(xlWorkBook);
+
+            #endregion
         }
 
         //~~> Release the objects
@@ -87,19 +100,28 @@ namespace ComLog.WinForms.Forms
 
         private void RunMacroForm_Shown(object sender, EventArgs e)
         {
+            MessageWriter($"Started at {DateTime.Now}.");
             RunMacro();
-            // load result to db
-            LoadInDb();
+            var cashUpdateMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)];
+            if (_macroRunSettings.MacroName.Equals(cashUpdateMacro))
+            {
+                // load result to db
+                ImportRun();
+            }
+            else 
+            {
+                MessageWriter($"Completed at {DateTime.Now}.");
+            }
         }
 
-        private void LoadInDb()
+        private void ImportRun()
         {
             var excelBookQuery = CompositionRoot.Resolve<IExcelBookQuery>();
             MessageWriter($"Количество записей в таблице импорта: {excelBookQuery.GetEntities().Count()}");
-            MessageWriter($"Импорт из файла: {_destinationFilename}");
+            MessageWriter($"Импорт из файла: {_macroRunSettings.DestinationFilename}");
             var loaderSettings = new LoaderSettings
             {
-                LoadedFilePath = _destinationFilename,
+                LoadedFilePath = _macroRunSettings.DestinationFilename,
                 SqlConnectionString = ConfigurationManager.ConnectionStrings["ComLog"].ConnectionString,
                 BeforeLoadScriptFilename =
                     ConfigurationManager.AppSettings[nameof(LoaderSettings.BeforeLoadScriptFilename)],
