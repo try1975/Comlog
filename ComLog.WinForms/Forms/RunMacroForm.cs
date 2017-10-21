@@ -108,10 +108,10 @@ namespace ComLog.WinForms.Forms
                 // load result to db
                 ImportRun();
             }
-            else 
-            {
-                MessageWriter($"Completed at {DateTime.Now}.");
-            }
+            MessageWriter($"Completed at {DateTime.Now}.");
+            btnOk.Enabled = true;
+            btnOk.Focus();
+            btnCancel.Enabled = false;
         }
 
         private void ImportRun()

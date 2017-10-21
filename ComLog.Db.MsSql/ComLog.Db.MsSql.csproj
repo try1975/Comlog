@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappings\DailyMap.cs" />
     <Compile Include="Mappings\AccountMap.cs" />
     <Compile Include="Mappings\AccountTypeMap.cs" />
     <Compile Include="Mappings\BankMap.cs" />
@@ -100,8 +101,13 @@
     <Compile Include="Migrations\201710160801521_V10.Designer.cs">
       <DependentUpon>201710160801521_V10.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710211632128_V11.cs" />
+    <Compile Include="Migrations\201710211632128_V11.Designer.cs">
+      <DependentUpon>201710211632128_V11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryProcessors\DailyQuery.cs" />
     <Compile Include="QueryProcessors\AccountQuery.cs" />
     <Compile Include="QueryProcessors\AccountTypeQuery.cs" />
     <Compile Include="QueryProcessors\BankQuery.cs" />
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710160801521_V10.resx">
       <DependentUpon>201710160801521_V10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710211632128_V11.resx">
+      <DependentUpon>201710211632128_V11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

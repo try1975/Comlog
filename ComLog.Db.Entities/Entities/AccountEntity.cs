@@ -14,12 +14,16 @@ namespace ComLog.Db.Entities
         public string CurrencyId { get; set; }
 
         public int AccountTypeId { get; set; }
+        
 
         public AccountTypeEntity AccountType { get; set; }
 
         public BankEntity Bank { get; set; }
 
         public CurrencyEntity Currency { get; set; }
+
+        public int? DailyId { get; set; }
+        public DailyEntity Daily { get; set; }
 
         public DateTime? Closed { get; set; }
 

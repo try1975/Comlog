@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 using ComLog.Db.Entities;
 
@@ -51,6 +50,11 @@ namespace ComLog.Db.MsSql.Mappings
                .HasForeignKey(s => s.CurrencyId)
                .WillCascadeOnDelete(false)
                ;
+            HasOptional(s => s.Daily)
+                .WithMany(l => l.Accounts)
+                .HasForeignKey(s => s.DailyId)
+                .WillCascadeOnDelete(false)
+                ;
         }
     }
 }

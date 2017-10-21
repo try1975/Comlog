@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public string BankName { get; set; }
+        public string DailyName { get; set; }
         public string CurrencyId { get; set; }
         public int CurrencyOrd { get; set; }
         public decimal PrevBalance { get; set; }

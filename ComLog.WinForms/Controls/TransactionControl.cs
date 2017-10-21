@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComLog.Dto.Ext;
@@ -16,11 +17,13 @@ using ComLog.WinForms.Interfaces.Data;
 using ComLog.WinForms.Interfaces.Filter;
 using ComLog.WinForms.Presenters;
 using ComLog.WinForms.Utils;
+using log4net;
 
 namespace ComLog.WinForms.Controls
 {
     public partial class TransactionControl : UserControl, ITransactionView
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IPresenter _presenter;
         private readonly ITransactionViewFilter _transactionViewFilter;
         private bool _isEventHandlerSets;
@@ -357,6 +360,8 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.MsDaily01)];
             if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(TransactionExtDto.CurrencyOrd)];
+            if (column != null) column.Visible = false;
 
 
             column = dgvItems.Columns[nameof(TransactionExtDto.TransactionDate)];
@@ -636,7 +641,19 @@ namespace ComLog.WinForms.Controls
 
         private async void btnMsDaily_Click(object sender, EventArgs e)
         {
-            var saveFileDialog = new SaveFileDialog { FileName = $"MS_ComLog_{dtpDateFrom.Value:yyMMdd}-{dtpDateTo.Value:yyMMdd}_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
+            var report01 = await _presenter.DataMаnager.GetAccountsReport01(dtpDateFrom.Value, dtpDateTo.Value);
+            if (report01 == null)
+            {
+                const string errorText = "Data receive error.";
+                Log.Error(errorText);
+                MessageBox.Show(errorText, @"Error", MessageBoxButtons.OK);
+                return;
+            }
+            var fileName = $"MS_ComLog_{dtpDateFrom.Value:yyMMdd}";
+            if (dtpDateFrom.Value != dtpDateTo.Value) fileName = fileName + $"_{dtpDateTo.Value:yyMMdd}";
+            if (dtpDateTo.Value.Date != DateTime.Today) fileName = fileName + $"_{DateTime.Today:yyMMdd}";
+            fileName = fileName + $"_{DateTime.Now:HHmm}.xlsx";
+            var saveFileDialog = new SaveFileDialog { FileName = fileName };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
             #region comment
@@ -668,7 +685,6 @@ namespace ComLog.WinForms.Controls
 
             #endregion
 
-            var report01 = await _presenter.DataMаnager.GetAccountsReport01(dtpDateFrom.Value, dtpDateTo.Value);
             CreateExcelFile.CreateExcelDocument(report01, saveFileDialog.FileName);
             var macroRunSettings = new MacroRunSettings
             {
@@ -695,7 +711,18 @@ namespace ComLog.WinForms.Controls
             {
                 runMacroForm.ShowDialog();
             }
-            if (File.Exists(macroRunSettings.DestinationFilename)) Process.Start(macroRunSettings.DestinationFilename);
+            if (!File.Exists(macroRunSettings.DestinationFilename)) return;
+            try
+            {
+                File.Delete(macroRunSettings.SourceFilename);
+                File.Move(macroRunSettings.DestinationFilename, macroRunSettings.SourceFilename);
+                Process.Start(macroRunSettings.SourceFilename);
+            }
+            catch (Exception exception)
+            {
+                Log.Error(exception);
+                MessageBox.Show(exception.ToString());
+            }
         }
 
         private void btnLoadCashUpdateXls_Click(object sender, EventArgs e)

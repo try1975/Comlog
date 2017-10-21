@@ -169,12 +169,12 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.DisplayIndex = 2;
             column = dgvItems.Columns[nameof(AccountExtDto.CurrencyId)];
             if (column != null) column.DisplayIndex = 3;
-            column = dgvItems.Columns[nameof(AccountExtDto.Balance)];
-            if (column != null) column.DisplayIndex = 4;
             column = dgvItems.Columns[nameof(AccountExtDto.DbBalance)];
-            if (column != null) column.DisplayIndex = 5;
+            if (column != null) column.DisplayIndex = 4;
+            column = dgvItems.Columns[nameof(AccountExtDto.Balance)];
+            if (column != null) column.DisplayIndex = dgvItems.Columns.Count - 2;
             column = dgvItems.Columns[nameof(AccountExtDto.DeltaBalance)];
-            if (column != null) column.DisplayIndex = 6;
+            if (column != null) column.DisplayIndex = dgvItems.Columns.Count - 1; ;
 
 
             column = dgvItems.Columns[nameof(AccountDto.Name)];
@@ -225,7 +225,7 @@ namespace ComLog.WinForms.Controls
             cbClosed.CheckedChanged += cbClosed_CheckedChanged;
             cbShowClosed.CheckedChanged += cbShowClosed_CheckedChanged;
             cbOnlyTodayActivity.CheckedChanged += cbOnlyTodayActivity_CheckedChanged;
-            
+
         }
 
         #endregion //IRefreshedView
