@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C00F992-EAB5-4CE2-B09C-AEFEBD5923BF}</ProjectGuid>
+    <ProjectGuid>{3DAEE35B-F9C5-4F49-87E8-1D568EECB50B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ComLog.Dto</RootNamespace>
-    <AssemblyName>ComLog.Dto</AssemblyName>
+    <RootNamespace>ComLog.Data.Interfaces</RootNamespace>
+    <AssemblyName>ComLog.Data.Interfaces</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,27 +35,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dto\AccountDto.cs" />
-    <Compile Include="Dto\AccountTypeDto.cs" />
-    <Compile Include="Dto\BankDto.cs" />
-    <Compile Include="Dto\CurrencyDto.cs" />
-    <Compile Include="Dto\Ext\AccountBalanceDto.cs" />
-    <Compile Include="Dto\Ext\AccountExtDto.cs" />
-    <Compile Include="Dto\Ext\AccountMsDailyDto.cs" />
-    <Compile Include="Dto\Ext\CheckBalanceDto.cs" />
-    <Compile Include="Dto\Ext\TransactionExtDto.cs" />
-    <Compile Include="Dto\Ext\TransactionReport01Dto.cs" />
-    <Compile Include="Dto\TransactionDto.cs" />
-    <Compile Include="Dto\TransactionTypeDto.cs" />
-    <Compile Include="IDto.cs" />
-    <Compile Include="ITrackedDto.cs" />
+    <Compile Include="IAccount.cs" />
+    <Compile Include="IEntity.cs" />
+    <Compile Include="ITrackedEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ComLog.Data.Interfaces\ComLog.Data.Interfaces.csproj">
-      <Project>{3DAEE35B-F9C5-4F49-87E8-1D568EECB50B}</Project>
-      <Name>ComLog.Data.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

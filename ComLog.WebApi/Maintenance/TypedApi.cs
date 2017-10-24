@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using ComLog.Data.Interfaces;
 using ComLog.Db.Entities;
 using ComLog.Dto;
 using log4net;

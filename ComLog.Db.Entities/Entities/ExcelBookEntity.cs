@@ -1,4 +1,5 @@
 ﻿using System;
+using ComLog.Data.Interfaces;
 
 namespace ComLog.Db.Entities
 {

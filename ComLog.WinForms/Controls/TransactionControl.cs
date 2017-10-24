@@ -15,6 +15,7 @@ using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
 using ComLog.WinForms.Interfaces.Filter;
+using ComLog.WinForms.Ninject;
 using ComLog.WinForms.Presenters;
 using ComLog.WinForms.Utils;
 using log4net;
@@ -35,6 +36,19 @@ namespace ComLog.WinForms.Controls
             _presenter = new TransactionPresenter(this, transactionDataManager, dataMаnager);
             dtpDateFrom.Value = _transactionViewFilter.DateFrom;
             dtpDateTo.Value = _transactionViewFilter.DateTo;
+            //var accountControl = CompositionRoot.Resolve<IAccountView>();
+            //accountControl.HideAll();
+            //AddControlToWorkArea((Control)accountControl);
+            pnlAccounts.Visible = false;
+            splitter2.Visible = false;
+            pnlDetails.Visible = true;
+        }
+
+        private void AddControlToWorkArea(Control control)
+        {
+            control.Dock = DockStyle.Fill;
+            pnlAccounts.Controls.Clear();
+            pnlAccounts.Controls.Add(control);
         }
 
         private bool ValidateData()
@@ -596,6 +610,7 @@ namespace ComLog.WinForms.Controls
         private void dgvItems_SortStringChanged(object sender, EventArgs e)
         {
             _presenter.BindingSource.Sort = dgvItems.SortString;
+            AfterGridDataChange();
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

@@ -23,6 +23,7 @@ namespace ComLog.WinForms.Controls
         private readonly IPresenter _presenter;
         private DateTime? _closed;
         private bool _isEventHandlerSets;
+        private bool _hideAllMode;
 
         public AccountControl(IAccountDataManager accountDataManager, IDataMаnager dataMаnager)
         {
@@ -85,6 +86,8 @@ namespace ComLog.WinForms.Controls
             set { cmbAccountType.SelectedValue = value; }
         }
 
+        public int? DailyId { get; set; }
+
         public DateTime? Closed
         {
             get { return _closed; }
@@ -137,6 +140,18 @@ namespace ComLog.WinForms.Controls
 
         #endregion //DetailsLists
 
+        #region Methods
+
+        public void HideAll()
+        {
+            pnlDetails.Visible = false;
+            splitter1.Visible = false;
+            panel1.Visible = false;
+            _hideAllMode = true;
+        }
+
+        #endregion //Methods
+
         #endregion //IAccountView implementation
 
         #region IRefreshedView
@@ -157,6 +172,28 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(AccountExtDto.DisplayMember)];
             if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(AccountExtDto.DailyId)];
+            if (column != null) column.Visible = false;
+
+            if (_hideAllMode)
+            {
+                column = dgvItems.Columns[nameof(AccountExtDto.AccountTypeName)];
+                if (column != null) column.Visible = false;
+                column = dgvItems.Columns[nameof(AccountExtDto.CurrencyId)];
+                if (column != null) column.Visible = false;
+                column = dgvItems.Columns[nameof(AccountExtDto.Balance)];
+                if (column != null) column.Visible = false;
+                column = dgvItems.Columns[nameof(AccountExtDto.DeltaBalance)];
+                if (column != null) column.Visible = false;
+                column = dgvItems.Columns[nameof(AccountExtDto.Closed)];
+                if (column != null) column.Visible = false;
+                column = dgvItems.Columns[nameof(AccountExtDto.MsDaily01)];
+                if (column != null) column.Visible = false;
+                column = dgvItems.Columns[nameof(AccountExtDto.ChangeAt)];
+                if (column != null) column.Visible = false;
+                column = dgvItems.Columns[nameof(AccountExtDto.ChangeBy)];
+                if (column != null) column.Visible = false;
+            }
 
             column = dgvItems.Columns[nameof(AccountDto.Name)];
             if (column != null) column.HeaderText = @"Account Name";
@@ -368,6 +405,7 @@ namespace ComLog.WinForms.Controls
         private void dgvItems_SortStringChanged(object sender, EventArgs e)
         {
             _presenter.BindingSource.Sort = dgvItems.SortString;
+            AfterGridDataChange();
         }
 
         private void cbClosed_CheckedChanged(object sender, EventArgs e)

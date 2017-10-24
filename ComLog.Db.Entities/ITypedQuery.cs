@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using ComLog.Data.Interfaces;
 
 namespace ComLog.Db.Entities
 {

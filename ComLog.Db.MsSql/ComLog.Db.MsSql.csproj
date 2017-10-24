@@ -123,6 +123,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ComLog.Data.Interfaces\ComLog.Data.Interfaces.csproj">
+      <Project>{3DAEE35B-F9C5-4F49-87E8-1D568EECB50B}</Project>
+      <Name>ComLog.Data.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ComLog.Db.Entities\ComLog.Db.Entities.csproj">
       <Project>{CC4E6D4B-F05C-455E-944B-289621F14223}</Project>
       <Name>ComLog.Db.Entities</Name>

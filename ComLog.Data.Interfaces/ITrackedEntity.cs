@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ComLog.Db.Entities
+namespace ComLog.Data.Interfaces
 {
     public interface ITrackedEntity
     {

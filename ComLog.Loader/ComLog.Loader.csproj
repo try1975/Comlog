@@ -108,6 +108,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ComLog.Data.Interfaces\ComLog.Data.Interfaces.csproj">
+      <Project>{3DAEE35B-F9C5-4F49-87E8-1D568EECB50B}</Project>
+      <Name>ComLog.Data.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ComLog.Db.Entities\ComLog.Db.Entities.csproj">
       <Project>{cc4e6d4b-f05c-455e-944b-289621f14223}</Project>
       <Name>ComLog.Db.Entities</Name>

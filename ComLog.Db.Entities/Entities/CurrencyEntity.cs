@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ComLog.Data.Interfaces;
 
 namespace ComLog.Db.Entities
 {

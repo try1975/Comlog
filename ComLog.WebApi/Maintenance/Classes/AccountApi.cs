@@ -63,7 +63,8 @@ namespace ComLog.WebApi.Maintenance.Classes
                     AccountTypeName = o.account.AccountType.Name,
                     DbBalance = o.balance == null ? 0 : o.balance.DbBalance,
                     DeltaBalance = (o.account.Balance ?? 0) - (o.balance == null ? 0 : o.balance.DbBalance),
-                    MsDaily01 = o.account.MsDaily01
+                    MsDaily01 = o.account.MsDaily01,
+                    DailyId = o.account.DailyId
                 })
                 .ToList();
             return list;

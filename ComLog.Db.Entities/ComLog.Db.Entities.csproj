@@ -46,8 +46,6 @@
     <Compile Include="Entities\ExcelBookEntity.cs" />
     <Compile Include="Entities\TransactionEntity.cs" />
     <Compile Include="Entities\TransactionTypeEntity.cs" />
-    <Compile Include="IEntity.cs" />
-    <Compile Include="ITrackedEntity.cs" />
     <Compile Include="ITypedQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryProcessors\IDailyQuery.cs" />
@@ -62,6 +60,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ComLog.Data.Interfaces\ComLog.Data.Interfaces.csproj">
+      <Project>{3DAEE35B-F9C5-4F49-87E8-1D568EECB50B}</Project>
+      <Name>ComLog.Data.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

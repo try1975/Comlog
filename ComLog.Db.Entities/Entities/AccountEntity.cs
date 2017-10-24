@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using ComLog.Data.Interfaces;
 
 namespace ComLog.Db.Entities
 {
-    public class AccountEntity : IEntity<int>, ITrackedEntity
+    public class AccountEntity : IEntity<int>, IAccount, ITrackedEntity
     {
         public string Name { get; set; }
 

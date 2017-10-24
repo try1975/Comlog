@@ -71,7 +71,11 @@
             this.btnAddNew = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlGrid = new System.Windows.Forms.Panel();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.panel16 = new System.Windows.Forms.Panel();
             this.dgvItems = new ADGV.AdvancedDataGridView();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.pnlAccounts = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.lblSumDebits = new System.Windows.Forms.Label();
@@ -80,6 +84,8 @@
             this.lblSumCredits = new System.Windows.Forms.Label();
             this.lblRecCount = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.btnMsDaily = new System.Windows.Forms.Button();
             this.panel12 = new System.Windows.Forms.Panel();
             this.btnLoadCashUpdateXls = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -94,8 +100,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.btnMsDaily = new System.Windows.Forms.Button();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -111,14 +115,16 @@
             this.pnlId.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             this.pnlGrid.SuspendLayout();
+            this.panel14.SuspendLayout();
+            this.panel16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.panel12.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
-            this.panel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -130,6 +136,7 @@
             this.pnlDetails.Name = "pnlDetails";
             this.pnlDetails.Size = new System.Drawing.Size(398, 514);
             this.pnlDetails.TabIndex = 6;
+            this.pnlDetails.Visible = false;
             // 
             // pnlFields
             // 
@@ -549,14 +556,32 @@
             // 
             // pnlGrid
             // 
-            this.pnlGrid.Controls.Add(this.dgvItems);
+            this.pnlGrid.Controls.Add(this.panel14);
             this.pnlGrid.Controls.Add(this.panel2);
             this.pnlGrid.Controls.Add(this.panel1);
             this.pnlGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlGrid.Location = new System.Drawing.Point(0, 0);
+            this.pnlGrid.Location = new System.Drawing.Point(307, 0);
             this.pnlGrid.Name = "pnlGrid";
-            this.pnlGrid.Size = new System.Drawing.Size(852, 514);
+            this.pnlGrid.Size = new System.Drawing.Size(545, 514);
             this.pnlGrid.TabIndex = 9;
+            // 
+            // panel14
+            // 
+            this.panel14.Controls.Add(this.panel16);
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel14.Location = new System.Drawing.Point(0, 41);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(545, 445);
+            this.panel14.TabIndex = 4;
+            // 
+            // panel16
+            // 
+            this.panel16.Controls.Add(this.dgvItems);
+            this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel16.Location = new System.Drawing.Point(0, 0);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(545, 445);
+            this.panel16.TabIndex = 2;
             // 
             // dgvItems
             // 
@@ -567,12 +592,28 @@
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.DateWithTime = false;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 41);
+            this.dgvItems.Location = new System.Drawing.Point(0, 0);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.ReadOnly = true;
-            this.dgvItems.Size = new System.Drawing.Size(852, 445);
+            this.dgvItems.Size = new System.Drawing.Size(545, 445);
             this.dgvItems.TabIndex = 1;
             this.dgvItems.TimeFilter = false;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Location = new System.Drawing.Point(304, 0);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 514);
+            this.splitter2.TabIndex = 1;
+            this.splitter2.TabStop = false;
+            // 
+            // pnlAccounts
+            // 
+            this.pnlAccounts.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlAccounts.Location = new System.Drawing.Point(0, 0);
+            this.pnlAccounts.Name = "pnlAccounts";
+            this.pnlAccounts.Size = new System.Drawing.Size(304, 514);
+            this.pnlAccounts.TabIndex = 0;
             // 
             // panel2
             // 
@@ -585,7 +626,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 486);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(852, 28);
+            this.panel2.Size = new System.Drawing.Size(545, 28);
             this.panel2.TabIndex = 3;
             // 
             // label14
@@ -655,8 +696,26 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(852, 41);
+            this.panel1.Size = new System.Drawing.Size(545, 41);
             this.panel1.TabIndex = 2;
+            // 
+            // panel13
+            // 
+            this.panel13.Controls.Add(this.btnMsDaily);
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel13.Location = new System.Drawing.Point(705, 0);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(104, 41);
+            this.panel13.TabIndex = 8;
+            // 
+            // btnMsDaily
+            // 
+            this.btnMsDaily.Location = new System.Drawing.Point(14, 10);
+            this.btnMsDaily.Name = "btnMsDaily";
+            this.btnMsDaily.Size = new System.Drawing.Size(75, 23);
+            this.btnMsDaily.TabIndex = 0;
+            this.btnMsDaily.Text = "MS daily";
+            this.btnMsDaily.UseVisualStyleBackColor = true;
             // 
             // panel12
             // 
@@ -792,29 +851,13 @@
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
-            // panel13
-            // 
-            this.panel13.Controls.Add(this.btnMsDaily);
-            this.panel13.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel13.Location = new System.Drawing.Point(705, 0);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(104, 41);
-            this.panel13.TabIndex = 8;
-            // 
-            // btnMsDaily
-            // 
-            this.btnMsDaily.Location = new System.Drawing.Point(14, 10);
-            this.btnMsDaily.Name = "btnMsDaily";
-            this.btnMsDaily.Size = new System.Drawing.Size(75, 23);
-            this.btnMsDaily.TabIndex = 0;
-            this.btnMsDaily.Text = "MS daily";
-            this.btnMsDaily.UseVisualStyleBackColor = true;
-            // 
             // TransactionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlGrid);
+            this.Controls.Add(this.splitter2);
+            this.Controls.Add(this.pnlAccounts);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlDetails);
             this.Name = "TransactionControl";
@@ -845,16 +888,18 @@
             this.pnlId.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
             this.pnlGrid.ResumeLayout(false);
+            this.panel14.ResumeLayout(false);
+            this.panel16.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel10.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -929,5 +974,9 @@
         private System.Windows.Forms.Button btnDateFromAdd;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Button btnMsDaily;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.Panel panel16;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.Panel pnlAccounts;
     }
 }

@@ -4,6 +4,7 @@ using System.Data.Entity.Migrations;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using ComLog.Data.Interfaces;
 using ComLog.Db.Entities;
 using Z.EntityFramework.Plus;
 
