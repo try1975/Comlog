@@ -174,6 +174,13 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(AccountExtDto.DailyId)];
             if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(AccountExtDto.ChangeAt)];
+            if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(AccountExtDto.ChangeBy)];
+            if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(AccountExtDto.Closed)];
+            if (column != null) column.Visible = cbShowClosed.Checked;
+
 
             if (_hideAllMode)
             {

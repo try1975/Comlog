@@ -170,6 +170,7 @@ namespace ComLog.WinForms.Controls
             // 
             this.cmbAccountType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbAccountType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAccountType.Enabled = false;
             this.cmbAccountType.FormattingEnabled = true;
             this.cmbAccountType.Location = new System.Drawing.Point(97, 5);
@@ -200,6 +201,7 @@ namespace ComLog.WinForms.Controls
             // 
             this.cmbCurrency.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCurrency.Enabled = false;
             this.cmbCurrency.FormattingEnabled = true;
             this.cmbCurrency.Location = new System.Drawing.Point(97, 6);
@@ -288,6 +290,7 @@ namespace ComLog.WinForms.Controls
             // 
             this.cmbBank.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBank.Enabled = false;
             this.cmbBank.FormattingEnabled = true;
             this.cmbBank.Location = new System.Drawing.Point(97, 4);
@@ -453,7 +456,7 @@ namespace ComLog.WinForms.Controls
             // 
             this.cbShowClosed.AutoSize = true;
             this.cbShowClosed.Location = new System.Drawing.Point(13, 16);
-            this.cbShowClosed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbShowClosed.Margin = new System.Windows.Forms.Padding(2);
             this.cbShowClosed.Name = "cbShowClosed";
             this.cbShowClosed.Size = new System.Drawing.Size(87, 17);
             this.cbShowClosed.TabIndex = 0;
@@ -473,7 +476,7 @@ namespace ComLog.WinForms.Controls
             // 
             this.cbOnlyTodayActivity.AutoSize = true;
             this.cbOnlyTodayActivity.Location = new System.Drawing.Point(13, 16);
-            this.cbOnlyTodayActivity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbOnlyTodayActivity.Margin = new System.Windows.Forms.Padding(2);
             this.cbOnlyTodayActivity.Name = "cbOnlyTodayActivity";
             this.cbOnlyTodayActivity.Size = new System.Drawing.Size(134, 17);
             this.cbOnlyTodayActivity.TabIndex = 0;

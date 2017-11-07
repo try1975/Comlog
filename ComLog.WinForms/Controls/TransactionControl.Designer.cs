@@ -74,8 +74,6 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.panel16 = new System.Windows.Forms.Panel();
             this.dgvItems = new ADGV.AdvancedDataGridView();
-            this.splitter2 = new System.Windows.Forms.Splitter();
-            this.pnlAccounts = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.lblSumDebits = new System.Windows.Forms.Label();
@@ -100,6 +98,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.pnlAccounts = new System.Windows.Forms.Panel();
+            this.btnLoadCashMovement = new System.Windows.Forms.Button();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -347,6 +348,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbTransactionType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbTransactionType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbTransactionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTransactionType.Enabled = false;
             this.cmbTransactionType.FormattingEnabled = true;
             this.cmbTransactionType.Location = new System.Drawing.Point(97, 6);
@@ -560,18 +562,18 @@
             this.pnlGrid.Controls.Add(this.panel2);
             this.pnlGrid.Controls.Add(this.panel1);
             this.pnlGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlGrid.Location = new System.Drawing.Point(307, 0);
+            this.pnlGrid.Location = new System.Drawing.Point(59, 0);
             this.pnlGrid.Name = "pnlGrid";
-            this.pnlGrid.Size = new System.Drawing.Size(545, 514);
+            this.pnlGrid.Size = new System.Drawing.Size(793, 514);
             this.pnlGrid.TabIndex = 9;
             // 
             // panel14
             // 
             this.panel14.Controls.Add(this.panel16);
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel14.Location = new System.Drawing.Point(0, 41);
+            this.panel14.Location = new System.Drawing.Point(0, 53);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(545, 445);
+            this.panel14.Size = new System.Drawing.Size(793, 433);
             this.panel14.TabIndex = 4;
             // 
             // panel16
@@ -580,7 +582,7 @@
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel16.Location = new System.Drawing.Point(0, 0);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(545, 445);
+            this.panel16.Size = new System.Drawing.Size(793, 433);
             this.panel16.TabIndex = 2;
             // 
             // dgvItems
@@ -595,25 +597,9 @@
             this.dgvItems.Location = new System.Drawing.Point(0, 0);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.ReadOnly = true;
-            this.dgvItems.Size = new System.Drawing.Size(545, 445);
+            this.dgvItems.Size = new System.Drawing.Size(793, 433);
             this.dgvItems.TabIndex = 1;
             this.dgvItems.TimeFilter = false;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Location = new System.Drawing.Point(304, 0);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 514);
-            this.splitter2.TabIndex = 1;
-            this.splitter2.TabStop = false;
-            // 
-            // pnlAccounts
-            // 
-            this.pnlAccounts.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlAccounts.Location = new System.Drawing.Point(0, 0);
-            this.pnlAccounts.Name = "pnlAccounts";
-            this.pnlAccounts.Size = new System.Drawing.Size(304, 514);
-            this.pnlAccounts.TabIndex = 0;
             // 
             // panel2
             // 
@@ -626,7 +612,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 486);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(545, 28);
+            this.panel2.Size = new System.Drawing.Size(793, 28);
             this.panel2.TabIndex = 3;
             // 
             // label14
@@ -696,16 +682,16 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(545, 41);
+            this.panel1.Size = new System.Drawing.Size(793, 53);
             this.panel1.TabIndex = 2;
             // 
             // panel13
             // 
             this.panel13.Controls.Add(this.btnMsDaily);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel13.Location = new System.Drawing.Point(705, 0);
+            this.panel13.Location = new System.Drawing.Point(723, 0);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(104, 41);
+            this.panel13.Size = new System.Drawing.Size(104, 53);
             this.panel13.TabIndex = 8;
             // 
             // btnMsDaily
@@ -719,20 +705,21 @@
             // 
             // panel12
             // 
+            this.panel12.Controls.Add(this.btnLoadCashMovement);
             this.panel12.Controls.Add(this.btnLoadCashUpdateXls);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel12.Location = new System.Drawing.Point(573, 0);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(132, 41);
+            this.panel12.Size = new System.Drawing.Size(150, 53);
             this.panel12.TabIndex = 7;
             // 
             // btnLoadCashUpdateXls
             // 
-            this.btnLoadCashUpdateXls.Location = new System.Drawing.Point(14, 10);
+            this.btnLoadCashUpdateXls.Location = new System.Drawing.Point(14, 3);
             this.btnLoadCashUpdateXls.Name = "btnLoadCashUpdateXls";
-            this.btnLoadCashUpdateXls.Size = new System.Drawing.Size(115, 23);
+            this.btnLoadCashUpdateXls.Size = new System.Drawing.Size(130, 23);
             this.btnLoadCashUpdateXls.TabIndex = 0;
-            this.btnLoadCashUpdateXls.Text = "load Cash Update xls";
+            this.btnLoadCashUpdateXls.Text = "Load Cash Update";
             this.btnLoadCashUpdateXls.UseVisualStyleBackColor = true;
             // 
             // panel11
@@ -741,7 +728,7 @@
             this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel11.Location = new System.Drawing.Point(469, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(104, 41);
+            this.panel11.Size = new System.Drawing.Size(104, 53);
             this.panel11.TabIndex = 6;
             // 
             // btnExcelExport
@@ -765,7 +752,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel9.Location = new System.Drawing.Point(104, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(365, 41);
+            this.panel9.Size = new System.Drawing.Size(365, 53);
             this.panel9.TabIndex = 4;
             // 
             // btnDateFromSubtract
@@ -839,7 +826,7 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel10.Location = new System.Drawing.Point(0, 0);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(104, 41);
+            this.panel10.Size = new System.Drawing.Size(104, 53);
             this.panel10.TabIndex = 5;
             // 
             // btnRefresh
@@ -850,6 +837,31 @@
             this.btnRefresh.TabIndex = 0;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Location = new System.Drawing.Point(56, 0);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 514);
+            this.splitter2.TabIndex = 1;
+            this.splitter2.TabStop = false;
+            // 
+            // pnlAccounts
+            // 
+            this.pnlAccounts.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlAccounts.Location = new System.Drawing.Point(0, 0);
+            this.pnlAccounts.Name = "pnlAccounts";
+            this.pnlAccounts.Size = new System.Drawing.Size(56, 514);
+            this.pnlAccounts.TabIndex = 0;
+            // 
+            // btnLoadCashMovement
+            // 
+            this.btnLoadCashMovement.Location = new System.Drawing.Point(14, 27);
+            this.btnLoadCashMovement.Name = "btnLoadCashMovement";
+            this.btnLoadCashMovement.Size = new System.Drawing.Size(130, 23);
+            this.btnLoadCashMovement.TabIndex = 1;
+            this.btnLoadCashMovement.Text = "Load Cash Movement";
+            this.btnLoadCashMovement.UseVisualStyleBackColor = true;
             // 
             // TransactionControl
             // 
@@ -978,5 +990,6 @@
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Panel pnlAccounts;
+        private System.Windows.Forms.Button btnLoadCashMovement;
     }
 }

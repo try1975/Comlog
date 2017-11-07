@@ -438,6 +438,7 @@ namespace ComLog.WinForms.Controls
             btnRefresh.Click += btnRefresh_Click;
             btnExcelExport.Click += btnExcelExport_Click;
             btnLoadCashUpdateXls.Click += btnLoadCashUpdateXls_Click;
+            btnLoadCashMovement.Click += btnLoadCashMovement_Click;
             btnMsDaily.Click += btnMsDaily_Click;
             dgvItems.FilterStringChanged += dgvItems_FilterStringChanged;
             dgvItems.SortStringChanged += dgvItems_SortStringChanged;
@@ -454,6 +455,7 @@ namespace ComLog.WinForms.Controls
             btnDateFromAdd.Click += btnDateFromAdd_Click;
             btnDateFromSubtract.Click += btnDateFromSubtract_Click;
         }
+       
 
         #endregion //IRefreshedView
 
@@ -740,17 +742,18 @@ namespace ComLog.WinForms.Controls
             }
         }
 
-        private void btnLoadCashUpdateXls_Click(object sender, EventArgs e)
+        private void LoadByExcelMacro(string macroName)
         {
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
             var macroRunSettings = new MacroRunSettings
             {
                 MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
-                MacroName = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)],
+                MacroName = ConfigurationManager.AppSettings[macroName],
                 SourceFilename = openFileDialog.FileName,
                 DestinationFilename = openFileDialog.FileName.Replace(".xls", "_Converted.xls")
             };
+            macroRunSettings.Params["ImportRun"] = bool.TrueString;
             var runMacroForm = new RunMacroForm(macroRunSettings);
             if (runMacroForm.NotShow)
             {
@@ -760,6 +763,16 @@ namespace ComLog.WinForms.Controls
             {
                 if (runMacroForm.ShowDialog() == DialogResult.OK) btnRefresh_Click(this, null);
             }
+        }
+
+        private void btnLoadCashUpdateXls_Click(object sender, EventArgs e)
+        {
+            LoadByExcelMacro(nameof(MacroSettings.CashUpdateMacro));
+        }
+
+        private void btnLoadCashMovement_Click(object sender, EventArgs e)
+        {
+            LoadByExcelMacro(nameof(MacroSettings.CashMovementMacro)); 
         }
 
         private void dtpDateFrom_ValueChanged(object sender, EventArgs e)

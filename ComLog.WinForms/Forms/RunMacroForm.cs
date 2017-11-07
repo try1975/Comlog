@@ -44,10 +44,15 @@ namespace ComLog.WinForms.Forms
 
             //~~> Run the macros by supplying the necessary arguments
             var cashUpdateMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)];
+            var cashMovementMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashMovementMacro)];
             var msDailyMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.MsDailyMacro)];
             try
             {
                 if (_macroRunSettings.MacroName.Equals(cashUpdateMacro))
+                {
+                    xlApp.Run(_macroRunSettings.MacroName, _macroRunSettings.SourceFilename, _macroRunSettings.DestinationFilename, DateTime.Today);
+                }
+                else if (_macroRunSettings.MacroName.Equals(cashMovementMacro))
                 {
                     xlApp.Run(_macroRunSettings.MacroName, _macroRunSettings.SourceFilename, _macroRunSettings.DestinationFilename, DateTime.Today);
                 }
@@ -102,8 +107,7 @@ namespace ComLog.WinForms.Forms
         {
             MessageWriter($"Started at {DateTime.Now}.");
             RunMacro();
-            var cashUpdateMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)];
-            if (_macroRunSettings.MacroName.Equals(cashUpdateMacro))
+            if (_macroRunSettings.Params["ImportRun"].Equals(bool.TrueString))
             {
                 // load result to db
                 ImportRun();

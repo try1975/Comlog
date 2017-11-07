@@ -65,24 +65,27 @@
             this.panel1.Controls.Add(this.pnlTransactions);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1264, 32);
+            this.panel1.Size = new System.Drawing.Size(1685, 39);
             this.panel1.TabIndex = 4;
             // 
             // panelCurrencies
             // 
             this.panelCurrencies.Controls.Add(this.btnCurrencies);
             this.panelCurrencies.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelCurrencies.Location = new System.Drawing.Point(1005, 0);
+            this.panelCurrencies.Location = new System.Drawing.Point(1342, 0);
+            this.panelCurrencies.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelCurrencies.Name = "panelCurrencies";
-            this.panelCurrencies.Size = new System.Drawing.Size(89, 32);
+            this.panelCurrencies.Size = new System.Drawing.Size(119, 39);
             this.panelCurrencies.TabIndex = 18;
             // 
             // btnCurrencies
             // 
-            this.btnCurrencies.Location = new System.Drawing.Point(0, 3);
+            this.btnCurrencies.Location = new System.Drawing.Point(0, 4);
+            this.btnCurrencies.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCurrencies.Name = "btnCurrencies";
-            this.btnCurrencies.Size = new System.Drawing.Size(75, 23);
+            this.btnCurrencies.Size = new System.Drawing.Size(100, 28);
             this.btnCurrencies.TabIndex = 2;
             this.btnCurrencies.Text = "Currencies";
             this.btnCurrencies.UseVisualStyleBackColor = true;
@@ -92,16 +95,18 @@
             // 
             this.pnlTransactionTypes.Controls.Add(this.btnTransactionTypes);
             this.pnlTransactionTypes.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlTransactionTypes.Location = new System.Drawing.Point(900, 0);
+            this.pnlTransactionTypes.Location = new System.Drawing.Point(1202, 0);
+            this.pnlTransactionTypes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTransactionTypes.Name = "pnlTransactionTypes";
-            this.pnlTransactionTypes.Size = new System.Drawing.Size(105, 32);
+            this.pnlTransactionTypes.Size = new System.Drawing.Size(140, 39);
             this.pnlTransactionTypes.TabIndex = 17;
             // 
             // btnTransactionTypes
             // 
-            this.btnTransactionTypes.Location = new System.Drawing.Point(0, 3);
+            this.btnTransactionTypes.Location = new System.Drawing.Point(0, 4);
+            this.btnTransactionTypes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTransactionTypes.Name = "btnTransactionTypes";
-            this.btnTransactionTypes.Size = new System.Drawing.Size(102, 23);
+            this.btnTransactionTypes.Size = new System.Drawing.Size(136, 28);
             this.btnTransactionTypes.TabIndex = 2;
             this.btnTransactionTypes.Text = "TransactionTypes";
             this.btnTransactionTypes.UseVisualStyleBackColor = true;
@@ -111,16 +116,18 @@
             // 
             this.pnlAccountTypes.Controls.Add(this.btnAccountTypes);
             this.pnlAccountTypes.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlAccountTypes.Location = new System.Drawing.Point(806, 0);
+            this.pnlAccountTypes.Location = new System.Drawing.Point(1077, 0);
+            this.pnlAccountTypes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAccountTypes.Name = "pnlAccountTypes";
-            this.pnlAccountTypes.Size = new System.Drawing.Size(94, 32);
+            this.pnlAccountTypes.Size = new System.Drawing.Size(125, 39);
             this.pnlAccountTypes.TabIndex = 15;
             // 
             // btnAccountTypes
             // 
-            this.btnAccountTypes.Location = new System.Drawing.Point(0, 3);
+            this.btnAccountTypes.Location = new System.Drawing.Point(0, 4);
+            this.btnAccountTypes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAccountTypes.Name = "btnAccountTypes";
-            this.btnAccountTypes.Size = new System.Drawing.Size(89, 23);
+            this.btnAccountTypes.Size = new System.Drawing.Size(119, 28);
             this.btnAccountTypes.TabIndex = 2;
             this.btnAccountTypes.Text = "AccountTypes";
             this.btnAccountTypes.UseVisualStyleBackColor = true;
@@ -129,25 +136,28 @@
             // panel6
             // 
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel6.Location = new System.Drawing.Point(741, 0);
+            this.panel6.Location = new System.Drawing.Point(990, 0);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(65, 32);
+            this.panel6.Size = new System.Drawing.Size(87, 39);
             this.panel6.TabIndex = 16;
             // 
             // pnlBanks
             // 
             this.pnlBanks.Controls.Add(this.btnBanks);
             this.pnlBanks.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlBanks.Location = new System.Drawing.Point(652, 0);
+            this.pnlBanks.Location = new System.Drawing.Point(871, 0);
+            this.pnlBanks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlBanks.Name = "pnlBanks";
-            this.pnlBanks.Size = new System.Drawing.Size(89, 32);
+            this.pnlBanks.Size = new System.Drawing.Size(119, 39);
             this.pnlBanks.TabIndex = 9;
             // 
             // btnBanks
             // 
-            this.btnBanks.Location = new System.Drawing.Point(0, 3);
+            this.btnBanks.Location = new System.Drawing.Point(0, 4);
+            this.btnBanks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBanks.Name = "btnBanks";
-            this.btnBanks.Size = new System.Drawing.Size(75, 23);
+            this.btnBanks.Size = new System.Drawing.Size(100, 28);
             this.btnBanks.TabIndex = 2;
             this.btnBanks.Text = "Banks";
             this.btnBanks.UseVisualStyleBackColor = true;
@@ -157,16 +167,18 @@
             // 
             this.pnlAccounts.Controls.Add(this.btnAccounts);
             this.pnlAccounts.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlAccounts.Location = new System.Drawing.Point(555, 0);
+            this.pnlAccounts.Location = new System.Drawing.Point(741, 0);
+            this.pnlAccounts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAccounts.Name = "pnlAccounts";
-            this.pnlAccounts.Size = new System.Drawing.Size(97, 32);
+            this.pnlAccounts.Size = new System.Drawing.Size(130, 39);
             this.pnlAccounts.TabIndex = 10;
             // 
             // btnAccounts
             // 
-            this.btnAccounts.Location = new System.Drawing.Point(0, 3);
+            this.btnAccounts.Location = new System.Drawing.Point(0, 4);
+            this.btnAccounts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAccounts.Name = "btnAccounts";
-            this.btnAccounts.Size = new System.Drawing.Size(91, 23);
+            this.btnAccounts.Size = new System.Drawing.Size(121, 28);
             this.btnAccounts.TabIndex = 3;
             this.btnAccounts.Text = "Accounts";
             this.btnAccounts.UseVisualStyleBackColor = true;
@@ -175,9 +187,10 @@
             // panel8
             // 
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(109, 0);
+            this.panel8.Location = new System.Drawing.Point(146, 0);
+            this.panel8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(446, 32);
+            this.panel8.Size = new System.Drawing.Size(595, 39);
             this.panel8.TabIndex = 13;
             // 
             // pnlTransactions
@@ -185,16 +198,17 @@
             this.pnlTransactions.Controls.Add(this.btnTransactions);
             this.pnlTransactions.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlTransactions.Location = new System.Drawing.Point(0, 0);
+            this.pnlTransactions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTransactions.Name = "pnlTransactions";
-            this.pnlTransactions.Size = new System.Drawing.Size(109, 32);
+            this.pnlTransactions.Size = new System.Drawing.Size(146, 39);
             this.pnlTransactions.TabIndex = 14;
             // 
             // btnTransactions
             // 
-            this.btnTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnTransactions.Location = new System.Drawing.Point(5, 3);
+            this.btnTransactions.Location = new System.Drawing.Point(7, 4);
+            this.btnTransactions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTransactions.Name = "btnTransactions";
-            this.btnTransactions.Size = new System.Drawing.Size(98, 23);
+            this.btnTransactions.Size = new System.Drawing.Size(131, 28);
             this.btnTransactions.TabIndex = 6;
             this.btnTransactions.Text = "Transactions";
             this.btnTransactions.UseVisualStyleBackColor = true;
@@ -204,19 +218,22 @@
             // 
             this.pnlWorkArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlWorkArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlWorkArea.Location = new System.Drawing.Point(0, 32);
+            this.pnlWorkArea.Location = new System.Drawing.Point(0, 39);
+            this.pnlWorkArea.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlWorkArea.Name = "pnlWorkArea";
-            this.pnlWorkArea.Size = new System.Drawing.Size(1264, 490);
+            this.pnlWorkArea.Size = new System.Drawing.Size(1685, 603);
             this.pnlWorkArea.TabIndex = 5;
             // 
             // ComLogControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlWorkArea);
             this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ComLogControl";
-            this.Size = new System.Drawing.Size(1264, 522);
+            this.Size = new System.Drawing.Size(1685, 642);
             this.panel1.ResumeLayout(false);
             this.panelCurrencies.ResumeLayout(false);
             this.pnlTransactionTypes.ResumeLayout(false);
