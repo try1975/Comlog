@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using ComLog.Dto;
 using ComLog.Dto.Ext;
+using ComLog.WinForms.Administration;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
@@ -14,6 +15,7 @@ using ComLog.WinForms.Interfaces.Filter;
 using ComLog.WinForms.Presenters;
 using ComLog.WinForms.Presenters.Common;
 using ComLog.WinForms.Utils;
+using Enumerable = System.Linq.Enumerable;
 
 namespace ComLog.WinForms.Controls
 {
@@ -164,6 +166,9 @@ namespace ComLog.WinForms.Controls
 
         private void ColumnSettings()
         {
+            pnlShowCheck.Visible = CurrentUser.MaySeeBalance;
+            pnlBalance.Visible = cbShowCheck.Checked;
+
             var column = dgvItems.Columns[nameof(AccountDto.Id)];
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(AccountDto.BankId)];
@@ -180,6 +185,10 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(AccountExtDto.Closed)];
             if (column != null) column.Visible = cbShowClosed.Checked;
+            column = dgvItems.Columns[nameof(AccountExtDto.Balance)];
+            if (column != null) column.Visible = cbShowCheck.Checked;
+            column = dgvItems.Columns[nameof(AccountExtDto.DeltaBalance)];
+            if (column != null) column.Visible = cbShowCheck.Checked;
 
 
             if (_hideAllMode)
@@ -218,7 +227,7 @@ namespace ComLog.WinForms.Controls
             column = dgvItems.Columns[nameof(AccountExtDto.Balance)];
             if (column != null) column.DisplayIndex = dgvItems.Columns.Count - 2;
             column = dgvItems.Columns[nameof(AccountExtDto.DeltaBalance)];
-            if (column != null) column.DisplayIndex = dgvItems.Columns.Count - 1; ;
+            if (column != null) column.DisplayIndex = dgvItems.Columns.Count - 1; 
 
 
             column = dgvItems.Columns[nameof(AccountDto.Name)];
@@ -268,6 +277,7 @@ namespace ComLog.WinForms.Controls
 
             cbClosed.CheckedChanged += cbClosed_CheckedChanged;
             cbShowClosed.CheckedChanged += cbShowClosed_CheckedChanged;
+            cbShowCheck.CheckedChanged += cbShowCheck_CheckedChanged;
             cbOnlyTodayActivity.CheckedChanged += cbOnlyTodayActivity_CheckedChanged;
 
         }
@@ -452,6 +462,11 @@ namespace ComLog.WinForms.Controls
         {
             _accountViewFilter.ShowClosed = cbShowClosed.Checked;
             _presenter.Reopen();
+        }
+
+        private void cbShowCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            ColumnSettings();
         }
 
         private void cbOnlyTodayActivity_CheckedChanged(object sender, EventArgs e)

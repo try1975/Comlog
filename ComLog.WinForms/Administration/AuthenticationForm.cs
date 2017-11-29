@@ -22,7 +22,7 @@ namespace ComLog.WinForms.Administration
             var result = WindowsIdentity.GetCurrent().Name;
             var backSlashIndex = result.IndexOf("\\", StringComparison.Ordinal);
             if (backSlashIndex >= 0) result = result.Substring(backSlashIndex + 1);
-            return result;
+            return result.ToLower();
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
