@@ -26,8 +26,8 @@ namespace ComLog.WebApi.Maintenance.Classes
                  .Include(nameof(AccountEntity.AccountType))
                  .Include(nameof(AccountEntity.Currency))
                  .OrderBy(z => z.Bank.Name)
-                 .ThenBy(z => z.Currency.Ord)
                  .ThenBy(z => z.Name)
+                 .ThenBy(z => z.Currency.Ord)
                  .ToList()
                  ;
             if (!withBalance)
