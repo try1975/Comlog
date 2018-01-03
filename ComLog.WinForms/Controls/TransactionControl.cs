@@ -15,7 +15,6 @@ using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
 using ComLog.WinForms.Interfaces.Filter;
-using ComLog.WinForms.Ninject;
 using ComLog.WinForms.Presenters;
 using ComLog.WinForms.Utils;
 using log4net;
@@ -28,6 +27,7 @@ namespace ComLog.WinForms.Controls
         private readonly IPresenter _presenter;
         private readonly ITransactionViewFilter _transactionViewFilter;
         private bool _isEventHandlerSets;
+        private const int EditableDays = 7;
 
         public TransactionControl(ITransactionDataManager transactionDataManager, IDataMаnager dataMаnager)
         {
@@ -53,10 +53,10 @@ namespace ComLog.WinForms.Controls
 
         private bool ValidateData()
         {
-            if (TransactionDate <= DateTime.Today.AddDays(-5))
+            if (TransactionDate <= DateTime.Today.AddDays(-EditableDays))
             {
                 MessageBox.Show(
-                    $@"Transaction date must be greater than {DateTime.Today.AddDays(-6):dd-MM-yyyy}",
+                    $@"Transaction date must be greater than {DateTime.Today.AddDays(-(EditableDays + 1)):dd-MM-yyyy}",
                     @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
                     MessageBoxDefaultButton.Button1);
                 return false;
@@ -455,7 +455,7 @@ namespace ComLog.WinForms.Controls
             btnDateFromAdd.Click += btnDateFromAdd_Click;
             btnDateFromSubtract.Click += btnDateFromSubtract_Click;
         }
-       
+
 
         #endregion //IRefreshedView
 
@@ -480,11 +480,11 @@ namespace ComLog.WinForms.Controls
             DisableInput();
 
             btnDelete.Enabled = true;
-            if (TransactionDate <= DateTime.Today.AddDays(-5)) btnDelete.Enabled = false;
+            if (TransactionDate <= DateTime.Today.AddDays(-EditableDays)) btnDelete.Enabled = false;
             btnCancel.Enabled = false;
             btnSave.Enabled = false;
             btnEdit.Enabled = true;
-            if (TransactionDate <= DateTime.Today.AddDays(-5)) btnEdit.Enabled = false;
+            if (TransactionDate <= DateTime.Today.AddDays(-EditableDays)) btnEdit.Enabled = false;
             btnAddNew.Enabled = true;
         }
 
@@ -772,7 +772,7 @@ namespace ComLog.WinForms.Controls
 
         private void btnLoadCashMovement_Click(object sender, EventArgs e)
         {
-            LoadByExcelMacro(nameof(MacroSettings.CashMovementMacro)); 
+            LoadByExcelMacro(nameof(MacroSettings.CashMovementMacro));
         }
 
         private void dtpDateFrom_ValueChanged(object sender, EventArgs e)
