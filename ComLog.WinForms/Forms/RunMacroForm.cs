@@ -46,6 +46,7 @@ namespace ComLog.WinForms.Forms
             var cashUpdateMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashUpdateMacro)];
             var cashMovementMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashMovementMacro)];
             var msDailyMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.MsDailyMacro)];
+            var reportYMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.ReportYMacro)];
             try
             {
                 if (_macroRunSettings.MacroName.Equals(cashUpdateMacro))
@@ -57,6 +58,18 @@ namespace ComLog.WinForms.Forms
                     xlApp.Run(_macroRunSettings.MacroName, _macroRunSettings.SourceFilename, _macroRunSettings.DestinationFilename, DateTime.Today);
                 }
                 else if (_macroRunSettings.MacroName.Equals(msDailyMacro))
+                {
+                    xlApp.Run(_macroRunSettings.MacroName, _macroRunSettings.SourceFilename, _macroRunSettings.DestinationFilename
+                        , _macroRunSettings.Params["Period"]
+                        , _macroRunSettings.Params["EUR_RATE"]
+                        , _macroRunSettings.Params["GBP_RATE"]
+                        , _macroRunSettings.Params["CHF_RATE"]
+                        , _macroRunSettings.Params["EUR_RATE_P"]
+                        , _macroRunSettings.Params["GBP_RATE_P"]
+                        , _macroRunSettings.Params["CHF_RATE_P"]
+                        );
+                }
+                else if (_macroRunSettings.MacroName.Equals(reportYMacro))
                 {
                     xlApp.Run(_macroRunSettings.MacroName, _macroRunSettings.SourceFilename, _macroRunSettings.DestinationFilename, _macroRunSettings.Params["Period"]);
                 }

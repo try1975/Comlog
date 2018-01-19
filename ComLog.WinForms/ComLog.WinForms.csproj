@@ -167,6 +167,12 @@
     <Compile Include="Data\Filter\TransactionViewFilter.cs" />
     <Compile Include="Data\TransactionTypeDataManager.cs" />
     <Compile Include="Data\TransactionDataManager.cs" />
+    <Compile Include="Forms\DateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DateForm.Designer.cs">
+      <DependentUpon>DateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RunMacroForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TransactionTypeControl.resx">
       <DependentUpon>TransactionTypeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DateForm.resx">
+      <DependentUpon>DateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RunMacroForm.resx">
       <DependentUpon>RunMacroForm.cs</DependentUpon>

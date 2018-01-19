@@ -19,6 +19,18 @@ namespace ComLog.WebApi.Maintenance.Classes
             _transactionQuery = transactionQuery;
         }
 
+        public override AccountDto ChangeItem(AccountDto dto)
+        {
+            var entity = Query.GetEntity(dto.Id);
+            if (entity != null)
+            {
+                dto.BankId = entity.BankId;
+                dto.CurrencyId = entity.CurrencyId;
+                dto.AccountTypeId = entity.AccountTypeId;
+            }
+            return base.ChangeItem(dto);
+        }
+
         public IEnumerable<AccountExtDto> GetExtItems(bool withBalance)
         {
             var accounts = Query.GetEntities()

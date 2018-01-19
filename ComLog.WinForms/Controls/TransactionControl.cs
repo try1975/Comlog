@@ -440,6 +440,7 @@ namespace ComLog.WinForms.Controls
             btnLoadCashUpdateXls.Click += btnLoadCashUpdateXls_Click;
             btnLoadCashMovement.Click += btnLoadCashMovement_Click;
             btnMsDaily.Click += btnMsDaily_Click;
+            btnReportY.Click += btnReportY_Click;
             dgvItems.FilterStringChanged += dgvItems_FilterStringChanged;
             dgvItems.SortStringChanged += dgvItems_SortStringChanged;
 
@@ -627,11 +628,66 @@ namespace ComLog.WinForms.Controls
             _presenter.Reopen();
         }
 
+        private void btnReportY_Click(object sender, EventArgs e)
+        {
+            var sourceDataTable = (DataTable)_presenter.BindingSource.DataSource;
+            var view = new DataView(sourceDataTable, $"{nameof(TransactionExtDto.Report)} in ('Y','y')", dgvItems.SortString, DataViewRowState.CurrentRows);
+            var dataTable = view.ToTable();
+            var fileName = $"ComLog_Y_{dtpDateFrom.Value:yyMMdd}";
+            if (dtpDateFrom.Value != dtpDateTo.Value) fileName = fileName + $"_{dtpDateTo.Value:yyMMdd}";
+            if (dtpDateTo.Value.Date != DateTime.Today) fileName = fileName + $"_{DateTime.Today:yyMMdd}";
+            fileName = fileName + $"_{DateTime.Now:HHmm}.xlsx";
+            var saveFileDialog = new SaveFileDialog { FileName = fileName };
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            CreateExcelFile.CreateExcelDocument(dataTable, saveFileDialog.FileName);
+            var macroRunSettings = new MacroRunSettings
+            {
+                MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
+                MacroName = ConfigurationManager.AppSettings[nameof(MacroSettings.ReportYMacro)],
+                SourceFilename = saveFileDialog.FileName,
+                DestinationFilename = saveFileDialog.FileName.Replace(".xls", "_Formated.xls")
+            };
+            if (dtpDateFrom.Value != dtpDateTo.Value)
+            {
+                macroRunSettings.Params["Period"] = $"{dtpDateFrom.Value:dd-MMM-yy} to {dtpDateTo.Value:dd-MMM-yy}";
+            }
+            else
+            {
+                macroRunSettings.Params["Period"] = $"{dtpDateFrom.Value:dd-MMM-yy}";
+            }
+
+            var runMacroForm = new RunMacroForm(macroRunSettings);
+            if (runMacroForm.NotShow)
+            {
+                runMacroForm.Close();
+            }
+            else
+            {
+                runMacroForm.ShowDialog();
+            }
+            if (!File.Exists(macroRunSettings.DestinationFilename)) return;
+            try
+            {
+                File.Delete(macroRunSettings.SourceFilename);
+                File.Move(macroRunSettings.DestinationFilename, macroRunSettings.SourceFilename);
+                Process.Start(macroRunSettings.SourceFilename);
+            }
+            catch (Exception exception)
+            {
+                Log.Error(exception);
+                MessageBox.Show(exception.ToString());
+            }
+        }
+
         private void btnExcelExport_Click(object sender, EventArgs e)
         {
             var saveFileDialog = new SaveFileDialog { FileName = $"ComLog_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            var dataTable = ((DataTable)_presenter.BindingSource.DataSource).Copy();
+            var sourceDataTable = (DataTable)_presenter.BindingSource.DataSource;
+            var view = new DataView(sourceDataTable, dgvItems.FilterString, dgvItems.SortString, DataViewRowState.CurrentRows);
+            //var dataTable = sourceDataTable.Copy();
+            var dataTable = view.ToTable();
             dataTable.SetColumnsOrder(
                 nameof(TransactionExtDto.TransactionDate)
                 , nameof(TransactionExtDto.BankName)
@@ -650,59 +706,19 @@ namespace ComLog.WinForms.Controls
                 , nameof(TransactionExtDto.ChangeBy)
                 , nameof(TransactionExtDto.ChangeAt)
             );
-            var dataSet = new DataSet();
-            dataSet.Tables.Add(dataTable);
-            CreateExcelFile.CreateExcelDocument(dataSet, saveFileDialog.FileName);
+            CreateExcelFile.CreateExcelDocument(dataTable, saveFileDialog.FileName);
             if (File.Exists(saveFileDialog.FileName)) Process.Start(saveFileDialog.FileName);
         }
 
         private async void btnMsDaily_Click(object sender, EventArgs e)
         {
-            var report01 = await _presenter.DataMаnager.GetAccountsReport01(dtpDateFrom.Value, dtpDateTo.Value);
-            if (report01 == null)
-            {
-                const string errorText = "Data receive error.";
-                Log.Error(errorText);
-                MessageBox.Show(errorText, @"Error", MessageBoxButtons.OK);
-                return;
-            }
             var fileName = $"MS_ComLog_{dtpDateFrom.Value:yyMMdd}";
-            if (dtpDateFrom.Value != dtpDateTo.Value) fileName = fileName + $"_{dtpDateTo.Value:yyMMdd}";
-            if (dtpDateTo.Value.Date != DateTime.Today) fileName = fileName + $"_{DateTime.Today:yyMMdd}";
-            fileName = fileName + $"_{DateTime.Now:HHmm}.xlsx";
+            if (dtpDateFrom.Value.Date != dtpDateTo.Value.Date) fileName = fileName + $"_{dtpDateTo.Value:yyMMdd}";
+            //if (dtpDateTo.Value.Date != DateTime.Today) fileName = fileName + $"_{DateTime.Today:yyMMdd}";
+            fileName = fileName + $"_{DateTime.Now:yyMMddHHmm}.xlsx";
             var saveFileDialog = new SaveFileDialog { FileName = fileName };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
-            #region comment
-
-            //var dataTable = ((DataTable)_presenter.BindingSource.DataSource).Copy();
-
-            //var dataView = dataTable.DefaultView;
-            //var filter = $"{nameof(TransactionExtDto.MsDaily01)} = {bool.TrueString}";
-            //dataView.RowFilter = filter;
-            //var sort = $"{nameof(TransactionExtDto.TransactionDate)} ASC, {nameof(TransactionExtDto.BankName)} ASC, {nameof(TransactionExtDto.CurrencyOrd)} ASC";
-            //dataView.Sort = sort;
-            //dataTable = dataView.ToTable();
-            //var columnNames = new[]
-            //{
-            //    nameof(TransactionExtDto.BankName), nameof(TransactionExtDto.CurrencyId),
-            //    nameof(TransactionExtDto.FromTo), nameof(TransactionExtDto.Description),
-            //    nameof(TransactionExtDto.Credits), nameof(TransactionExtDto.Debits),
-            //    nameof(TransactionExtDto.TransactionDate)
-            //};
-
-            //dataTable.SetColumnsOrder(columnNames);
-            //var columnIndex = columnNames.Length - 1;
-            //for (var i = dataTable.Columns.Count - 1; i > columnIndex; i--)
-            //{
-            //    dataTable.Columns.RemoveAt(i);
-            //}
-
-            //CreateExcelFile.CreateExcelDocument(dataTable, saveFileDialog.FileName);
-
-            #endregion
-
-            CreateExcelFile.CreateExcelDocument(report01, saveFileDialog.FileName);
             var macroRunSettings = new MacroRunSettings
             {
                 MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
@@ -718,6 +734,51 @@ namespace ComLog.WinForms.Controls
             {
                 macroRunSettings.Params["Period"] = $"{dtpDateFrom.Value:dd-MMM-yy}";
             }
+
+            // Previous currency rate to params
+            var date = dtpDateTo.Value.Date;
+            var previousDayCount = -1;
+            if (date.DayOfWeek == DayOfWeek.Monday) previousDayCount = -3;
+            date = date.AddDays(previousDayCount);
+            // take date of previous report from dialog
+            var dateForm = new DateForm { Date = date };
+            if (dateForm.ShowDialog() != DialogResult.OK) return;
+            date = dateForm.Date.Date.AddDays(-1);
+            Log.Error($"Rate begin date {date:yy-MM-dd}");
+
+            var rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("EUR", date);
+            macroRunSettings.Params["EUR_RATE_P"] = $"{rate:##.0000}";
+            Log.Error($"Rate EUR begin value {date:yy-MM-dd} {rate:##.0000}");
+            rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("GBP", date);
+            macroRunSettings.Params["GBP_RATE_P"] = $"{rate:##.0000}";
+            Log.Error($"Rate GBP begin value {date:yy-MM-dd} {rate:##.0000}");
+            rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("CHF", date);
+            macroRunSettings.Params["CHF_RATE_P"] = $"{rate:##.0000}";
+            Log.Error($"Rate CHF begin value {date:yy-MM-dd} {rate:##.0000}");
+
+            // Current currency rate to params
+            date = dtpDateTo.Value.Date.AddDays(-1);
+            Log.Error($"Rate end date {date:yy-MM-dd}");
+            rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("EUR", date);
+            macroRunSettings.Params["EUR_RATE"] = $"{rate:##.0000}";
+            Log.Error($"Rate EUR end value {date:yy-MM-dd} {rate:##.0000}");
+            rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("GBP", date);
+            macroRunSettings.Params["GBP_RATE"] = $"{rate:##.0000}";
+            Log.Error($"Rate GBP end value {date:yy-MM-dd} {rate:##.0000}");
+            rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("CHF", date);
+            macroRunSettings.Params["CHF_RATE"] = $"{rate:##.0000}";
+            Log.Error($"Rate CHF end value {date:yy-MM-dd} {rate:##.0000}");
+
+
+            var report = await _presenter.DataMаnager.GetAccountsReport01(dtpDateFrom.Value, dtpDateTo.Value);
+            if (report == null)
+            {
+                const string errorText = "Data receive error.";
+                Log.Error(errorText);
+                MessageBox.Show(errorText, @"Error", MessageBoxButtons.OK);
+                return;
+            }
+            CreateExcelFile.CreateExcelDocument(report, saveFileDialog.FileName);
 
             var runMacroForm = new RunMacroForm(macroRunSettings);
             if (runMacroForm.NotShow)

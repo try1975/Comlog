@@ -440,7 +440,10 @@ namespace ComLog.WinForms.Controls
         {
             var saveFileDialog = new SaveFileDialog { FileName = $"ComLogAccounts_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" };
             if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            var dataTable = ((DataTable)_presenter.BindingSource.DataSource).Copy();
+            var sourceDataTable = (DataTable)_presenter.BindingSource.DataSource;
+            var view = new DataView(sourceDataTable, dgvItems.FilterString, dgvItems.SortString, DataViewRowState.CurrentRows);
+            //var dataTable = sourceDataTable.Copy();
+            var dataTable = view.ToTable();
             dataTable.SetColumnsOrder(nameof(AccountExtDto.BankName)
                 , nameof(AccountExtDto.Name)
                 , nameof(AccountExtDto.AccountTypeName)
@@ -452,9 +455,7 @@ namespace ComLog.WinForms.Controls
                 , nameof(AccountExtDto.ChangeBy)
                 , nameof(AccountExtDto.ChangeAt)
             );
-            var dataSet = new DataSet();
-            dataSet.Tables.Add(dataTable);
-            CreateExcelFile.CreateExcelDocument(dataSet, saveFileDialog.FileName);
+            CreateExcelFile.CreateExcelDocument(dataTable, saveFileDialog.FileName);
             if (File.Exists(saveFileDialog.FileName)) Process.Start(saveFileDialog.FileName);
         }
 

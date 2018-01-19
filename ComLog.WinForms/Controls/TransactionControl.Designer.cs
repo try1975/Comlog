@@ -85,8 +85,10 @@
             this.panel13 = new System.Windows.Forms.Panel();
             this.btnMsDaily = new System.Windows.Forms.Button();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.btnLoadCashMovement = new System.Windows.Forms.Button();
             this.btnLoadCashUpdateXls = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.btnReportY = new System.Windows.Forms.Button();
             this.btnExcelExport = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
             this.btnDateFromSubtract = new System.Windows.Forms.Button();
@@ -100,7 +102,6 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.pnlAccounts = new System.Windows.Forms.Panel();
-            this.btnLoadCashMovement = new System.Windows.Forms.Button();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -696,7 +697,7 @@
             // 
             // btnMsDaily
             // 
-            this.btnMsDaily.Location = new System.Drawing.Point(14, 10);
+            this.btnMsDaily.Location = new System.Drawing.Point(6, 3);
             this.btnMsDaily.Name = "btnMsDaily";
             this.btnMsDaily.Size = new System.Drawing.Size(75, 23);
             this.btnMsDaily.TabIndex = 0;
@@ -713,6 +714,15 @@
             this.panel12.Size = new System.Drawing.Size(150, 53);
             this.panel12.TabIndex = 7;
             // 
+            // btnLoadCashMovement
+            // 
+            this.btnLoadCashMovement.Location = new System.Drawing.Point(14, 27);
+            this.btnLoadCashMovement.Name = "btnLoadCashMovement";
+            this.btnLoadCashMovement.Size = new System.Drawing.Size(130, 23);
+            this.btnLoadCashMovement.TabIndex = 1;
+            this.btnLoadCashMovement.Text = "Load Cash Movement";
+            this.btnLoadCashMovement.UseVisualStyleBackColor = true;
+            // 
             // btnLoadCashUpdateXls
             // 
             this.btnLoadCashUpdateXls.Location = new System.Drawing.Point(14, 3);
@@ -724,6 +734,7 @@
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.btnReportY);
             this.panel11.Controls.Add(this.btnExcelExport);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel11.Location = new System.Drawing.Point(469, 0);
@@ -731,9 +742,19 @@
             this.panel11.Size = new System.Drawing.Size(104, 53);
             this.panel11.TabIndex = 6;
             // 
+            // btnReportY
+            // 
+            this.btnReportY.Location = new System.Drawing.Point(6, 27);
+            this.btnReportY.Name = "btnReportY";
+            this.btnReportY.Size = new System.Drawing.Size(75, 23);
+            this.btnReportY.TabIndex = 1;
+            this.btnReportY.Text = "Y Report";
+            this.btnReportY.UseVisualStyleBackColor = true;
+            this.btnReportY.Visible = false;
+            // 
             // btnExcelExport
             // 
-            this.btnExcelExport.Location = new System.Drawing.Point(14, 10);
+            this.btnExcelExport.Location = new System.Drawing.Point(6, 3);
             this.btnExcelExport.Name = "btnExcelExport";
             this.btnExcelExport.Size = new System.Drawing.Size(75, 23);
             this.btnExcelExport.TabIndex = 0;
@@ -853,15 +874,6 @@
             this.pnlAccounts.Name = "pnlAccounts";
             this.pnlAccounts.Size = new System.Drawing.Size(56, 514);
             this.pnlAccounts.TabIndex = 0;
-            // 
-            // btnLoadCashMovement
-            // 
-            this.btnLoadCashMovement.Location = new System.Drawing.Point(14, 27);
-            this.btnLoadCashMovement.Name = "btnLoadCashMovement";
-            this.btnLoadCashMovement.Size = new System.Drawing.Size(130, 23);
-            this.btnLoadCashMovement.TabIndex = 1;
-            this.btnLoadCashMovement.Text = "Load Cash Movement";
-            this.btnLoadCashMovement.UseVisualStyleBackColor = true;
             // 
             // TransactionControl
             // 
@@ -991,5 +1003,6 @@
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Panel pnlAccounts;
         private System.Windows.Forms.Button btnLoadCashMovement;
+        private System.Windows.Forms.Button btnReportY;
     }
 }

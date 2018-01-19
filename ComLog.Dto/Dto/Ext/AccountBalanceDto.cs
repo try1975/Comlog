@@ -10,6 +10,5 @@
         public decimal PrevBalance { get; set; }
         public decimal Activity { get; set; }
         public decimal NewBalance { get; set; }
-
     }
 }
