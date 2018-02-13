@@ -173,6 +173,8 @@ namespace ComLog.WinForms.Controls
             }
             if (TransactionDate != null && TransactionDate.Value.Date == DateTime.Today)
                 dtpDateTo.Value = DateTime.Today;
+
+            Report = Report.Trim();
             return true;
         }
 
@@ -441,6 +443,7 @@ namespace ComLog.WinForms.Controls
             btnLoadCashMovement.Click += btnLoadCashMovement_Click;
             btnMsDaily.Click += btnMsDaily_Click;
             btnReportY.Click += btnReportY_Click;
+            btnLoadCl.Click += btnLoadCl_Click;
             dgvItems.FilterStringChanged += dgvItems_FilterStringChanged;
             dgvItems.SortStringChanged += dgvItems_SortStringChanged;
 
@@ -456,6 +459,7 @@ namespace ComLog.WinForms.Controls
             btnDateFromAdd.Click += btnDateFromAdd_Click;
             btnDateFromSubtract.Click += btnDateFromSubtract_Click;
         }
+
 
 
         #endregion //IRefreshedView
@@ -631,8 +635,22 @@ namespace ComLog.WinForms.Controls
         private void btnReportY_Click(object sender, EventArgs e)
         {
             var sourceDataTable = (DataTable)_presenter.BindingSource.DataSource;
-            var view = new DataView(sourceDataTable, $"{nameof(TransactionExtDto.Report)} in ('Y','y')", dgvItems.SortString, DataViewRowState.CurrentRows);
+            var sort = $"[{nameof(TransactionExtDto.BankName)}] ASC, [{nameof(TransactionExtDto.CurrencyOrd)}] ASC";
+            var rowFilter = $"{nameof(TransactionExtDto.Report)} in ('Y','y')";
+            var view = new DataView(sourceDataTable, rowFilter, sort, DataViewRowState.CurrentRows);
             var dataTable = view.ToTable();
+            var fieldNames = new[]
+            {
+                nameof(TransactionExtDto.BankName), nameof(TransactionExtDto.CurrencyId),
+                nameof(TransactionExtDto.FromTo), nameof(TransactionExtDto.Description), nameof(TransactionExtDto.Dcc)
+            };
+            dataTable.SetColumnsOrder(fieldNames);
+            for (var i = dataTable.Columns.Count - 1; i >= 0; i--)
+            {
+                if (!fieldNames.Any(f => f.Equals(dataTable.Columns[i].ColumnName)))
+                    dataTable.Columns.RemoveAt(i);
+            }
+
             var fileName = $"ComLog_Y_{dtpDateFrom.Value:yyMMdd}";
             if (dtpDateFrom.Value != dtpDateTo.Value) fileName = fileName + $"_{dtpDateTo.Value:yyMMdd}";
             if (dtpDateTo.Value.Date != DateTime.Today) fileName = fileName + $"_{DateTime.Today:yyMMdd}";
@@ -740,34 +758,34 @@ namespace ComLog.WinForms.Controls
             var previousDayCount = -1;
             if (date.DayOfWeek == DayOfWeek.Monday) previousDayCount = -3;
             date = date.AddDays(previousDayCount);
-            // take date of previous report from dialog
+            // TODO: take date of previous report from transaction table
             var dateForm = new DateForm { Date = date };
             if (dateForm.ShowDialog() != DialogResult.OK) return;
             date = dateForm.Date.Date.AddDays(-1);
-            Log.Error($"Rate begin date {date:yy-MM-dd}");
+            //Log.Error($"Rate begin date {date:yyyy-MM-dd}");
 
             var rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("EUR", date);
             macroRunSettings.Params["EUR_RATE_P"] = $"{rate:##.0000}";
-            Log.Error($"Rate EUR begin value {date:yy-MM-dd} {rate:##.0000}");
+            //Log.Error($"Rate EUR begin value {date:yyyy-MM-dd} {rate:##.0000}");
             rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("GBP", date);
             macroRunSettings.Params["GBP_RATE_P"] = $"{rate:##.0000}";
-            Log.Error($"Rate GBP begin value {date:yy-MM-dd} {rate:##.0000}");
+            //Log.Error($"Rate GBP begin value {date:yyyy-MM-dd} {rate:##.0000}");
             rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("CHF", date);
             macroRunSettings.Params["CHF_RATE_P"] = $"{rate:##.0000}";
-            Log.Error($"Rate CHF begin value {date:yy-MM-dd} {rate:##.0000}");
+            //Log.Error($"Rate CHF begin value {date:yyyy-MM-dd} {rate:##.0000}");
 
             // Current currency rate to params
             date = dtpDateTo.Value.Date.AddDays(-1);
-            Log.Error($"Rate end date {date:yy-MM-dd}");
+            //Log.Error($"Rate end date {date:yyyy-MM-dd}");
             rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("EUR", date);
             macroRunSettings.Params["EUR_RATE"] = $"{rate:##.0000}";
-            Log.Error($"Rate EUR end value {date:yy-MM-dd} {rate:##.0000}");
+            //Log.Error($"Rate EUR end value {date:yyyy-MM-dd} {rate:##.0000}");
             rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("GBP", date);
             macroRunSettings.Params["GBP_RATE"] = $"{rate:##.0000}";
-            Log.Error($"Rate GBP end value {date:yy-MM-dd} {rate:##.0000}");
+            //Log.Error($"Rate GBP end value {date:yyyy-MM-dd} {rate:##.0000}");
             rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("CHF", date);
             macroRunSettings.Params["CHF_RATE"] = $"{rate:##.0000}";
-            Log.Error($"Rate CHF end value {date:yy-MM-dd} {rate:##.0000}");
+            //Log.Error($"Rate CHF end value {date:yyyy-MM-dd} {rate:##.0000}");
 
 
             var report = await _presenter.DataMаnager.GetAccountsReport01(dtpDateFrom.Value, dtpDateTo.Value);
@@ -834,6 +852,29 @@ namespace ComLog.WinForms.Controls
         private void btnLoadCashMovement_Click(object sender, EventArgs e)
         {
             LoadByExcelMacro(nameof(MacroSettings.CashMovementMacro));
+        }
+
+        private void btnLoadCl_Click(object sender, EventArgs e)
+        {
+            var date = DateTime.Today;
+            var dateForm = new DateForm { Date = date, DateText = "Select date for cash list import" };
+            if (dateForm.ShowDialog() != DialogResult.OK) return;
+            date = dateForm.Date.Date;
+            var macroRunSettings = new MacroRunSettings
+            {
+                MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
+                MacroName = ConfigurationManager.AppSettings[nameof(MacroSettings.CashListMacro)],
+                Params = { ["ImportRun"] = bool.TrueString, ["Date"] = $"{date:yyyyMMdd}" }
+            };
+            var runMacroForm = new RunMacroForm(macroRunSettings);
+            if (runMacroForm.NotShow)
+            {
+                runMacroForm.Close();
+            }
+            else
+            {
+                if (runMacroForm.ShowDialog() == DialogResult.OK) btnRefresh_Click(this, null);
+            }
         }
 
         private void dtpDateFrom_ValueChanged(object sender, EventArgs e)

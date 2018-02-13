@@ -37,6 +37,7 @@ namespace CurEx.Console
                             decimal.Parse(rateFields[5], NumberStyles.Currency, CultureInfo.InvariantCulture),
                         HighRate = decimal.Parse(rateFields[3], NumberStyles.Currency, CultureInfo.InvariantCulture),
                         LowRate = decimal.Parse(rateFields[4], NumberStyles.Currency, CultureInfo.InvariantCulture),
+                        // TODO: set rate equal to close rate - field 5
                         Rate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture)
                     };
                     var dto =
@@ -46,7 +47,7 @@ namespace CurEx.Console
                     dto = PostCurrencyPairRate(currencyPairRateDto).Result;
                     if (dto == null) continue;
                     System.Console.WriteLine(
-                        $"{dto.CurrencyPairId} {dto.RateDate.ToString("yyyy-MM-dd")} {dto.Rate}");
+                        $"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
                 }
             }
             System.Console.WriteLine("Complete.");

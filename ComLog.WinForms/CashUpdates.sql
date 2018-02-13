@@ -35,6 +35,10 @@ UPDATE ExcelBooks set
 , AccountTypeId=(select top 1 a.Id from AccountTypes a where a.Name=ExcelBooks.AccountTypeName)
 , TransactionTypeId = (select t.Id from TransactionTypes t where t.Name=ExcelBooks.TrType);
 
+UPDATE ExcelBooks set
+  AccountTypeId=(select top 1 a.Id from AccountTypes a where a.Name='Other')
+where AccountTypeId is null;
+
 insert into Accounts(BankId,Name, CurrencyId, AccountTypeId)
 select distinct
   e.BankId
@@ -54,7 +58,7 @@ UPDATE ExcelBooks set
 
 /* Update Rates start */
 
-UPDATE ExcelBooks set Splus = Credits WHERE Credits is not null and Splus is null and CurrencyId='USD' 
+UPDATE ExcelBooks set Splus = Credits WHERE Credits is not null and Splus is null and CurrencyId='USD'; 
 
 UPDATE ExcelBooks set
   Sminus = isnull([Debits],(0))+isnull([Charges],(0))

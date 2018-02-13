@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using ComLog.Db.Entities;
@@ -22,6 +24,7 @@ namespace ComLog.WinForms.Forms
         {
             InitializeComponent();
             _macroRunSettings = macroRunSettings;
+            if (string.IsNullOrEmpty(_macroRunSettings.DestinationFilename)) return;
             if (!File.Exists(_macroRunSettings.DestinationFilename)) return;
             if (MessageBox.Show($@"Converted file {_macroRunSettings.DestinationFilename} already exists. Continue anyway?", @"Warning",
                     MessageBoxButtons.YesNo) == DialogResult.No) NotShow = true;
@@ -47,6 +50,7 @@ namespace ComLog.WinForms.Forms
             var cashMovementMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashMovementMacro)];
             var msDailyMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.MsDailyMacro)];
             var reportYMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.ReportYMacro)];
+            var cashListMacro = ConfigurationManager.AppSettings[nameof(MacroSettings.CashListMacro)];
             try
             {
                 if (_macroRunSettings.MacroName.Equals(cashUpdateMacro))
@@ -56,6 +60,24 @@ namespace ComLog.WinForms.Forms
                 else if (_macroRunSettings.MacroName.Equals(cashMovementMacro))
                 {
                     xlApp.Run(_macroRunSettings.MacroName, _macroRunSettings.SourceFilename, _macroRunSettings.DestinationFilename, DateTime.Today);
+                }
+                else if (_macroRunSettings.MacroName.Equals(cashListMacro))
+                {
+                    DateTime date;
+                    if (!DateTime.TryParseExact(_macroRunSettings.Params["Date"], "yyyyMMdd", CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out date))
+                    {
+                        date = DateTime.Today;
+                    }
+                    date = date.Date;
+                    var directoryName = Path.GetDirectoryName(path);
+                    if (directoryName != null)
+                    {
+                        var filePath = Path.Combine(directoryName, $"Cl_{DateTime.UtcNow:yyyyMMdd_HHmm}.xlsx");
+                        _macroRunSettings.DestinationFilename = filePath;
+                        //_macroRunSettings.DestinationFilename = new Uri(filePath).LocalPath;
+                    }
+                    xlApp.Run(_macroRunSettings.MacroName, ConfigurationManager.AppSettings["ClPath"], _macroRunSettings.DestinationFilename, date);
                 }
                 else if (_macroRunSettings.MacroName.Equals(msDailyMacro))
                 {
@@ -120,7 +142,7 @@ namespace ComLog.WinForms.Forms
         {
             MessageWriter($"Started at {DateTime.Now}.");
             RunMacro();
-            if (_macroRunSettings.Params.ContainsKey("ImportRun")  && _macroRunSettings.Params["ImportRun"].Equals(bool.TrueString))
+            if (_macroRunSettings.Params.ContainsKey("ImportRun") && _macroRunSettings.Params["ImportRun"].Equals(bool.TrueString))
             {
                 // load result to db
                 ImportRun();

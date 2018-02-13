@@ -85,6 +85,7 @@
             this.panel13 = new System.Windows.Forms.Panel();
             this.btnMsDaily = new System.Windows.Forms.Button();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.btnLoadCl = new System.Windows.Forms.Button();
             this.btnLoadCashMovement = new System.Windows.Forms.Button();
             this.btnLoadCashUpdateXls = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -572,9 +573,9 @@
             // 
             this.panel14.Controls.Add(this.panel16);
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel14.Location = new System.Drawing.Point(0, 53);
+            this.panel14.Location = new System.Drawing.Point(0, 54);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(793, 433);
+            this.panel14.Size = new System.Drawing.Size(793, 432);
             this.panel14.TabIndex = 4;
             // 
             // panel16
@@ -583,7 +584,7 @@
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel16.Location = new System.Drawing.Point(0, 0);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(793, 433);
+            this.panel16.Size = new System.Drawing.Size(793, 432);
             this.panel16.TabIndex = 2;
             // 
             // dgvItems
@@ -598,7 +599,7 @@
             this.dgvItems.Location = new System.Drawing.Point(0, 0);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.ReadOnly = true;
-            this.dgvItems.Size = new System.Drawing.Size(793, 433);
+            this.dgvItems.Size = new System.Drawing.Size(793, 432);
             this.dgvItems.TabIndex = 1;
             this.dgvItems.TimeFilter = false;
             // 
@@ -683,16 +684,16 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(793, 53);
+            this.panel1.Size = new System.Drawing.Size(793, 54);
             this.panel1.TabIndex = 2;
             // 
             // panel13
             // 
             this.panel13.Controls.Add(this.btnMsDaily);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel13.Location = new System.Drawing.Point(723, 0);
+            this.panel13.Location = new System.Drawing.Point(707, 0);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(104, 53);
+            this.panel13.Size = new System.Drawing.Size(104, 54);
             this.panel13.TabIndex = 8;
             // 
             // btnMsDaily
@@ -706,30 +707,40 @@
             // 
             // panel12
             // 
+            this.panel12.Controls.Add(this.btnLoadCl);
             this.panel12.Controls.Add(this.btnLoadCashMovement);
             this.panel12.Controls.Add(this.btnLoadCashUpdateXls);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel12.Location = new System.Drawing.Point(573, 0);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(150, 53);
+            this.panel12.Size = new System.Drawing.Size(134, 54);
             this.panel12.TabIndex = 7;
+            // 
+            // btnLoadCl
+            // 
+            this.btnLoadCl.Location = new System.Drawing.Point(92, 3);
+            this.btnLoadCl.Name = "btnLoadCl";
+            this.btnLoadCl.Size = new System.Drawing.Size(33, 23);
+            this.btnLoadCl.TabIndex = 2;
+            this.btnLoadCl.Text = "CL";
+            this.btnLoadCl.UseVisualStyleBackColor = true;
             // 
             // btnLoadCashMovement
             // 
-            this.btnLoadCashMovement.Location = new System.Drawing.Point(14, 27);
+            this.btnLoadCashMovement.Location = new System.Drawing.Point(53, 3);
             this.btnLoadCashMovement.Name = "btnLoadCashMovement";
-            this.btnLoadCashMovement.Size = new System.Drawing.Size(130, 23);
+            this.btnLoadCashMovement.Size = new System.Drawing.Size(33, 23);
             this.btnLoadCashMovement.TabIndex = 1;
-            this.btnLoadCashMovement.Text = "Load Cash Movement";
+            this.btnLoadCashMovement.Text = "CM";
             this.btnLoadCashMovement.UseVisualStyleBackColor = true;
             // 
             // btnLoadCashUpdateXls
             // 
             this.btnLoadCashUpdateXls.Location = new System.Drawing.Point(14, 3);
             this.btnLoadCashUpdateXls.Name = "btnLoadCashUpdateXls";
-            this.btnLoadCashUpdateXls.Size = new System.Drawing.Size(130, 23);
+            this.btnLoadCashUpdateXls.Size = new System.Drawing.Size(33, 23);
             this.btnLoadCashUpdateXls.TabIndex = 0;
-            this.btnLoadCashUpdateXls.Text = "Load Cash Update";
+            this.btnLoadCashUpdateXls.Text = "CU";
             this.btnLoadCashUpdateXls.UseVisualStyleBackColor = true;
             // 
             // panel11
@@ -739,7 +750,7 @@
             this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel11.Location = new System.Drawing.Point(469, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(104, 53);
+            this.panel11.Size = new System.Drawing.Size(104, 54);
             this.panel11.TabIndex = 6;
             // 
             // btnReportY
@@ -750,7 +761,6 @@
             this.btnReportY.TabIndex = 1;
             this.btnReportY.Text = "Y Report";
             this.btnReportY.UseVisualStyleBackColor = true;
-            this.btnReportY.Visible = false;
             // 
             // btnExcelExport
             // 
@@ -773,7 +783,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel9.Location = new System.Drawing.Point(104, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(365, 53);
+            this.panel9.Size = new System.Drawing.Size(365, 54);
             this.panel9.TabIndex = 4;
             // 
             // btnDateFromSubtract
@@ -847,7 +857,7 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel10.Location = new System.Drawing.Point(0, 0);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(104, 53);
+            this.panel10.Size = new System.Drawing.Size(104, 54);
             this.panel10.TabIndex = 5;
             // 
             // btnRefresh
@@ -1004,5 +1014,6 @@
         private System.Windows.Forms.Panel pnlAccounts;
         private System.Windows.Forms.Button btnLoadCashMovement;
         private System.Windows.Forms.Button btnReportY;
+        private System.Windows.Forms.Button btnLoadCl;
     }
 }

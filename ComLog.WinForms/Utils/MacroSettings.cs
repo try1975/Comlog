@@ -2,7 +2,7 @@
 {
     public class MacroSettings
     {
-        
+        public string CashListMacro { get; set; }
         public string MacroWorkBook { get; set; }
         public string CashUpdateMacro { get; set; }
         public string CashMovementMacro { get; set; }
