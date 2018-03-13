@@ -15,7 +15,6 @@ using ComLog.WinForms.Interfaces.Filter;
 using ComLog.WinForms.Presenters;
 using ComLog.WinForms.Presenters.Common;
 using ComLog.WinForms.Utils;
-using Enumerable = System.Linq.Enumerable;
 
 namespace ComLog.WinForms.Controls
 {
@@ -56,6 +55,8 @@ namespace ComLog.WinForms.Controls
             get { return tbName.Text; }
             set { tbName.Text = value; }
         }
+
+        public decimal? DbBalance { get; set; }
 
         public decimal? Balance
         {
@@ -227,7 +228,7 @@ namespace ComLog.WinForms.Controls
             column = dgvItems.Columns[nameof(AccountExtDto.Balance)];
             if (column != null) column.DisplayIndex = dgvItems.Columns.Count - 2;
             column = dgvItems.Columns[nameof(AccountExtDto.DeltaBalance)];
-            if (column != null) column.DisplayIndex = dgvItems.Columns.Count - 1; 
+            if (column != null) column.DisplayIndex = dgvItems.Columns.Count - 1;
 
 
             column = dgvItems.Columns[nameof(AccountDto.Name)];
@@ -365,7 +366,14 @@ namespace ComLog.WinForms.Controls
             tbName.Enabled = true;
             tbBalance.Enabled = true;
             cbClosed.Enabled = true;
-            cbMsDaily01.Enabled = true;
+            if (_presenter.PresenterMode == PresenterMode.Edit)
+            {
+                if (DbBalance == 0) cbMsDaily01.Enabled = true;
+            }
+            else
+            {
+                cbMsDaily01.Enabled = true;
+            }
             if (_presenter.PresenterMode != PresenterMode.AddNew) return;
             cmbBank.Enabled = true;
             cmbCurrency.Enabled = true;
