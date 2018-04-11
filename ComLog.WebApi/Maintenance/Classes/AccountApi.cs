@@ -163,7 +163,10 @@ namespace ComLog.WebApi.Maintenance.Classes
                             dto.FromTo = bankAndCurrencyTransactions[i].FromTo;
                             dto.Description = bankAndCurrencyTransactions[i].Description;
                             dto.Dcc = bankAndCurrencyTransactions[i].Dcc ?? 0;
-
+                            dto.Dc = bankAndCurrencyTransactions[i].Dc ?? 0;
+                            dto.Charges = bankAndCurrencyTransactions[i].Charges ?? 0;
+                            dto.Report = bankAndCurrencyTransactions[i].Report;
+                            dto.Pmrq = bankAndCurrencyTransactions[i].Pmrq;
                             dailyNew.Add(dto);
                         }
                         else
@@ -174,7 +177,11 @@ namespace ComLog.WebApi.Maintenance.Classes
                                 CurrencyId = dto.CurrencyId,
                                 FromTo = bankAndCurrencyTransactions[i].FromTo,
                                 Description = bankAndCurrencyTransactions[i].Description,
-                                Dcc = bankAndCurrencyTransactions[i].Dcc ?? 0
+                                Dcc = bankAndCurrencyTransactions[i].Dcc ?? 0,
+                                Dc = bankAndCurrencyTransactions[i].Dc ?? 0,
+                                Charges = bankAndCurrencyTransactions[i].Charges ?? 0,
+                                Report = bankAndCurrencyTransactions[i].Report,
+                                Pmrq = bankAndCurrencyTransactions[i].Pmrq
                             });
                         }
                         if (i == 0)

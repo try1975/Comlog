@@ -27,7 +27,14 @@ namespace ComLog.WinForms.Controls
         private readonly IPresenter _presenter;
         private readonly ITransactionViewFilter _transactionViewFilter;
         private bool _isEventHandlerSets;
-        private const int EditableDays = 7;
+        private int EditableDays
+        {
+            get
+            {
+                int editableDays;
+                return int.TryParse(ConfigurationManager.AppSettings[nameof(EditableDays)], out editableDays) ? editableDays : 7;
+            }
+        }
 
         public TransactionControl(ITransactionDataManager transactionDataManager, IDataMаnager dataMаnager)
         {
@@ -281,6 +288,13 @@ namespace ComLog.WinForms.Controls
             set { tbReport.Text = value; }
         }
 
+        public string Pmrq
+        {
+            get { return tbPmrq.Text; }
+            set { tbPmrq.Text = value; }
+        }
+
+        public decimal? Dc { get; set; }
         public decimal? Dcc { get; set; }
         public decimal? UsdDcc { get; set; }
 
@@ -367,6 +381,8 @@ namespace ComLog.WinForms.Controls
             column = dgvItems.Columns[nameof(TransactionExtDto.TransactionTypeId)];
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.Dcc)];
+            if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(TransactionExtDto.Dc)];
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.UsdDcc)];
             if (column != null) column.Visible = false;
@@ -552,6 +568,7 @@ namespace ComLog.WinForms.Controls
             tbFromTo.Text = string.Empty;
             tbDescription.Text = string.Empty;
             tbReport.Text = string.Empty;
+            tbPmrq.Text = string.Empty;
         }
 
         public void EnableInput()
@@ -566,6 +583,7 @@ namespace ComLog.WinForms.Controls
             tbFromTo.Enabled = true;
             tbDescription.Enabled = true;
             tbReport.Enabled = true;
+            tbPmrq.Enabled = true;
 
             cmbAllAccount.Focus();
         }
@@ -582,6 +600,7 @@ namespace ComLog.WinForms.Controls
             tbFromTo.Enabled = false;
             tbDescription.Enabled = false;
             tbReport.Enabled = false;
+            tbPmrq.Enabled = false;
         }
 
         #endregion //IEnterMode
@@ -796,7 +815,23 @@ namespace ComLog.WinForms.Controls
                 MessageBox.Show(errorText, @"Error", MessageBoxButtons.OK);
                 return;
             }
-            CreateExcelFile.CreateExcelDocument(report, saveFileDialog.FileName);
+            var dataTable = DataTableConverter.ToDataTable(report);
+            var fieldNames = new[]
+            {
+                nameof(AccountMsDailyDto.PrevBalance),
+                nameof(AccountMsDailyDto.BankName), nameof(AccountMsDailyDto.CurrencyId),
+                nameof(AccountMsDailyDto.FromTo), nameof(AccountMsDailyDto.Description),
+                nameof(AccountMsDailyDto.Dc),nameof(AccountMsDailyDto.Charges),
+                nameof(AccountMsDailyDto.Activity), nameof(AccountMsDailyDto.NewBalance),
+                nameof(AccountMsDailyDto.Report), nameof(AccountMsDailyDto.Pmrq)
+            };
+            dataTable.SetColumnsOrder(fieldNames);
+            for (var i = dataTable.Columns.Count - 1; i >= 0; i--)
+            {
+                if (!fieldNames.Any(f => f.Equals(dataTable.Columns[i].ColumnName)))
+                    dataTable.Columns.RemoveAt(i);
+            }
+            CreateExcelFile.CreateExcelDocument(dataTable, saveFileDialog.FileName);
 
             var runMacroForm = new RunMacroForm(macroRunSettings);
             if (runMacroForm.NotShow)

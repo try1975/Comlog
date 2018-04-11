@@ -47,6 +47,10 @@ namespace ComLog.WinForms.Interfaces
 
         DateTime? TransactionDate { get; set; }
 
+        string Pmrq { get; set; }
+
+        decimal? Dc { get; set; }
+
         #endregion //Details
     }
 }

@@ -69,6 +69,23 @@ namespace ComLog.Db.MsSql.Mappings
                 .IsOptional()
                 ;
 
+            Property(e => e.Pmrq)
+                .HasMaxLength(50)
+                .IsOptional()
+                ;
+            //Property(e => e.IsPmrq)
+            //    .HasColumnType("bit")
+            //    .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed)
+            //    ;
+            //DropColumn("dbo.Transactions", "IsPmrq");
+            //Sql(@"ALTER TABLE [dbo].[Transactions] ADD [IsPmrq] AS (CAST(CASE isnull([IsPmrq], '') WHEN '' THEN 0 ELSE 1 END AS bit));");
+
+
+            Property(e => e.Dc)
+                .HasColumnType("money")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed)
+                ;
+
             HasRequired(s => s.Bank)
                .WithMany(l => l.Transactions)
                .HasForeignKey(s => s.BankId)

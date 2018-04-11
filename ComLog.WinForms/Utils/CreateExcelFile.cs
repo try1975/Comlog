@@ -324,9 +324,12 @@ SpreadsheetDocument.Create(stream, SpreadsheetDocumentType.Workbook, true))
         {
             //  Add a new Excel Cell to our Row 
             var cell = new Cell {CellReference = cellReference, DataType = CellValues.String};
-            var cellValue = new CellValue {Text = cellStringValue};
-            // ReSharper disable once PossiblyMistakenUseOfParamsMethod
-            cell.Append(cellValue);
+            if (!string.IsNullOrEmpty(cellStringValue))
+            {
+                var cellValue = new CellValue {Text = cellStringValue};
+                // ReSharper disable once PossiblyMistakenUseOfParamsMethod
+                cell.Append(cellValue);
+            }
             // ReSharper disable once PossiblyMistakenUseOfParamsMethod
             excelRow.Append(cell);
         }

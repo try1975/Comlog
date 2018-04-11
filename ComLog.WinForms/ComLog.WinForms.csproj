@@ -230,6 +230,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Utils\CreateExcelFile.cs" />
+    <Compile Include="Utils\DataTableConverter.cs" />
     <Compile Include="Utils\DataTableExtensions.cs" />
     <Compile Include="Utils\GridColors.cs" />
     <Compile Include="Utils\MacroRunSettings.cs" />

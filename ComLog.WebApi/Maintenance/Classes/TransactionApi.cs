@@ -58,5 +58,19 @@ namespace ComLog.WebApi.Maintenance.Classes
         {
             return Mapper.Map<List<TransactionDto>>(Query.GetEntities().Take(10));
         }
+
+        public override TransactionDto AddItem(TransactionDto dto)
+        {
+            dto.Report = dto.Report.Trim().ToLower();
+            dto.Pmrq = dto.Pmrq.Trim();
+            return base.AddItem(dto);
+        }
+
+        public override TransactionDto ChangeItem(TransactionDto dto)
+        {
+            dto.Report = dto.Report.Trim().ToLower();
+            dto.Pmrq = dto.Pmrq.Trim();
+            return base.ChangeItem(dto);
+        }
     }
 }

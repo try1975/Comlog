@@ -47,5 +47,10 @@ namespace ComLog.Db.Entities
         public int Id { get; set; }
         public string ChangeBy { get; set; }
         public DateTime? ChangeAt { get; set; }
+
+        public string Pmrq { get; set; }
+        //public bool IsPmrq { get; private set; }
+        public decimal? Dc { get; private set; }
+
     }
 }
