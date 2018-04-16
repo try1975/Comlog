@@ -62,6 +62,7 @@ namespace ComLog.WebApi.Maintenance.Classes
         public override TransactionDto AddItem(TransactionDto dto)
         {
             dto.Report = dto.Report.Trim().ToLower();
+            if (dto.Report.Equals("lb")) dto.Report = "LB";
             dto.Pmrq = dto.Pmrq.Trim();
             return base.AddItem(dto);
         }
@@ -69,6 +70,7 @@ namespace ComLog.WebApi.Maintenance.Classes
         public override TransactionDto ChangeItem(TransactionDto dto)
         {
             dto.Report = dto.Report.Trim().ToLower();
+            if (dto.Report.Equals("lb")) dto.Report = "LB";
             dto.Pmrq = dto.Pmrq.Trim();
             return base.ChangeItem(dto);
         }

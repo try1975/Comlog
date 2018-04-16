@@ -758,10 +758,10 @@ namespace ComLog.WinForms.Controls
 
             var macroRunSettings = new MacroRunSettings
             {
-                MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
+                MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MsDailyWorkBook)],
                 MacroName = ConfigurationManager.AppSettings[nameof(MacroSettings.MsDailyMacro)],
                 SourceFilename = saveFileDialog.FileName,
-                DestinationFilename = saveFileDialog.FileName.Replace(".xls", "_Formated.xls")
+                DestinationFilename = saveFileDialog.FileName.Replace(".xlsx", "_Formated.xlsm")
             };
             if (dtpDateFrom.Value != dtpDateTo.Value)
             {
@@ -846,6 +846,7 @@ namespace ComLog.WinForms.Controls
             try
             {
                 File.Delete(macroRunSettings.SourceFilename);
+                macroRunSettings.SourceFilename = macroRunSettings.SourceFilename.Replace(".xlsx", ".xlsm");
                 File.Move(macroRunSettings.DestinationFilename, macroRunSettings.SourceFilename);
                 Process.Start(macroRunSettings.SourceFilename);
             }
