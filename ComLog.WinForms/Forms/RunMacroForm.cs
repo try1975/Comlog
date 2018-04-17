@@ -82,7 +82,8 @@ namespace ComLog.WinForms.Forms
                 else if (_macroRunSettings.MacroName.Equals(msDailyMacro))
                 {
                     xlApp.Run(_macroRunSettings.MacroName, _macroRunSettings.SourceFilename, _macroRunSettings.DestinationFilename
-                        , _macroRunSettings.Params["Period"]
+                        , _macroRunSettings.Params["DTB"]
+                        , _macroRunSettings.Params["DTE"]
                         , _macroRunSettings.Params["EUR_RATE"]
                         , _macroRunSettings.Params["GBP_RATE"]
                         , _macroRunSettings.Params["CHF_RATE"]

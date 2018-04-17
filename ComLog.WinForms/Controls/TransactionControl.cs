@@ -765,11 +765,13 @@ namespace ComLog.WinForms.Controls
             };
             if (dtpDateFrom.Value != dtpDateTo.Value)
             {
-                macroRunSettings.Params["Period"] = $"{dtpDateFrom.Value:dd-MMM-yy} to {dtpDateTo.Value:dd-MMM-yy}";
+                macroRunSettings.Params["DTB"] = $"{dtpDateFrom.Value:dd-MMM-yy}";
+                macroRunSettings.Params["DTE"] = $"{dtpDateTo.Value:dd-MMM-yy}";
             }
             else
             {
-                macroRunSettings.Params["Period"] = $"{dtpDateFrom.Value:dd-MMM-yy}";
+                macroRunSettings.Params["DTB"] = $"{dtpDateFrom.Value:dd-MMM-yy}";
+                macroRunSettings.Params["DTE"] = "";
             }
 
             // Previous currency rate to params
