@@ -145,14 +145,16 @@ namespace ComLog.WebApi.Maintenance.Classes
                 ;
             var transactions = _transactionQuery.GetEntities()
                     .Where(z => z.TransactionDate >= aDateFrom && z.TransactionDate < aDateTo && accountIds.Contains(z.AccountId))
+                    .Include(z => z.TransactionType)
                     .ToList()
                 ;
             var dailyNew = new List<AccountMsDailyDto>();
             foreach (var dto in daily)
             {
                 var accountsGroupIds = accounts.Where(z => z.DailyName == dto.BankName).Select(z => z.Id).ToList();
-                var bankAndCurrencyTransactions = transactions.Where(z =>
-                    accountsGroupIds.Contains(z.AccountId) && z.CurrencyId == dto.CurrencyId).ToList();
+                var bankAndCurrencyTransactions = transactions
+                    .Where(z => accountsGroupIds.Contains(z.AccountId) && z.CurrencyId == dto.CurrencyId)
+                    .ToList();
                 if (bankAndCurrencyTransactions.Count > 0)
                 {
                     var firstTime = true;
@@ -167,6 +169,7 @@ namespace ComLog.WebApi.Maintenance.Classes
                             dto.Charges = bankAndCurrencyTransactions[i].Charges ?? 0;
                             dto.Report = bankAndCurrencyTransactions[i].Report;
                             dto.Pmrq = bankAndCurrencyTransactions[i].Pmrq;
+                            dto.TransactionTypeName = bankAndCurrencyTransactions[i].TransactionType.Name;
                             dailyNew.Add(dto);
                         }
                         else
@@ -181,8 +184,9 @@ namespace ComLog.WebApi.Maintenance.Classes
                                 Dc = bankAndCurrencyTransactions[i].Dc ?? 0,
                                 Charges = bankAndCurrencyTransactions[i].Charges ?? 0,
                                 Report = bankAndCurrencyTransactions[i].Report,
-                                Pmrq = bankAndCurrencyTransactions[i].Pmrq
-                            });
+                                Pmrq = bankAndCurrencyTransactions[i].Pmrq,
+                                TransactionTypeName = bankAndCurrencyTransactions[i].TransactionType.Name
+                        });
                         }
                         if (i == 0)
                         {

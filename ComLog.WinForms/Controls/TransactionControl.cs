@@ -825,7 +825,8 @@ namespace ComLog.WinForms.Controls
                 nameof(AccountMsDailyDto.FromTo), nameof(AccountMsDailyDto.Description),
                 nameof(AccountMsDailyDto.Dc),nameof(AccountMsDailyDto.Charges),
                 nameof(AccountMsDailyDto.Activity), nameof(AccountMsDailyDto.NewBalance),
-                nameof(AccountMsDailyDto.Report), nameof(AccountMsDailyDto.Pmrq)
+                nameof(AccountMsDailyDto.Report), nameof(AccountMsDailyDto.Pmrq),
+                nameof(AccountMsDailyDto.TransactionTypeName)
             };
             dataTable.SetColumnsOrder(fieldNames);
             for (var i = dataTable.Columns.Count - 1; i >= 0; i--)

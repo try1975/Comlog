@@ -15,5 +15,6 @@
         public string Pmrq { get; set; }
         public decimal? Dc { get; set; }
         public decimal? Charges { get; set; }
+        public string TransactionTypeName { get; set; }
     }
 }
