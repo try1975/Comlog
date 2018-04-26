@@ -25,6 +25,7 @@ namespace ComLog.Db.MsSql
         public virtual DbSet<AccountTypeEntity> AccountTypes { get; set; }
         public virtual DbSet<CurrencyEntity> Currencies { get; set; }
         public virtual DbSet<TransactionTypeEntity> TransactionTypes { get; set; }
+        public virtual DbSet<NewFormTypeEntity> NewFormTypes { get; set; }
         public virtual DbSet<AccountEntity> Accounts { get; set; }
         public virtual DbSet<TransactionEntity> Transactions { get; set; }
         public virtual DbSet<DailyEntity> DailyNames { get; set; }
@@ -42,6 +43,7 @@ namespace ComLog.Db.MsSql
             modelBuilder.Configurations.Add(new AccountTypeMap($"{prefix}{nameof(AccountTypes)}"));
             modelBuilder.Configurations.Add(new CurrencyMap($"{prefix}{nameof(Currencies)}"));
             modelBuilder.Configurations.Add(new TransactionTypeMap($"{prefix}{nameof(TransactionTypes)}"));
+            modelBuilder.Configurations.Add(new NewFormTypeMap($"{prefix}{nameof(NewFormTypes)}"));
             modelBuilder.Configurations.Add(new AccountMap($"{prefix}{nameof(Accounts)}"));
             modelBuilder.Configurations.Add(new TransactionMap($"{prefix}{nameof(Transactions)}"));
             modelBuilder.Configurations.Add(new DailyMap($"{prefix}{nameof(DailyNames)}"));

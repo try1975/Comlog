@@ -44,6 +44,7 @@
     <Compile Include="Entities\CurrencyEntity.cs" />
     <Compile Include="Entities\DailyEntity.cs" />
     <Compile Include="Entities\ExcelBookEntity.cs" />
+    <Compile Include="Entities\NewFormTypeEntity.cs" />
     <Compile Include="Entities\TransactionEntity.cs" />
     <Compile Include="Entities\TransactionTypeEntity.cs" />
     <Compile Include="ITypedQuery.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="QueryProcessors\IBankQuery.cs" />
     <Compile Include="QueryProcessors\ICurrencyQuery.cs" />
     <Compile Include="QueryProcessors\IExcelBookQuery.cs" />
+    <Compile Include="QueryProcessors\INewFormTypeQuery.cs" />
     <Compile Include="QueryProcessors\ITransactionQuery.cs" />
     <Compile Include="QueryProcessors\ITransactionTypeQuery.cs" />
   </ItemGroup>

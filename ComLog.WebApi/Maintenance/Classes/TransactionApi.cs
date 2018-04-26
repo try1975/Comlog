@@ -47,6 +47,7 @@ namespace ComLog.WebApi.Maintenance.Classes
                 .Include(nameof(TransactionEntity.Bank))
                 .Include(nameof(TransactionEntity.Account))
                 .Include(nameof(TransactionEntity.TransactionType))
+                .Include(nameof(TransactionEntity.NewFormType))
                 .Include(nameof(TransactionEntity.Currency))
                 .OrderByDescending(z => z.TransactionDate)
                 .ThenByDescending(z=>z.ChangeAt)

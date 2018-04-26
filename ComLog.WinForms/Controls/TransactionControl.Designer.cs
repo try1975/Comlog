@@ -30,6 +30,9 @@
         {
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
+            this.pmlPmrq = new System.Windows.Forms.Panel();
+            this.lblPmrq = new System.Windows.Forms.Label();
+            this.tbPmrq = new System.Windows.Forms.TextBox();
             this.pnlReport = new System.Windows.Forms.Panel();
             this.lblReport = new System.Windows.Forms.Label();
             this.tbReport = new System.Windows.Forms.TextBox();
@@ -103,11 +106,12 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.pnlAccounts = new System.Windows.Forms.Panel();
-            this.pmlPmrq = new System.Windows.Forms.Panel();
-            this.lblPmrq = new System.Windows.Forms.Label();
-            this.tbPmrq = new System.Windows.Forms.TextBox();
+            this.pnlNewFormType = new System.Windows.Forms.Panel();
+            this.lblNewFormType = new System.Windows.Forms.Label();
+            this.cmbNewFormType = new System.Windows.Forms.ComboBox();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
+            this.pmlPmrq.SuspendLayout();
             this.pnlReport.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -131,7 +135,7 @@
             this.panel11.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
-            this.pmlPmrq.SuspendLayout();
+            this.pnlNewFormType.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -147,6 +151,7 @@
             // 
             // pnlFields
             // 
+            this.pnlFields.Controls.Add(this.pnlNewFormType);
             this.pnlFields.Controls.Add(this.pmlPmrq);
             this.pnlFields.Controls.Add(this.pnlReport);
             this.pnlFields.Controls.Add(this.panel7);
@@ -164,6 +169,35 @@
             this.pnlFields.Name = "pnlFields";
             this.pnlFields.Size = new System.Drawing.Size(398, 473);
             this.pnlFields.TabIndex = 1;
+            // 
+            // pmlPmrq
+            // 
+            this.pmlPmrq.Controls.Add(this.lblPmrq);
+            this.pmlPmrq.Controls.Add(this.tbPmrq);
+            this.pmlPmrq.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pmlPmrq.Location = new System.Drawing.Point(0, 366);
+            this.pmlPmrq.Name = "pmlPmrq";
+            this.pmlPmrq.Size = new System.Drawing.Size(398, 33);
+            this.pmlPmrq.TabIndex = 11;
+            // 
+            // lblPmrq
+            // 
+            this.lblPmrq.AutoSize = true;
+            this.lblPmrq.Location = new System.Drawing.Point(7, 9);
+            this.lblPmrq.Name = "lblPmrq";
+            this.lblPmrq.Size = new System.Drawing.Size(39, 13);
+            this.lblPmrq.TabIndex = 3;
+            this.lblPmrq.Text = "PMRQ";
+            // 
+            // tbPmrq
+            // 
+            this.tbPmrq.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPmrq.Enabled = false;
+            this.tbPmrq.Location = new System.Drawing.Point(97, 6);
+            this.tbPmrq.Name = "tbPmrq";
+            this.tbPmrq.Size = new System.Drawing.Size(285, 20);
+            this.tbPmrq.TabIndex = 2;
             // 
             // pnlReport
             // 
@@ -890,34 +924,39 @@
             this.pnlAccounts.Size = new System.Drawing.Size(56, 514);
             this.pnlAccounts.TabIndex = 0;
             // 
-            // pmlPmrq
+            // pnlNewFormType
             // 
-            this.pmlPmrq.Controls.Add(this.lblPmrq);
-            this.pmlPmrq.Controls.Add(this.tbPmrq);
-            this.pmlPmrq.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pmlPmrq.Location = new System.Drawing.Point(0, 366);
-            this.pmlPmrq.Name = "pmlPmrq";
-            this.pmlPmrq.Size = new System.Drawing.Size(398, 33);
-            this.pmlPmrq.TabIndex = 11;
+            this.pnlNewFormType.Controls.Add(this.cmbNewFormType);
+            this.pnlNewFormType.Controls.Add(this.lblNewFormType);
+            this.pnlNewFormType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNewFormType.Location = new System.Drawing.Point(0, 399);
+            this.pnlNewFormType.Name = "pnlNewFormType";
+            this.pnlNewFormType.Size = new System.Drawing.Size(398, 33);
+            this.pnlNewFormType.TabIndex = 12;
             // 
-            // lblPmrq
+            // lblNewFormType
             // 
-            this.lblPmrq.AutoSize = true;
-            this.lblPmrq.Location = new System.Drawing.Point(7, 9);
-            this.lblPmrq.Name = "lblPmrq";
-            this.lblPmrq.Size = new System.Drawing.Size(39, 13);
-            this.lblPmrq.TabIndex = 3;
-            this.lblPmrq.Text = "PMRQ";
+            this.lblNewFormType.AutoSize = true;
+            this.lblNewFormType.Location = new System.Drawing.Point(7, 9);
+            this.lblNewFormType.Name = "lblNewFormType";
+            this.lblNewFormType.Size = new System.Drawing.Size(52, 13);
+            this.lblNewFormType.TabIndex = 3;
+            this.lblNewFormType.Text = "NewForm";
             // 
-            // tbPmrq
+            // cmbNewFormType
             // 
-            this.tbPmrq.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cmbNewFormType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPmrq.Enabled = false;
-            this.tbPmrq.Location = new System.Drawing.Point(97, 6);
-            this.tbPmrq.Name = "tbPmrq";
-            this.tbPmrq.Size = new System.Drawing.Size(285, 20);
-            this.tbPmrq.TabIndex = 2;
+            this.cmbNewFormType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbNewFormType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbNewFormType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbNewFormType.Enabled = false;
+            this.cmbNewFormType.FormattingEnabled = true;
+            this.cmbNewFormType.Location = new System.Drawing.Point(97, 6);
+            this.cmbNewFormType.Name = "cmbNewFormType";
+            this.cmbNewFormType.Size = new System.Drawing.Size(285, 21);
+            this.cmbNewFormType.Sorted = true;
+            this.cmbNewFormType.TabIndex = 5;
             // 
             // TransactionControl
             // 
@@ -932,6 +971,8 @@
             this.Size = new System.Drawing.Size(1253, 514);
             this.pnlDetails.ResumeLayout(false);
             this.pnlFields.ResumeLayout(false);
+            this.pmlPmrq.ResumeLayout(false);
+            this.pmlPmrq.PerformLayout();
             this.pnlReport.ResumeLayout(false);
             this.pnlReport.PerformLayout();
             this.panel7.ResumeLayout(false);
@@ -968,8 +1009,8 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel10.ResumeLayout(false);
-            this.pmlPmrq.ResumeLayout(false);
-            this.pmlPmrq.PerformLayout();
+            this.pnlNewFormType.ResumeLayout(false);
+            this.pnlNewFormType.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1054,5 +1095,8 @@
         private System.Windows.Forms.Panel pmlPmrq;
         private System.Windows.Forms.Label lblPmrq;
         private System.Windows.Forms.TextBox tbPmrq;
+        private System.Windows.Forms.Panel pnlNewFormType;
+        private System.Windows.Forms.ComboBox cmbNewFormType;
+        private System.Windows.Forms.Label lblNewFormType;
     }
 }

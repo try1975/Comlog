@@ -12,7 +12,7 @@
             public const string Currencies = ApiSegmentName + nameof(Currencies);
             public const string Transactions = ApiSegmentName + nameof(Transactions);
             public const string TransactionTypes = ApiSegmentName + nameof(TransactionTypes);
-
+            public const string NewFormTypes = ApiSegmentName + nameof(NewFormTypes);
         }
     }
 }

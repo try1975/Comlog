@@ -140,6 +140,25 @@ namespace ComLog.WinForms.Controls
                     MessageBoxDefaultButton.Button1);
                 return false;
             }
+            var accountExtDto = cmbAllAccount.SelectedItem as AccountExtDto;
+            var msDaily = false;
+            if (accountExtDto?.MsDaily01 != null) msDaily = accountExtDto.MsDaily01.Value;
+            if (string.IsNullOrEmpty(cmbNewFormType.Text) && msDaily && string.IsNullOrEmpty(tbReport.Text) && string.IsNullOrEmpty(tbPmrq.Text) && string.IsNullOrEmpty(tbCharges.Text))
+            {
+                MessageBox.Show(
+                    @"NewForm type must be set",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            if (cmbNewFormType.SelectedItem == null && msDaily && string.IsNullOrEmpty(tbReport.Text) && string.IsNullOrEmpty(tbPmrq.Text) && string.IsNullOrEmpty(tbCharges.Text))
+            {
+                MessageBox.Show(
+                    @"NewForm type must be set",
+                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+                return false;
+            }
             return true;
         }
 
@@ -200,6 +219,7 @@ namespace ComLog.WinForms.Controls
             set { tbId.Text = value.ToString(); }
         }
 
+
         public int BankId { get; set; }
 
         public int AccountId
@@ -224,6 +244,16 @@ namespace ComLog.WinForms.Controls
         {
             get { return (int?)cmbTransactionType.SelectedValue; }
             set { cmbTransactionType.SelectedValue = value; }
+        }
+
+        public int? NewFormTypeId
+        {
+            get { return (int?)cmbNewFormType.SelectedValue; }
+            set
+            {
+                if (value == null) { cmbNewFormType.SelectedIndex = -1; }
+                else { cmbNewFormType.SelectedValue = value; }
+            }
         }
 
         public string CurrencyId { get; set; }
@@ -339,6 +369,16 @@ namespace ComLog.WinForms.Controls
             }
         }
 
+        public List<KeyValuePair<int, string>> NewFormTypeList
+        {
+            set
+            {
+                cmbNewFormType.DataSource = value;
+                cmbNewFormType.ValueMember = "Key";
+                cmbNewFormType.DisplayMember = "Value";
+            }
+        }
+
         #endregion DetailsList
 
         #endregion //ITransactionView implementation
@@ -380,6 +420,8 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.TransactionTypeId)];
             if (column != null) column.Visible = false;
+            column = dgvItems.Columns[nameof(TransactionExtDto.NewFormTypeId)];
+            if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.Dcc)];
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.Dc)];
@@ -391,7 +433,11 @@ namespace ComLog.WinForms.Controls
             column = dgvItems.Columns[nameof(TransactionExtDto.UsdDebits)];
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.MsDaily01)];
-            if (column != null) column.Visible = false;
+            if (column != null)
+            {
+                column.Visible = true;
+                column.DisplayIndex = dgvItems.Columns.Count - 1 - 1;
+            }
             column = dgvItems.Columns[nameof(TransactionExtDto.CurrencyOrd)];
             if (column != null) column.Visible = false;
 
@@ -406,6 +452,11 @@ namespace ComLog.WinForms.Controls
             if (column != null) column.DisplayIndex = 3;
             column = dgvItems.Columns[nameof(TransactionExtDto.TransactionTypeName)];
             if (column != null) column.DisplayIndex = 4;
+            column = dgvItems.Columns[nameof(TransactionExtDto.NewFormTypeName)];
+            if (column != null)
+            {
+                column.DisplayIndex = dgvItems.Columns.Count - 1 - 2;
+            }
 
             column = dgvItems.Columns[nameof(TransactionExtDto.TransactionDate)];
             if (column != null) column.HeaderText = @"Date";
@@ -562,6 +613,7 @@ namespace ComLog.WinForms.Controls
             cmbAllAccount.SelectedIndex = -1;
             //cmbNotClosedAccounts.SelectedIndex = -1;
             cmbTransactionType.SelectedIndex = -1;
+            cmbNewFormType.SelectedIndex = -1;
             tbCredits.Text = string.Empty;
             tbDebits.Text = string.Empty;
             tbCharges.Text = string.Empty;
@@ -577,6 +629,7 @@ namespace ComLog.WinForms.Controls
             dtpTransactionDate.Enabled = true;
             cmbAllAccount.Enabled = true;
             cmbTransactionType.Enabled = true;
+            cmbNewFormType.Enabled = true;
             tbCredits.Enabled = true;
             tbDebits.Enabled = true;
             tbCharges.Enabled = true;
@@ -594,6 +647,7 @@ namespace ComLog.WinForms.Controls
             dtpTransactionDate.Enabled = false;
             cmbAllAccount.Enabled = false;
             cmbTransactionType.Enabled = false;
+            cmbNewFormType.Enabled = false;
             tbCredits.Enabled = false;
             tbDebits.Enabled = false;
             tbCharges.Enabled = false;
@@ -775,7 +829,7 @@ namespace ComLog.WinForms.Controls
             }
 
             // Previous currency rate to params
-            var date = dtpDateTo.Value.Date;
+            var date = dtpDateFrom.Value.Date;
             var previousDayCount = -1;
             if (date.DayOfWeek == DayOfWeek.Monday) previousDayCount = -3;
             date = date.AddDays(previousDayCount);
@@ -826,7 +880,7 @@ namespace ComLog.WinForms.Controls
                 nameof(AccountMsDailyDto.Dc),nameof(AccountMsDailyDto.Charges),
                 nameof(AccountMsDailyDto.Activity), nameof(AccountMsDailyDto.NewBalance),
                 nameof(AccountMsDailyDto.Report), nameof(AccountMsDailyDto.Pmrq),
-                nameof(AccountMsDailyDto.TransactionTypeName)
+                nameof(AccountMsDailyDto.NewFormTypeName)
             };
             dataTable.SetColumnsOrder(fieldNames);
             for (var i = dataTable.Columns.Count - 1; i >= 0; i--)

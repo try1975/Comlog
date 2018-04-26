@@ -145,7 +145,7 @@ namespace ComLog.WebApi.Maintenance.Classes
                 ;
             var transactions = _transactionQuery.GetEntities()
                     .Where(z => z.TransactionDate >= aDateFrom && z.TransactionDate < aDateTo && accountIds.Contains(z.AccountId))
-                    .Include(z => z.TransactionType)
+                    .Include(z => z.NewFormType)
                     .ToList()
                 ;
             var dailyNew = new List<AccountMsDailyDto>();
@@ -169,7 +169,7 @@ namespace ComLog.WebApi.Maintenance.Classes
                             dto.Charges = bankAndCurrencyTransactions[i].Charges ?? 0;
                             dto.Report = bankAndCurrencyTransactions[i].Report;
                             dto.Pmrq = bankAndCurrencyTransactions[i].Pmrq;
-                            dto.TransactionTypeName = bankAndCurrencyTransactions[i].TransactionType.Name;
+                            dto.NewFormTypeName = bankAndCurrencyTransactions[i].NewFormType != null ? bankAndCurrencyTransactions[i].NewFormType.Name : "";
                             dailyNew.Add(dto);
                         }
                         else
@@ -185,8 +185,8 @@ namespace ComLog.WebApi.Maintenance.Classes
                                 Charges = bankAndCurrencyTransactions[i].Charges ?? 0,
                                 Report = bankAndCurrencyTransactions[i].Report,
                                 Pmrq = bankAndCurrencyTransactions[i].Pmrq,
-                                TransactionTypeName = bankAndCurrencyTransactions[i].TransactionType.Name
-                        });
+                                NewFormTypeName = bankAndCurrencyTransactions[i].NewFormType !=null ? bankAndCurrencyTransactions[i].NewFormType.Name : ""
+                            });
                         }
                         if (i == 0)
                         {

@@ -45,6 +45,7 @@
     <Compile Include="Dto\Ext\TransactionExtDto.cs" />
     <Compile Include="Dto\Ext\TransactionReport01Dto.cs" />
     <Compile Include="Dto\TransactionDto.cs" />
+    <Compile Include="Dto\NewFormTypeDto.cs" />
     <Compile Include="Dto\TransactionTypeDto.cs" />
     <Compile Include="IDto.cs" />
     <Compile Include="ITrackedDto.cs" />

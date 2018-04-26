@@ -52,6 +52,9 @@ namespace ComLog.WebApi.Ninject
             container.Bind<ITransactionTypeApi>().To<TransactionTypeApi>().InRequestScope();
             container.Bind<ITransactionTypeQuery>().To<TransactionTypeQuery>().InRequestScope();
 
+            container.Bind<INewFormTypeApi>().To<NewFormTypeApi>().InRequestScope();
+            container.Bind<INewFormTypeQuery>().To<NewFormTypeQuery>().InRequestScope();
+
             #endregion
         }
 
@@ -64,6 +67,7 @@ namespace ComLog.WebApi.Ninject
             CurrencyAutoMapper.Configure(cfg);
             TransactionAutoMapper.Configure(cfg);
             TransactionTypeAutoMapper.Configure(cfg);
+            NewFormTypeAutoMapper.Configure(cfg);
             Mapper.Initialize(cfg);
             //Mapper.AssertConfigurationIsValid();
         }

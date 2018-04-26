@@ -109,6 +109,12 @@ namespace ComLog.Db.MsSql.Mappings
                .HasForeignKey(s => s.TransactionTypeId)
                .WillCascadeOnDelete(false)
                ;
+
+            HasOptional(s => s.NewFormType)
+                .WithMany(l => l.Transactions)
+                .HasForeignKey(s => s.NewFormTypeId)
+                .WillCascadeOnDelete(false)
+                ;
         }
     }
 }

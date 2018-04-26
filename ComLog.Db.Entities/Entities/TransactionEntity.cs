@@ -12,6 +12,7 @@ namespace ComLog.Db.Entities
         public int AccountId { get; set; }
 
         public int? TransactionTypeId { get; set; }
+        public int? NewFormTypeId { get; set; }
 
         public string CurrencyId { get; set; }
 
@@ -44,12 +45,12 @@ namespace ComLog.Db.Entities
         public CurrencyEntity Currency { get; set; }
 
         public TransactionTypeEntity TransactionType { get; set; }
+        public NewFormTypeEntity NewFormType { get; set; }
         public int Id { get; set; }
         public string ChangeBy { get; set; }
         public DateTime? ChangeAt { get; set; }
 
         public string Pmrq { get; set; }
-        //public bool IsPmrq { get; private set; }
         public decimal? Dc { get; private set; }
 
     }

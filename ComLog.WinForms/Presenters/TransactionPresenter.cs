@@ -35,6 +35,15 @@ namespace ComLog.WinForms.Presenters
                         .ToList();
             else
                 ((ITransactionView) View).TransactionTypeList = new List<KeyValuePair<int, string>>();
+
+            var newFormTypeDtos = await DataMаnager.GetNewFormTypes();
+            if (newFormTypeDtos != null)
+                ((ITransactionView)View).NewFormTypeList =
+                    newFormTypeDtos.Select(c => new KeyValuePair<int, string>(c.Id, $"{c.Name}"))
+                        .OrderBy(kv => kv.Value)
+                        .ToList();
+            else
+                ((ITransactionView)View).NewFormTypeList = new List<KeyValuePair<int, string>>();
         }
     }
 }

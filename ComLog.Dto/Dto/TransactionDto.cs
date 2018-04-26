@@ -12,6 +12,8 @@ namespace ComLog.Dto
 
         public int? TransactionTypeId { get; set; }
 
+        public int? NewFormTypeId { get; set; }
+
         public string CurrencyId { get; set; }
 
         public decimal? Credits { get; set; }

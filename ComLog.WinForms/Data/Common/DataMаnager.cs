@@ -20,6 +20,7 @@ namespace ComLog.WinForms.Data.Common
         private readonly string _apiCurrencies;
         private readonly string _apiTransactions;
         private readonly string _apiTransactionTypes;
+        private readonly string _apiNewFormTypes;
         private readonly HttpClient _comLogHttpClient;
 
         private readonly string _curExApi;
@@ -37,6 +38,7 @@ namespace ComLog.WinForms.Data.Common
             _apiBanks = $"{baseApi}{ComLogConstants.ClientAppApi.Banks}/";
             _apiCurrencies = $"{baseApi}{ComLogConstants.ClientAppApi.Currencies}/";
             _apiTransactionTypes = $"{baseApi}{ComLogConstants.ClientAppApi.TransactionTypes}/";
+            _apiNewFormTypes = $"{baseApi}{ComLogConstants.ClientAppApi.NewFormTypes}/";
             _apiTransactions = $"{baseApi}{ComLogConstants.ClientAppApi.Transactions}/";
 
             #endregion
@@ -100,7 +102,7 @@ namespace ComLog.WinForms.Data.Common
 
         #endregion //Currencies
 
-        #region TransactionTypes
+        #region Types
 
         public async Task<IEnumerable<TransactionTypeDto>> GetTransactionTypes()
         {
@@ -112,7 +114,17 @@ namespace ComLog.WinForms.Data.Common
             }
         }
 
-        #endregion //TransactionTypes
+        public async Task<IEnumerable<NewFormTypeDto>> GetNewFormTypes()
+        {
+            using (var response = await _comLogHttpClient.GetAsync($"{_apiNewFormTypes}"))
+            {
+                if (!response.IsSuccessStatusCode) return null;
+                var result = await response.Content.ReadAsAsync<List<NewFormTypeDto>>();
+                return result;
+            }
+        }
+
+        #endregion //Types
 
         #region CurrencyExchangeRate
 

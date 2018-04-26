@@ -26,11 +26,12 @@ namespace ComLog.WinForms.Interfaces.Common
 
         #endregion //Currencies
 
-        #region TransactionTypes
+        #region Types
 
         Task<IEnumerable<TransactionTypeDto>> GetTransactionTypes();
+        Task<IEnumerable<NewFormTypeDto>> GetNewFormTypes();
 
-        #endregion //TransactionTypes
+        #endregion //Types
 
         #region CurrencyExchangeRate
 

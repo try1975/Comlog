@@ -12,6 +12,7 @@ namespace ComLog.WinForms.Interfaces
         List<AccountExtDto> AllAccountList { set; }
         List<AccountExtDto> NotClosedAccountList { set; }
         List<KeyValuePair<int, string>> TransactionTypeList { set; }
+        List<KeyValuePair<int, string>> NewFormTypeList { set; }
 
         #endregion DetailsList
 
@@ -22,6 +23,8 @@ namespace ComLog.WinForms.Interfaces
         int AccountId { get; set; }
 
         int? TransactionTypeId { get; set; }
+
+        int? NewFormTypeId { get; set; }
 
         string CurrencyId { get; set; }
 

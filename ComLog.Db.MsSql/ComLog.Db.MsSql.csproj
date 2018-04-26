@@ -59,6 +59,7 @@
     <Compile Include="Mappings\BankMap.cs" />
     <Compile Include="Mappings\CurrencyMap.cs" />
     <Compile Include="Mappings\ExcelBookMap.cs" />
+    <Compile Include="Mappings\NewFormTypeMap.cs" />
     <Compile Include="Mappings\TransactionMap.cs" />
     <Compile Include="Mappings\TransactionTypeMap.cs" />
     <Compile Include="Migrations\201707071649203_V01.cs" />
@@ -109,6 +110,10 @@
     <Compile Include="Migrations\201804051256511_V012.Designer.cs">
       <DependentUpon>201804051256511_V012.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804260956074_V013.cs" />
+    <Compile Include="Migrations\201804260956074_V013.Designer.cs">
+      <DependentUpon>201804260956074_V013.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryProcessors\DailyQuery.cs" />
@@ -117,6 +122,7 @@
     <Compile Include="QueryProcessors\BankQuery.cs" />
     <Compile Include="QueryProcessors\CurrencyQuery.cs" />
     <Compile Include="QueryProcessors\ExcelBookQuery.cs" />
+    <Compile Include="QueryProcessors\NewFormTypeQuery.cs" />
     <Compile Include="QueryProcessors\TransactionQuery.cs" />
     <Compile Include="QueryProcessors\TransactionTypeQuery.cs" />
     <Compile Include="QueryProcessors\TypedQuery.cs" />
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804051256511_V012.resx">
       <DependentUpon>201804051256511_V012.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804260956074_V013.resx">
+      <DependentUpon>201804260956074_V013.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
