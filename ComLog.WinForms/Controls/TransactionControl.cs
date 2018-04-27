@@ -145,19 +145,10 @@ namespace ComLog.WinForms.Controls
             if (accountExtDto?.MsDaily01 != null) msDaily = accountExtDto.MsDaily01.Value;
             if (string.IsNullOrEmpty(cmbNewFormType.Text) && msDaily && string.IsNullOrEmpty(tbReport.Text) && string.IsNullOrEmpty(tbPmrq.Text) && string.IsNullOrEmpty(tbCharges.Text))
             {
-                MessageBox.Show(
-                    @"NewForm type must be set",
-                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-                    MessageBoxDefaultButton.Button1);
-                return false;
-            }
-            if (cmbNewFormType.SelectedItem == null && msDaily && string.IsNullOrEmpty(tbReport.Text) && string.IsNullOrEmpty(tbPmrq.Text) && string.IsNullOrEmpty(tbCharges.Text))
-            {
-                MessageBox.Show(
-                    @"NewForm type must be set",
-                    @"Important Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-                    MessageBoxDefaultButton.Button1);
-                return false;
+                return MessageBox.Show(
+                    @"NewForm type must be set?",
+                    @"Important Note", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button1)==DialogResult.No;
             }
             return true;
         }
