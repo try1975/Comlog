@@ -30,6 +30,9 @@
         {
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
+            this.pnlNewFormType = new System.Windows.Forms.Panel();
+            this.cmbNewFormType = new System.Windows.Forms.ComboBox();
+            this.lblNewFormType = new System.Windows.Forms.Label();
             this.pmlPmrq = new System.Windows.Forms.Panel();
             this.lblPmrq = new System.Windows.Forms.Label();
             this.tbPmrq = new System.Windows.Forms.TextBox();
@@ -106,11 +109,10 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.pnlAccounts = new System.Windows.Forms.Panel();
-            this.pnlNewFormType = new System.Windows.Forms.Panel();
-            this.lblNewFormType = new System.Windows.Forms.Label();
-            this.cmbNewFormType = new System.Windows.Forms.ComboBox();
+            this.btnClearNewForm = new System.Windows.Forms.Button();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
+            this.pnlNewFormType.SuspendLayout();
             this.pmlPmrq.SuspendLayout();
             this.pnlReport.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -135,7 +137,6 @@
             this.panel11.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
-            this.pnlNewFormType.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -169,6 +170,41 @@
             this.pnlFields.Name = "pnlFields";
             this.pnlFields.Size = new System.Drawing.Size(398, 473);
             this.pnlFields.TabIndex = 1;
+            // 
+            // pnlNewFormType
+            // 
+            this.pnlNewFormType.Controls.Add(this.btnClearNewForm);
+            this.pnlNewFormType.Controls.Add(this.cmbNewFormType);
+            this.pnlNewFormType.Controls.Add(this.lblNewFormType);
+            this.pnlNewFormType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNewFormType.Location = new System.Drawing.Point(0, 399);
+            this.pnlNewFormType.Name = "pnlNewFormType";
+            this.pnlNewFormType.Size = new System.Drawing.Size(398, 33);
+            this.pnlNewFormType.TabIndex = 12;
+            // 
+            // cmbNewFormType
+            // 
+            this.cmbNewFormType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbNewFormType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbNewFormType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbNewFormType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbNewFormType.Enabled = false;
+            this.cmbNewFormType.FormattingEnabled = true;
+            this.cmbNewFormType.Location = new System.Drawing.Point(97, 6);
+            this.cmbNewFormType.Name = "cmbNewFormType";
+            this.cmbNewFormType.Size = new System.Drawing.Size(247, 21);
+            this.cmbNewFormType.Sorted = true;
+            this.cmbNewFormType.TabIndex = 5;
+            // 
+            // lblNewFormType
+            // 
+            this.lblNewFormType.AutoSize = true;
+            this.lblNewFormType.Location = new System.Drawing.Point(7, 9);
+            this.lblNewFormType.Name = "lblNewFormType";
+            this.lblNewFormType.Size = new System.Drawing.Size(52, 13);
+            this.lblNewFormType.TabIndex = 3;
+            this.lblNewFormType.Text = "NewForm";
             // 
             // pmlPmrq
             // 
@@ -924,39 +960,14 @@
             this.pnlAccounts.Size = new System.Drawing.Size(56, 514);
             this.pnlAccounts.TabIndex = 0;
             // 
-            // pnlNewFormType
+            // btnClearNewForm
             // 
-            this.pnlNewFormType.Controls.Add(this.cmbNewFormType);
-            this.pnlNewFormType.Controls.Add(this.lblNewFormType);
-            this.pnlNewFormType.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNewFormType.Location = new System.Drawing.Point(0, 399);
-            this.pnlNewFormType.Name = "pnlNewFormType";
-            this.pnlNewFormType.Size = new System.Drawing.Size(398, 33);
-            this.pnlNewFormType.TabIndex = 12;
-            // 
-            // lblNewFormType
-            // 
-            this.lblNewFormType.AutoSize = true;
-            this.lblNewFormType.Location = new System.Drawing.Point(7, 9);
-            this.lblNewFormType.Name = "lblNewFormType";
-            this.lblNewFormType.Size = new System.Drawing.Size(52, 13);
-            this.lblNewFormType.TabIndex = 3;
-            this.lblNewFormType.Text = "NewForm";
-            // 
-            // cmbNewFormType
-            // 
-            this.cmbNewFormType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbNewFormType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbNewFormType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbNewFormType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbNewFormType.Enabled = false;
-            this.cmbNewFormType.FormattingEnabled = true;
-            this.cmbNewFormType.Location = new System.Drawing.Point(97, 6);
-            this.cmbNewFormType.Name = "cmbNewFormType";
-            this.cmbNewFormType.Size = new System.Drawing.Size(285, 21);
-            this.cmbNewFormType.Sorted = true;
-            this.cmbNewFormType.TabIndex = 5;
+            this.btnClearNewForm.Location = new System.Drawing.Point(351, 7);
+            this.btnClearNewForm.Name = "btnClearNewForm";
+            this.btnClearNewForm.Size = new System.Drawing.Size(21, 20);
+            this.btnClearNewForm.TabIndex = 6;
+            this.btnClearNewForm.Text = "C";
+            this.btnClearNewForm.UseVisualStyleBackColor = true;
             // 
             // TransactionControl
             // 
@@ -971,6 +982,8 @@
             this.Size = new System.Drawing.Size(1253, 514);
             this.pnlDetails.ResumeLayout(false);
             this.pnlFields.ResumeLayout(false);
+            this.pnlNewFormType.ResumeLayout(false);
+            this.pnlNewFormType.PerformLayout();
             this.pmlPmrq.ResumeLayout(false);
             this.pmlPmrq.PerformLayout();
             this.pnlReport.ResumeLayout(false);
@@ -1009,8 +1022,6 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel10.ResumeLayout(false);
-            this.pnlNewFormType.ResumeLayout(false);
-            this.pnlNewFormType.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1098,5 +1109,6 @@
         private System.Windows.Forms.Panel pnlNewFormType;
         private System.Windows.Forms.ComboBox cmbNewFormType;
         private System.Windows.Forms.Label lblNewFormType;
+        private System.Windows.Forms.Button btnClearNewForm;
     }
 }

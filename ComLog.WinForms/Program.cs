@@ -2,8 +2,8 @@
 using System.Windows.Forms;
 using AutoMapper;
 using AutoMapper.Configuration;
-using ComLog.WinForms.Administration;
 using ComLog.WinForms.Data.Common;
+using ComLog.WinForms.Forms;
 using ComLog.WinForms.Ninject;
 using log4net.Config;
 

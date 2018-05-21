@@ -2,10 +2,11 @@
 using System.Reflection;
 using System.Security.Principal;
 using System.Windows.Forms;
+using ComLog.WinForms.Administration;
 using ComLog.WinForms.Ninject;
 using log4net;
 
-namespace ComLog.WinForms.Administration
+namespace ComLog.WinForms.Forms
 {
     public partial class AuthenticationForm : Form
     {

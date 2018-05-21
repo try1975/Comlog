@@ -102,10 +102,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administration\AdministrationDataManager.cs" />
-    <Compile Include="Administration\AuthenticationForm.cs">
+    <Compile Include="Forms\AuthenticationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Administration\AuthenticationForm.designer.cs">
+    <Compile Include="Forms\AuthenticationForm.designer.cs">
       <DependentUpon>AuthenticationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Administration\CachedList.cs" />
@@ -235,7 +235,7 @@
     <Compile Include="Utils\GridColors.cs" />
     <Compile Include="Utils\MacroRunSettings.cs" />
     <Compile Include="Utils\MacroSettings.cs" />
-    <EmbeddedResource Include="Administration\AuthenticationForm.resx">
+    <EmbeddedResource Include="Forms\AuthenticationForm.resx">
       <DependentUpon>AuthenticationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccountControl.resx">

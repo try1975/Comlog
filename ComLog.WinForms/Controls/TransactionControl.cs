@@ -516,9 +516,11 @@ namespace ComLog.WinForms.Controls
             btnToday.Click += btnToday_Click;
             btnDateFromAdd.Click += btnDateFromAdd_Click;
             btnDateFromSubtract.Click += btnDateFromSubtract_Click;
+
+            btnClearNewForm.Click += btnClearNewForm_Click;
         }
 
-
+       
 
         #endregion //IRefreshedView
 
@@ -621,6 +623,7 @@ namespace ComLog.WinForms.Controls
             cmbAllAccount.Enabled = true;
             cmbTransactionType.Enabled = true;
             cmbNewFormType.Enabled = true;
+            btnClearNewForm.Enabled = true;
             tbCredits.Enabled = true;
             tbDebits.Enabled = true;
             tbCharges.Enabled = true;
@@ -639,6 +642,7 @@ namespace ComLog.WinForms.Controls
             cmbAllAccount.Enabled = false;
             cmbTransactionType.Enabled = false;
             cmbNewFormType.Enabled = false;
+            btnClearNewForm.Enabled = false;
             tbCredits.Enabled = false;
             tbDebits.Enabled = false;
             tbCharges.Enabled = false;
@@ -991,6 +995,11 @@ namespace ComLog.WinForms.Controls
         private void btnDateFromAdd_Click(object sender, EventArgs e)
         {
             dtpDateFrom.Value = dtpDateFrom.Value.AddDays(1);
+        }
+
+        private void btnClearNewForm_Click(object sender, EventArgs e)
+        {
+            cmbNewFormType.SelectedIndex = -1;
         }
 
         #endregion //Event handlers

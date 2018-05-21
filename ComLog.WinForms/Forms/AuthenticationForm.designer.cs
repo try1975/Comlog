@@ -1,4 +1,4 @@
-﻿namespace ComLog.WinForms.Administration
+﻿namespace ComLog.WinForms.Forms
 {
     partial class AuthenticationForm
     {
