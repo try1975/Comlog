@@ -26,7 +26,9 @@ namespace CurEx.Db.MsSql.Migrations
               new CurrencyPairEntity { Id = "USDCHF" },
               new CurrencyPairEntity { Id = "HKDUSD" },
               new CurrencyPairEntity { Id = "RUBUSD" },
-              new CurrencyPairEntity { Id = "UAHUSD" }
+              new CurrencyPairEntity { Id = "UAHUSD" },
+              new CurrencyPairEntity { Id = "EURGBP" },
+              new CurrencyPairEntity { Id = "GBPCHF" }
             );
 
             context.CurrencyPairRates.AddOrUpdate(

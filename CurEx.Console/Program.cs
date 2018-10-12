@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CurEx.Dto.Dto;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
@@ -7,17 +8,20 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CurEx.Dto.Dto;
+using Newtonsoft.Json;
 
 namespace CurEx.Console
 {
     internal static class Program
     {
         private static HttpClient HttpClient { get; set; }
+        private static Dictionary<string, string> _finamCurrencies;
 
         private static void Main()
         {
             HttpClient = new HttpClient(new LoggingHandler());
+            _finamCurrencies = JsonConvert.DeserializeObject<Dictionary<string, string>>(ConfigurationManager.AppSettings["FinamCurrencies"]);
+
             var pairs = GetCurrencyPairs().Result;
             foreach (var pair in pairs)
             {
@@ -31,7 +35,7 @@ namespace CurEx.Console
                     var currencyPairRateDto = new CurrencyPairRateDto
                     {
                         CurrencyPairId = pair.Id,
-                        RateDate = DateTime.ParseExact(rateFields[0],"yyyyMMdd",CultureInfo.InvariantCulture,DateTimeStyles.None),
+                        RateDate = DateTime.ParseExact(rateFields[0], "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None),
                         OpenRate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture),
                         CloseRate =
                             decimal.Parse(rateFields[5], NumberStyles.Currency, CultureInfo.InvariantCulture),
@@ -54,31 +58,6 @@ namespace CurEx.Console
             Thread.Sleep(3000);
         }
 
-/*
-        private static async Task<string> GetFxRates(string instruments)
-        {
-            var refreshValueCount = ConfigurationManager.AppSettings["RefreshValueCount"];
-            if (string.IsNullOrEmpty(refreshValueCount)) refreshValueCount = "10";
-            using (
-                var response =
-                    await
-                        HttpClient.GetAsync(
-                            $"http://api.fxhistoricaldata.com/indicators?instruments={instruments}&expression=open,close,high,low&item_count={refreshValueCount}&format=csv&timeframe=day")
-                )
-            {
-                if (!response.IsSuccessStatusCode) return null;
-                using (var stream = await response.Content.ReadAsStreamAsync())
-                {
-                    stream.Position = 0;
-                    using (var reader = new StreamReader(stream, Encoding.UTF8))
-                    {
-                        return reader.ReadToEnd();
-                    }
-                }
-            }
-        }
-*/
-
         private static async Task<string> GetFinamRates(string instruments)
         {
             var refreshValueCount = ConfigurationManager.AppSettings["RefreshValueCount"];
@@ -90,12 +69,8 @@ namespace CurEx.Console
             var strStartDate01 = startDate.ToString("yyMMdd");
             var strStartDate02 = startDate.ToString("dd.MM.yyyy");
             var filename = $"{instruments}_{strStartDate01}_{strEndDate01}";
-            var period = $"df={startDate.Day}&mf={startDate.Month - 1}&yf={startDate.Year}&from={strStartDate02}&dt={endDate.Day}&mt={endDate.Month-1}&yt={endDate.Year}&to={strEndDate02}";
-            var em = "";
-            if (instruments.Equals("EURUSD")) em = "83";
-            if (instruments.Equals("GBPUSD")) em = "86";
-            if (instruments.Equals("USDCHF")) em = "85";
-            if (string.IsNullOrEmpty(em)) return "";
+            var period = $"df={startDate.Day}&mf={startDate.Month - 1}&yf={startDate.Year}&from={strStartDate02}&dt={endDate.Day}&mt={endDate.Month - 1}&yt={endDate.Year}&to={strEndDate02}";
+            if (!_finamCurrencies.TryGetValue(instruments, out var em)) return string.Empty;
             using (
                 var response =
                     await
