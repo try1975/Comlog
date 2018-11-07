@@ -21,13 +21,19 @@ namespace CurEx.Console
         {
             HttpClient = new HttpClient(new LoggingHandler());
             _finamCurrencies = JsonConvert.DeserializeObject<Dictionary<string, string>>(ConfigurationManager.AppSettings["FinamCurrencies"]);
-
+            //foreach (var finamCurrency in _finamCurrencies)
+            //{
+            //    System.Console.WriteLine($"finamCurrency {finamCurrency.Key}={finamCurrency.Value}");
+            //}
+            
             var pairs = GetCurrencyPairs().Result;
             foreach (var pair in pairs)
             {
+                //System.Console.WriteLine($"pair {pair.Id}");
                 var txt = GetFinamRates(pair.Id).Result;
                 if (string.IsNullOrEmpty(txt)) continue;
                 var rates = txt.Split('\n');
+                Thread.Sleep(2000);
                 foreach (var rate in rates)
                 {
                     if (string.IsNullOrEmpty(rate)) continue;
@@ -35,7 +41,8 @@ namespace CurEx.Console
                     var currencyPairRateDto = new CurrencyPairRateDto
                     {
                         CurrencyPairId = pair.Id,
-                        RateDate = DateTime.ParseExact(rateFields[0], "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None),
+                        RateDate = DateTime.ParseExact(rateFields[0], "yyyyMMdd", CultureInfo.InvariantCulture,
+                            DateTimeStyles.None),
                         OpenRate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture),
                         CloseRate =
                             decimal.Parse(rateFields[5], NumberStyles.Currency, CultureInfo.InvariantCulture),
@@ -47,7 +54,13 @@ namespace CurEx.Console
                     var dto =
                         GetCurrencyPairRateByDate(currencyPairRateDto.CurrencyPairId,
                             currencyPairRateDto.RateDate.ToString("yyyy-MM-dd")).Result;
-                    if (dto != null) continue;
+                    if (dto != null)
+                    {
+                        //System.Console.WriteLine(
+                        //    $"From db:{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
+                        continue;
+                    }
+
                     dto = PostCurrencyPairRate(currencyPairRateDto).Result;
                     if (dto == null) continue;
                     System.Console.WriteLine(
@@ -71,12 +84,8 @@ namespace CurEx.Console
             var filename = $"{instruments}_{strStartDate01}_{strEndDate01}";
             var period = $"df={startDate.Day}&mf={startDate.Month - 1}&yf={startDate.Year}&from={strStartDate02}&dt={endDate.Day}&mt={endDate.Month - 1}&yt={endDate.Year}&to={strEndDate02}";
             if (!_finamCurrencies.TryGetValue(instruments, out var em)) return string.Empty;
-            using (
-                var response =
-                    await
-                        HttpClient.GetAsync(
-                            $"http://export.finam.ru/{filename}.csv?market=5&em={em}&code={instruments}&apply=0&{period}&p=8&f={filename}&e=.csv&cn={instruments}&dtf=1&tmf=1&MSOR=1&mstimever=1&sep=1&sep2=1&datf=5")
-                )
+            var formattableString = $"http://export.finam.ru/{filename}.csv?market=5&em={em}&code={instruments}&apply=0&{period}&p=8&f={filename}&e=.csv&cn={instruments}&dtf=1&tmf=1&MSOR=1&mstimever=1&sep=1&sep2=1&datf=5";
+            using (var response = await HttpClient.GetAsync(formattableString))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 using (var stream = await response.Content.ReadAsStreamAsync())
@@ -92,12 +101,8 @@ namespace CurEx.Console
 
         private static async Task<CurrencyPairRateDto> GetCurrencyPairRateByDate(string currencyPairId, string rateDate)
         {
-            using (
-                var response =
-                    await
-                        HttpClient.GetAsync(
-                            $"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairRates?currencyPairId={currencyPairId}&rateDate={rateDate}")
-                )
+            var formattableString = $"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairRates?currencyPairId={currencyPairId}&rateDate={rateDate}";
+            using (var response = await HttpClient.GetAsync(formattableString))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<CurrencyPairRateDto>();
