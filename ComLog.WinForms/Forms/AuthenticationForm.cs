@@ -10,7 +10,7 @@ namespace ComLog.WinForms.Forms
 {
     public partial class AuthenticationForm : Form
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(nameof(AuthenticationForm));
 
         public AuthenticationForm()
         {
@@ -20,10 +20,18 @@ namespace ComLog.WinForms.Forms
 
         private static string GetCurrentUserNameAsLogin()
         {
-            var result = WindowsIdentity.GetCurrent().Name;
-            var backSlashIndex = result.IndexOf("\\", StringComparison.Ordinal);
-            if (backSlashIndex >= 0) result = result.Substring(backSlashIndex + 1);
-            return result.ToLower();
+            try
+            {
+                var result = WindowsIdentity.GetCurrent().Name;
+                var backSlashIndex = result.IndexOf("\\", StringComparison.Ordinal);
+                if (backSlashIndex >= 0) result = result.Substring(backSlashIndex + 1);
+                return result.ToLower();
+            }
+            catch (Exception exception)
+            {
+                Log.Error(exception);
+            }
+            return string.Empty;
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
