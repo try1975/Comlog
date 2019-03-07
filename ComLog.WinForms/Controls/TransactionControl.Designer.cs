@@ -31,6 +31,7 @@
             this.pnlDetails = new System.Windows.Forms.Panel();
             this.pnlFields = new System.Windows.Forms.Panel();
             this.pnlNewFormType = new System.Windows.Forms.Panel();
+            this.btnClearNewForm = new System.Windows.Forms.Button();
             this.cmbNewFormType = new System.Windows.Forms.ComboBox();
             this.lblNewFormType = new System.Windows.Forms.Label();
             this.pmlPmrq = new System.Windows.Forms.Panel();
@@ -109,7 +110,6 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.pnlAccounts = new System.Windows.Forms.Panel();
-            this.btnClearNewForm = new System.Windows.Forms.Button();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.pnlNewFormType.SuspendLayout();
@@ -181,6 +181,15 @@
             this.pnlNewFormType.Name = "pnlNewFormType";
             this.pnlNewFormType.Size = new System.Drawing.Size(398, 33);
             this.pnlNewFormType.TabIndex = 12;
+            // 
+            // btnClearNewForm
+            // 
+            this.btnClearNewForm.Location = new System.Drawing.Point(351, 7);
+            this.btnClearNewForm.Name = "btnClearNewForm";
+            this.btnClearNewForm.Size = new System.Drawing.Size(21, 20);
+            this.btnClearNewForm.TabIndex = 6;
+            this.btnClearNewForm.Text = "C";
+            this.btnClearNewForm.UseVisualStyleBackColor = true;
             // 
             // cmbNewFormType
             // 
@@ -959,15 +968,6 @@
             this.pnlAccounts.Name = "pnlAccounts";
             this.pnlAccounts.Size = new System.Drawing.Size(56, 514);
             this.pnlAccounts.TabIndex = 0;
-            // 
-            // btnClearNewForm
-            // 
-            this.btnClearNewForm.Location = new System.Drawing.Point(351, 7);
-            this.btnClearNewForm.Name = "btnClearNewForm";
-            this.btnClearNewForm.Size = new System.Drawing.Size(21, 20);
-            this.btnClearNewForm.TabIndex = 6;
-            this.btnClearNewForm.Text = "C";
-            this.btnClearNewForm.UseVisualStyleBackColor = true;
             // 
             // TransactionControl
             // 
