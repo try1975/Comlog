@@ -143,7 +143,7 @@ namespace ComLog.WinForms.Forms
         {
             MessageWriter($"Started at {DateTime.Now}.");
             RunMacro();
-            if (_macroRunSettings.Params.ContainsKey("ImportRun") && _macroRunSettings.Params["ImportRun"].Equals(bool.TrueString))
+            if (_macroRunSettings.Params.ContainsKey(MacroRunSettings.ImportRun) && _macroRunSettings.Params[MacroRunSettings.ImportRun].Equals(bool.TrueString))
             {
                 // load result to db
                 ImportRun();

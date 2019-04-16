@@ -9,6 +9,8 @@ namespace ComLog.WinForms.Interfaces
 
         string TransactionTypeName { get; set; }
 
+        bool? IsActive { get; set; }
+
         #endregion //Details
     }
 }

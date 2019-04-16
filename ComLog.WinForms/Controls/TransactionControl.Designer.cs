@@ -110,6 +110,9 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.pnlAccounts = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtpWeekDt = new System.Windows.Forms.DateTimePicker();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.pnlNewFormType.SuspendLayout();
@@ -137,6 +140,7 @@
             this.panel11.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -152,6 +156,7 @@
             // 
             // pnlFields
             // 
+            this.pnlFields.Controls.Add(this.panel8);
             this.pnlFields.Controls.Add(this.pnlNewFormType);
             this.pnlFields.Controls.Add(this.pmlPmrq);
             this.pnlFields.Controls.Add(this.pnlReport);
@@ -969,6 +974,32 @@
             this.pnlAccounts.Size = new System.Drawing.Size(56, 514);
             this.pnlAccounts.TabIndex = 0;
             // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.label3);
+            this.panel8.Controls.Add(this.dtpWeekDt);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Location = new System.Drawing.Point(0, 432);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(398, 34);
+            this.panel8.TabIndex = 13;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "WeekDate";
+            // 
+            // dtpWeekDt
+            // 
+            this.dtpWeekDt.Location = new System.Drawing.Point(97, 7);
+            this.dtpWeekDt.Name = "dtpWeekDt";
+            this.dtpWeekDt.Size = new System.Drawing.Size(200, 20);
+            this.dtpWeekDt.TabIndex = 0;
+            // 
             // TransactionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1022,6 +1053,8 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel10.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1110,5 +1143,8 @@
         private System.Windows.Forms.ComboBox cmbNewFormType;
         private System.Windows.Forms.Label lblNewFormType;
         private System.Windows.Forms.Button btnClearNewForm;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dtpWeekDt;
     }
 }

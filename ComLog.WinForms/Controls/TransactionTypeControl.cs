@@ -1,10 +1,10 @@
-﻿using System;
-using System.Windows.Forms;
-using ComLog.Dto;
+﻿using ComLog.Dto;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
 using ComLog.WinForms.Presenters;
+using System;
+using System.Windows.Forms;
 
 namespace ComLog.WinForms.Controls
 {
@@ -38,6 +38,37 @@ namespace ComLog.WinForms.Controls
         {
             get { return tbName.Text; }
             set { tbName.Text = value; }
+        }
+
+        public bool? IsActive
+        {
+            get
+            {
+                switch (cbIsActive.CheckState)
+                {
+                    case CheckState.Checked:
+                        return true;
+                    case CheckState.Unchecked:
+                        return false;
+                    case CheckState.Indeterminate:
+                        return null;
+                }
+                return null;
+            }
+            set
+            {
+                switch (value)
+                {
+                    case true:
+                        cbIsActive.CheckState = CheckState.Checked;
+                        return;
+                    case false:
+                        cbIsActive.CheckState = CheckState.Unchecked;
+                        return;
+                            
+                }
+                cbIsActive.CheckState = CheckState.Indeterminate;
+            }
         }
 
         #endregion //Details
@@ -144,18 +175,21 @@ namespace ComLog.WinForms.Controls
         {
             tbId.Clear();
             tbName.Clear();
+            cbIsActive.CheckState = CheckState.Indeterminate;
         }
 
         public void EnableInput()
         {
             //tbId.Enabled = true;
             tbName.Enabled = true;
+            cbIsActive.Enabled = true;
         }
 
         public void DisableInput()
         {
             tbId.Enabled = false;
             tbName.Enabled = false;
+            cbIsActive.Enabled = false;
         }
 
         #endregion //IEnterMode

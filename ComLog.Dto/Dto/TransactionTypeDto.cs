@@ -8,5 +8,6 @@ namespace ComLog.Dto
         public string Name { get; set; }
         public string ChangeBy { get; set; }
         public DateTime? ChangeAt { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

@@ -52,6 +52,6 @@ namespace ComLog.Db.Entities
 
         public string Pmrq { get; set; }
         public decimal? Dc { get; private set; }
-
+        public DateTime? WeekDt { get; set; }
     }
 }

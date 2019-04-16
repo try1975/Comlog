@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ComLog.Dto.Ext;
+﻿using ComLog.Dto.Ext;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
 using ComLog.WinForms.Interfaces.Data;
 using ComLog.WinForms.Presenters.Common;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ComLog.WinForms.Presenters
 {
@@ -21,20 +21,20 @@ namespace ComLog.WinForms.Presenters
             var accountDtos = await DataMаnager.GetAccounts();
             var accountExtDtos = accountDtos as IList<AccountExtDto> ?? accountDtos.ToList();
             //((ITransactionView)View).AllAccountList = accountExtDtos?.OrderBy(z => z.Name).ThenBy(z => z.BankName).ThenBy(z => z.CurrencyId).ToList();
-            ((ITransactionView) View).AllAccountList = accountExtDtos?.Where(z => z.Closed == null).OrderBy(z => z.Name)
+            ((ITransactionView)View).AllAccountList = accountExtDtos?.Where(z => z.Closed == null).OrderBy(z => z.Name)
                 .ThenBy(z => z.BankName).ThenBy(z => z.CurrencyId).ToList();
 
-            ((ITransactionView) View).NotClosedAccountList = accountExtDtos?.Where(z => z.Closed == null)
+            ((ITransactionView)View).NotClosedAccountList = accountExtDtos?.Where(z => z.Closed == null)
                 .OrderBy(z => z.Name).ThenBy(z => z.BankName).ThenBy(z => z.CurrencyId).ToList();
 
             var transactionTypeDtos = await DataMаnager.GetTransactionTypes();
             if (transactionTypeDtos != null)
-                ((ITransactionView) View).TransactionTypeList =
-                    transactionTypeDtos.Select(c => new KeyValuePair<int, string>(c.Id, $"{c.Name}"))
+                ((ITransactionView)View).TransactionTypeList =
+                    transactionTypeDtos.Where(z => z.IsActive == true).Select(c => new KeyValuePair<int, string>(c.Id, $"{c.Name}"))
                         .OrderBy(kv => kv.Value)
                         .ToList();
             else
-                ((ITransactionView) View).TransactionTypeList = new List<KeyValuePair<int, string>>();
+                ((ITransactionView)View).TransactionTypeList = new List<KeyValuePair<int, string>>();
 
             var newFormTypeDtos = await DataMаnager.GetNewFormTypes();
             if (newFormTypeDtos != null)

@@ -46,6 +46,8 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlGrid = new System.Windows.Forms.Panel();
             this.dgvItems = new ADGV.AdvancedDataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cbIsActive = new System.Windows.Forms.CheckBox();
             this.pnlDetails.SuspendLayout();
             this.pnlFields.SuspendLayout();
             this.pnlAccountName.SuspendLayout();
@@ -53,6 +55,7 @@
             this.pnlButtons.SuspendLayout();
             this.pnlGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDetails
@@ -67,6 +70,7 @@
             // 
             // pnlFields
             // 
+            this.pnlFields.Controls.Add(this.panel1);
             this.pnlFields.Controls.Add(this.pnlAccountName);
             this.pnlFields.Controls.Add(this.pnlId);
             this.pnlFields.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -228,6 +232,28 @@
             this.dgvItems.TabIndex = 1;
             this.dgvItems.TimeFilter = false;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.cbIsActive);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 67);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(396, 34);
+            this.panel1.TabIndex = 5;
+            // 
+            // cbIsActive
+            // 
+            this.cbIsActive.AutoSize = true;
+            this.cbIsActive.Checked = true;
+            this.cbIsActive.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            this.cbIsActive.Location = new System.Drawing.Point(128, 8);
+            this.cbIsActive.Name = "cbIsActive";
+            this.cbIsActive.Size = new System.Drawing.Size(64, 17);
+            this.cbIsActive.TabIndex = 1;
+            this.cbIsActive.Text = "IsActive";
+            this.cbIsActive.ThreeState = true;
+            this.cbIsActive.UseVisualStyleBackColor = true;
+            // 
             // TransactionTypeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,6 +272,8 @@
             this.pnlButtons.ResumeLayout(false);
             this.pnlGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -269,5 +297,7 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel pnlGrid;
         private ADGV.AdvancedDataGridView dgvItems;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox cbIsActive;
     }
 }

@@ -4,6 +4,8 @@ namespace ComLog.WinForms.Utils
 {
     public class MacroRunSettings
     {
+        public static string ImportRun = nameof(ImportRun);
+
         public string MacroWorkBook { get; set; }
         public string MacroName { get; set; }
         public string SourceFilename { get; set; }

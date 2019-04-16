@@ -27,6 +27,9 @@ namespace ComLog.Db.MsSql.Mappings
             Property(e => e.ChangeAt)
                 .IsOptional()
                 ;
+            Property(e => e.IsActive)
+                .IsOptional()
+                ;
         }
     }
 }

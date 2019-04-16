@@ -328,6 +328,16 @@ namespace ComLog.WinForms.Controls
             }
         }
 
+        public DateTime? WeekDt
+        {
+            get { return dtpWeekDt.Value; }
+            set
+            {
+                if (value != null) dtpWeekDt.Value = value.Value;
+                else if (TransactionDate != null) dtpWeekDt.Value = TransactionDate.Value;
+            }
+        }
+
         #endregion //Details
 
         #region DetailsList
@@ -614,6 +624,7 @@ namespace ComLog.WinForms.Controls
             tbDescription.Text = string.Empty;
             tbReport.Text = string.Empty;
             tbPmrq.Text = string.Empty;
+            dtpWeekDt.Value = DateTime.Today;
         }
 
         public void EnableInput()
@@ -631,6 +642,7 @@ namespace ComLog.WinForms.Controls
             tbDescription.Enabled = true;
             tbReport.Enabled = true;
             tbPmrq.Enabled = true;
+            dtpWeekDt.Enabled = true;
 
             cmbAllAccount.Focus();
         }
@@ -650,6 +662,7 @@ namespace ComLog.WinForms.Controls
             tbDescription.Enabled = false;
             tbReport.Enabled = false;
             tbPmrq.Enabled = false;
+            dtpWeekDt.Enabled = false;
         }
 
         #endregion //IEnterMode
@@ -920,7 +933,7 @@ namespace ComLog.WinForms.Controls
                 SourceFilename = openFileDialog.FileName,
                 DestinationFilename = openFileDialog.FileName.Replace(".xls", "_Converted.xls")
             };
-            macroRunSettings.Params["ImportRun"] = bool.TrueString;
+            macroRunSettings.Params[MacroRunSettings.ImportRun] = bool.TrueString;
             var runMacroForm = new RunMacroForm(macroRunSettings);
             if (runMacroForm.NotShow)
             {
@@ -952,7 +965,7 @@ namespace ComLog.WinForms.Controls
             {
                 MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
                 MacroName = ConfigurationManager.AppSettings[nameof(MacroSettings.CashListMacro)],
-                Params = { ["ImportRun"] = bool.TrueString, ["Date"] = $"{date:yyyyMMdd}" }
+                Params = { [MacroRunSettings.ImportRun] = bool.TrueString, ["Date"] = $"{date:yyyyMMdd}" }
             };
             var runMacroForm = new RunMacroForm(macroRunSettings);
             if (runMacroForm.NotShow)

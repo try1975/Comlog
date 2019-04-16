@@ -80,6 +80,10 @@ namespace ComLog.Db.MsSql.Mappings
             //DropColumn("dbo.Transactions", "IsPmrq");
             //Sql(@"ALTER TABLE [dbo].[Transactions] ADD [IsPmrq] AS (CAST(CASE isnull([IsPmrq], '') WHEN '' THEN 0 ELSE 1 END AS bit));");
 
+            Property(e => e.WeekDt)
+                .IsOptional()
+                ;
+
 
             Property(e => e.Dc)
                 .HasColumnType("money")

@@ -54,6 +54,8 @@ namespace ComLog.WinForms.Interfaces
 
         decimal? Dc { get; set; }
 
+        DateTime? WeekDt { get; set; }
+
         #endregion //Details
     }
 }
