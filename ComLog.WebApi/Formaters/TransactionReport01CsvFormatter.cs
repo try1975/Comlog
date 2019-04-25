@@ -4,6 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Text.RegularExpressions;
 using ComLog.Dto.Ext;
 
@@ -66,12 +67,58 @@ namespace ComLog.WebApi.Formaters
         // Helper methods for serializing Products to CSV format. 
         private static void WriteItem(TransactionReport01Dto dto, TextWriter writer)
         {
-           writer.WriteLine($"{Escape(dto.TransactionDate.ToString("dd/MM/yyyy"))},{Escape(dto.BankName)},{Escape(dto.AccountName)},{Escape(dto.TransactionTypeName)},{Escape(dto.CurrencyId)},{Escape(dto.Credits)},{Escape(dto.Debits)},{Escape(dto.Charges)},{Escape(dto.FromTo)},{Escape(dto.Description)},{Escape(dto.UsdCredits)},{Escape(dto.UsdDebits)},{Escape(dto.Report)},{Escape(dto.Dcc)},{Escape(dto.UsdDcc)}");
+            var sb = new StringBuilder();
+            sb.Append($"{Escape(dto.TransactionDate.ToString("dd/MM/yyyy"))}");
+            sb.Append($",{Escape(dto.BankName)}");
+            sb.Append($",{Escape(dto.AccountName)}");
+            sb.Append($",{Escape(dto.TransactionTypeName)}");
+            sb.Append($",{Escape(dto.CurrencyId)}");
+            sb.Append($",{Escape(dto.Credits)}");
+            sb.Append($",{Escape(dto.Debits)}");
+            sb.Append($",{Escape(dto.Charges)}");
+            sb.Append($",{Escape(dto.FromTo)}");
+            sb.Append($",{Escape(dto.Description)}");
+            sb.Append($",{Escape(dto.UsdCredits)}");
+            sb.Append($",{Escape(dto.UsdDebits)}");
+            sb.Append($",{Escape(dto.Report)}");
+            sb.Append($",{Escape(dto.Dcc)}");
+            sb.Append($",{Escape(dto.UsdDcc)}");
+            var weekDt = dto.WeekDt ?? dto.TransactionDate;
+            var culture = System.Globalization.CultureInfo.CurrentCulture;
+            var weekNum = culture.Calendar.GetWeekOfYear(
+                weekDt,
+                System.Globalization.CalendarWeekRule.FirstFourDayWeek,
+                DayOfWeek.Monday)
+                .ToString()
+                .Trim()
+                .PadLeft(2, '0');
+
+            sb.Append($",{Escape(weekDt.ToString("yyyy"))}-{weekNum}");
+
+            writer.WriteLine(sb.ToString());
         }
 
         private static void WriteHeader(TextWriter writer)
         {
-            writer.WriteLine($"{nameof(TransactionReport01Dto.TransactionDate)},{nameof(TransactionReport01Dto.BankName)},{nameof(TransactionReport01Dto.AccountName)},{nameof(TransactionReport01Dto.TransactionTypeName)},{nameof(TransactionReport01Dto.CurrencyId)},{nameof(TransactionReport01Dto.Credits)},{nameof(TransactionReport01Dto.Debits)},{nameof(TransactionReport01Dto.Charges)},{nameof(TransactionReport01Dto.FromTo)},{nameof(TransactionReport01Dto.Description)},{nameof(TransactionReport01Dto.UsdCredits)},{nameof(TransactionReport01Dto.UsdDebits)},{nameof(TransactionReport01Dto.Report)},{nameof(TransactionReport01Dto.Dcc)},{nameof(TransactionReport01Dto.UsdDcc)}");
+            var sb = new StringBuilder();
+            sb.Append($"{nameof(TransactionReport01Dto.TransactionDate)}");
+            sb.Append($",{nameof(TransactionReport01Dto.BankName)}");
+            sb.Append($",{nameof(TransactionReport01Dto.AccountName)}");
+            sb.Append($",{nameof(TransactionReport01Dto.TransactionTypeName)}");
+            sb.Append($",{nameof(TransactionReport01Dto.CurrencyId)}");
+            sb.Append($",{nameof(TransactionReport01Dto.Credits)}");
+            sb.Append($",{nameof(TransactionReport01Dto.Debits)}");
+            sb.Append($",{nameof(TransactionReport01Dto.Charges)}");
+            sb.Append($",{nameof(TransactionReport01Dto.FromTo)}");
+            sb.Append($",{nameof(TransactionReport01Dto.Description)}");
+            sb.Append($",{nameof(TransactionReport01Dto.UsdCredits)}");
+            sb.Append($",{nameof(TransactionReport01Dto.UsdDebits)}");
+            sb.Append($",{nameof(TransactionReport01Dto.Report)}");
+            sb.Append($",{nameof(TransactionReport01Dto.Dcc)}");
+            sb.Append($",{nameof(TransactionReport01Dto.UsdDcc)}");
+            sb.Append($",{nameof(TransactionReport01Dto.WeekDt)}");
+
+            writer.WriteLine(sb.ToString());
         }
 
         private static readonly char[] SpecialChars = { ',', '\n', '\r', '"' };

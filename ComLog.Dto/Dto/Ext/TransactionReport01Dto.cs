@@ -4,6 +4,7 @@ namespace ComLog.Dto.Ext
 {
     public class TransactionReport01Dto
     {
+        private DateTime? _weekDt;
         public DateTime TransactionDate { get; set; }
 
         public string BankName { get; set; }
@@ -33,5 +34,11 @@ namespace ComLog.Dto.Ext
         public decimal? Dcc { get; private set; }
 
         public decimal? UsdDcc { get; private set; }
+
+        public DateTime? WeekDt
+        {
+            get => _weekDt ?? TransactionDate;
+            set => _weekDt = value;
+        }
     }
 }
