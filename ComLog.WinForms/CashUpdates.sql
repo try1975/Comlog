@@ -80,6 +80,7 @@ SET Splus = ROUND(Credits * (
 					FROM CurrencyPairRates r2
 					WHERE r2.RateDate <= ExcelBooks.Dt
 					)
+				AND CHARINDEX('USD', r1.CurrencyPairId) > 0
 			), 2)
 WHERE Credits IS NOT NULL
 	AND Splus IS NULL
@@ -99,6 +100,7 @@ SET Sminus = ROUND((isnull([Debits], (0)) + isnull([Charges], (0))) * (
 					FROM CurrencyPairRates r2
 					WHERE r2.RateDate <= ExcelBooks.Dt
 					)
+				AND CHARINDEX('USD', r1.CurrencyPairId) > 0
 			), 2)
 WHERE (
 		Debits IS NOT NULL
