@@ -182,11 +182,13 @@ namespace ComLog.WinForms.Controls
             }
             else
             {
-                if (Debits.HasValue) UsdDebits = Debits * rate;
+                decimal? usdDebits = null;
+                if (Debits.HasValue) usdDebits = Debits * rate;
                 if (Charges.HasValue)
-                    if (UsdDebits.HasValue) UsdDebits += Charges * rate;
+                    if (usdDebits.HasValue) usdDebits += Charges * rate;
                     else
-                        UsdDebits = Charges * rate;
+                        usdDebits = Charges * rate;
+                UsdDebits = usdDebits;
             }
             if (TransactionDate != null && TransactionDate.Value.Date == DateTime.Today)
                 dtpDateTo.Value = DateTime.Today;
