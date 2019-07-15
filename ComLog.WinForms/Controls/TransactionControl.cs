@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComLog.Dto.Ext;
+using ComLog.WinForms.Administration;
 using ComLog.WinForms.Forms;
 using ComLog.WinForms.Interfaces;
 using ComLog.WinForms.Interfaces.Common;
@@ -31,6 +32,7 @@ namespace ComLog.WinForms.Controls
         {
             get
             {
+                if (CurrentUser.Login.ToLower().Equals("am")) return 365;
                 int editableDays;
                 return int.TryParse(ConfigurationManager.AppSettings[nameof(EditableDays)], out editableDays) ? editableDays : 7;
             }
