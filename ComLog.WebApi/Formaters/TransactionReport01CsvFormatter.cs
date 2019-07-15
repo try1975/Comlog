@@ -78,11 +78,13 @@ namespace ComLog.WebApi.Formaters
             sb.Append($",{Escape(dto.Charges)}");
             sb.Append($",{Escape(dto.FromTo)}");
             sb.Append($",{Escape(dto.Description)}");
-            sb.Append($",{Escape(dto.UsdCredits)}");
+            var usdCredits = Escape($"{dto.UsdCredits:F2}");
+            sb.Append($",{usdCredits}");
             sb.Append($",{Escape(dto.UsdDebits)}");
             sb.Append($",{Escape(dto.Report)}");
             sb.Append($",{Escape(dto.Dcc)}");
-            sb.Append($",{Escape(dto.UsdDcc)}");
+            var usdDcc = Escape($"{dto.UsdDcc:F2}");
+            sb.Append($",{usdDcc}");
             var weekDt = dto.WeekDt ?? dto.TransactionDate;
             var culture = System.Globalization.CultureInfo.CurrentCulture;
             var weekNum = culture.Calendar.GetWeekOfYear(
