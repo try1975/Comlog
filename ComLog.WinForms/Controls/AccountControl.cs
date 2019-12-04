@@ -424,12 +424,14 @@ namespace ComLog.WinForms.Controls
         private void dgvItems_FilterStringChanged(object sender, EventArgs e)
         {
             _presenter.BindingSource.Filter = dgvItems.FilterString;
+            _presenter.BindingSource.ResetBindings(false);
             AfterGridDataChange();
         }
 
         private void dgvItems_SortStringChanged(object sender, EventArgs e)
         {
             _presenter.BindingSource.Sort = dgvItems.SortString;
+            _presenter.BindingSource.ResetBindings(false);
             AfterGridDataChange();
         }
 

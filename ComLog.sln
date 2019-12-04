@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComLog.Db.Entities", "ComLog.Db.Entities\ComLog.Db.Entities.csproj", "{CC4E6D4B-F05C-455E-944B-289621F14223}"
 EndProject
@@ -118,5 +118,8 @@ Global
 		{8485B816-C2EE-43CB-AD54-0B0A6E43AF9C} = {2BA6CD83-FFC4-4EE3-AF7A-C5CBD5E5DC25}
 		{B71DA30E-87F3-465E-AC33-A5FE591676A0} = {D0F12C7F-D098-41F1-8A49-6BBE260EFA12}
 		{3DAEE35B-F9C5-4F49-87E8-1D568EECB50B} = {D0F12C7F-D098-41F1-8A49-6BBE260EFA12}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {417BEF68-7C0A-4310-AA20-3998DD805ABA}
 	EndGlobalSection
 EndGlobal
