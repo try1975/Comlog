@@ -25,7 +25,7 @@ namespace CurEx.Console
             //{
             //    System.Console.WriteLine($"finamCurrency {finamCurrency.Key}={finamCurrency.Value}");
             //}
-            
+
             var pairs = GetCurrencyPairs().Result;
             foreach (var pair in pairs)
             {
@@ -67,6 +67,36 @@ namespace CurEx.Console
                         $"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
                 }
             }
+            //AED
+            const string currencyPairId = "AEDUSD";
+            var todayAedRate = GetCurrencyPairRateByDate(currencyPairId, $"{DateTime.Today:yyyy-MM-dd}").Result;
+            if (todayAedRate == null)
+            {
+                var getAedRate = GetAedRate().Result;
+                if (!string.IsNullOrEmpty(getAedRate))
+                {
+                    if (decimal.TryParse(getAedRate, NumberStyles.Any, new CultureInfo("en-US"), out decimal aedRate))
+                    {
+                        var currencyPairRateDto = new CurrencyPairRateDto
+                        {
+                            RateDate = DateTime.Today,
+                            CurrencyPairId = currencyPairId,
+                            Rate = aedRate,
+                            OpenRate = aedRate,
+                            CloseRate = aedRate,
+                            LowRate = aedRate,
+                            HighRate = aedRate
+                        };
+                        var dto = PostCurrencyPairRate(currencyPairRateDto).Result;
+                        if (dto != null)
+                        {
+                            System.Console.WriteLine($"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
+                        }
+                    }
+                }
+            }
+
+
             System.Console.WriteLine("Complete.");
             Thread.Sleep(3000);
         }
@@ -127,6 +157,22 @@ namespace CurEx.Console
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<List<CurrencyPairDto>>();
                 return result;
+            }
+        }
+
+        private static async Task<string> GetAedRate()
+        {
+            using (var response = await HttpClient.GetAsync("https://www.currency.me.uk/remote/ER-CCCS2-AJAX.php?ConvertTo=USD&ConvertFrom=AED&amount=1"))
+            {
+                if (!response.IsSuccessStatusCode) return null;
+                using (var stream = await response.Content.ReadAsStreamAsync())
+                {
+                    stream.Position = 0;
+                    using (var reader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        return reader.ReadToEnd();
+                    }
+                }
             }
         }
     }
