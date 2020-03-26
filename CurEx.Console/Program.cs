@@ -14,12 +14,12 @@ namespace CurEx.Console
 {
     internal static class Program
     {
-        private static HttpClient HttpClient { get; set; }
+        private static HttpClient _httpClient { get; set; }
         private static Dictionary<string, string> _finamCurrencies;
 
         private static void Main()
         {
-            HttpClient = new HttpClient(new LoggingHandler());
+            _httpClient = new HttpClient(new LoggingHandler());
             _finamCurrencies = JsonConvert.DeserializeObject<Dictionary<string, string>>(ConfigurationManager.AppSettings["FinamCurrencies"]);
             //foreach (var finamCurrency in _finamCurrencies)
             //{
@@ -67,34 +67,8 @@ namespace CurEx.Console
                         $"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
                 }
             }
-            //AED
-            const string currencyPairId = "AEDUSD";
-            var todayAedRate = GetCurrencyPairRateByDate(currencyPairId, $"{DateTime.Today:yyyy-MM-dd}").Result;
-            if (todayAedRate == null)
-            {
-                var getAedRate = GetAedRate().Result;
-                if (!string.IsNullOrEmpty(getAedRate))
-                {
-                    if (decimal.TryParse(getAedRate, NumberStyles.Any, new CultureInfo("en-US"), out decimal aedRate))
-                    {
-                        var currencyPairRateDto = new CurrencyPairRateDto
-                        {
-                            RateDate = DateTime.Today,
-                            CurrencyPairId = currencyPairId,
-                            Rate = aedRate,
-                            OpenRate = aedRate,
-                            CloseRate = aedRate,
-                            LowRate = aedRate,
-                            HighRate = aedRate
-                        };
-                        var dto = PostCurrencyPairRate(currencyPairRateDto).Result;
-                        if (dto != null)
-                        {
-                            System.Console.WriteLine($"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
-                        }
-                    }
-                }
-            }
+            CheckFromCurrencyMe(convertFrom: "AED", convertTo: "USD");
+            CheckFromCurrencyMe(convertFrom: "GBP", convertTo: "USD");
 
 
             System.Console.WriteLine("Complete.");
@@ -115,7 +89,7 @@ namespace CurEx.Console
             var period = $"df={startDate.Day}&mf={startDate.Month - 1}&yf={startDate.Year}&from={strStartDate02}&dt={endDate.Day}&mt={endDate.Month - 1}&yt={endDate.Year}&to={strEndDate02}";
             if (!_finamCurrencies.TryGetValue(instruments, out var em)) return string.Empty;
             var formattableString = $"http://export.finam.ru/{filename}.csv?market=5&em={em}&code={instruments}&apply=0&{period}&p=8&f={filename}&e=.csv&cn={instruments}&dtf=1&tmf=1&MSOR=1&mstimever=1&sep=1&sep2=1&datf=5";
-            using (var response = await HttpClient.GetAsync(formattableString))
+            using (var response = await _httpClient.GetAsync(formattableString))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 using (var stream = await response.Content.ReadAsStreamAsync())
@@ -132,7 +106,7 @@ namespace CurEx.Console
         private static async Task<CurrencyPairRateDto> GetCurrencyPairRateByDate(string currencyPairId, string rateDate)
         {
             var formattableString = $"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairRates?currencyPairId={currencyPairId}&rateDate={rateDate}";
-            using (var response = await HttpClient.GetAsync(formattableString))
+            using (var response = await _httpClient.GetAsync(formattableString))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<CurrencyPairRateDto>();
@@ -142,7 +116,7 @@ namespace CurEx.Console
 
         private static async Task<CurrencyPairRateDto> PostCurrencyPairRate(CurrencyPairRateDto dto)
         {
-            using (var response = await HttpClient.PostAsJsonAsync($"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairRates", dto))
+            using (var response = await _httpClient.PostAsJsonAsync($"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairRates", dto))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<CurrencyPairRateDto>();
@@ -152,7 +126,7 @@ namespace CurEx.Console
 
         private static async Task<IEnumerable<CurrencyPairDto>> GetCurrencyPairs()
         {
-            using (var response = await HttpClient.GetAsync($"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairs"))
+            using (var response = await _httpClient.GetAsync($"{ConfigurationManager.AppSettings["BaseApi"]}api/CurrencyPairs"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 var result = await response.Content.ReadAsAsync<List<CurrencyPairDto>>();
@@ -160,20 +134,39 @@ namespace CurEx.Console
             }
         }
 
-        private static async Task<string> GetAedRate()
+        private static async Task<string> GetCurrencyMeRate(string convertFrom, string convertTo)
         {
-            using (var response = await HttpClient.GetAsync("https://www.currency.me.uk/remote/ER-CCCS2-AJAX.php?ConvertTo=USD&ConvertFrom=AED&amount=1"))
+            using (var response = await _httpClient.GetAsync($"https://www.currency.me.uk/remote/ER-CCCS2-AJAX.php?ConvertTo={convertTo}&ConvertFrom={convertFrom}&amount=1"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 using (var stream = await response.Content.ReadAsStreamAsync())
                 {
                     stream.Position = 0;
-                    using (var reader = new StreamReader(stream, Encoding.UTF8))
-                    {
-                        return reader.ReadToEnd();
-                    }
+                    using (var reader = new StreamReader(stream, Encoding.UTF8)) return reader.ReadToEnd();
                 }
             }
+        }
+
+        private static void CheckFromCurrencyMe(string convertFrom, string convertTo)
+        {
+            var date = DateTime.Today;
+            if (GetCurrencyPairRateByDate($"{convertFrom}{convertTo}", $"{date:yyyy-MM-dd}").Result != null) return;
+            var getRate = GetCurrencyMeRate(convertFrom, convertTo).Result;
+            if (string.IsNullOrEmpty(getRate)) return;
+            if (!decimal.TryParse(getRate, NumberStyles.Any, new CultureInfo("en-US"), out decimal rate)) return;
+            var currencyPairRateDto = new CurrencyPairRateDto
+            {
+                RateDate = date,
+                CurrencyPairId = $"{convertFrom}{convertTo}",
+                Rate = rate,
+                OpenRate = rate,
+                CloseRate = rate,
+                LowRate = rate,
+                HighRate = rate
+            };
+            var dto = PostCurrencyPairRate(currencyPairRateDto).Result;
+            if (dto == null) return;
+            System.Console.WriteLine($"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
         }
     }
 }
