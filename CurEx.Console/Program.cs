@@ -29,7 +29,6 @@ namespace CurEx.Console
             var pairs = GetCurrencyPairs().Result;
             foreach (var pair in pairs)
             {
-                //System.Console.WriteLine($"pair {pair.Id}");
                 var txt = GetFinamRates(pair.Id).Result;
                 if (string.IsNullOrEmpty(txt)) continue;
                 var rates = txt.Split('\n');
@@ -67,9 +66,14 @@ namespace CurEx.Console
                         $"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
                 }
             }
-            CheckFromCurrencyMe(convertFrom: "AED", convertTo: "USD");
-            CheckFromCurrencyMe(convertFrom: "GBP", convertTo: "USD");
 
+            //foreach (var pair in pairs)
+            //{
+            //    var convertFrom = pair.Id.Substring(0, 3);
+            //    var convertTo = pair.Id.Substring(3);
+            //    CheckFromCurrencyMe(convertFrom, convertTo);
+            //}
+            CheckFromCurrencyMe("AED", "USD");
 
             System.Console.WriteLine("Complete.");
             Thread.Sleep(3000);
@@ -80,12 +84,12 @@ namespace CurEx.Console
             var refreshValueCount = ConfigurationManager.AppSettings["RefreshValueCount"];
             if (string.IsNullOrEmpty(refreshValueCount)) refreshValueCount = "10";
             var endDate = DateTime.Today.AddDays(-1);
-            var strEndDate01 = endDate.ToString("yyMMdd");
+            //var strEndDate01 = endDate.ToString("yyMMdd");
             var strEndDate02 = endDate.ToString("dd.MM.yyyy");
             var startDate = endDate.AddDays(-1 * int.Parse(refreshValueCount));
-            var strStartDate01 = startDate.ToString("yyMMdd");
+            //var strStartDate01 = startDate.ToString("yyMMdd");
             var strStartDate02 = startDate.ToString("dd.MM.yyyy");
-            var filename = $"{instruments}_{strStartDate01}_{strEndDate01}";
+            var filename = $"{instruments}_{startDate:yyMMdd}_{endDate:yyMMdd}";
             var period = $"df={startDate.Day}&mf={startDate.Month - 1}&yf={startDate.Year}&from={strStartDate02}&dt={endDate.Day}&mt={endDate.Month - 1}&yt={endDate.Year}&to={strEndDate02}";
             if (!_finamCurrencies.TryGetValue(instruments, out var em)) return string.Empty;
             var formattableString = $"http://export.finam.ru/{filename}.csv?market=5&em={em}&code={instruments}&apply=0&{period}&p=8&f={filename}&e=.csv&cn={instruments}&dtf=1&tmf=1&MSOR=1&mstimever=1&sep=1&sep2=1&datf=5";
