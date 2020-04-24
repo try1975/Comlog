@@ -51,6 +51,7 @@
     <Compile Include="LoggingHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RatesApiDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.AppSettings.config">

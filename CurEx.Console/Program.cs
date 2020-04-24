@@ -35,45 +35,58 @@ namespace CurEx.Console
                 Thread.Sleep(2000);
                 foreach (var rate in rates)
                 {
-                    if (string.IsNullOrEmpty(rate)) continue;
-                    var rateFields = rate.Split(',');
-                    var currencyPairRateDto = new CurrencyPairRateDto
-                    {
-                        CurrencyPairId = pair.Id,
-                        RateDate = DateTime.ParseExact(rateFields[0], "yyyyMMdd", CultureInfo.InvariantCulture,
-                            DateTimeStyles.None),
-                        OpenRate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture),
-                        CloseRate =
-                            decimal.Parse(rateFields[5], NumberStyles.Currency, CultureInfo.InvariantCulture),
-                        HighRate = decimal.Parse(rateFields[3], NumberStyles.Currency, CultureInfo.InvariantCulture),
-                        LowRate = decimal.Parse(rateFields[4], NumberStyles.Currency, CultureInfo.InvariantCulture),
-                        // TODO: set rate equal to close rate - field 5
-                        Rate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture)
-                    };
-                    var dto =
-                        GetCurrencyPairRateByDate(currencyPairRateDto.CurrencyPairId,
-                            currencyPairRateDto.RateDate.ToString("yyyy-MM-dd")).Result;
-                    if (dto != null)
-                    {
-                        //System.Console.WriteLine(
-                        //    $"From db:{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
-                        continue;
-                    }
 
-                    dto = PostCurrencyPairRate(currencyPairRateDto).Result;
-                    if (dto == null) continue;
-                    System.Console.WriteLine(
-                        $"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
+                    if (string.IsNullOrEmpty(rate)) continue;
+
+                    try
+                    {
+                        var rateFields = rate.Split(',');
+                        var currencyPairRateDto = new CurrencyPairRateDto
+                        {
+                            CurrencyPairId = pair.Id,
+                            RateDate = DateTime.ParseExact(rateFields[0], "yyyyMMdd", CultureInfo.InvariantCulture,
+                                DateTimeStyles.None),
+                            OpenRate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture),
+                            CloseRate =
+                                decimal.Parse(rateFields[5], NumberStyles.Currency, CultureInfo.InvariantCulture),
+                            HighRate = decimal.Parse(rateFields[3], NumberStyles.Currency, CultureInfo.InvariantCulture),
+                            LowRate = decimal.Parse(rateFields[4], NumberStyles.Currency, CultureInfo.InvariantCulture),
+                            // TODO: set rate equal to close rate - field 5
+                            Rate = decimal.Parse(rateFields[2], NumberStyles.Currency, CultureInfo.InvariantCulture)
+                        };
+
+                        var dto =
+                            GetCurrencyPairRateByDate(currencyPairRateDto.CurrencyPairId,
+                                currencyPairRateDto.RateDate.ToString("yyyy-MM-dd")).Result;
+                        if (dto != null)
+                        {
+                            //System.Console.WriteLine(
+                            //    $"From db:{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
+                            continue;
+                        }
+
+                        dto = PostCurrencyPairRate(currencyPairRateDto).Result;
+                        if (dto == null) continue;
+                        System.Console.WriteLine(
+                            $"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
+                    }
+                    catch (Exception)
+                    {
+                        System.Console.WriteLine($"Error parse response {pair.Id}");
+                        //throw;
+                    }
                 }
             }
 
-            //foreach (var pair in pairs)
-            //{
-            //    var convertFrom = pair.Id.Substring(0, 3);
-            //    var convertTo = pair.Id.Substring(3);
-            //    CheckFromCurrencyMe(convertFrom, convertTo);
-            //}
+            foreach (var pair in pairs)
+            {
+                var convertFrom = pair.Id.Substring(0, 3);
+                var convertTo = pair.Id.Substring(3);
+                CheckFromRatesApi(convertFrom, convertTo);
+            }
             CheckFromCurrencyMe("AED", "USD");
+
+
 
             System.Console.WriteLine("Complete.");
             Thread.Sleep(3000);
@@ -171,6 +184,63 @@ namespace CurEx.Console
             var dto = PostCurrencyPairRate(currencyPairRateDto).Result;
             if (dto == null) return;
             System.Console.WriteLine($"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
+        }
+
+
+        private static void CheckFromRatesApi(string convertFrom, string convertTo)
+        {
+            for (int i = 12 - 1; i >= 0; i--)
+            {
+                var date = DateTime.Today.AddDays(-i);
+                if (GetCurrencyPairRateByDate($"{convertFrom}{convertTo}", $"{date:yyyy-MM-dd}").Result != null) continue;
+                var getRate = GetRatesApiDateRate(convertFrom, $"{date:yyyy-MM-dd}").Result;
+                if (string.IsNullOrEmpty(getRate)) continue;
+                var ratesApiDto = JsonConvert.DeserializeObject<RatesApiDto>(getRate);
+                if (ratesApiDto == null) continue;
+                var rate = ratesApiDto.GetRate(convertTo);
+                if (rate == 0) continue;
+                var currencyPairRateDto = new CurrencyPairRateDto
+                {
+                    RateDate = date,
+                    CurrencyPairId = $"{convertFrom}{convertTo}",
+                    Rate = rate,
+                    OpenRate = rate,
+                    CloseRate = rate,
+                    LowRate = rate * 0.992m,
+                    HighRate = rate * 1.008m
+                };
+                var dto = PostCurrencyPairRate(currencyPairRateDto).Result;
+                if (dto == null) return;
+                System.Console.WriteLine($"{dto.CurrencyPairId} {dto.RateDate:yyyy-MM-dd} {dto.Rate}");
+            }
+
+        }
+
+        //https://ratesapi.io/documentation/
+        private static async Task<string> GetRatesApiLatestRate(string convertFrom)
+        {
+            using (var response = await _httpClient.GetAsync($"https://api.ratesapi.io/api/latest?base={convertFrom}"))
+            {
+                if (!response.IsSuccessStatusCode) return null;
+                using (var stream = await response.Content.ReadAsStreamAsync())
+                {
+                    stream.Position = 0;
+                    using (var reader = new StreamReader(stream, Encoding.UTF8)) return reader.ReadToEnd();
+                }
+            }
+        }
+
+        private static async Task<string> GetRatesApiDateRate(string convertFrom, string date)
+        {
+            using (var response = await _httpClient.GetAsync($"https://api.ratesapi.io/api/{date}?base={convertFrom}"))
+            {
+                if (!response.IsSuccessStatusCode) return null;
+                using (var stream = await response.Content.ReadAsStreamAsync())
+                {
+                    stream.Position = 0;
+                    using (var reader = new StreamReader(stream, Encoding.UTF8)) return reader.ReadToEnd();
+                }
+            }
         }
     }
 }
