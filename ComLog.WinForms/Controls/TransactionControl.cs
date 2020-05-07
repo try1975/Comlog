@@ -32,7 +32,7 @@ namespace ComLog.WinForms.Controls
         {
             get
             {
-                if (CurrentUser.Login.ToLower().Equals("am")) return 365;
+                if (CurrentUser.Login.ToLower().Equals("am")) return 720;
                 int editableDays;
                 return int.TryParse(ConfigurationManager.AppSettings[nameof(EditableDays)], out editableDays) ? editableDays : 7;
             }
@@ -853,30 +853,33 @@ namespace ComLog.WinForms.Controls
             var dateForm = new DateForm { Date = date };
             if (dateForm.ShowDialog() != DialogResult.OK) return;
             date = dateForm.Date.Date.AddDays(-1);
-            //Log.Error($"Rate begin date {date:yyyy-MM-dd}");
 
             var rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("EUR", date);
             macroRunSettings.Params["EUR_RATE_P"] = $"{rate:##.0000}";
-            //Log.Error($"Rate EUR begin value {date:yyyy-MM-dd} {rate:##.0000}");
+            
             rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("GBP", date);
             macroRunSettings.Params["GBP_RATE_P"] = $"{rate:##.0000}";
-            //Log.Error($"Rate GBP begin value {date:yyyy-MM-dd} {rate:##.0000}");
+            
             rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("CHF", date);
             macroRunSettings.Params["CHF_RATE_P"] = $"{rate:##.0000}";
-            //Log.Error($"Rate CHF begin value {date:yyyy-MM-dd} {rate:##.0000}");
+
+            rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("AED", date);
+            macroRunSettings.Params["AED_RATE_P"] = $"{rate:##.0000}";
+
 
             // Current currency rate to params
             date = dtpDateTo.Value.Date.AddDays(-1);
-            //Log.Error($"Rate end date {date:yyyy-MM-dd}");
             rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("EUR", date);
             macroRunSettings.Params["EUR_RATE"] = $"{rate:##.0000}";
-            //Log.Error($"Rate EUR end value {date:yyyy-MM-dd} {rate:##.0000}");
+            
             rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("GBP", date);
             macroRunSettings.Params["GBP_RATE"] = $"{rate:##.0000}";
-            //Log.Error($"Rate GBP end value {date:yyyy-MM-dd} {rate:##.0000}");
+            
             rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("CHF", date);
             macroRunSettings.Params["CHF_RATE"] = $"{rate:##.0000}";
-            //Log.Error($"Rate CHF end value {date:yyyy-MM-dd} {rate:##.0000}");
+
+            rate = await _presenter.DataMаnager.GetCurrencyExchangeRate("AED", date);
+            macroRunSettings.Params["AED_RATE"] = $"{rate:##.0000}";
 
 
             var report = await _presenter.DataMаnager.GetAccountsReport01(dtpDateFrom.Value, dtpDateTo.Value);

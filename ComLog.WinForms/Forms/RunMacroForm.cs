@@ -87,9 +87,11 @@ namespace ComLog.WinForms.Forms
                         , _macroRunSettings.Params["EUR_RATE"]
                         , _macroRunSettings.Params["GBP_RATE"]
                         , _macroRunSettings.Params["CHF_RATE"]
+                        , _macroRunSettings.Params["AED_RATE"]
                         , _macroRunSettings.Params["EUR_RATE_P"]
                         , _macroRunSettings.Params["GBP_RATE_P"]
                         , _macroRunSettings.Params["CHF_RATE_P"]
+                        , _macroRunSettings.Params["AED_RATE_P"]
                         );
                 }
                 else if (_macroRunSettings.MacroName.Equals(reportYMacro))
