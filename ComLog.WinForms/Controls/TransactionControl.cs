@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComLog.Dto.Ext;
@@ -419,6 +420,7 @@ namespace ComLog.WinForms.Controls
 
         private void ColumnSettings()
         {
+            dgvItems.RowHeadersWidth = 5;
             var column = dgvItems.Columns[nameof(TransactionExtDto.Id)];
             if (column != null) column.Visible = false;
             column = dgvItems.Columns[nameof(TransactionExtDto.BankId)];
@@ -534,9 +536,9 @@ namespace ComLog.WinForms.Controls
             btnDateFromSubtract.Click += btnDateFromSubtract_Click;
 
             btnClearNewForm.Click += btnClearNewForm_Click;
-        }
 
-       
+            btnSort01.Click += BtnSort01_Click;
+        }
 
         #endregion //IRefreshedView
 
@@ -1024,6 +1026,28 @@ namespace ComLog.WinForms.Controls
         private void btnClearNewForm_Click(object sender, EventArgs e)
         {
             cmbNewFormType.SelectedIndex = -1;
+        }
+
+        private void BtnSort01_Click(object sender, EventArgs e)
+        {
+            //DataGridViewColumn column = dgvItems.Columns[nameof(TransactionExtDto.BankName)];
+            //if (column != null) dgvItems.Sort(column, System.ComponentModel.ListSortDirection.Ascending);
+            var sbSort = new StringBuilder();
+            sbSort.Append($"[{nameof(TransactionExtDto.BankName)}] ASC");
+            sbSort.Append($", [{nameof(TransactionExtDto.AccountName)}] ASC");
+            sbSort.Append($", [{nameof(TransactionExtDto.CurrencyOrd)}] ASC");
+            sbSort.Append($", [{nameof(TransactionExtDto.TransactionDate)}] ASC");
+
+            _presenter.BindingSource.Sort = sbSort.ToString();
+            _presenter.BindingSource.ResetBindings(false);
+            AfterGridDataChange();
+
+            var column = dgvItems.Columns[nameof(TransactionExtDto.Charges)];
+            if (column != null) column.Width = 50;
+            column = dgvItems.Columns[nameof(TransactionExtDto.FromTo)];
+            if (column != null) column.Width = 200;
+            column = dgvItems.Columns[nameof(TransactionExtDto.Description)];
+            if (column != null) column.Width = 200;
         }
 
         #endregion //Event handlers
