@@ -12,6 +12,6 @@ namespace ComLog.WinForms.Administration
 
         public static bool MaySeeBalance { get { return Array.Exists(MaySeeBalanceArray, z => z.Equals(Login.ToLower())); }}
 
-        private static readonly string[] MaySeeBalanceArray = {"ag", "or",  "tli", "yadmin", "vorobyev", "nb", "adm.yv"};
+        private static readonly string[] MaySeeBalanceArray = {"ag", "tli", "mj", "vorobyev", "nb", "adm.yv"};
     }
 }
