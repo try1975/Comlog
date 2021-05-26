@@ -941,12 +941,15 @@ namespace ComLog.WinForms.Controls
         {
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            var sourceFilename = openFileDialog.FileName;
+            var destinationFilename = sourceFilename.Replace(".xls", "_Converted.xls");
+            destinationFilename = Path.ChangeExtension(destinationFilename, ".xlsx");
             var macroRunSettings = new MacroRunSettings
             {
                 MacroWorkBook = ConfigurationManager.AppSettings[nameof(MacroSettings.MacroWorkBook)],
                 MacroName = ConfigurationManager.AppSettings[macroName],
-                SourceFilename = openFileDialog.FileName,
-                DestinationFilename = openFileDialog.FileName.Replace(".xls", "_Converted.xls")
+                SourceFilename = sourceFilename,
+                DestinationFilename = destinationFilename
             };
             macroRunSettings.Params[MacroRunSettings.ImportRun] = bool.TrueString;
             var runMacroForm = new RunMacroForm(macroRunSettings);
