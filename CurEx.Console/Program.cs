@@ -105,8 +105,8 @@ namespace CurEx.Console
             var filename = $"{instruments}_{startDate:yyMMdd}_{endDate:yyMMdd}";
             var period = $"df={startDate.Day}&mf={startDate.Month - 1}&yf={startDate.Year}&from={strStartDate02}&dt={endDate.Day}&mt={endDate.Month - 1}&yt={endDate.Year}&to={strEndDate02}";
             if (!_finamCurrencies.TryGetValue(instruments, out var em)) return string.Empty;
-            var formattableString = $"http://export.finam.ru/{filename}.csv?market=5&em={em}&code={instruments}&apply=0&{period}&p=8&f={filename}&e=.csv&cn={instruments}&dtf=1&tmf=1&MSOR=1&mstimever=1&sep=1&sep2=1&datf=5";
-            using (var response = await _httpClient.GetAsync(formattableString))
+            var requestUri = $"http://export.finam.ru/{filename}.csv?market=5&em={em}&code={instruments}&apply=0&{period}&p=8&f={filename}&e=.csv&cn={instruments}&dtf=1&tmf=1&MSOR=1&mstimever=1&sep=1&sep2=1&datf=5";
+            using (var response = await _httpClient.GetAsync(requestUri))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 using (var stream = await response.Content.ReadAsStreamAsync())
@@ -114,7 +114,7 @@ namespace CurEx.Console
                     stream.Position = 0;
                     using (var reader = new StreamReader(stream, Encoding.UTF8))
                     {
-                        return reader.ReadToEnd();
+                        return await reader.ReadToEndAsync();
                     }
                 }
             }
@@ -216,10 +216,10 @@ namespace CurEx.Console
 
         }
 
-        //https://ratesapi.io/documentation/
+        //https://exchangeratesapi.io/documentation/
         private static async Task<string> GetRatesApiLatestRate(string convertFrom)
         {
-            using (var response = await _httpClient.GetAsync($"https://api.ratesapi.io/api/latest?base={convertFrom}"))
+            using (var response = await _httpClient.GetAsync($"http://api.exchangeratesapi.io/v1/latest?access_key=31bd69d9567d159d57b8383ad608dbad&base={convertFrom}"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 using (var stream = await response.Content.ReadAsStreamAsync())
@@ -232,7 +232,7 @@ namespace CurEx.Console
 
         private static async Task<string> GetRatesApiDateRate(string convertFrom, string date)
         {
-            using (var response = await _httpClient.GetAsync($"https://api.ratesapi.io/api/{date}?base={convertFrom}"))
+            using (var response = await _httpClient.GetAsync($"http://api.exchangeratesapi.io/v1/{date}?base={convertFrom}&access_key=31bd69d9567d159d57b8383ad608dbad"))
             {
                 if (!response.IsSuccessStatusCode) return null;
                 using (var stream = await response.Content.ReadAsStreamAsync())

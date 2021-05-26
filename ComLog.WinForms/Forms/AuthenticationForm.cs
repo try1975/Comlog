@@ -23,9 +23,12 @@ namespace ComLog.WinForms.Forms
             try
             {
                 var result = WindowsIdentity.GetCurrent().Name;
+                Log.Debug($"WindowsIdentity.GetCurrent().Name {result}");
                 var backSlashIndex = result.IndexOf("\\", StringComparison.Ordinal);
                 if (backSlashIndex >= 0) result = result.Substring(backSlashIndex + 1);
-                return result.ToLower();
+                result = result.ToLower();
+                Log.Debug($"result {result}");
+                return result;
             }
             catch (Exception exception)
             {
@@ -38,6 +41,7 @@ namespace ComLog.WinForms.Forms
         {
 #if DEBUG
             CurrentUser.Login = GetCurrentUserNameAsLogin();
+            Log.Debug($"CurrentUser.Login {CurrentUser.Login}");
             var mainForm = CompositionRoot.Resolve<MainForm>();
             Hide();
             Log.Debug("Start mainform");
