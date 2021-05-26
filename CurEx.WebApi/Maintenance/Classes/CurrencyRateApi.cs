@@ -14,17 +14,7 @@ namespace CurEx.WebApi.Maintenance.Classes
             _query = query;
         }
 
-        public decimal GetRate(string currencyId, DateTime date)
-        {
-            currencyId = currencyId.ToUpper().Trim();
-            var currencyPairRateEntity = _query.GetEntities().Where(z => z.CurrencyPairId.Contains(currencyId) && z.RateDate <= date).OrderByDescending(z => z.RateDate).FirstOrDefault();
-            if (currencyPairRateEntity == null) return 1m;
-            if (currencyPairRateEntity.CurrencyPairId.StartsWith(currencyId)) return currencyPairRateEntity.Rate;
-            if (currencyPairRateEntity.CurrencyPairId.EndsWith(currencyId)) return 1 / currencyPairRateEntity.Rate;
-            return 1m;
-        }
-
-        public decimal GetRatePair(string currencyFrom, string currencyTo, DateTime date)
+        public decimal GetRate(string currencyFrom, string currencyTo, DateTime date)
         {
             currencyFrom = currencyFrom.ToUpper().Trim();
             currencyTo = currencyTo.ToUpper().Trim();

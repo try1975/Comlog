@@ -4,6 +4,6 @@ namespace CurEx.WebApi.Maintenance.Interfaces
 {
     public interface ICurrencyRateApi
     {
-        decimal GetRate(string currencyId, DateTime date);
+        decimal GetRate(string currencyFrom, string currencyTo, DateTime date);
     }
 }

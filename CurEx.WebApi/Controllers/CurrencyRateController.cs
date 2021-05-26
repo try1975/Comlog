@@ -14,9 +14,12 @@ namespace CurEx.WebApi.Controllers
             _api = api;
         }
 
-        public decimal Get(string currencyId, /*[DateTimeParameter(DateFormat = "dd_MM_yyyy")]*/ DateTime date)
+        public decimal Get(string currencyId, /*[DateTimeParameter(DateFormat = "dd_MM_yyyy")]*/ DateTime date, string currencyTo = "USD")
         {
-            return currencyId.Equals("USD", StringComparison.OrdinalIgnoreCase) ? 1m : _api.GetRate(currencyId, date);
+            currencyId = currencyId.ToUpper().Trim();
+            currencyTo = currencyTo.ToUpper().Trim();
+            if (currencyId == currencyTo) return 1m;
+            return _api.GetRate(currencyFrom: currencyId, currencyTo, date);
         }
     }
 }
